@@ -1,13 +1,16 @@
 
 import { Button,Grid } from "@mui/material";
 import "./Home.css";
+import Header from './Header';
 
 export default function Home() {
   return (
     
     <div>
       
-        <div className="gridItem"></div>
+      <div>
+      <Header />
+    </div>
         <div >
         <Grid container className='gridItem2'>
         <Grid className="container">
