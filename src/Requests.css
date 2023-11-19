@@ -1,9 +1,3 @@
-.request-grid{
-    width: auto;
-    height: 85px;
-    background-color: #829CA6;
-    margin:0 auto; 
-  }
 
   .request-grid2 {
     display: flex;
@@ -22,7 +16,7 @@
   
   .request-rem {
     width:auto;
-    height:100px;
+    height:auto;
     background-color: white;
     border-radius: 10px;
   }
@@ -30,10 +24,16 @@
   .request-para{
     font-size: 1.2em;
     font-weight: bold;
-    padding: 10px;
     text-align: justify;
+    padding: 10px;
   }
   
+  .request-para2{
+    font-size: 2em;
+    font-weight: bolder;
+    text-align: center;
+    color: red;
+  }
   .request-img {
    margin-left: 0;
    margin-right: auto;
@@ -58,7 +58,7 @@
     box-sizing: border-box; 
     border-radius: 10px;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); 
-    margin-left: 10px;
+    margin-left: 20px;
   }
 
     .name {
@@ -79,7 +79,7 @@
       box-sizing: border-box; 
       border-radius: 10px;
       box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
-      margin-left: 10px; 
+      margin-left: 20px; 
     }
 
     .custom-checkbox input {
