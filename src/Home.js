@@ -10,7 +10,7 @@ export default function Home() {
       
       <div>
       <Header />
-    </div>
+      </div>
         <div >
         <Grid container className='gridItem2'>
         <Grid className="container">
@@ -34,7 +34,9 @@ export default function Home() {
                              DISCOVER OPPORTUNITIES: Uncover exciting opportunities for local involvement.<br></br><br></br>
                              Your community, your app – BarangayConnect.
        </p>
-       <div></div>
+       <div>
+      
+       </div>
 
        </Grid>
 

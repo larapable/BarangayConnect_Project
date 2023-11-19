@@ -33,6 +33,7 @@ function Requests() {
     <div className='request-grid2'>
     <div className='request-con'>
         <div className='request-rem'>
+          <p className='request-para2'>R E M I N D E R S</p>
             <p className='request-para'>The requesting of documents has a fee of P30.00 
                peso for each documents. And for others, additional 
                P5.00 will be charge.</p>

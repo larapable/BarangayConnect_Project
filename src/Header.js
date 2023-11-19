@@ -29,30 +29,30 @@ export default function Header() {
       {/* Header */}
       <Grid container className="grid">
        
-        <Grid item sm={4}>
+        <Grid item sm={6}>
           <div className="conlogo">
             <img src={"headerlogo.png"} className="headlogo" alt="headerLogo" />
           </div>
         </Grid>
-        <Grid item sm={1.5} className="btn">
+        <Grid item sm={1} className="btn">
           <div className="noowrap">
             <Link to="home" className="header-link">DASHBOARD</Link>
           </div>
         </Grid>
 
-        <Grid item sm={1.5} className="btn">
+        <Grid item sm={1} className="btn">
           <div className="noowrap">
             <Link to="calendar" className="header-link">CALENDAR</Link>
           </div>
         </Grid>
 
-        <Grid item sm={2} className="btn">
+        <Grid item sm={1.5} className="btn">
           <div className="noowrap">
             <Link to="business" className="header-link">BUSINESS SUPPORT</Link>
           </div>
         </Grid>
 
-        <Grid item sm={1.5} className="btn">
+        <Grid item sm={1} className="btn">
           <div className="noowrap">
             <Link to="about"
               className="header-link"
@@ -136,7 +136,9 @@ export default function Header() {
                 >
                   FORUM
                 </Link>
-              </MenuItem><MenuItem onClick={handleMenuClose}>
+              </MenuItem>
+
+              <MenuItem onClick={handleMenuClose}>
                 <Link to="emergency"
                   style={{
                     color: "#213555",
@@ -145,6 +147,18 @@ export default function Header() {
                   }}
                 >
                   EMERGENCY ALERT
+                </Link>
+              </MenuItem>
+              
+              <MenuItem onClick={handleMenuClose}>
+                <Link to="emergency"
+                  style={{
+                    color: "#213555",
+                    fontWeight: "bold",
+                    textDecoration:"none",
+                  }}
+                >
+                  REQUESTS DOCUMENT
                 </Link>
               </MenuItem>
             </Menu>
