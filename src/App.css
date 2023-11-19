@@ -1,0 +1,29 @@
+.gridItem {
+  width: auto;
+  height: 150px;
+  background-color: #829ca6;
+}
+
+.logoContainer {
+  text-align: center;
+}
+.headerlogo {
+  margin-top: 10px;
+  width: 400px;
+}
+
+.contbn {
+  text-align: center;
+  padding: 5px;
+}
+.nowrap {
+  white-space: nowrap;
+  display: flex; 
+  justify-content: left;
+}
+
+.contbn Button {
+  margin: 0 5px;
+  width: 170px;
+  font-size: 12px;
+}

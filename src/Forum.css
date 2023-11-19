@@ -1,0 +1,30 @@
+.gd {
+  width: auto;
+  height: 85px;
+  background-color: #829CA6;
+  margin:0 auto; 
+}
+
+.con {
+  width: 50vw;
+  max-width: 450px; 
+  margin-right: auto; 
+  margin-left: 0;
+  padding: 20px;
+  background-color: #213555;
+}
+
+.para {
+  font-size: 1.4em;
+  font-weight: 450;
+  color: #A8A2A2;
+  text-align: justify;
+}
+
+.title{
+  color: aliceblue;
+   font-size: 3em;
+   font-weight: 700;
+   text-align: center;
+
+}

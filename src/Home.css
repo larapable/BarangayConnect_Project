@@ -1,0 +1,73 @@
+.gridItem {
+  width: auto;
+  height: 85px;
+  background-color: #829CA6;
+}
+
+.gridItem2 {
+  width: auto;
+  height: auto;
+  margin-top: 3em;
+  justify-content: center; 
+  align-items: center; 
+}
+
+.container {
+  width: 1000px;
+  height: auto;
+  background-color:#213555;
+  opacity:0.8;
+  flex-direction: column;
+  justify-content: center; 
+  align-items: center; 
+  border-radius: 10px;
+  
+}
+
+.stmt1 {
+  margin-top: 50px;
+  margin-left: 20px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  font-size: 3rem;
+  color:#fff;
+}
+
+.stmt2 {
+  margin-top: 20px;
+  margin-left: 20px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  color:#fff;
+}
+
+.stmt3 {
+  margin-top: 70px;
+  margin-left: 50px;
+  margin-right: 50px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  text-align: justify;
+  font-size: 24px;
+  font-weight: 500;
+  color:#fff;
+}
+.stmt4 {
+  margin-left: 50px;
+  margin-right: 50px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+
+.comlogo {
+  text-align: center;
+  padding:0%;
+}
+
+.togetherlogo {
+  width: 15vw;
+}
