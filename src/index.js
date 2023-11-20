@@ -7,6 +7,7 @@ import Forum from './Forum';
 import Header from './Header';
 import Requests from './Requests';
 import reportWebVitals from './reportWebVitals';
+import BLAdmin from './BLAdmin';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -17,7 +18,8 @@ root.render(
     {/* <Forum/> */}
     {/* <Home/> */}
     {/* <Header/> */}
-    <Requests/>
+    {/* <Requests/> */}
+    <BLAdmin/>
     
   </React.StrictMode>
 );
