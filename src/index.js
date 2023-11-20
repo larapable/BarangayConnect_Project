@@ -2,11 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-import Home from './Home';
-import Forum from './Forum';
-import Header from './Header';
-import Requests from './Requests';
 import reportWebVitals from './reportWebVitals';
+import { BrowserRouter } from 'react-router-dom';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -17,8 +14,9 @@ root.render(
     {/* <Forum/> */}
     {/* <Home/> */}
     {/* <Header/> */}
-    <Requests/>
-    
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </React.StrictMode>
 );
 
