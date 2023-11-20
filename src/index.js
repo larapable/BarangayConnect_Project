@@ -8,6 +8,7 @@ import Header from './Header';
 import Requests from './Requests';
 import reportWebVitals from './reportWebVitals';
 import BLAdmin from './BLAdmin';
+import BLUser from './BLUser';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -19,7 +20,8 @@ root.render(
     {/* <Home/> */}
     {/* <Header/> */}
     {/* <Requests/> */}
-    <BLAdmin/>
+    {/* <BLAdmin/> */}
+    <BLUser/>
     
   </React.StrictMode>
 );
