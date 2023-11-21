@@ -1,7 +1,9 @@
-import "./Forum.css";
-import { Grid, Button, TextField, Paper } from "@mui/material";
-import React, { useState } from "react";
-import Header from "./Header";
+import './Forum.css';
+import { Grid, Button,TextField,Paper } from '@mui/material';
+import React, { useState } from 'react';
+import Header from './Header';
+
+
 
 function Forum() {
   const [inputValue, setInputValue] = useState("");
@@ -17,9 +19,9 @@ function Forum() {
   return (
     <div>
       <div>
-        <Header />
+      <Header />
       </div>
-
+  
       <div className="con">
         <div className="title">
           <p>WHAT'S NEW ?</p>
