@@ -2,6 +2,7 @@ import { Grid, Menu, MenuItem,Link} from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/KeyboardArrowDown";
 import { useState } from "react";
 import "./Header.css";
+import { NavLink } from "react-router-dom";
 
 
 
@@ -37,7 +38,7 @@ export default function Header() {
 
         <Grid item sm={1} className="btn">
           <div className="noowrap">
-            <Link to="home" className="header-link">DASHBOARD</Link>
+            <NavLink to="/home" className="header-link">DASHBOARD</NavLink>
           </div>
         </Grid>
 
@@ -72,7 +73,7 @@ export default function Header() {
               onClose={handleMenuClose}
             >
               <MenuItem onClick={handleMenuClose}>
-                <Link to="profile"
+                <NavLink to="/profile"
                   style={{
                     color: "#213555",
                     fontWeight: "bold",
@@ -80,7 +81,7 @@ export default function Header() {
                   }}
                 >
                   PROFILE
-                </Link>
+                </NavLink>
               </MenuItem>
               <MenuItem onClick={handleMenuClose}>
                 <Link to="directory"
