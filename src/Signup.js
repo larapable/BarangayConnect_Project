@@ -1,11 +1,11 @@
 import { Button, Modal, Paper } from "@mui/material";
 import React, { useState } from "react";
-import "./Signup.css";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import { Link, useNavigate } from "react-router-dom";
+import "./Signup.css";
 
 export default function Signup() {
   const navigate = useNavigate();

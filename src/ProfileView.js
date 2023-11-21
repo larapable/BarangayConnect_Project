@@ -26,7 +26,7 @@ export default function ProfileView() {
       reader.readAsDataURL(file);
     }
   };
-  const placeholderImage = "profile.png"; // Replace with your placeholder image URL or local path
+  const placeholderImage = "../profile.png"; // Replace with your placeholder image URL or local path
   const details = [
     "Username",
     "Email",

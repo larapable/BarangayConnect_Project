@@ -7,6 +7,9 @@ import Signup from "./Signup";
 import Home from "./Home";
 import ProfileView from "./ProfileView";
 import ProfileEdit from "./ProfileEdit";
+import CommunityCalendar from "./CommunityCalendar";
+// import Forum from "./Forum";
+
 
 function App() {
   return (
@@ -17,6 +20,8 @@ function App() {
       <Route path="/home" element={<Home />} />
       <Route path="/profile" element={<ProfileView />} />
       <Route path="/profile/edit" element={<ProfileEdit />} />
+      <Route path="/calendar" element={<CommunityCalendar />} />
+      {/* <Route path="/forum" element={<Forum />} /> */}
     </Routes>
   );
 }

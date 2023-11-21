@@ -7,7 +7,8 @@ export default function ProfileEdit() {
   const uploadedImage = useRef(null);
   const imageUploader = useRef(null);
 
-  const placeholderImage = "profile.png";
+  const placeholderImage = "../profile.png";
+
   const editableFields = [
     "Mobile Number",
     "Marital Status",

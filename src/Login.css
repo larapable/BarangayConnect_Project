@@ -1,13 +1,11 @@
 .top-left-icon {
-    position: absolute;
-    top: 30px;
-    left: 50px;
-    width: 350px;
-    height: auto;
-  }
-  
-  .header {
-    font-size: 60px;
-  }
-  
-  
+  position: absolute;
+  top: 30px;
+  left: 50px;
+  width: 350px;
+  height: auto;
+}
+
+.header {
+  font-size: 60px;
+}
