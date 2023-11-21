@@ -15,6 +15,11 @@ export default function Login() {
       password,
     });
 
+    if (!username || !password) {
+      alert("Please fill in all required fields.");
+      return;
+    }
+
     try {
       const response = await fetch("http://localhost:8080/login-signup/login", {
         method: "POST",
@@ -32,10 +37,11 @@ export default function Login() {
         // Handle login error
         const data = await response.json();
         console.error("Login failed");
+        alert("An error occurred during login. Please try again later.");
       }
     } catch (error) {
       console.error("Error during login:", error);
-      alert("An error occurred during login. Please try again later.");
+      alert("Your account does not exist or your account is not verified. Please check your email for verification instructions.");
     }
   };
 

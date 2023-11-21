@@ -21,6 +21,20 @@ export default function Signup() {
   const [isAccountCreated, setIsAccountCreated] = useState(false);
 
   const handleSignup = async (event) => {
+    // Check if required fields are filled
+    if (
+      !username ||
+      !password ||
+      !email ||
+      !fname ||
+      !lname ||
+      !address ||
+      !dateOfBirth ||
+      !gender
+    ) {
+      alert("Please fill in all required fields.");
+      return;
+    }
     event.preventDefault();
     console.log("Submitting:", {
       username,
@@ -61,6 +75,15 @@ export default function Signup() {
         console.log("Signup successful");
       } else {
         // Handle signup error
+        const data = await response.json();
+
+        if (response.status === 500 && data.message) {
+          // Server error, handle username already exists
+          alert(data.message);
+        } else {
+          // Fallback error message
+          alert("An error occurred during signup. Please try again later.");
+        }
         console.error("Signup failed");
       }
     } catch (error) {

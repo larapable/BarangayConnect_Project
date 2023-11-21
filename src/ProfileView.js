@@ -2,10 +2,17 @@ import React, { useState, useRef } from "react";
 import { Button, Grid } from "@mui/material";
 import Header from "../../BarangayConnect_Project/src/Header";
 import "./Profile.css";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 
 export default function ProfileView() {
   const uploadedImage = useRef(null);
   const imageUploader = useRef(null);
+  const navigate = useNavigate();
+
+  const handleEditProfile = () => {
+    // Navigate to the /profile/edit route
+    navigate("/profile/edit");
+  };
 
   const handleImageUpload = (e) => {
     const [file] = e.target.files;
@@ -124,19 +131,21 @@ export default function ProfileView() {
           </div>
 
           <div className="center-style">
-            <Button
-              variant="contained"
-              style={{
-                color: "#FFFFFF",
-                background: "#213555",
-                borderRadius: "10px",
-                width: "150px",
-                fontWeight: "bold",
-                marginTop: "20px",
-              }}
-            >
-              Edit Profile
-            </Button>
+            <Link to="/profile/edit">
+              <Button
+                variant="contained"
+                style={{
+                  color: "#FFFFFF",
+                  background: "#213555",
+                  borderRadius: "10px",
+                  width: "150px",
+                  fontWeight: "bold",
+                  marginTop: "20px",
+                }}
+              >
+                Edit Profile
+              </Button>
+            </Link>
           </div>
         </div>
       </Grid>

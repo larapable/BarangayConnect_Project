@@ -2,6 +2,7 @@ import { Grid, Menu, MenuItem,Link} from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/KeyboardArrowDown";
 import { useState } from "react";
 import "./Header.css";
+import { NavLink } from "react-router-dom";
 
 
 
@@ -29,14 +30,15 @@ export default function Header() {
       {/* Header */}
       <Grid container className="grid">
        
-        <Grid item sm={6}>
+        <Grid item sm={5}>
           <div className="conlogo">
             <img src={"headerlogo.png"} className="headlogo" alt="headerLogo" />
           </div>
         </Grid>
+
         <Grid item sm={1} className="btn">
           <div className="noowrap">
-            <Link to="home" className="header-link">DASHBOARD</Link>
+            <NavLink to="/home" className="header-link">DASHBOARD</NavLink>
           </div>
         </Grid>
 
@@ -71,7 +73,7 @@ export default function Header() {
               onClose={handleMenuClose}
             >
               <MenuItem onClick={handleMenuClose}>
-                <Link to="profile"
+                <NavLink to="/profile"
                   style={{
                     color: "#213555",
                     fontWeight: "bold",
@@ -79,7 +81,7 @@ export default function Header() {
                   }}
                 >
                   PROFILE
-                </Link>
+                </NavLink>
               </MenuItem>
               <MenuItem onClick={handleMenuClose}>
                 <Link to="directory"
@@ -96,7 +98,7 @@ export default function Header() {
           </div>
         </Grid>
 
-        <Grid item sm={1.5} className="btn">
+        <Grid item sm={1} className="btn">
           <div className="noowrap">
             <Link to="services"
               className="header-link"
@@ -162,6 +164,13 @@ export default function Header() {
                 </Link>
               </MenuItem>
             </Menu>
+          </div>
+        </Grid>
+
+          
+        <Grid item sm={1} className="btn">
+          <div className="noowrap">
+            <Link to="business" className="header-link">LOGOUT</Link>
           </div>
         </Grid>
         {/* Add other grids as needed */}
