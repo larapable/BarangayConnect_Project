@@ -7,21 +7,18 @@ import Forum from './Forum';
 import Header from './Header';
 import Requests from './Requests';
 import reportWebVitals from './reportWebVitals';
-import BLAdmin from './BLAdmin';
-import BLUser from './BLUser';
+import PaymentRem from './PaymentRem';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
   <React.StrictMode>
-    {/* <App /> */}
     {/* <Forum/> */}
     {/* <Home/> */}
     {/* <Header/> */}
-    {/* <Requests/> */}
-    {/* <BLAdmin/> */}
-    <BLUser/>
+    <Requests/>
+    {/* <PaymentRem/> */}
     
   </React.StrictMode>
 );

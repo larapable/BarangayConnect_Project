@@ -39,9 +39,25 @@ function Requests() {
                P5.00 will be charge.</p>
         </div>
     </div>
+   
+     
     <div className='request-img'>
+    <div style={{backgroundImage: 'url("/tisa_logo.png")',
+                backgroundSize:'cover',
+                backgroundPosition:'center',
+                backgroundRepeat:'no-repeat',
+                backgroundColor: 'rgba(255, 255, 255, 0.2)',
+                position:'relative',
+               }}>
+      <div style={{marginBottom:'20px'}}>
       <Grid container>
         <Grid item className='text-fields-container'>
+          <h1 style={{textAlign: 'left', 
+                      display: 'flex', 
+                      alignItems: 'left', 
+                      justifyContent: 'left' ,
+                      marginLeft:'50px'}}>DOCUMENT REQUEST</h1>
+          <p className='name2'>Fill all the necessary informations and make sure to fill NA for none</p>
         <p className='name'>Name</p>
       <input type='text' placeholder='Lastname' className='custom-input'/>
       <input type='text' placeholder='Firstname'  className='custom-input' />
@@ -49,22 +65,23 @@ function Requests() {
       <input type='text' placeholder='Suffix'  className='custom-input'/>
         </Grid>
       </Grid>
+      </div>
        
-    <div>
+    <div style={{marginBottom:'20px'}}>
       <Grid container>
-        <Grid item sm={3}>
+        <Grid item >
           <p className='name'>Birthdate</p>
           <div>
           <input type='text' placeholder='dd/mm/yyyy' className='custom-input'/> 
           </div>
         </Grid>
-        <Grid item sm={3}>
+        <Grid item>
           <p className='name'>Age</p>
           <div>
           <input type='text' placeholder='' className='custom-input'/> 
           </div>
         </Grid>
-        <Grid item sm={3}>
+        <Grid item>
           <p className='name'>Gender</p>
           <div>
           <input type='text' placeholder='' className='custom-input'/> 
@@ -73,12 +90,18 @@ function Requests() {
       </Grid>
     </div>
 
-    <div>
+    <div style={{marginBottom:'20px'}}>
       <Grid container>
         <Grid item sm={5}>
         <p className='name'>Purok</p>
           <div>
-          <input type='text' placeholder='' className='custom-input2'/> 
+          <div>
+            <select className='custom-input2'>
+              <option value='option1'>Option 1</option>
+              <option value='option2'>Option 2</option>
+              <option value='option3'>Option 3</option>
+            </select>
+          </div> 
           </div>
         </Grid>
 
@@ -91,7 +114,7 @@ function Requests() {
       </Grid>
     </div>
 
-    <div style={{marginBottom:'20px'}}>
+    <div style={{marginBottom:'40px'}}>
     <Grid container>
     <Grid item>
         <p className='name'>Document Type (Please check the appropriate box)</p>
@@ -103,7 +126,7 @@ function Requests() {
                 checked={isChecked}
                 onChange={() => handleCheckboxChange(index)}
               />
-              <span style={{ fontSize: '25px',marginRight:'50px' }}>{labels[index]}</span>
+              <span style={{ fontSize: '20px',marginRight:'20px', fontWeight:'bold'}}>{labels[index]}</span>
             </label>
           ))}
         </div>
@@ -112,25 +135,25 @@ function Requests() {
     </div>
      
         
-    <div>
+    <div style={{marginBottom:'10px'}}>
       <Grid container>
-        <Grid item sm={3}>
+        <Grid item>
           <p className='name'>For Others</p>
           <div>
           <input type='text' placeholder='Please specify' className='custom-input'/> 
           </div>
         </Grid>
-        <Grid item sm={3}>
+        <Grid item>
           <p className='name'>Type</p>
           <div>
-            <select className='custom-select'>
+            <select className='custom-input'>
               <option value='option1'>Option 1</option>
               <option value='option2'>Option 2</option>
               <option value='option3'>Option 3</option>
             </select>
           </div>
         </Grid>
-        <Grid item sm={3}>
+        <Grid item>
           <p className='name'>Number of Copies</p>
           <div>
           <input type='text' placeholder='' className='custom-input'/> 
@@ -140,7 +163,7 @@ function Requests() {
     </div>
 
     <div>
-      <Grid container>
+      <Grid container style={{marginBottom:'10px'}}>
         <Grid item sm={5}>
         <p className='name'>Email</p>
           <div>
@@ -157,19 +180,20 @@ function Requests() {
       </Grid>
     </div>
 
-       <div style={{marginTop:'70px'}}>
-       <Grid container>
-        <Grid item sm={2.5}>
+       <div >
+       <Grid container className='request-btn'>
+        <Grid item >
         <button variant='contained' style={{backgroundColor:'#213555',
                                             color:'white',
                                             height:'50px',
                                             width:'300px',
-                                            marginLeft:'10px',
-                                            fontSize:'25px',
+                                            marginLeft:'50px',
+                                            fontSize:'18px',
                                             fontWeight:'bold',
                                             borderRadius:'10px',
-                                            border:'none'}}>
-          Clear Request
+                                            border:'none',
+                                            }}>
+          CLEAR REQUEST
         </button>
         </Grid>
         <Grid item>
@@ -178,16 +202,17 @@ function Requests() {
                                             height:'50px',
                                             width:'300px',
                                             marginLeft:'10px',
-                                            fontSize:'25px',
+                                            fontSize:'18px',
                                             fontWeight:'bold',
                                             borderRadius:'10px',
                                             border:'none'}}>
-          Proceed to Payment
+          PROCEED
         </button>
         </Grid>
        </Grid>
        </div>
        
+        </div>
         </div>
           </div>  
     </div>
