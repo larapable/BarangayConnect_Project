@@ -1,20 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
+import App from './App';
+import Home from './Home';
+import Forum from './Forum';
+import Header from './Header';
+import Requests from './Requests';
 import reportWebVitals from './reportWebVitals';
-import EmergencyAlert from './EmergencyAlert';
-import IncidentReportForm from './IncidentReportForm';
-import SubmitReportForm from './SubmitReportForm';
+import PaymentRem from './PaymentRem';
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
   <React.StrictMode>
-    {/* <App /> */}
     {/* <Forum/> */}
     {/* <Home/> */}
     {/* <Header/> */}
-    <IncidentReportForm/>
+    <Requests/>
+    {/* <PaymentRem/> */}
     
   </React.StrictMode>
 );
