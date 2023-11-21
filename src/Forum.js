@@ -1,6 +1,7 @@
 import './Forum.css';
 import { Grid, Button,TextField,Paper } from '@mui/material';
 import React, { useState } from 'react';
+import Header from './Header';
 
 
 
@@ -17,7 +18,9 @@ function Forum() {
   };
   return (
     <div>
-      <div className="gd"></div>
+      <div>
+      <Header />
+      </div>
   
       <div className="con">
         <div className='title'>

@@ -29,11 +29,12 @@ export default function Header() {
       {/* Header */}
       <Grid container className="grid">
        
-        <Grid item sm={6}>
+        <Grid item sm={5}>
           <div className="conlogo">
             <img src={"headerlogo.png"} className="headlogo" alt="headerLogo" />
           </div>
         </Grid>
+
         <Grid item sm={1} className="btn">
           <div className="noowrap">
             <Link to="home" className="header-link">DASHBOARD</Link>
@@ -96,7 +97,7 @@ export default function Header() {
           </div>
         </Grid>
 
-        <Grid item sm={1.5} className="btn">
+        <Grid item sm={1} className="btn">
           <div className="noowrap">
             <Link to="services"
               className="header-link"
@@ -162,6 +163,13 @@ export default function Header() {
                 </Link>
               </MenuItem>
             </Menu>
+          </div>
+        </Grid>
+
+          
+        <Grid item sm={1} className="btn">
+          <div className="noowrap">
+            <Link to="business" className="header-link">LOGOUT</Link>
           </div>
         </Grid>
         {/* Add other grids as needed */}
