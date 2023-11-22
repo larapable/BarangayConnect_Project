@@ -1,0 +1,39 @@
+.main-div {
+  display: flex;
+  justify-content: center;
+  background: #829ca6;
+  height: 100vh;
+}
+.paper-style {
+  width: 900px;
+  height: 53vh;
+  background: #ffffff;
+  display: flex;
+  border-radius: 10px;
+  border: 3px solid #213555;
+}
+.title {
+  font-size: 24px;
+  color: #213555;
+}
+.long-input {
+  width: 345px;
+  height: 40px;
+  border-radius: 10px;
+}
+.short-input {
+  width: 160px;
+  height: 40px;
+  border-radius: 10px;
+}
+.popup {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  border: 2px solid #213555;
+  text-align: center;
+}

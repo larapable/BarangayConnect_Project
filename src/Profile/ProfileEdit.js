@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react";
 import { Button, Grid } from "@mui/material";
+import Header from "../Header";
 import "./Profile.css";
 import Header from "../Header"; 
 import { Link } from "react-router-dom";
