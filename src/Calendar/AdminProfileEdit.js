@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import { Button, Grid, Modal } from "@mui/material";
-import Header from "../../BarangayConnect_Project/src/Header";
+import Header from "../Header";
 
 export default function AdminProfileEdit() {
   const uploadedImage = useRef(null);

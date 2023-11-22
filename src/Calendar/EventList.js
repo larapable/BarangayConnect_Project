@@ -1,7 +1,7 @@
-import Header from "../../BarangayConnect_Project/src/Header";
+import Header from "../Header";
 import React from "react";
 
-export default function ProfileList() {
+export default function EventList() {
   return (
     <div
       style={{
@@ -23,10 +23,9 @@ export default function ProfileList() {
         }}
       >
         <h1 style={{ fontSize: "60px", color: "white", margin: "60px" }}>
-          PROFILE LIST:
+          EVENT LIST:
         </h1>
       </div>
-      
     </div>
   );
 }

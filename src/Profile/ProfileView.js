@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import { Button, Grid } from "@mui/material";
-import Header from "../../BarangayConnect_Project/src/Header";
+import Header from "../Header";
 import "./Profile.css";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 
@@ -49,10 +49,6 @@ export default function ProfileView() {
     "Jugan Tisa, Cebu, Philippines",
     "Female",
     "January 1, 1990",
-    "09999999999",
-    "Married",
-    "Filipino",
-    "Roman Catholic",
   ];
 
   return (

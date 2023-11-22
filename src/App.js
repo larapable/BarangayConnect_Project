@@ -1,13 +1,13 @@
 // App.js
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Start from "./Start";
-import Login from "./Login";
-import Signup from "./Signup";
+import Start from "./Login/Start";
+import Login from "./Login/Login";
+import Signup from "./Login/Signup";
 import Home from "./Home";
-import ProfileView from "./ProfileView";
-import ProfileEdit from "./ProfileEdit";
-import CommunityCalendar from "./CommunityCalendar";
+import ProfileView from "./Profile/ProfileView";
+import ProfileEdit from "./Profile/ProfileEdit";
+import CommunityCalendar from "./Calendar/CommunityCalendar";
 // import Forum from "./Forum";
 
 

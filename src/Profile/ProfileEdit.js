@@ -1,7 +1,8 @@
 import React, { useState, useRef } from "react";
 import { Button, Grid } from "@mui/material";
 import "./Profile.css";
-import Header from "./Header";
+import Header from "../Header";
+import { Link } from "react-router-dom";
 
 export default function ProfileEdit() {
   const uploadedImage = useRef(null);
@@ -37,10 +38,35 @@ export default function ProfileEdit() {
     "Jugan Tisa, Cebu, Philippines",
     "Female",
     "January 1, 1990",
-    "09999999999",
-    "Married",
+  ];
+
+  const maritalStatusOptions = ["", "Single", "Married", "Divorced", "Widowed"];
+  const citizenshipOptions = [
+    "",
     "Filipino",
+    "American",
+    "Chinese",
+    "Japanese",
+    "Korean",
+    "Indian",
+    "British",
+    "Canadian",
+    "Australian",
+    "Black American",
+    "Other",
+  ];
+  const religionOptions = [
+    "",
     "Roman Catholic",
+    "Islam",
+    "Protestant",
+    "Iglesia ni Cristo",
+    "Seventh Day Adventist",
+    "Jehovah's Witness",
+    "Bible Baptist Church",
+    "Born Again Christian",
+    "Philippine Independent Church",
+    "Other",
   ];
 
   const [values, setValues] = useState(initialValues);
@@ -63,6 +89,7 @@ export default function ProfileEdit() {
       reader.readAsDataURL(file);
     }
   };
+
   return (
     <div className="profile-screen">
       <div>
@@ -152,17 +179,81 @@ export default function ProfileEdit() {
                   }}
                 >
                   {editableFields.includes(label) ? (
-                    <input
-                      type="text"
-                      style={{
-                        color: "#213555",
-                        fontWeight: "bold",
-                        fontSize: "18px",
-                        marginTop: "10px",
-                      }}
-                      value={values[index]}
-                      onChange={(e) => handleInputChange(index, e.target.value)}
-                    />
+                    label === "Marital Status" ? (
+                      <select
+                        value={values[index]}
+                        onChange={(e) =>
+                          handleInputChange(index, e.target.value)
+                        }
+                        style={{
+                          color: "#213555",
+                          fontWeight: "bold",
+                          fontSize: "18px",
+                          marginTop: "10px",
+                          width: "245px",
+                        }}
+                      >
+                        {maritalStatusOptions.map((option, optionIndex) => (
+                          <option key={optionIndex} value={option}>
+                            {option}
+                          </option>
+                        ))}
+                      </select>
+                    ) : label === "Citizenship" ? (
+                      <select
+                        value={values[index]}
+                        onChange={(e) =>
+                          handleInputChange(index, e.target.value)
+                        }
+                        style={{
+                          color: "#213555",
+                          fontWeight: "bold",
+                          fontSize: "18px",
+                          marginTop: "10px",
+                          width: "245px",
+                        }}
+                      >
+                        {citizenshipOptions.map((option, optionIndex) => (
+                          <option key={optionIndex} value={option}>
+                            {option}
+                          </option>
+                        ))}
+                      </select>
+                    ) : label === "Religion" ? (
+                      <select
+                        value={values[index]}
+                        onChange={(e) =>
+                          handleInputChange(index, e.target.value)
+                        }
+                        style={{
+                          color: "#213555",
+                          fontWeight: "bold",
+                          fontSize: "18px",
+                          marginTop: "10px",
+                          width: "245px",
+                        }}
+                      >
+                        {religionOptions.map((option, optionIndex) => (
+                          <option key={optionIndex} value={option}>
+                            {option}
+                          </option>
+                        ))}
+                      </select>
+                    ) : (
+                      <input
+                        type="text"
+                        style={{
+                          color: "#213555",
+                          fontWeight: "bold",
+                          fontSize: "18px",
+                          marginTop: "10px",
+                        }}
+                        value={values[index]}
+                        onChange={(e) =>
+                          handleInputChange(index, e.target.value)
+                        }
+                      />
+                    )
                   ) : (
                     <p
                       style={{
@@ -181,19 +272,21 @@ export default function ProfileEdit() {
           </div>
 
           <div className="center-style">
-            <Button
-              variant="contained"
-              style={{
-                color: "#FFFFFF",
-                background: "#213555",
-                borderRadius: "10px",
-                width: "150px",
-                fontWeight: "bold",
-                marginTop: "20px",
-              }}
-            >
-              Finish
-            </Button>
+            <Link to="/profile">
+              <Button
+                variant="contained"
+                style={{
+                  color: "#FFFFFF",
+                  background: "#213555",
+                  borderRadius: "10px",
+                  width: "150px",
+                  fontWeight: "bold",
+                  marginTop: "20px",
+                }}
+              >
+                Finish
+              </Button>
+            </Link>
           </div>
         </div>
       </Grid>
