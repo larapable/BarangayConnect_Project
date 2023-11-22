@@ -23,7 +23,7 @@ function Forum() {
       </div>
   
       <div className="con">
-        <div className="title">
+        <div className="forum-title">
           <p>WHAT'S NEW ?</p>
         </div>
         <div className="para">

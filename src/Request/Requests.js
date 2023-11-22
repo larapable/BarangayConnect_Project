@@ -49,7 +49,7 @@ function Requests() {
                 backgroundColor: 'rgba(255, 255, 255, 0.2)',
                 position:'relative',
                }}>
-      <div style={{marginBottom:'20px'}}>
+      <div style={{marginBottom:'50px'}}>
       <Grid container>
         <Grid item className='text-fields-container'>
           <h1 style={{textAlign: 'left', 
@@ -67,7 +67,7 @@ function Requests() {
       </Grid>
       </div>
        
-    <div style={{marginBottom:'20px'}}>
+    <div style={{marginBottom:'50px'}}>
       <Grid container>
         <Grid item >
           <p className='name'>Birthdate</p>
@@ -87,12 +87,18 @@ function Requests() {
           <input type='text' placeholder='' className='custom-input'/> 
           </div>
         </Grid>
+        <Grid item>
+          <p className='name'>Number of Copies</p>
+          <div>
+          <input type='text' placeholder='' className='custom-input'/> 
+          </div>
+        </Grid>
       </Grid>
     </div>
 
-    <div style={{marginBottom:'20px'}}>
+    <div style={{marginBottom:'50px'}}>
       <Grid container>
-        <Grid item sm={5}>
+        <Grid item>
         <p className='name'>Purok</p>
           <div>
           <div>
@@ -105,7 +111,7 @@ function Requests() {
           </div>
         </Grid>
 
-        <Grid item sm={5}>
+        <Grid item >
         <p className='name'>Purpose</p>
           <div>
           <input type='text' placeholder='' className='custom-input2'/> 
@@ -114,7 +120,7 @@ function Requests() {
       </Grid>
     </div>
 
-    <div style={{marginBottom:'40px'}}>
+    <div style={{marginBottom:'50px'}}>
     <Grid container>
     <Grid item>
         <p className='name'>Document Type (Please check the appropriate box)</p>
@@ -126,7 +132,7 @@ function Requests() {
                 checked={isChecked}
                 onChange={() => handleCheckboxChange(index)}
               />
-              <span style={{ fontSize: '20px',marginRight:'20px', fontWeight:'bold'}}>{labels[index]}</span>
+              <span style={{ fontSize: '20px',marginRight:'40px', fontWeight:'bold'}}>{labels[index]}</span>
             </label>
           ))}
         </div>
@@ -135,7 +141,7 @@ function Requests() {
     </div>
      
         
-    <div style={{marginBottom:'10px'}}>
+    <div style={{marginBottom:'50px'}}>
       <Grid container>
         <Grid item>
           <p className='name'>For Others</p>
@@ -153,28 +159,18 @@ function Requests() {
             </select>
           </div>
         </Grid>
+
         <Grid item>
-          <p className='name'>Number of Copies</p>
+        <p className='name'>Contact Number</p>
           <div>
           <input type='text' placeholder='' className='custom-input'/> 
           </div>
         </Grid>
-      </Grid>
-    </div>
 
-    <div>
-      <Grid container style={{marginBottom:'10px'}}>
-        <Grid item sm={5}>
+        <Grid item>
         <p className='name'>Email</p>
           <div>
-          <input type='text' placeholder='' className='custom-input2'/> 
-          </div>
-        </Grid>
-
-        <Grid item sm={5}>
-        <p className='name'>Contact Number</p>
-          <div>
-          <input type='text' placeholder='' className='custom-input2'/> 
+          <input type='text' placeholder='' className='custom-input'/> 
           </div>
         </Grid>
       </Grid>
