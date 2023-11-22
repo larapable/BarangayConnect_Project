@@ -9,14 +9,9 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
   <React.StrictMode>
-    {/* <Forum/> */}
-    {/* <Home/> */}
-    {/* <Header/> */}
     <BrowserRouter>
       <App />
     </BrowserRouter>
-    {/* <PaymentRem/>
-    {/* <Requests /> */}
   </React.StrictMode>
 );
 

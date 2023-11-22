@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import { Button, Grid } from "@mui/material";
-import Header from "../../BarangayConnect_Project/src/Header";
 import "./Profile.css";
+import Header from "./Header";
 
 export default function ProfileEdit() {
   const uploadedImage = useRef(null);
