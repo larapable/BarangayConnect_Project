@@ -84,7 +84,7 @@ export default function Header() {
                 </NavLink>
               </MenuItem>
               <MenuItem onClick={handleMenuClose}>
-                <Link to="directory"
+                <NavLink to="/barangaydirectory"
                   style={{
                     color: "#213555",
                     fontWeight: "bold",
@@ -92,7 +92,7 @@ export default function Header() {
                   }}
                 >
                   BARANGAY DIRECTORY
-                </Link>
+                </NavLink>
               </MenuItem>
             </Menu>
           </div>

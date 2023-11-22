@@ -10,6 +10,7 @@ import ProfileEdit from "./ProfileEdit";
 import EmergencyAlertChoices from "./EmergencyAlertChoices";
 import SubmitReportForm from "./SubmitReportForm";
 import EmergencyAlertList from "./EmergencyAlertList";
+import OfficialsList from "./BarangayDirectory";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         <Route path="/submitreport" element={<SubmitReportForm />} />
         <Route path="/emergencyalertlist" element={<EmergencyAlertList />} />
         <Route path="/backhome" element={<Home />} />
+        <Route path="/barangaydirectory" element={<OfficialsList />} />
       </Routes>
     </Router>
   );
