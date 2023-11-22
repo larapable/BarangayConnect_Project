@@ -1,40 +1,88 @@
 import React, { useState } from 'react';
-import { Button } from '@mui/material';
-import Header from './Header';
-import "./IncidentReportForm.css";
+import { Link } from 'react-router-dom';
+import "./SubmitReportForm.css";
+import { Button, Dialog, DialogTitle, DialogActions } from '@mui/material';
+import Header from '../Header';
 
-const IncidentReportForm = () => {
-    const [incidentType, setIncidentType] = useState('');
+const SubmitReportForm = () => {
+
     const [date, setDate] = useState('');
     const [time, setTime] = useState('');
     const [location, setLocation] = useState('');
     const [incidentDetails, setIncidentDetails] = useState('');
+    const [incidentType, setIncidentType] = useState('');
+    const [isDialogOpen, setDialogOpen] = useState(false);
+    const [error, setError] = useState('');
     const [submitted, setSubmitted] = useState(false);
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Add your form submission logic here
-        // For example, you can console.log the inputs for now
+
+        // Check if all required fields are filled
+        if (!date || !time || !location || !incidentDetails || !incidentType) {
+            setError('Please fill in all fields.');
+            return;
+        }
+
+        // Reset error state
+        setError('');
+
         console.log({
-            incidentType,
             date,
             time,
             location,
             incidentDetails,
+            incidentType,
         });
+
+        setDialogOpen(true);
         setSubmitted(true);
+    };
+
+    const handleDialogClose = () => {
+        setDialogOpen(false);
+    };
+
+    const handleSubmitAnotherReport = () => {
+        setDate('');
+        setTime('');
+        setLocation('');
+        setIncidentDetails('');
+        setIncidentType('');
+        setDialogOpen(false);
     };
 
     return (
         <div>
             <Header />
-            <div>
-                <div style={{ display: 'flex' }}>
-                    {/* Left side - Form */}
-                    <div style={{ marginTop: '20px' }}>
-                        <h1 style={{ color: "#213555", marginLeft: '10px', marginTop: '-5px' }}>REPORT AN ISSUE</h1>
-                    </div>
-                    <div style={{ border: "2px solid #213555", padding: "3px", width: "520px", height: "auto", marginTop: '70px', marginLeft: '-270px' , marginRight: '5px'}}>
+            <div class="label-voice">
+                <h1>LET YOUR VOICE BE HEARD!</h1>
+            </div>
+            <div className='report-image'>
+                <img src={"reportissuepic.png"} alt="Background Image" style={{ width: "15%", height: "30vh" }} />
+            </div>
+            <div class="text-voice">
+                <p>Help us make our community a better place by reporting any issues <br />
+                    or concerns you encounter. Whether it's about public services, safety, <br />
+                    infrastructure, or any other matter, we want to hear from you. <br />
+                    Your input plays a vital role in addressing and resolving community <br />
+                    issues.
+                </p>
+                <p>
+                    Our barangay officials and dedicated team will review your report <br />
+                    promptly and take the necessary steps to resolve the issue. Your <br />
+                    participation is crucial in maintaining the well-being of our community.
+                </p>
+                <p>
+                    Your community, your app - Barangay Connect!
+                </p>
+            </div>
+            <div className="report-label">
+                <div className='report-label-box'>
+                    <h1 style={{ color: "#fff", marginLeft: '10px' }}>REPORT AN ISSUE</h1>
+                </div>
+                <div className='report-issue'>
+                    <div style={{ border: "2px solid #213555", padding: "3px", width: "870px", height: "auto"}}>
                         <form onSubmit={handleSubmit}>
                             {/* Type of Incident */}
                             <br />
@@ -99,6 +147,7 @@ const IncidentReportForm = () => {
                             />
                             <br />
                             <div className='button-submit'>
+                            {error && <p style={{ color: 'red' }}>{error}</p>}
                                 <Button
                                     variant="contained"
                                     style={{ color: '#FFFFFF', fontWeight: "bolder", backgroundColor: "#213555", width: '400px', height: '20px', padding: '15px 30px', borderRadius: '10px', textAlign: 'center' }}
@@ -109,35 +158,38 @@ const IncidentReportForm = () => {
                             </div>
                         </form>
                     </div>
-                    <div>
-                        {/* Incident Alert Box */}
-                        <div style={{ backgroundColor: '#213555', padding: '10px', borderRadius: '5px', color: '#fff', height: '50px', width: '965px', marginLeft: '3px' }}>
-                            <h2 style={{ marginTop: '-3px' }}>A L E R T !</h2>
-                        </div>
-                        <div style={{ marginLeft: '5px', padding: '10px', border: '2px solid #ccc', borderRadius: '5px', width: '960px', height: '130px', marginTop: '0px', fontSize: '11px'}}>
-                            <p style={{ marginTop: '5px' }}><strong>Type of Incident:</strong> {incidentType}</p>
-                            <p><strong>Date:</strong> {date}</p>
-                            <p><strong>Time:</strong> {time}</p>
-                            <p><strong>Location:</strong> {location}</p>
-                            <p><strong>Incident Details:</strong> {incidentDetails}</p>
-                        </div>
-
-                        {/* Report Forum Box */}
-                        <div style={{ backgroundColor: '#213555', padding: '10px', borderRadius: '5px', color: '#fff', height: '50px', width: '965px', marginLeft: '3px', marginTop: '50px' }}>
-                            <h2 style={{ marginTop: '-3px' }}>R E P O R T F O R U M</h2>
-                        </div>
-                        <div style={{ marginLeft: '5px', padding: '10px', border: '2px solid #ccc', borderRadius: '5px', width: '960px', height: '130px', marginTop: '0px', fontSize: '11px'}}>
-                            <p style={{ marginTop: '5px' }}><strong>Type of Incident:</strong> {incidentType}</p>
-                            <p><strong>Date:</strong> {date}</p>
-                            <p><strong>Time:</strong> {time}</p>
-                            <p><strong>Location:</strong> {location}</p>
-                            <p><strong>Incident Details:</strong> {incidentDetails}</p>
-                        </div>
-                    </div>
                 </div>
             </div>
+            {/* Dialog for submission confirmation */}
+            <Dialog open={isDialogOpen} onClose={handleDialogClose} PaperProps={{ style: { backgroundColor: '#E0E0E0' } }}>
+                <img src={"checkbutton.png"} alt="Check Button" className="checkbutton" />
+                <DialogTitle style={{ margin: 'auto', textAlign: 'center', color: '#213555', fontWeight: 'bold', fontSize: '30px' }}>
+                    Your Emergency Report has been submitted!
+                </DialogTitle>
+                <DialogActions>
+                    <Button
+                        style={{ backgroundColor: "#213555", marginBottom: "10px" , width: '300px'}}
+                        className="button-anotherreport"
+                        onClick={handleSubmitAnotherReport}
+                        variant="contained"
+                    >
+                        Another Report
+                    </Button>
+
+                    <Link to="/backhome">
+                        <Button
+                            style={{ backgroundColor: "#213555", marginBottom: "10px" , width: '300px'}}
+                            className="button-backhome"
+                            onClick={handleDialogClose}
+                            variant="contained"
+                        >
+                            Back Home
+                        </Button>
+                    </Link>
+                </DialogActions>
+            </Dialog>
         </div>
     );
 };
 
-export default IncidentReportForm;
+export default SubmitReportForm;

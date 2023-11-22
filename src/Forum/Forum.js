@@ -1,7 +1,7 @@
 import './Forum.css';
 import { Grid, Button,TextField,Paper } from '@mui/material';
 import React, { useState } from 'react';
-import Header from './Header';
+import Header from '../Header';
 
 
 
