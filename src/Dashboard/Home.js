@@ -17,7 +17,7 @@ export default function Home() {
               <Grid item>
                 <div className="comlogo">
                   <img
-                    src={"together.png"}
+                    src={"../together.png"}
                     className="togetherlogo"
                     alt="togetherlogo"
                   />
