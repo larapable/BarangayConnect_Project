@@ -1,5 +1,5 @@
 import './PaymentRem.css';
-import Header from './Header';
+import Header from '../Header';
 import { Button } from '@mui/material';
 
 function PaymentRem() {

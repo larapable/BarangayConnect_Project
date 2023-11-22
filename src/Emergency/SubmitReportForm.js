@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import "./SubmitReportForm.css";
 import { Button, Dialog, DialogTitle, DialogActions } from '@mui/material';
-import Header from './Header';
+import Header from '../Header';
 
 const SubmitReportForm = () => {
 

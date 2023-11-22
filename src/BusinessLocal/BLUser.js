@@ -2,7 +2,7 @@ import { Grid, Link, Menu, MenuItem, Paper, Button, TextField, InputBase } from 
 import SearchIcon from "@mui/icons-material/Search";
 import { useState } from "react";
 import "./BLUser.css";
-import Header from "./Header";
+import Header from "../Header";
 
 export default function BLUser (){
 

@@ -1,6 +1,6 @@
 import { Button, Grid } from "@mui/material";
 import "./Home.css";
-import Header from "./Header";
+import Header from "../Header";
 
 export default function Home() {
   return (

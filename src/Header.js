@@ -44,13 +44,13 @@ export default function Header() {
 
         <Grid item sm={1} className="btn">
           <div className="noowrap">
-            <Link to="calendar" className="header-link">CALENDAR</Link>
+            <NavLink to="/calendar" className="header-link">CALENDAR</NavLink>
           </div>
         </Grid>
 
         <Grid item sm={1.5} className="btn">
           <div className="noowrap">
-            <Link to="business" className="header-link">BUSINESS SUPPORT</Link>
+            <NavLink to="/business" className="header-link">BUSINESS SUPPORT</NavLink>
           </div>
         </Grid>
 
@@ -84,7 +84,7 @@ export default function Header() {
                 </NavLink>
               </MenuItem>
               <MenuItem onClick={handleMenuClose}>
-                <NavLink to="/barangaydirectory"
+                <NavLink to="directory"
                   style={{
                     color: "#213555",
                     fontWeight: "bold",
@@ -117,7 +117,7 @@ export default function Header() {
               onClose={handleMenuClose}
             >
               <MenuItem onClick={handleMenuClose}>
-                <Link to="announcements"
+                <NavLink to="/announcements"
                   style={{
                     color: "#213555",
                     fontWeight: "bold",
@@ -126,10 +126,10 @@ export default function Header() {
                   
                 >
                   ANNOUNCEMENTS
-                </Link>
+                </NavLink>
               </MenuItem>
               <MenuItem onClick={handleMenuClose}>
-                <Link to="forum"
+                <NavLink to="/forum"
                   style={{
                     color: "#213555",
                     fontWeight: "bold",
@@ -137,11 +137,11 @@ export default function Header() {
                   }}
                 >
                   FORUM
-                </Link>
+                </NavLink>
               </MenuItem>
 
               <MenuItem onClick={handleMenuClose}>
-                <NavLink to="/emergencyalertchoices"
+                <NavLink to="/emergency"
                   style={{
                     color: "#213555",
                     fontWeight: "bold",
@@ -153,7 +153,7 @@ export default function Header() {
               </MenuItem>
               
               <MenuItem onClick={handleMenuClose}>
-                <Link to="requets"
+                <NavLink to="/requests"
                   style={{
                     color: "#213555",
                     fontWeight: "bold",
@@ -161,7 +161,7 @@ export default function Header() {
                   }}
                 >
                   REQUESTS DOCUMENT
-                </Link>
+                </NavLink>
               </MenuItem>
             </Menu>
           </div>

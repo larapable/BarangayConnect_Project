@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Button } from '@mui/material';
-import Header from './Header';
+import Header from '../Header';
 import "./IncidentReportForm.css";
 
 const IncidentReportForm = () => {

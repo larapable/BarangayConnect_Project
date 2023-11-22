@@ -4,7 +4,7 @@ import {useEffect, useState} from "react";
 import uuid from "react-uuid";
 import AnnAdminMain from "./AnnAdminMain"
 import AnnAdminSidebar from "./AnnAdminSidebar"
-import Header from "./Header";
+import Header from "../Header";
 import "./AnnAdmin.css";
 
 export default function AnnAdmin (){

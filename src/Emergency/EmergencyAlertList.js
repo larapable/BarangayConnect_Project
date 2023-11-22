@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Header from './Header';
+import Header from '../Header';
 import './EmergencyAlertList.css'; // Import the CSS file
 
 const EmergencyAlertList = () => {

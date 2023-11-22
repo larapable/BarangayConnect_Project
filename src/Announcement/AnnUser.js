@@ -2,7 +2,7 @@ import { Grid, Link, Menu, MenuItem, Paper, Button, TextField, InputBase } from 
 import SearchIcon from "@mui/icons-material/Search";
 import {useEffect, useState} from "react";
 import uuid from "react-uuid";
-import Header from "./Header";
+import Header from "../Header";
 import "./AnnUser.css";
 
 

@@ -1,15 +1,15 @@
 import { Button } from '@mui/material';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Header from './Header';
+import Header from '../Header';
 import "./EmergencyAlertChoices.css";
 
 const EmergencyAlertChoices = () => {
     return (
-        <div style={{ backgroundColor: '#213555' }}>
+        <div >
+            <div> <Header /></div>
             <div>
-                {/* Header */}
-                <Header />
+               
                 <img src={"fullbg.png"} alt="Background Image" style={{ width: "100%", height: "88vh", objectFit: "cover" }} />
             </div>
             <div className="popup-container">

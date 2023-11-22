@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import { Button, Grid } from "@mui/material";
-import Header from "../../BarangayConnect_Project/src/Header";
+import Header from "../Header";
 import "./Profile.css";
 
 export default function AdminProfileView () {
