@@ -16,7 +16,7 @@ const EmergencyAlertChoices = () => {
                 <div className="popup-box">
                     {/* Content inside the pop-up container */}
                     <img src={"BClogo.png"} alt="Logo Pop-up" className="popup-image" />
-                    <div style={{ alignItems: 'center', margin: 'auto', justifyContent: 'center', marginTop: '140px' }}>
+                    <div style={{ alignItems: 'center', margin: 'auto', justifyContent: 'center', marginTop: '15px' }}>
                         <Link to="/submitreport">
                             <Button class="button button-submit" variant="contained" style={{ height: '70px', padding: '15px 150px', borderRadius: '10px', fontWeight: 'bold' }}>
                                 Submit a Report Form

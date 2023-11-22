@@ -32,9 +32,9 @@ const IncidentReportForm = () => {
                 <div style={{ display: 'flex' }}>
                     {/* Left side - Form */}
                     <div style={{ marginTop: '20px' }}>
-                        <h1 style={{ color: "#213555", marginLeft: '10px', marginTop: '-5px' }}>REPORT AN ISSUE</h1>
+                        <h1 style={{ color: "#213555", marginLeft: '5px', marginTop: '-5px' }}>REPORT AN ISSUE</h1>
                     </div>
-                    <div style={{ border: "2px solid #213555", padding: "3px", width: "520px", height: "auto", marginTop: '70px', marginLeft: '-270px' , marginRight: '5px'}}>
+                    <div style={{ border: "2px solid #213555", padding: "3px", width: "520px", height: "540px", marginTop: '70px', marginLeft: '-270px' , marginRight: '5px' }}>
                         <form onSubmit={handleSubmit}>
                             {/* Type of Incident */}
                             <br />
@@ -44,7 +44,7 @@ const IncidentReportForm = () => {
                                 onChange={(e) => setIncidentType(e.target.value)}
                                 placeholder='Type of Incident.....'
                                 required={submitted}
-                                className='incident-input'
+                                className='incident-report-incident-input'
                             />
                             <br />
                             <br />
@@ -57,7 +57,7 @@ const IncidentReportForm = () => {
                                     value={date}
                                     onChange={(e) => setDate(e.target.value)}
                                     required={submitted}
-                                    className='incident-date'
+                                    className='incident-report-incident-date'
                                 />
                             </label>
 
@@ -68,7 +68,7 @@ const IncidentReportForm = () => {
                                     value={time}
                                     onChange={(e) => setTime(e.target.value)}
                                     required={submitted}
-                                    className='incident-time'
+                                    className='incident-report-incident-time'
                                 />
                             </label>
                             <br />
@@ -82,7 +82,7 @@ const IncidentReportForm = () => {
                                 onChange={(e) => setLocation(e.target.value)}
                                 placeholder='Exact Location.....'
                                 required={submitted}
-                                className='incident-location'
+                                className='incident-report-incident-location'
                             />
                             <br />
                             <br />
@@ -95,10 +95,10 @@ const IncidentReportForm = () => {
                                 onChange={(e) => setIncidentDetails(e.target.value)}
                                 placeholder='Incident Details.....'
                                 required={submitted}
-                                className='incident-incident-details'
+                                className='incident-report-incident-incident-details'
                             />
                             <br />
-                            <div className='button-submit'>
+                            <div className='incident-button-submit'>
                                 <Button
                                     variant="contained"
                                     style={{ color: '#FFFFFF', fontWeight: "bolder", backgroundColor: "#213555", width: '400px', height: '20px', padding: '15px 30px', borderRadius: '10px', textAlign: 'center' }}
@@ -111,7 +111,7 @@ const IncidentReportForm = () => {
                     </div>
                     <div>
                         {/* Incident Alert Box */}
-                        <div style={{ backgroundColor: '#213555', padding: '10px', borderRadius: '5px', color: '#fff', height: '50px', width: '965px', marginLeft: '3px' }}>
+                        <div style={{ backgroundColor: '#213555', padding: '10px', borderRadius: '5px', color: '#fff', height: '50px', width: '965px', marginLeft: '3px' , marginTop: '5px'}}>
                             <h2 style={{ marginTop: '-3px' }}>A L E R T !</h2>
                         </div>
                         <div style={{ marginLeft: '5px', padding: '10px', border: '2px solid #ccc', borderRadius: '5px', width: '960px', height: '130px', marginTop: '0px', fontSize: '11px'}}>
@@ -123,7 +123,7 @@ const IncidentReportForm = () => {
                         </div>
 
                         {/* Report Forum Box */}
-                        <div style={{ backgroundColor: '#213555', padding: '10px', borderRadius: '5px', color: '#fff', height: '50px', width: '965px', marginLeft: '3px', marginTop: '50px' }}>
+                        <div style={{ backgroundColor: '#213555', padding: '10px', borderRadius: '5px', color: '#fff', height: '50px', width: '965px', marginLeft: '3px', marginTop: '70px' }}>
                             <h2 style={{ marginTop: '-3px' }}>R E P O R T F O R U M</h2>
                         </div>
                         <div style={{ marginLeft: '5px', padding: '10px', border: '2px solid #ccc', borderRadius: '5px', width: '960px', height: '130px', marginTop: '0px', fontSize: '11px'}}>

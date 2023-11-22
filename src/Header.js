@@ -141,7 +141,7 @@ export default function Header() {
               </MenuItem>
 
               <MenuItem onClick={handleMenuClose}>
-                <Link to="emergency"
+                <NavLink to="/emergencyalertchoices"
                   style={{
                     color: "#213555",
                     fontWeight: "bold",
@@ -149,11 +149,11 @@ export default function Header() {
                   }}
                 >
                   EMERGENCY ALERT
-                </Link>
+                </NavLink>
               </MenuItem>
               
               <MenuItem onClick={handleMenuClose}>
-                <Link to="emergency"
+                <Link to="requets"
                   style={{
                     color: "#213555",
                     fontWeight: "bold",
