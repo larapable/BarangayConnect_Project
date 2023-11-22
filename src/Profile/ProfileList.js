@@ -1,4 +1,4 @@
-import Header from "../../BarangayConnect_Project/src/Header";
+import Header from "../Header";
 import React from "react";
 
 export default function ProfileList() {

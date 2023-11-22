@@ -13,7 +13,7 @@ import { useEffect, useState } from "react";
 import uuid from "react-uuid";
 import BLMain from "./BLMain";
 import BLSidebar from "./BLSidebar";
-import Header from "./Header";
+import Header from "../Header";
 import "./BLAdmin.css";
 
 export default function BLAdmin() {

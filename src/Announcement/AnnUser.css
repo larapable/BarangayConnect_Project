@@ -16,7 +16,7 @@
     right: 0;
     bottom: 0;
     left: 0;
-    background-image: url("C:\Users\ebeb_miao\Downloads\tisalogo.png");
+    background-image: url('../../public/tisa_logo.png');
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
