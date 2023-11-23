@@ -6,10 +6,10 @@ import "./EmergencyAlertChoices.css";
 
 const EmergencyAlertChoices = () => {
     return (
-        <div >
-            <div> <Header /></div>
+        <div style={{ backgroundColor: '#213555' }}>
             <div>
-               
+                {/* Header */}
+                <Header />
                 <img src={"fullbg.png"} alt="Background Image" style={{ width: "100%", height: "88vh", objectFit: "cover" }} />
             </div>
             <div className="popup-container">
