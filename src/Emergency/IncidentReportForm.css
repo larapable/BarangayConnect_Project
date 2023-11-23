@@ -2,44 +2,35 @@ body {
     background-color: #ffffff;
 }
 
-.text-voice {
+.incident-text-voice {
     margin-left: 50px;
     font-size: 18px;
     color: #A8A2A2;
     font-family: 'Your Chosen Font', sans-serif;
 }
 
-.label-voice {
+.incident-label-voice {
     margin-left: 50px;
     color: #213555;
     font-size: 20px;
 }
 
-.report-image {
+.incident-report-image {
     margin-left: 190px;
     margin-top: 30px;
 }
 
-.report-label {
+.incident-report-label {
     margin-left: 645px;
     margin-top: -595px;
 }
 
-.report-issue {
+.incident-report-issue {
     height: 50vh;
     margin-right: 50%;
 }
 
-.report-label-box {
-    border: 2px solid #333;
-    padding: 0%;
-    display: inline-block;
-    width: 500px;
-    background-color: #213555;
-    margin-top: 5px;
-}
-
-.incident-input {
+.incident-report-incident-input {
     border: 1px solid #ccc;
     border-radius: 8px;
     padding: 8px;
@@ -50,7 +41,7 @@ body {
     height: 50px;
 }
 
-.incident-date {
+.incident-report-incident-date {
     border: 1px solid #ccc;
     border-radius: 8px;
     padding: 8px;
@@ -60,7 +51,7 @@ body {
     margin-top: auto;
 }
 
-.incident-time {
+.incident-report-incident-time {
     border: 1px solid #ccc;
     border-radius: 8px;
     padding: 8px;
@@ -69,7 +60,7 @@ body {
     width: 115px;
 }
 
-.incident-location {
+.incident-report-incident-location {
     border: 1px solid #ccc;
     border-radius: 8px;
     padding: 8px;
@@ -81,7 +72,7 @@ body {
     height: 50px;
 }
 
-.incident-incident-details {
+.incident-report-incident-incident-details {
     border: 1px solid #ccc;
     border-radius: 8px;
     padding: 8px;
@@ -94,20 +85,20 @@ body {
     margin-top: -20px;
 }
 
-.incident-input,
-.incident-date,
-.incident-time,
-.incident-location,
-.incident-incident-details {
+.incident-report-incident-input,
+.incident-report-incident-date,
+.incident-report-incident-time,
+.incident-report-incident-location,
+.incident-report-incident-incident-details {
     font-family: 'Your Chosen Font', sans-serif;
 }
 
-.button-submit {
+.incident-button-submit {
     margin-top: 10px;
     text-align: center;
 }
 
-.checkbutton {
+.incident-checkbutton {
     width: 200px;
     height: auto;
     display: flex;
@@ -116,8 +107,8 @@ body {
     margin: auto;
 }
 
-.button-anotherreport,
-.button-backhome {
+.incident-button-anotherreport,
+.incident-button-backhome {
     height: 30px;
     width: 400px;
     padding: 15px 30px;
