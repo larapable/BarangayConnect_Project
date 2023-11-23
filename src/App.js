@@ -9,7 +9,7 @@ import CommunityCalendar from "./Calendar/CommunityCalendar"
 import BLUser from "./BusinessLocal/BLUser";
 import AnnUser from "./Announcement/AnnUser"
 import Forum from "./Forum/Forum"
-//import EmergencyAlertChoices from "./EmergencyAlertChoices";
+import EmergencyAlertChoices from "./Emergency/EmergencyAlertChoices";
 import Requests from "./Request/Requests"
 import ProfileView from "./Profile/ProfileView";
 import ProfileEdit from "./Profile/ProfileEdit";
@@ -26,7 +26,7 @@ function App() {
       <Route path="/announcements" element={<AnnUser />}/>
       <Route path="/forum" element={<Forum />}/>
       <Route path="/requests" element={<Requests />}/>
-      {/* <Route path="/emergency" element={<EmergencyAlertChoices />}/> */}
+      <Route path="/emergency" element={<EmergencyAlertChoices />}/>
       <Route path="/business" element={<BLUser/>}/>
       <Route path="/profile" element={<ProfileView />} />
       <Route path="/profile/edit" element={<ProfileEdit />} />

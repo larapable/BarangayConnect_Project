@@ -1,0 +1,26 @@
+.eventlist-bg {
+  background: #213555;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.eventlist-title {
+  font-size: 60px;
+  color: white;
+  margin: 60px;
+}
+.admin-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.input-design {
+  width: 500px;
+  height: 40px;
+  border: none;
+  border-bottom: 1px solid white;
+  outline: none;
+  background: transparent;
+  color: white;
+}
+

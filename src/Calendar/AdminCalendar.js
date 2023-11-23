@@ -3,18 +3,13 @@ import Header from "../Header";
 import { DateCalendar, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { useState } from "react";
+import "./CC.css";
 
 export default function AdminCalendar() {
   const [date, setDate] = useState(null);
   const [value, setValue] = useState(null);
   return (
-    <div
-      style={{
-        height: "100vh",
-        display: "flex",
-        flexDirection: "column",
-      }}
-    >
+    <div className="admin-container">
       <div>
         <Header />
       </div>
@@ -41,19 +36,18 @@ export default function AdminCalendar() {
               height: "100%",
               width: "100%",
               display: "flex",
-              flexDirection: "column", // Set the main axis direction to column
-              alignItems: "flex-start", // Align items to the start of the cross axis
+              flexDirection: "column",
+              alignItems: "flex-start",
             }}
           >
             <div
               style={{
                 display: "flex",
                 flexDirection: "column",
-                alignItems: "center",
                 marginLeft: "auto",
                 marginRight: "auto",
                 marginTop: "100px",
-                textAlign: "left", // Align text inside the div to the left
+                textAlign: "left",
               }}
             >
               <h1 style={{ color: "white" }}>Event title:</h1>
@@ -61,60 +55,28 @@ export default function AdminCalendar() {
                 type="text"
                 id="title"
                 name="title"
-                style={{
-                  width: "500px",
-                  height: "40px",
-                  border: "none",
-                  borderBottom: "1px solid white",
-                  outline: "none",
-                  background: "transparent",
-                  color: "white",
-                }}
+                className="input-design"
               ></input>
               <h1 style={{ color: "white" }}>Event description:</h1>
               <input
                 type="text"
                 id="description"
                 name="description"
-                style={{
-                  width: "500px",
-                  height: "40px",
-                  border: "none",
-                  borderBottom: "1px solid white",
-                  outline: "none",
-                  background: "transparent",
-                  color: "white",
-                }}
+                className="input-design"
               ></input>
               <h1 style={{ color: "white" }}>Event location:</h1>
               <input
                 type="text"
                 id="location"
                 name="location"
-                style={{
-                  width: "500px",
-                  height: "40px",
-                  border: "none",
-                  borderBottom: "1px solid white",
-                  outline: "none",
-                  background: "transparent",
-                  color: "white",
-                }}
+                className="input-design"
               ></input>
               <h1 style={{ color: "white" }}>Event time:</h1>
               <input
                 type="text"
                 id="time"
                 name="time"
-                style={{
-                  width: "500px",
-                  height: "40px",
-                  border: "none",
-                  borderBottom: "1px solid white",
-                  outline: "none",
-                  background: "transparent",
-                  color: "white",
-                }}
+                className="input-design"
               ></input>
 
               <Button
@@ -141,6 +103,7 @@ export default function AdminCalendar() {
             justifyContent: "center",
             textAlign: "center",
             alignItems: "center",
+            background: "#FFFFFF",
           }}
         >
           <LocalizationProvider dateAdapter={AdapterDayjs}>
