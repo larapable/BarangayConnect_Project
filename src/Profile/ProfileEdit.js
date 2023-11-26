@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Button, Grid } from "@mui/material";
 import Header from "../Header";
 import "./Profile.css";
@@ -7,6 +7,51 @@ import { Link } from "react-router-dom";
 export default function ProfileEdit() {
   const uploadedImage = useRef(null);
   const imageUploader = useRef(null);
+  const [userData, setUserData] = useState(null);
+  const [error, setError] = useState(null);
+
+  const username = localStorage.getItem("username");
+
+  useEffect(() => {
+    const fetchUserProfile = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:8080/login-signup/getInfoByUsername/${username}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error("User not found");
+        }
+
+        const data = await response.json();
+        setUserData(data);
+        setError(null);
+        console.log("Successfully fetched user information");
+      } catch (error) {
+        setUserData(null);
+        setError(error.message || "An error occurred");
+        console.error("Error fetching user information:", error);
+      }
+    };
+    fetchUserProfile();
+  }, [username]);
+
+  // Sample values for each detail
+  const data = [
+    userData?.username || "",
+    userData?.email || "",
+    userData?.fname || "",
+    userData?.lname || "",
+    userData?.address || "",
+    userData?.gender || "",
+    userData?.dateOfBirth || "",
+  ];
 
   const placeholderImage = "../profile.png";
 
@@ -28,16 +73,6 @@ export default function ProfileEdit() {
     "Marital Status",
     "Citizenship",
     "Religion",
-  ];
-  // Sample values for each detail
-  const initialValues = [
-    "larsss01 ",
-    "larajane@gmail.com",
-    "Lara",
-    "Jane",
-    "Jugan Tisa, Cebu, Philippines",
-    "Female",
-    "January 1, 1990",
   ];
 
   const maritalStatusOptions = ["", "Single", "Married", "Divorced", "Widowed"];
@@ -69,7 +104,7 @@ export default function ProfileEdit() {
     "Other",
   ];
 
-  const [values, setValues] = useState(initialValues);
+  const [values, setValues] = useState(data);
 
   const handleInputChange = (index, newValue) => {
     const newValues = [...values];
@@ -112,7 +147,7 @@ export default function ProfileEdit() {
                   fontSize: "50px",
                 }}
               >
-                Lara Jane
+                {userData?.username || ""}
               </p>
               <input
                 type="file"
@@ -123,12 +158,11 @@ export default function ProfileEdit() {
                   display: "none",
                 }}
               />
-
               <Button
                 variant="contained"
                 style={{
-                  color: "#FFFFFF",
-                  background: "#213555",
+                  color: "#213555",
+                  background: "#FFFFFF",
                   borderRadius: "10px",
                   width: "200px",
                   fontWeight: "bold",
@@ -189,8 +223,9 @@ export default function ProfileEdit() {
                           color: "#213555",
                           fontWeight: "bold",
                           fontSize: "18px",
-                          marginTop: "10px",
+                          marginTop: "15px",
                           width: "245px",
+                        
                         }}
                       >
                         {maritalStatusOptions.map((option, optionIndex) => (
@@ -209,7 +244,7 @@ export default function ProfileEdit() {
                           color: "#213555",
                           fontWeight: "bold",
                           fontSize: "18px",
-                          marginTop: "10px",
+                          marginTop: "15px",
                           width: "245px",
                         }}
                       >
@@ -229,7 +264,7 @@ export default function ProfileEdit() {
                           color: "#213555",
                           fontWeight: "bold",
                           fontSize: "18px",
-                          marginTop: "10px",
+                          marginTop: "15px",
                           width: "245px",
                         }}
                       >
@@ -242,11 +277,12 @@ export default function ProfileEdit() {
                     ) : (
                       <input
                         type="text"
+                        placeholder="0999-999-9999"
                         style={{
                           color: "#213555",
                           fontWeight: "bold",
                           fontSize: "18px",
-                          marginTop: "10px",
+                          marginTop: "15px",
                         }}
                         value={values[index]}
                         onChange={(e) =>
@@ -263,7 +299,7 @@ export default function ProfileEdit() {
                         marginBottom: "10px",
                       }}
                     >
-                      {values[index]}
+                      {data[index]}
                     </p>
                   )}
                 </div>

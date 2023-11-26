@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Button, Grid } from "@mui/material";
 import Header from "../Header";
 import "./Profile.css";
@@ -8,9 +8,43 @@ export default function ProfileView() {
   const uploadedImage = useRef(null);
   const imageUploader = useRef(null);
   const navigate = useNavigate();
+  const [userData, setUserData] = useState(null);
+  const [error, setError] = useState(null);
+
+  // Fetch the username from the local storage
+  const username = localStorage.getItem("username");
+
+  useEffect(() => {
+    const fetchUserProfile = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:8080/login-signup/getInfoByUsername/${username}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error("User not found");
+        }
+
+        const data = await response.json();
+        setUserData(data);
+        setError(null);
+        console.log("Successfully fetched user information");
+      } catch (error) {
+        setUserData(null);
+        setError(error.message || "An error occurred");
+        console.error("Error fetching user information:", error);
+      }
+    };
+    fetchUserProfile();
+  }, [username]);
 
   const handleEditProfile = () => {
-    // Navigate to the /profile/edit route
     navigate("/profile/edit");
   };
 
@@ -41,14 +75,14 @@ export default function ProfileView() {
     "Religion",
   ];
   // Sample values for each detail
-  const values = [
-    "larsss01 ",
-    "larajane@gmail.com",
-    "Lara",
-    "Jane",
-    "Jugan Tisa, Cebu, Philippines",
-    "Female",
-    "January 1, 1990",
+  const data = [
+    userData?.username || "",
+    userData?.email || "",
+    userData?.fname || "",
+    userData?.lname || "",
+    userData?.address || "",
+    userData?.gender || "",
+    userData?.dateOfBirth || "",
   ];
 
   return (
@@ -73,7 +107,7 @@ export default function ProfileView() {
                   fontSize: "50px",
                 }}
               >
-                Lara Jane
+                {userData?.username || ""}
               </p>
             </div>
           </div>
@@ -119,7 +153,7 @@ export default function ProfileView() {
                       marginBottom: "10px",
                     }}
                   >
-                    {values[index]}
+                    {data[index]}
                   </p>
                 </div>
               </div>

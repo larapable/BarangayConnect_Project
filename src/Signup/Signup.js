@@ -35,6 +35,17 @@ export default function Signup() {
       alert("Please fill in all required fields.");
       return;
     }
+
+    // Check if password meets requirements
+    const passwordRegex =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&.])[A-Za-z\d@$!%*?&.]{8,}$/;
+    if (!passwordRegex.test(password)) {
+      alert(
+        "Password must be a minimum of 8 characters, with at least one uppercase letter, one lowercase letter, one number, and one special character (including period)."
+      );
+      return;
+    }
+
     event.preventDefault();
     console.log("Submitting:", {
       username,
@@ -187,6 +198,7 @@ export default function Signup() {
                     type="text"
                     id="address"
                     name="address"
+                    placeholder="Street Name, Barangay, City"
                     className="long-input"
                     value={address}
                     onChange={(e) => setAddress(e.target.value)}
