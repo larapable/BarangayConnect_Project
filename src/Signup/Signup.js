@@ -76,8 +76,8 @@ export default function Signup() {
       } else {
         // Handle signup error
         const data = await response.json();
-
-        if (response.status === 500 && data.message) {
+        
+        if (response.status === 500 && data.message){
           // Server error, handle username already exists
           alert(data.message);
         } else {

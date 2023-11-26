@@ -55,13 +55,13 @@ const SubmitReportForm = () => {
     return (
         <div>
             <Header />
-            <div class="label-voice">
+            <div class="submit-label-voice">
                 <h1>LET YOUR VOICE BE HEARD!</h1>
             </div>
-            <div className='report-image'>
+            <div className='submit-report-image'>
                 <img src={"reportissuepic.png"} alt="Background Image" style={{ width: "15%", height: "30vh" }} />
             </div>
-            <div class="text-voice">
+            <div class="submit-text-voice">
                 <p>Help us make our community a better place by reporting any issues <br />
                     or concerns you encounter. Whether it's about public services, safety, <br />
                     infrastructure, or any other matter, we want to hear from you. <br />
@@ -77,12 +77,12 @@ const SubmitReportForm = () => {
                     Your community, your app - Barangay Connect!
                 </p>
             </div>
-            <div className="report-label">
-                <div className='report-label-box'>
+            <div className="submit-report-label">
+                <div className='submit-report-label-box'>
                     <h1 style={{ color: "#fff", marginLeft: '10px' }}>REPORT AN ISSUE</h1>
                 </div>
-                <div className='report-issue'>
-                    <div style={{ border: "2px solid #213555", padding: "3px", width: "870px", height: "auto"}}>
+                <div className='submit-report-issue'>
+                    <div style={{ border: "2px solid #213555", padding: "3px", width: "870px", height: "auto" }}>
                         <form onSubmit={handleSubmit}>
                             {/* Type of Incident */}
                             <br />
@@ -92,7 +92,7 @@ const SubmitReportForm = () => {
                                 onChange={(e) => setIncidentType(e.target.value)}
                                 placeholder='Type of Incident.....'
                                 required={submitted}
-                                className='incident-input'
+                                className='submit-incident-input'
                             />
                             <br />
                             <br />
@@ -105,7 +105,7 @@ const SubmitReportForm = () => {
                                     value={date}
                                     onChange={(e) => setDate(e.target.value)}
                                     required={submitted}
-                                    className='incident-date'
+                                    className='submit-incident-date'
                                 />
                             </label>
 
@@ -116,7 +116,7 @@ const SubmitReportForm = () => {
                                     value={time}
                                     onChange={(e) => setTime(e.target.value)}
                                     required={submitted}
-                                    className='incident-time'
+                                    className='submit-incident-time'
                                 />
                             </label>
                             <br />
@@ -130,7 +130,7 @@ const SubmitReportForm = () => {
                                 onChange={(e) => setLocation(e.target.value)}
                                 placeholder='Exact Location.....'
                                 required={submitted}
-                                className='incident-location'
+                                className='submit-incident-location'
                             />
                             <br />
                             <br />
@@ -143,10 +143,10 @@ const SubmitReportForm = () => {
                                 onChange={(e) => setIncidentDetails(e.target.value)}
                                 placeholder='Incident Details.....'
                                 required={submitted}
-                                className='incident-incident-details'
+                                className='submit-incident-incident-details'
                             />
                             <br />
-                            <div className='button-submit'>
+                            <div className='submit-button-submit'>
                             {error && <p style={{ color: 'red' }}>{error}</p>}
                                 <Button
                                     variant="contained"
@@ -162,14 +162,14 @@ const SubmitReportForm = () => {
             </div>
             {/* Dialog for submission confirmation */}
             <Dialog open={isDialogOpen} onClose={handleDialogClose} PaperProps={{ style: { backgroundColor: '#E0E0E0' } }}>
-                <img src={"checkbutton.png"} alt="Check Button" className="checkbutton" />
+                <img src={"checkbutton.png"} alt="Check Button" className="submit-checkbutton" />
                 <DialogTitle style={{ margin: 'auto', textAlign: 'center', color: '#213555', fontWeight: 'bold', fontSize: '30px' }}>
                     Your Emergency Report has been submitted!
                 </DialogTitle>
                 <DialogActions>
                     <Button
                         style={{ backgroundColor: "#213555", marginBottom: "10px" , width: '300px'}}
-                        className="button-anotherreport"
+                        className="submit-button-anotherreport"
                         onClick={handleSubmitAnotherReport}
                         variant="contained"
                     >
@@ -179,7 +179,7 @@ const SubmitReportForm = () => {
                     <Link to="/backhome">
                         <Button
                             style={{ backgroundColor: "#213555", marginBottom: "10px" , width: '300px'}}
-                            className="button-backhome"
+                            className="submit-button-backhome"
                             onClick={handleDialogClose}
                             variant="contained"
                         >

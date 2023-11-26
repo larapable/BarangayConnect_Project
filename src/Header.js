@@ -84,7 +84,7 @@ export default function Header() {
                 </NavLink>
               </MenuItem>
               <MenuItem onClick={handleMenuClose}>
-                <NavLink to="directory"
+                <NavLink to="/directory"
                   style={{
                     color: "#213555",
                     fontWeight: "bold",

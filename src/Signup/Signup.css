@@ -2,11 +2,12 @@
   display: flex;
   justify-content: center;
   background: #829ca6;
-  height: 100vh;
+  height: auto;
+  padding-bottom: 69px;
 }
 .paper-style {
   width: 900px;
-  height: 53vh;
+  height: auto;
   background: #ffffff;
   display: flex;
   border-radius: 10px;

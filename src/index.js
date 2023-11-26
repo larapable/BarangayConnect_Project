@@ -11,12 +11,12 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
   <React.StrictMode>
-
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-
-  
+    {/* <Forum/> */}
+    {/* <Home/> */}
+    {/* <Header/> */}
+    <Requests/>
+    {/* <PaymentRem/> */}
+    
   </React.StrictMode>
 );
 // If you want to start measuring performance in your app, pass a function
