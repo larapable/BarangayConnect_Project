@@ -3,41 +3,44 @@ body {
 }
 
 .submit-text-voice {
-    margin-left: 40px;
-    font-size: 18px;
+    margin-left: 100px;
+    font-size: 21px;
     color: #A8A2A2;
     font-family: 'Your Chosen Font', sans-serif;
 }
 
 .submit-label-voice {
-    margin-left: 40px;
+    margin-left: 90px;
     color: #213555;
-    font-size: 20px;
+    font-size: 25px;
+    width: 700px;
 }
 
 .submit-report-image {
-    margin-left: 190px;
+    margin-left: 220px;
     margin-top: 30px;
 }
 
 .submit-report-label {
     margin-left: 640px;
-    margin-top: -590px;
+    margin-top: -780px;
 }
 
 .submit-report-issue {
     height: 50vh;
     margin-right: 50%;
-    margin-bottom: 100px;
+    margin-bottom: 330px;
+    margin-left: 190px;
 }
 
 .submit-report-label-box {
     border: 2px solid #333;
     padding: 0%;
     display: inline-block;
-    width: 876px;
+    width: 1164px;
     background-color: #213555;
-    margin-top: 5px;
+    margin-top: -500%;
+    margin-left: 190px;
 }
 
 .submit-incident-input {
@@ -47,8 +50,9 @@ body {
     box-shadow: 0 4px 5px #A8A2A2;
     box-sizing: border-box;
     width: 98%;
-    height: 50px;
+    height: 90px;
     margin-left: 8px;
+    font-size: 16px;
 }
 
 .submit-incident-date {
@@ -57,8 +61,11 @@ body {
     padding: 8px;
     box-shadow: 0 4px 5px #A8A2A2;
     box-sizing: border-box;
-    width: 115px;
-    margin-top: auto;
+    width: 130px;
+    height: 80px;
+    margin-top: 10px;
+    margin-left: 10px;
+    font-size: 16px;
 }
 
 .submit-incident-time {
@@ -67,7 +74,10 @@ body {
     padding: 8px;
     box-shadow: 0 4px 5px #A8A2A2;
     box-sizing: border-box;
-    width: 115px;
+    width: 130px;
+    height: 80px;
+    margin-left: 10px;
+    font-size: 16px;
 }
 
 .submit-incident-location {
@@ -78,8 +88,9 @@ body {
     box-sizing: border-box;
     width: 98%;
     margin-left: 8px;
-    margin-top: -50px;
-    height: 50px;
+    margin-top: -20px;
+    height: 90px;
+    font-size: 16px;
 }
 
 .submit-incident-incident-details {
@@ -90,9 +101,10 @@ body {
     box-sizing: border-box;
     width: 98%;
     margin-left: 8px;
-    height: 250px;
+    height: 330px;
     box-sizing: border-box;
     margin-top: -20px;
+    font-size: 16px;
 }
 
 .submit-incident-input,
@@ -106,6 +118,7 @@ body {
 .submit-button-submit {
     margin-top: 10px;
     text-align: center;
+    margin-bottom: 10px;
 }
 
 .submit-checkbutton {

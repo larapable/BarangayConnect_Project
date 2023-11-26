@@ -11,10 +11,12 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
   <React.StrictMode>
+    <BrowserRouter>
     {/* <Forum/> */}
     {/* <Home/> */}
     {/* <Header/> */}
-    <Requests/>
+    <App/>
+    </BrowserRouter>
     {/* <PaymentRem/> */}
     
   </React.StrictMode>

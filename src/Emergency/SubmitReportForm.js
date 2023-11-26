@@ -59,7 +59,7 @@ const SubmitReportForm = () => {
                 <h1>LET YOUR VOICE BE HEARD!</h1>
             </div>
             <div className='submit-report-image'>
-                <img src={"reportissuepic.png"} alt="Background Image" style={{ width: "15%", height: "30vh" }} />
+                <img src={"reportissuepic.png"} alt="Background Image" style={{ width: "20%", height: "40vh" }} />
             </div>
             <div class="submit-text-voice">
                 <p>Help us make our community a better place by reporting any issues <br />
@@ -82,11 +82,11 @@ const SubmitReportForm = () => {
                     <h1 style={{ color: "#fff", marginLeft: '10px' }}>REPORT AN ISSUE</h1>
                 </div>
                 <div className='submit-report-issue'>
-                    <div style={{ border: "2px solid #213555", padding: "3px", width: "870px", height: "auto" }}>
+                    <div style={{ border: "2px solid #213555", padding: "3px", width: "230%", height: "auto" , marginBottom: '20px'}}>
                         <form onSubmit={handleSubmit}>
                             {/* Type of Incident */}
                             <br />
-                            <input
+                            <textarea
                                 type="text"
                                 value={incidentType}
                                 onChange={(e) => setIncidentType(e.target.value)}
@@ -124,7 +124,7 @@ const SubmitReportForm = () => {
                             {/* Exact Location */}
                             <br />
                             <br />
-                            <input
+                            <textarea
                                 type="text"
                                 value={location}
                                 onChange={(e) => setLocation(e.target.value)}
