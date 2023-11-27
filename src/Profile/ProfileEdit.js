@@ -9,6 +9,10 @@ export default function ProfileEdit() {
   const imageUploader = useRef(null);
   const [userData, setUserData] = useState(null);
   const [error, setError] = useState(null);
+  const [mobileNumber, setMobileNumber] = useState("");
+  const [maritalStatus, setMaritalStatus] = useState("");
+  const [citizenship, setCitizenship] = useState("");
+  const [religion, setReligion] = useState("");
 
   const username = localStorage.getItem("username");
 
@@ -51,6 +55,10 @@ export default function ProfileEdit() {
     userData?.address || "",
     userData?.gender || "",
     userData?.dateOfBirth || "",
+    userData?.mobileNumber || "",
+    userData?.maritalStatus || "",
+    userData?.citizenship || "",
+    userData?.religion || "",
   ];
 
   const placeholderImage = "../profile.png";
@@ -104,14 +112,6 @@ export default function ProfileEdit() {
     "Other",
   ];
 
-  const [values, setValues] = useState(data);
-
-  const handleInputChange = (index, newValue) => {
-    const newValues = [...values];
-    newValues[index] = newValue;
-    setValues(newValues);
-  };
-
   const handleImageUpload = (e) => {
     const [file] = e.target.files;
     if (file) {
@@ -122,6 +122,33 @@ export default function ProfileEdit() {
         current.src = e.target.result;
       };
       reader.readAsDataURL(file);
+    }
+  };
+  const handleFinishClick = async () => {
+    console.log("Finish button clicked"); // Add this line
+    try {
+      const response = await fetch(
+        `http://localhost:8080/login-signup/updateUserInfo/${username}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            mobileNumber,
+            maritalStatus,
+            citizenship,
+            religion,
+          }),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to update user info");
+      }
+      console.log("User info updated successfully");
+    } catch (error) {
+      console.error("Error updating user info:", error);
     }
   };
 
@@ -215,17 +242,14 @@ export default function ProfileEdit() {
                   {editableFields.includes(label) ? (
                     label === "Marital Status" ? (
                       <select
-                        value={values[index]}
-                        onChange={(e) =>
-                          handleInputChange(index, e.target.value)
-                        }
+                        value={maritalStatus}
+                        onChange={(e) => setMaritalStatus(e.target.value)}
                         style={{
                           color: "#213555",
                           fontWeight: "bold",
                           fontSize: "18px",
                           marginTop: "15px",
                           width: "245px",
-                        
                         }}
                       >
                         {maritalStatusOptions.map((option, optionIndex) => (
@@ -236,10 +260,8 @@ export default function ProfileEdit() {
                       </select>
                     ) : label === "Citizenship" ? (
                       <select
-                        value={values[index]}
-                        onChange={(e) =>
-                          handleInputChange(index, e.target.value)
-                        }
+                        value={citizenship}
+                        onChange={(e) => setCitizenship(e.target.value)}
                         style={{
                           color: "#213555",
                           fontWeight: "bold",
@@ -256,10 +278,8 @@ export default function ProfileEdit() {
                       </select>
                     ) : label === "Religion" ? (
                       <select
-                        value={values[index]}
-                        onChange={(e) =>
-                          handleInputChange(index, e.target.value)
-                        }
+                        value={religion}
+                        onChange={(e) => setReligion(e.target.value)}
                         style={{
                           color: "#213555",
                           fontWeight: "bold",
@@ -284,10 +304,8 @@ export default function ProfileEdit() {
                           fontSize: "18px",
                           marginTop: "15px",
                         }}
-                        value={values[index]}
-                        onChange={(e) =>
-                          handleInputChange(index, e.target.value)
-                        }
+                        value={mobileNumber}
+                        onChange={(e) => setMobileNumber(e.target.value)}
                       />
                     )
                   ) : (
@@ -319,6 +337,7 @@ export default function ProfileEdit() {
                   fontWeight: "bold",
                   marginTop: "20px",
                 }}
+                onClick={handleFinishClick}
               >
                 Finish
               </Button>

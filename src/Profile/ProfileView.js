@@ -83,6 +83,10 @@ export default function ProfileView() {
     userData?.address || "",
     userData?.gender || "",
     userData?.dateOfBirth || "",
+    userData?.mobileNumber || "",
+    userData?.maritalStatus || "",
+    userData?.citizenship || "",
+    userData?.religion || "",
   ];
 
   return (
