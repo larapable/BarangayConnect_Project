@@ -1,15 +1,8 @@
-body {
+.submit-report-body {
     background-color: #ffffff;
 }
 
-.submit-text-voice {
-    margin-left: 100px;
-    font-size: 21px;
-    color: #A8A2A2;
-    font-family: 'Your Chosen Font', sans-serif;
-}
-
-.submit-label-voice {
+.text-voice-be-heard {
     margin-left: 90px;
     color: #213555;
     font-size: 25px;
@@ -21,19 +14,19 @@ body {
     margin-top: 30px;
 }
 
-.submit-report-label {
+.description-voice-be-heard {
+    margin-left: 100px;
+    font-size: 21px;
+    color: #A8A2A2;
+    font-family: 'Your Chosen Font', sans-serif;
+}
+
+.report-an-issue-text {
     margin-left: 640px;
     margin-top: -780px;
 }
 
-.submit-report-issue {
-    height: 50vh;
-    margin-right: 50%;
-    margin-bottom: 330px;
-    margin-left: 190px;
-}
-
-.submit-report-label-box {
+.report-an-issue-text-box {
     border: 2px solid #333;
     padding: 0%;
     display: inline-block;
@@ -43,7 +36,14 @@ body {
     margin-left: 190px;
 }
 
-.submit-incident-input {
+.submit-report-issue {
+    height: 50vh;
+    margin-right: 50%;
+    margin-bottom: 330px;
+    margin-left: 190px;
+}
+
+.incident-type-input {
     border: 1px solid #ccc;
     border-radius: 8px;
     padding: 8px;
@@ -55,7 +55,7 @@ body {
     font-size: 16px;
 }
 
-.submit-incident-date {
+.incident-date-input {
     border: 1px solid #ccc;
     border-radius: 8px;
     padding: 8px;
@@ -68,7 +68,7 @@ body {
     font-size: 16px;
 }
 
-.submit-incident-time {
+.incident-time-input {
     border: 1px solid #ccc;
     border-radius: 8px;
     padding: 8px;
@@ -80,7 +80,7 @@ body {
     font-size: 16px;
 }
 
-.submit-incident-location {
+.incident-location-input {
     border: 1px solid #ccc;
     border-radius: 8px;
     padding: 8px;
@@ -93,7 +93,7 @@ body {
     font-size: 16px;
 }
 
-.submit-incident-incident-details {
+.incident-details-input {
     border: 1px solid #ccc;
     border-radius: 8px;
     padding: 8px;
@@ -107,21 +107,21 @@ body {
     font-size: 16px;
 }
 
-.submit-incident-input,
-.submit-incident-date,
-.submit-incident-time,
-.submit-incident-location,
-.submit-incident-incident-details {
+.incident-type-input,
+.incident-date-input,
+.incident-time-input,
+.incident-location-input,
+.incident-details-input {
     font-family: 'Your Chosen Font', sans-serif;
 }
 
-.submit-button-submit {
+.report-issue-button {
     margin-top: 10px;
     text-align: center;
     margin-bottom: 10px;
 }
 
-.submit-checkbutton {
+.success-pop-up {
     width: 200px;
     height: auto;
     display: flex;
@@ -130,8 +130,8 @@ body {
     margin: auto;
 }
 
-.submit-button-anotherreport,
-.submit-button-backhome {
+.button-another-report,
+.button-back-home {
     height: 30px;
     width: 400px;
     padding: 15px 30px;

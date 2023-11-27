@@ -3,65 +3,72 @@ import { Link } from 'react-router-dom';
 import "./SubmitReportForm.css";
 import { Button, Dialog, DialogTitle, DialogActions } from '@mui/material';
 import Header from '../Header';
+import axios from 'axios';
 
 const SubmitReportForm = () => {
 
     const [date, setDate] = useState('');
     const [time, setTime] = useState('');
-    const [location, setLocation] = useState('');
+    const [exactLocation, setExactLocation] = useState('');
     const [incidentDetails, setIncidentDetails] = useState('');
     const [incidentType, setIncidentType] = useState('');
     const [isDialogOpen, setDialogOpen] = useState(false);
     const [error, setError] = useState('');
     const [submitted, setSubmitted] = useState(false);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-
+    
         // Check if all required fields are filled
-        if (!date || !time || !location || !incidentDetails || !incidentType) {
-            setError('Please fill in all fields.');
-            return;
+        if (!date || !time || !exactLocation || !incidentDetails || !incidentType) {
+          setError('Please fill in all fields.');
+          return;
         }
-
+    
         // Reset error state
         setError('');
-
-        console.log({
+    
+        try {
+          // Make the HTTP request to your Spring Boot backend
+          await axios.post('http://localhost:8080/emergencies/add', {
             date,
             time,
-            location,
+            exactLocation,
             incidentDetails,
-            incidentType,
-        });
-
-        setDialogOpen(true);
-        setSubmitted(true);
-    };
-
-    const handleDialogClose = () => {
+            typeOfIncident: incidentType,
+          });
+    
+          // Show the submission dialog
+          setDialogOpen(true);
+          setSubmitted(true);
+        } catch (error) {
+          console.error('Error submitting incident:', error);
+        }
+      };
+    
+      const handleDialogClose = () => {
         setDialogOpen(false);
-    };
-
-    const handleSubmitAnotherReport = () => {
+      };
+    
+      const handleSubmitAnotherReport = () => {
         setDate('');
         setTime('');
-        setLocation('');
+        setExactLocation('');
         setIncidentDetails('');
         setIncidentType('');
         setDialogOpen(false);
-    };
+      };
 
     return (
-        <div>
+        <div className='submit-report-body'>
             <Header />
-            <div class="submit-label-voice">
+            <div class="text-voice-be-heard ">
                 <h1>LET YOUR VOICE BE HEARD!</h1>
             </div>
             <div className='submit-report-image'>
                 <img src={"reportissuepic.png"} alt="Background Image" style={{ width: "20%", height: "40vh" }} />
             </div>
-            <div class="submit-text-voice">
+            <div class="description-voice-be-heard">
                 <p>Help us make our community a better place by reporting any issues <br />
                     or concerns you encounter. Whether it's about public services, safety, <br />
                     infrastructure, or any other matter, we want to hear from you. <br />
@@ -77,8 +84,8 @@ const SubmitReportForm = () => {
                     Your community, your app - Barangay Connect!
                 </p>
             </div>
-            <div className="submit-report-label">
-                <div className='submit-report-label-box'>
+            <div className="report-an-issue-text">
+                <div className='report-an-issue-text-box'>
                     <h1 style={{ color: "#fff", marginLeft: '10px' }}>REPORT AN ISSUE</h1>
                 </div>
                 <div className='submit-report-issue'>
@@ -92,7 +99,7 @@ const SubmitReportForm = () => {
                                 onChange={(e) => setIncidentType(e.target.value)}
                                 placeholder='Type of Incident.....'
                                 required={submitted}
-                                className='submit-incident-input'
+                                className='incident-type-input'
                             />
                             <br />
                             <br />
@@ -105,7 +112,7 @@ const SubmitReportForm = () => {
                                     value={date}
                                     onChange={(e) => setDate(e.target.value)}
                                     required={submitted}
-                                    className='submit-incident-date'
+                                    className='incident-date-input'
                                 />
                             </label>
 
@@ -116,7 +123,7 @@ const SubmitReportForm = () => {
                                     value={time}
                                     onChange={(e) => setTime(e.target.value)}
                                     required={submitted}
-                                    className='submit-incident-time'
+                                    className='incident-time-input'
                                 />
                             </label>
                             <br />
@@ -126,11 +133,11 @@ const SubmitReportForm = () => {
                             <br />
                             <textarea
                                 type="text"
-                                value={location}
-                                onChange={(e) => setLocation(e.target.value)}
+                                value={exactLocation}
+                                onChange={(e) => setExactLocation(e.target.value)}
                                 placeholder='Exact Location.....'
                                 required={submitted}
-                                className='submit-incident-location'
+                                className='incident-location-input'
                             />
                             <br />
                             <br />
@@ -143,10 +150,10 @@ const SubmitReportForm = () => {
                                 onChange={(e) => setIncidentDetails(e.target.value)}
                                 placeholder='Incident Details.....'
                                 required={submitted}
-                                className='submit-incident-incident-details'
+                                className='incident-details-input'
                             />
                             <br />
-                            <div className='submit-button-submit'>
+                            <div className='report-issue-button'>
                             {error && <p style={{ color: 'red' }}>{error}</p>}
                                 <Button
                                     variant="contained"
@@ -162,14 +169,14 @@ const SubmitReportForm = () => {
             </div>
             {/* Dialog for submission confirmation */}
             <Dialog open={isDialogOpen} onClose={handleDialogClose} PaperProps={{ style: { backgroundColor: '#E0E0E0' } }}>
-                <img src={"checkbutton.png"} alt="Check Button" className="submit-checkbutton" />
+                <img src={"checkbutton.png"} alt="Check Button" className="success-pop-up" />
                 <DialogTitle style={{ margin: 'auto', textAlign: 'center', color: '#213555', fontWeight: 'bold', fontSize: '30px' }}>
                     Your Emergency Report has been submitted!
                 </DialogTitle>
                 <DialogActions>
                     <Button
                         style={{ backgroundColor: "#213555", marginBottom: "10px" , width: '300px'}}
-                        className="submit-button-anotherreport"
+                        className="button-another-report"
                         onClick={handleSubmitAnotherReport}
                         variant="contained"
                     >
@@ -179,7 +186,7 @@ const SubmitReportForm = () => {
                     <Link to="/backhome">
                         <Button
                             style={{ backgroundColor: "#213555", marginBottom: "10px" , width: '300px'}}
-                            className="submit-button-backhome"
+                            className="button-back-home"
                             onClick={handleDialogClose}
                             variant="contained"
                         >
