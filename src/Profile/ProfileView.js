@@ -6,7 +6,6 @@ import { Link, Outlet, useNavigate } from "react-router-dom";
 
 export default function ProfileView() {
   const uploadedImage = useRef(null);
-  const imageUploader = useRef(null);
   const navigate = useNavigate();
   const [userData, setUserData] = useState(null);
   const [error, setError] = useState(null);
@@ -35,6 +34,14 @@ export default function ProfileView() {
         setUserData(data);
         setError(null);
         console.log("Successfully fetched user information");
+        // Check if the photoPath is null or empty
+        if (data.photoPath) {
+          // Set the image path to the uploadedImage ref
+          uploadedImage.current.src = data.photoPath;
+        } else {
+          // Set the placeholder image to the uploadedImage ref
+          uploadedImage.current.src = placeholderImage;
+        }
       } catch (error) {
         setUserData(null);
         setError(error.message || "An error occurred");
@@ -44,22 +51,6 @@ export default function ProfileView() {
     fetchUserProfile();
   }, [username]);
 
-  const handleEditProfile = () => {
-    navigate("/profile/edit");
-  };
-
-  const handleImageUpload = (e) => {
-    const [file] = e.target.files;
-    if (file) {
-      const reader = new FileReader();
-      const { current } = uploadedImage;
-      current.file = file;
-      reader.onload = (e) => {
-        current.src = e.target.result;
-      };
-      reader.readAsDataURL(file);
-    }
-  };
   const placeholderImage = "../profile.png"; // Replace with your placeholder image URL or local path
   const details = [
     "Username",
