@@ -13,6 +13,8 @@ import EmergencyAlertChoices from "./Emergency/EmergencyAlertChoices";
 import Requests from "./Request/Requests"
 import ProfileView from "./Profile/ProfileView";
 import ProfileEdit from "./Profile/ProfileEdit";
+import EventList from "./Calendar/EventList";
+import AdminCalendar from "./Calendar/AdminCalendar";
 
 
 function App() {
@@ -31,6 +33,8 @@ function App() {
       <Route path="/profile" element={<ProfileView />} />
       <Route path="/profile/edit" element={<ProfileEdit />} />
       <Route path="/calendar" element={<CommunityCalendar />} />
+      <Route path="/admincalendar" element={<AdminCalendar />} />
+      <Route path="/admincalendar/eventlist" element={<EventList />} />
       {/* <Route path="/forum" element={<Forum />} /> */}
     </Routes>
   );
