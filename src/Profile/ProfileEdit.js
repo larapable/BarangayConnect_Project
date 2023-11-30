@@ -1,21 +1,21 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Button, Grid, Input } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import { Button, Grid } from "@mui/material";
 import Header from "../Header";
 import "./Profile.css";
-import { Link } from "react-router-dom";
 
 export default function ProfileEdit() {
-  const uploadedImage = useRef(null);
   const imageUploader = useRef(null);
   const [userData, setUserData] = useState(null);
   const [error, setError] = useState(null);
+  const [password, setPassword] = useState(userData?.password);
   const [mobileNumber, setMobileNumber] = useState("");
   const [maritalStatus, setMaritalStatus] = useState("");
   const [citizenship, setCitizenship] = useState("");
   const [religion, setReligion] = useState("");
-
   const [selectedImage, setSelectedImage] = useState();
   const [selectedFile, setSelectedFile] = useState(null);
+  const navigate = useNavigate();
 
   const username = localStorage.getItem("username");
   const placeholderImage = "../profile.png";
@@ -54,6 +54,7 @@ export default function ProfileEdit() {
   // Sample values for each detail
   const data = [
     userData?.username || "",
+    userData?.password || "",
     userData?.email || "",
     userData?.fname || "",
     userData?.lname || "",
@@ -67,6 +68,7 @@ export default function ProfileEdit() {
   ];
 
   const editableFields = [
+    "Password",
     "Mobile Number",
     "Marital Status",
     "Citizenship",
@@ -74,6 +76,7 @@ export default function ProfileEdit() {
   ];
   const details = [
     "Username",
+    "Password",
     "Email",
     "First Name",
     "Last Name",
@@ -126,13 +129,32 @@ export default function ProfileEdit() {
     }
   };
 
+  const validatePassword = (password) => {
+    const passwordRegex =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&.])[A-Za-z\d@$!%*?&.]{8,}$/;
+    return passwordRegex.test(password);
+  };
+
   const handleFinishClick = async (event) => {
     console.log("Finish button clicked");
 
     // Check if all fields have values
-    if (!mobileNumber || !maritalStatus || !citizenship || !religion) {
+    if (
+      !mobileNumber ||
+      !maritalStatus ||
+      !citizenship ||
+      !religion ||
+      !password
+    ) {
       alert("All fields must have values");
       event.preventDefault();
+      return;
+    }
+    // Validate the password
+    if (!validatePassword(password)) {
+      alert(
+        "Password must be a minimum of 8 characters, with at least one uppercase letter, one lowercase letter, one number, and one special character (including period)."
+      );
       return;
     }
 
@@ -151,7 +173,7 @@ export default function ProfileEdit() {
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
-      } 
+      }
       localStorage.setItem("photoPath", response.photoPath);
       const data = await response.json();
       console.log("Success:", data);
@@ -171,6 +193,7 @@ export default function ProfileEdit() {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
+            password,
             mobileNumber,
             maritalStatus,
             citizenship,
@@ -186,6 +209,9 @@ export default function ProfileEdit() {
     } catch (error) {
       console.error("Error updating user info:", error);
     }
+
+    // Navigate to the profile view
+    navigate("/profile");
   };
 
   return (
@@ -332,6 +358,18 @@ export default function ProfileEdit() {
                           </option>
                         ))}
                       </select>
+                    ) : label === "Password" ? (
+                      <input
+                        type="text"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        style={{
+                          color: "#213555",
+                          fontWeight: "bold",
+                          fontSize: "18px",
+                          marginTop: "15px",
+                        }}
+                      />
                     ) : (
                       <input
                         type="text"
@@ -364,22 +402,20 @@ export default function ProfileEdit() {
           </div>
 
           <div className="center-style">
-            <Link to="/profile">
-              <Button
-                variant="contained"
-                style={{
-                  color: "#FFFFFF",
-                  background: "#213555",
-                  borderRadius: "10px",
-                  width: "150px",
-                  fontWeight: "bold",
-                  marginTop: "20px",
-                }}
-                onClick={handleFinishClick}
-              >
-                Finish
-              </Button>
-            </Link>
+            <Button
+              variant="contained"
+              style={{
+                color: "#FFFFFF",
+                background: "#213555",
+                borderRadius: "10px",
+                width: "150px",
+                fontWeight: "bold",
+                marginTop: "20px",
+              }}
+              onClick={handleFinishClick}
+            >
+              Finish
+            </Button>
           </div>
         </div>
       </Grid>

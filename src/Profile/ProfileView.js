@@ -2,13 +2,15 @@ import React, { useState, useRef, useEffect } from "react";
 import { Button, Grid } from "@mui/material";
 import Header from "../Header";
 import "./Profile.css";
-import { Link, Outlet, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { IconButton } from "@mui/material";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 export default function ProfileView() {
   const uploadedImage = useRef(null);
-  const navigate = useNavigate();
   const [userData, setUserData] = useState(null);
   const [error, setError] = useState(null);
+  const [showPassword, setShowPassword] = useState(false);
 
   // Fetch the username from the local storage
   const username = localStorage.getItem("username");
@@ -54,6 +56,7 @@ export default function ProfileView() {
   const placeholderImage = "../profile.png"; // Replace with your placeholder image URL or local path
   const details = [
     "Username",
+    "Password",
     "Email",
     "First Name",
     "Last Name",
@@ -68,6 +71,7 @@ export default function ProfileView() {
   // Sample values for each detail
   const data = [
     userData?.username || "",
+    userData?.password || "",
     userData?.email || "",
     userData?.fname || "",
     userData?.lname || "",
@@ -102,7 +106,7 @@ export default function ProfileView() {
                   fontSize: "50px",
                 }}
               >
-                {userData?.username || ""}
+                {userData?.fname || ""} {userData?.lname || ""}
               </p>
             </div>
           </div>
@@ -140,21 +144,43 @@ export default function ProfileView() {
                   </p>
                 </div>
                 <div style={{ textAlign: "center", marginRight: "250px" }}>
-                  <p
-                    style={{
-                      color: "#213555",
-                      fontWeight: "bold",
-                      fontSize: "18px",
-                      marginBottom: "10px",
-                    }}
-                  >
-                    {data[index]}
-                  </p>
+                  {label === "Password" ? (
+                    <>
+                      <p
+                        style={{
+                          color: "#213555",
+                          fontWeight: "bold",
+                          fontSize: "18px",
+                          marginBottom: "10px",
+                        }}
+                      >
+                        {showPassword
+                          ? data[index]
+                          : "*".repeat(data[index].length)}
+                        <IconButton
+                          onClick={() => setShowPassword(!showPassword)}
+                          onMouseDown={(event) => event.preventDefault()}
+                        >
+                          {showPassword ? <VisibilityOff /> : <Visibility />}
+                        </IconButton>
+                      </p>
+                    </>
+                  ) : (
+                    <p
+                      style={{
+                        color: "#213555",
+                        fontWeight: "bold",
+                        fontSize: "18px",
+                        marginBottom: "10px",
+                      }}
+                    >
+                      {data[index]}
+                    </p>
+                  )}
                 </div>
               </div>
             ))}
           </div>
-
           <div className="center-style">
             <Link to="/profile/edit">
               <Button
