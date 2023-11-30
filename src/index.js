@@ -4,19 +4,14 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
-import AdminCalendar from "./Calendar/AdminCalendar";
-
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
   <React.StrictMode>
-    {/* <Forum/> */}
-    {/* <Home/> */}
-    {/* <Header/> */}
-    <Requests/>
-    {/* <PaymentRem/> */}
-    
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </React.StrictMode>
 );
 

@@ -16,7 +16,8 @@ import Requests from "./Request/Requests"
 import ProfileView from "./Profile/ProfileView";
 import ProfileEdit from "./Profile/ProfileEdit";
 import BarangayDirectory from "./Directory/BarangayDirectory" 
-
+import AdminCalendar from "./Calendar/AdminCalendar"
+import EventList from "./Calendar/EventList"
 
 function App() {
   return (

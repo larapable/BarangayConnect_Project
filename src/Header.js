@@ -92,7 +92,7 @@ export default function Header() {
                   }}
                 >
                   BARANGAY DIRECTORY
-                </Link>
+                </NavLink>
               </MenuItem>
             </Menu>
           </div>

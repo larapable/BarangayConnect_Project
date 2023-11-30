@@ -34,7 +34,8 @@ const Login = () => {
         // Login successful
         console.log("Login successful");
         // Store username in localStorage
-        localStorage.setItem("username", username);
+        const userObj = await response.json();
+        localStorage.setItem("user", JSON.stringify(userObj));
         
         navigate("/home");
       } else {
