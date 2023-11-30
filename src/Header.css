@@ -15,9 +15,8 @@
 .btn {
   text-align: right;
   padding: 40px;
-  
 }
-.noowrap{
+.noowrap {
   white-space: nowrap;
 }
 
@@ -35,31 +34,19 @@
 
 .noowrap > .header-link:hover {
   color: #213555;
-  ;
 }
 .noowrap > .header-link::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: -5px;
   left: 0;
   width: 100%;
-  height: 2px; 
-  background-color: transparent; 
+  height: 2px;
+  background-color: transparent;
   transition: height 0.3s, background-color 0.3s;
 }
 
 .noowrap > .header-link:hover::after {
-  height: 2px; 
-  background-color: #BDBDBD; 
+  height: 2px;
+  background-color: #bdbdbd;
 }
-
-
-
-
-
-
-
-
-
-
- 

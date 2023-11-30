@@ -35,8 +35,15 @@ function App() {
       <Route path="/backhome" element={<Home />} />
       <Route path="/directory" element={<BarangayDirectory />} />
       <Route path="/business" element={<BLUser />} />
+      <Route path="/announcements" element={<AnnUser />}/>
+      <Route path="/forum" element={<Forum />}/>
+      <Route path="/requests" element={<Requests />}/>
+      <Route path="/business" element={<BLUser/>}/>
       <Route path="/profile" element={<ProfileView />} />
       <Route path="/profile/edit" element={<ProfileEdit />} />
+      <Route path="/calendar" element={<CommunityCalendar />} />
+      <Route path="/admincalendar" element={<AdminCalendar />} />
+      <Route path="/admincalendar/eventlist" element={<EventList />} />
       <Route path="/" element={<EmergencyAlertChoices />} />
     </Routes>
   );

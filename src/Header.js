@@ -32,7 +32,7 @@ export default function Header() {
        
         <Grid item sm={5}>
           <div className="conlogo">
-            <img src={"headerlogo.png"} className="headlogo" alt="headerLogo" />
+            <img src={"/headerlogo.png"} className="headlogo" alt="headerLogo" />
           </div>
         </Grid>
 
@@ -92,7 +92,7 @@ export default function Header() {
                   }}
                 >
                   BARANGAY DIRECTORY
-                </NavLink>
+                </Link>
               </MenuItem>
             </Menu>
           </div>

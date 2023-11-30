@@ -19,6 +19,7 @@ export default function CommunityCalendar() {
           style={{
             height: "100%",
             width: "30%",
+            background: "#FFFFFF",
           }}
         >
           <div
