@@ -2,35 +2,36 @@ body {
     background-color: #ffffff;
 }
 
-.text-voice {
-    margin-left: 50px;
+.submit-text-voice {
+    margin-left: 40px;
     font-size: 18px;
     color: #A8A2A2;
     font-family: 'Your Chosen Font', sans-serif;
 }
 
-.label-voice {
-    margin-left: 50px;
+.submit-label-voice {
+    margin-left: 40px;
     color: #213555;
     font-size: 20px;
 }
 
-.report-image {
+.submit-report-image {
     margin-left: 190px;
     margin-top: 30px;
 }
 
-.report-label {
-    margin-left: 635px;
-    margin-top: -595px;
+.submit-report-label {
+    margin-left: 640px;
+    margin-top: -590px;
 }
 
-.report-issue {
+.submit-report-issue {
     height: 50vh;
     margin-right: 50%;
+    margin-bottom: 100px;
 }
 
-.report-label-box {
+.submit-report-label-box {
     border: 2px solid #333;
     padding: 0%;
     display: inline-block;
@@ -39,18 +40,18 @@ body {
     margin-top: 5px;
 }
 
-.incident-input {
+.submit-incident-input {
     border: 1px solid #ccc;
     border-radius: 8px;
     padding: 8px;
     box-shadow: 0 4px 5px #A8A2A2;
     box-sizing: border-box;
-    width: 850px;
-    margin-left: 10px;
+    width: 98%;
     height: 50px;
+    margin-left: 8px;
 }
 
-.incident-date {
+.submit-incident-date {
     border: 1px solid #ccc;
     border-radius: 8px;
     padding: 8px;
@@ -60,7 +61,7 @@ body {
     margin-top: auto;
 }
 
-.incident-time {
+.submit-incident-time {
     border: 1px solid #ccc;
     border-radius: 8px;
     padding: 8px;
@@ -69,45 +70,45 @@ body {
     width: 115px;
 }
 
-.incident-location {
+.submit-incident-location {
     border: 1px solid #ccc;
     border-radius: 8px;
     padding: 8px;
     box-shadow: 0 4px 5px #A8A2A2;
     box-sizing: border-box;
-    width: 850px;
-    margin-left: 10px;
+    width: 98%;
+    margin-left: 8px;
     margin-top: -50px;
     height: 50px;
 }
 
-.incident-incident-details {
+.submit-incident-incident-details {
     border: 1px solid #ccc;
     border-radius: 8px;
     padding: 8px;
     box-shadow: 0 4px 5px #A8A2A2;
     box-sizing: border-box;
-    width: 850px;
-    margin-left: 10px;
+    width: 98%;
+    margin-left: 8px;
     height: 250px;
     box-sizing: border-box;
     margin-top: -20px;
 }
 
-.incident-input,
-.incident-date,
-.incident-time,
-.incident-location,
-.incident-incident-details {
+.submit-incident-input,
+.submit-incident-date,
+.submit-incident-time,
+.submit-incident-location,
+.submit-incident-incident-details {
     font-family: 'Your Chosen Font', sans-serif;
 }
 
-.button-submit {
+.submit-button-submit {
     margin-top: 10px;
     text-align: center;
 }
 
-.checkbutton {
+.submit-checkbutton {
     width: 200px;
     height: auto;
     display: flex;
@@ -116,8 +117,8 @@ body {
     margin: auto;
 }
 
-.button-anotherreport,
-.button-backhome {
+.submit-button-anotherreport,
+.submit-button-backhome {
     height: 30px;
     width: 400px;
     padding: 15px 30px;
