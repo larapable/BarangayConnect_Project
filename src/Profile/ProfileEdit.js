@@ -126,32 +126,6 @@ export default function ProfileEdit() {
     }
   };
 
-  // const handleImageChange = async () => {
-  //   try {
-  //     const formData = new FormData();
-  //     formData.append("image", selectedFile); // selectedFile is the file selected by the user
-
-  //     const response = await fetch(
-  //       `http://localhost:8080/login-signup/uploadImage/${username}`,
-  //       {
-  //         method: "POST",
-  //         body: formData,
-  //       }
-  //     );
-
-  //     if (!response.ok) {
-  //       throw new Error(`HTTP error! status: ${response.status}`);
-  //     }
-
-  //     const data = await response.json();
-  //     console.log("Success:", data);
-  //     // Update the user data in your application...
-  //     setSelectedImage(data.photoPath);
-  //   } catch (error) {
-  //     console.error("Error:", error);
-  //   }
-  // };
-
   const handleFinishClick = async (event) => {
     console.log("Finish button clicked");
 
