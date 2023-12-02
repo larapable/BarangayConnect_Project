@@ -4,6 +4,7 @@ import "./Login.css";
 import { Button } from "@mui/material";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 
+
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -46,6 +47,9 @@ const Login = () => {
       }
     } catch (error) {
       console.error("Error during login:", error);
+      alert(
+        "Your account does not exist or your account is not verified. Please check your email for verification instructions."
+      );
       alert(
         "Your account does not exist or your account is not verified. Please check your email for verification instructions."
       );
@@ -155,3 +159,4 @@ const Login = () => {
 };
 
 export default Login;
+

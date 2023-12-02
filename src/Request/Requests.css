@@ -100,8 +100,8 @@
 
     .custom-checkbox input {
       appearance: none; 
-      width: 30px; 
-      height: 30px; 
+      width: 27px; 
+      height: 27px; 
       border: 2px solid #000; 
       border-radius: 4px; 
       cursor: pointer; 
@@ -123,7 +123,20 @@
   display: flex;
   align-items: left;
   justify-content: left;
+  margin-left: 410px;
+
 
 }
 
+.popup2 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  border: 2px solid #213555;
+  text-align: center;
+}
 

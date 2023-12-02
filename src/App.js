@@ -18,6 +18,7 @@ import ProfileEdit from "./Profile/ProfileEdit";
 import BarangayDirectory from "./Directory/BarangayDirectory" 
 import AdminCalendar from "./Calendar/AdminCalendar"
 import EventList from "./Calendar/EventList"
+import AdminRequest from "./Request/AdminRequest";
 
 function App() {
   return (
@@ -44,8 +45,10 @@ function App() {
       <Route path="/profile/edit" element={<ProfileEdit />} />
       <Route path="/calendar" element={<CommunityCalendar />} />
       <Route path="/admincalendar" element={<AdminCalendar />} />
+      <Route path="/adminrequest" element={<AdminRequest />} />
       <Route path="/admincalendar/eventlist" element={<EventList />} />
       <Route path="/" element={<EmergencyAlertChoices />} />
+      
     </Routes>
   );
 }
