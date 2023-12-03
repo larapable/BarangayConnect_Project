@@ -1,27 +1,62 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Button, Grid } from "@mui/material";
 import Header from "../Header";
 import "./Profile.css";
+import { Link, useParams } from "react-router-dom";
+import { IconButton } from "@mui/material";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 
-export default function AdminProfileView () {
+export default function AdminProfileView() {
   const uploadedImage = useRef(null);
-  const imageUploader = useRef(null);
+  const [userData, setUserData] = useState(null);
+  const [error, setError] = useState(null);
+  const [showPassword, setShowPassword] = useState(false);
+  const { userId } = useParams();
 
-  const handleImageUpload = (e) => {
-    const [file] = e.target.files;
-    if (file) {
-      const reader = new FileReader();
-      const { current } = uploadedImage;
-      current.file = file;
-      reader.onload = (e) => {
-        current.src = e.target.result;
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-  const placeholderImage = "profile.png"; // Replace with your placeholder image URL or local path
+  useEffect(() => {
+    const fetchUserProfile = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:8080/login-signup/getInfoById/${userId}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error("User not found");
+        }
+
+        const data = await response.json();
+        setUserData(data);
+        setError(null);
+        console.log("Successfully fetched user information");
+
+        // Check if the photoPath is null or empty
+        if (data.photoPath) {
+          // Set the image path to the uploadedImage ref
+          const imagePath = `../${data.photoPath}`;
+          uploadedImage.current.src = imagePath;
+        } else {
+          // Set the placeholder image to the uploadedImage ref
+          uploadedImage.current.src = placeholderImage;
+        }
+      } catch (error) {
+        setUserData(null);
+        setError(error.message || "An error occurred");
+        console.error("Error fetching user information:", error);
+      }
+    };
+    fetchUserProfile();
+  }, [userId]);
+
+  const placeholderImage = "../profile.png";
   const details = [
     "Username",
+    "Password",
     "Email",
     "First Name",
     "Last Name",
@@ -32,30 +67,32 @@ export default function AdminProfileView () {
     "Marital Status",
     "Citizenship",
     "Religion",
+    "Verified",
   ];
   // Sample values for each detail
-  const values = [
-    "larsss01 ",
-    "larajane@gmail.com",
-    "Lara",
-    "Jane",
-    "Jugan Tisa, Cebu, Philippines",
-    "Female",
-    "January 1, 1990",
-    "09999999999",
-    "Married",
-    "Filipino",
-    "Roman Catholic",
+  const data = [
+    userData?.username || "",
+    userData?.password || "",
+    userData?.email || "",
+    userData?.fname || "",
+    userData?.lname || "",
+    userData?.address || "",
+    userData?.gender || "",
+    userData?.dateOfBirth || "",
+    userData?.mobileNumber || "",
+    userData?.maritalStatus || "",
+    userData?.citizenship || "",
+    userData?.religion || "",
+    userData?.isVerified ? "Yes" : "No",
   ];
+
   return (
     <div className="profile-screen">
       <div>
         <Header />
       </div>
       <Grid container style={{ flex: 1 }}>
-        <div
-          className="profilePicture-area"
-        >
+        <div className="profilePicture-area">
           <div>
             <img
               ref={uploadedImage}
@@ -63,11 +100,7 @@ export default function AdminProfileView () {
               src={uploadedImage.current?.src || placeholderImage}
               alt="Profile"
             />
-            <div
-              style={{
-                textAlign: "center",
-              }}
-            >
+            <div className="center-style">
               <p
                 style={{
                   color: "#FFFFFF",
@@ -75,14 +108,12 @@ export default function AdminProfileView () {
                   fontSize: "50px",
                 }}
               >
-                Lara Jane
+                {userData?.fname || ""} {userData?.lname || ""}
               </p>
             </div>
           </div>
         </div>
-        <div
-          className="details-area"
-        >
+        <div className="details-area">
           <div className="center-style">
             <h1
               style={{
@@ -90,7 +121,7 @@ export default function AdminProfileView () {
                 color: "#213555",
               }}
             >
-              Hi There, Tisaanon!
+              Hi There, Admin!
             </h1>
           </div>
           <div>
@@ -115,35 +146,60 @@ export default function AdminProfileView () {
                   </p>
                 </div>
                 <div style={{ textAlign: "center", marginRight: "250px" }}>
-                  <p
-                    style={{
-                      color: "#213555",
-                      fontWeight: "bold",
-                      fontSize: "18px",
-                      marginBottom: "10px",
-                    }}
-                  >
-                    {values[index]}
-                  </p>
+                  {label === "Password" ? (
+                    <>
+                      <p
+                        style={{
+                          color: "#213555",
+                          fontWeight: "bold",
+                          fontSize: "18px",
+                          marginBottom: "0px",
+                        }}
+                      >
+                        {showPassword
+                          ? data[index]
+                          : "*".repeat(data[index].length)}
+                        <IconButton
+                          onClick={() => setShowPassword(!showPassword)}
+                          onMouseDown={(event) => event.preventDefault()}
+                        >
+                          {showPassword ? <VisibilityOff /> : <Visibility />}
+                        </IconButton>
+                      </p>
+                    </>
+                  ) : (
+                    <p
+                      style={{
+                        color: "#213555",
+                        fontWeight: "bold",
+                        fontSize: "18px",
+                        marginBottom: "10px",
+                      }}
+                    >
+                      {data[index]}
+                    </p>
+                  )}
                 </div>
               </div>
             ))}
           </div>
-
           <div className="center-style">
-            <Button
-              variant="contained"
-              style={{
-                color: "#FFFFFF",
-                background: "#213555",
-                borderRadius: "10px",
-                width: "150px",
-                fontWeight: "bold",
-                marginTop: "20px",
-              }}
-            >
-              Edit Profile
-            </Button>
+            <Link to={`/profileList/${userId}/editProfile`}>
+              <Button
+                variant="contained"
+                style={{
+                  color: "#FFFFFF",
+                  background: "#213555",
+                  borderRadius: "10px",
+                  width: "150px",
+                  fontWeight: "bold",
+                  marginTop: "20px",
+                  marginBottom: "20px",
+                }}
+              >
+                Edit Profile
+              </Button>
+            </Link>
           </div>
         </div>
       </Grid>
