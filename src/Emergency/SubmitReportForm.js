@@ -18,46 +18,64 @@ const SubmitReportForm = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-    
+
         // Check if all required fields are filled
         if (!date || !time || !exactLocation || !incidentDetails || !incidentType) {
-          setError('Please fill in all fields.');
-          return;
+            setError('Please fill in all fields.');
+            return;
         }
-    
+
         // Reset error state
         setError('');
-    
+
+        // Get user object from localStorage
+        const userObj = JSON.parse(localStorage.getItem("user"));
+
         try {
-          // Make the HTTP request to your Spring Boot backend
-          await axios.post('http://localhost:8080/emergencies/add', {
-            date,
-            time,
-            exactLocation,
-            incidentDetails,
-            typeOfIncident: incidentType,
-          });
-    
-          // Show the submission dialog
-          setDialogOpen(true);
-          setSubmitted(true);
+            // Make the HTTP request to your Spring Boot backend
+            const response = await fetch('http://localhost:8080/emergency/insertEmergency', {
+                method: 'POST',  // Make sure it's a POST request
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    date,
+                    time,
+                    exactLocation,
+                    incidentDetails,
+                    typeOfIncident: incidentType,
+                    user: userObj,
+                }),
+            });
+
+
+            if (!response.ok) {
+                // Handle non-successful response
+                const errorMessage = await response.text(); // Get error message from the server
+                throw new Error(`Error submitting incident: ${response.status} - ${errorMessage}`);
+            }
+
+            // Show the submission dialog
+            setDialogOpen(true);
+            setSubmitted(true);
         } catch (error) {
-          console.error('Error submitting incident:', error);
+            console.error(error.message);
         }
-      };
-    
-      const handleDialogClose = () => {
+    };
+
+
+    const handleDialogClose = () => {
         setDialogOpen(false);
-      };
-    
-      const handleSubmitAnotherReport = () => {
+    };
+
+    const handleSubmitAnotherReport = () => {
         setDate('');
         setTime('');
         setExactLocation('');
         setIncidentDetails('');
         setIncidentType('');
         setDialogOpen(false);
-      };
+    };
 
     return (
         <div className='submit-report-body'>
@@ -89,8 +107,8 @@ const SubmitReportForm = () => {
                     <h1 style={{ color: "#fff", marginLeft: '10px' }}>REPORT AN ISSUE</h1>
                 </div>
                 <div className='submit-report-issue'>
-                    <div style={{ border: "2px solid #213555", padding: "3px", width: "230%", height: "auto" , marginBottom: '20px'}}>
-                        <form onSubmit={handleSubmit}>
+                    <div style={{ border: "2px solid #213555", padding: "3px", width: "230%", height: "auto", marginBottom: '20px' }}>
+                        <form onSubmit={handleSubmit} method="post">
                             {/* Type of Incident */}
                             <br />
                             <textarea
@@ -154,7 +172,7 @@ const SubmitReportForm = () => {
                             />
                             <br />
                             <div className='report-issue-button'>
-                            {error && <p style={{ color: 'red' }}>{error}</p>}
+                                {error && <p style={{ color: 'red' }}>{error}</p>}
                                 <Button
                                     variant="contained"
                                     style={{ color: '#FFFFFF', fontWeight: "bolder", backgroundColor: "#213555", width: '400px', height: '20px', padding: '15px 30px', borderRadius: '10px', textAlign: 'center' }}
@@ -175,7 +193,7 @@ const SubmitReportForm = () => {
                 </DialogTitle>
                 <DialogActions>
                     <Button
-                        style={{ backgroundColor: "#213555", marginBottom: "10px" , width: '300px'}}
+                        style={{ backgroundColor: "#213555", marginBottom: "10px", width: '300px' }}
                         className="button-another-report"
                         onClick={handleSubmitAnotherReport}
                         variant="contained"
@@ -185,7 +203,7 @@ const SubmitReportForm = () => {
 
                     <Link to="/backhome">
                         <Button
-                            style={{ backgroundColor: "#213555", marginBottom: "10px" , width: '300px'}}
+                            style={{ backgroundColor: "#213555", marginBottom: "10px", width: '300px' }}
                             className="button-back-home"
                             onClick={handleDialogClose}
                             variant="contained"

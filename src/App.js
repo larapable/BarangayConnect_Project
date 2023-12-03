@@ -16,6 +16,9 @@ import Requests from "./Request/Requests"
 import ProfileView from "./Profile/ProfileView";
 import ProfileEdit from "./Profile/ProfileEdit";
 import BarangayDirectory from "./Directory/BarangayDirectory" 
+import AdminIncidentReport from "./AdminEmergency/AdminIncidentReport";
+import AdminEmergencyHotline from "./AdminEmergency/AdminEmergencyHotline";
+import AdminDirectoryList from "./AdminDirectory/AdminDirectoryList";
 
 
 function App() {
@@ -38,6 +41,9 @@ function App() {
       <Route path="/profile" element={<ProfileView />} />
       <Route path="/profile/edit" element={<ProfileEdit />} />
       <Route path="/" element={<EmergencyAlertChoices />} />
+      <Route path="/adminincidentreport" element={<AdminIncidentReport />} />
+      <Route path="/adminemergencyhotline" element={<AdminEmergencyHotline />} />
+      <Route path="/admindirectorylist" element={<AdminDirectoryList />} />
     </Routes>
   );
 }
