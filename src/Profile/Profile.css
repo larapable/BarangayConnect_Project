@@ -1,45 +1,66 @@
 .profile-screen {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-  }
-  .profilePicture-area {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #213555cc;
-    height: 100%;
-    width: 45%;
-  }
-  .image-style {
-    width: 450px;
-    height: 450px;
-    border-radius: 50%;
-    border: 2px solid #ffffff;
-  }
-  .details-area {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    background: #ffffff;
-    height: 100%;
-    width: 55%;
-  }
-  .center-style{
-    text-align: center;
-  }
-  .delete-popup {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: #ffffff;
-    padding: 20px;
-    border-radius: 10px;
-    border: 2px solid #213555;
-    width: 300px;
-    text-align: center;
-  }
-  .delete-popup p{
-    font-size: 20px;
-  }
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+.profilePicture-area {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #213555cc;
+  height: 100%;
+  width: 45%;
+}
+.image-style {
+  width: 450px;
+  height: 450px;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+}
+.details-area {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  background: #ffffff;
+  height: 100%;
+  width: 55%;
+}
+.center-style {
+  text-align: center;
+}
+.delete-popup {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  border: 2px solid #213555;
+  width: 300px;
+  text-align: center;
+}
+.delete-popup p {
+  font-size: 20px;
+}
+.profile-list-paper {
+  margin: 10px;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  width: 80%;
+  height: 50px;
+}
+.profile-popup {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  border: 2px solid #213555;
+  text-align: center;
+}

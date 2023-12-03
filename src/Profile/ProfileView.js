@@ -13,7 +13,8 @@ export default function ProfileView() {
   const [showPassword, setShowPassword] = useState(false);
 
   // Fetch the username from the local storage
-  const username = localStorage.getItem("username");
+  const userObj = JSON.parse(localStorage.getItem("user"));
+  const username = userObj.username;
 
   useEffect(() => {
     const fetchUserProfile = async () => {
@@ -151,7 +152,7 @@ export default function ProfileView() {
                           color: "#213555",
                           fontWeight: "bold",
                           fontSize: "18px",
-                          marginBottom: "10px",
+                          marginBottom: "0px",
                         }}
                       >
                         {showPassword
