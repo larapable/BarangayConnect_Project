@@ -144,6 +144,7 @@ export default function ProfileEdit() {
 
   // Define modal actions
   const handleConfirm = async (event) => {
+    event.preventDefault();
     console.log("Confirm button clicked");
 
     // Check if all fields have values
@@ -155,7 +156,6 @@ export default function ProfileEdit() {
       !password
     ) {
       alert("All fields must have values");
-      event.preventDefault();
       return;
     }
     // Validate the password
