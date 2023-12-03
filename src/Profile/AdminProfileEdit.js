@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Button, Grid, Modal } from "@mui/material";
 import Header from "../Header";
 import "./Profile.css";
@@ -45,13 +45,6 @@ export default function AdminProfileEdit() {
     userData?.isVerified || "",
   ];
 
-  const editableFields = [
-    "Mobile Number",
-    "Marital Status",
-    "Citizenship",
-    "Religion",
-    "Verified",
-  ];
   const details = [
     "Username",
     "Password",
@@ -185,10 +178,6 @@ export default function AdminProfileEdit() {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            mobileNumber,
-            maritalStatus,
-            citizenship,
-            religion,
             isVerified: verifiedValue,
           }),
         }
@@ -324,93 +313,24 @@ export default function AdminProfileEdit() {
                     marginRight: "250px",
                   }}
                 >
-                  {editableFields.includes(label) ? (
-                    label === "Verified" ? (
-                      <select
-                        value={isVerified}
-                        onChange={(e) => setIsVerified(e.target.value)}
-                        style={{
-                          color: "#213555",
-                          fontWeight: "bold",
-                          fontSize: "18px",
-                          marginTop: "15px",
-                          width: "245px",
-                        }}
-                      >
-                        {verifiedOptions.map((option, optionIndex) => (
-                          <option key={optionIndex} value={option}>
-                            {option}
-                          </option>
-                        ))}
-                      </select>
-                    ) : label === "Marital Status" ? (
-                      <select
-                        value={maritalStatus}
-                        onChange={(e) => setMaritalStatus(e.target.value)}
-                        style={{
-                          color: "#213555",
-                          fontWeight: "bold",
-                          fontSize: "18px",
-                          marginTop: "15px",
-                          width: "245px",
-                        }}
-                      >
-                        {maritalStatusOptions.map((option, optionIndex) => (
-                          <option key={optionIndex} value={option}>
-                            {option}
-                          </option>
-                        ))}
-                      </select>
-                    ) : label === "Citizenship" ? (
-                      <select
-                        value={citizenship}
-                        onChange={(e) => setCitizenship(e.target.value)}
-                        style={{
-                          color: "#213555",
-                          fontWeight: "bold",
-                          fontSize: "18px",
-                          marginTop: "15px",
-                          width: "245px",
-                        }}
-                      >
-                        {citizenshipOptions.map((option, optionIndex) => (
-                          <option key={optionIndex} value={option}>
-                            {option}
-                          </option>
-                        ))}
-                      </select>
-                    ) : label === "Religion" ? (
-                      <select
-                        value={religion}
-                        onChange={(e) => setReligion(e.target.value)}
-                        style={{
-                          color: "#213555",
-                          fontWeight: "bold",
-                          fontSize: "18px",
-                          marginTop: "15px",
-                          width: "245px",
-                        }}
-                      >
-                        {religionOptions.map((option, optionIndex) => (
-                          <option key={optionIndex} value={option}>
-                            {option}
-                          </option>
-                        ))}
-                      </select>
-                    ) : (
-                      <input
-                        type="text"
-                        placeholder="0999-999-9999"
-                        style={{
-                          color: "#213555",
-                          fontWeight: "bold",
-                          fontSize: "18px",
-                          marginTop: "15px",
-                        }}
-                        value={mobileNumber}
-                        onChange={(e) => setMobileNumber(e.target.value)}
-                      />
-                    )
+                  {label === "Verified" ? (
+                    <select
+                      value={isVerified}
+                      onChange={(e) => setIsVerified(e.target.value)}
+                      style={{
+                        color: "#213555",
+                        fontWeight: "bold",
+                        fontSize: "18px",
+                        marginTop: "15px",
+                        width: "245px",
+                      }}
+                    >
+                      {verifiedOptions.map((option, optionIndex) => (
+                        <option key={optionIndex} value={option}>
+                          {option}
+                        </option>
+                      ))}
+                    </select>
                   ) : label === "Password" ? (
                     <p
                       style={{
