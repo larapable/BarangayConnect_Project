@@ -1,8 +1,10 @@
 import Header from "../Header";
 import React, { useState, useEffect } from "react";
 import "./CC.css";
+import { Button, Paper } from "@mui/material";
 
 export default function EventList() {
+  
   const [events, setEvents] = useState([]);
 
   useEffect(() => {
@@ -24,14 +26,6 @@ export default function EventList() {
       });
   }, []);
 
-  const handleUpdate = (id) => {
-    // Handle update logic here
-  };
-
-  const handleDelete = (id) => {
-    // Handle delete logic here
-  };
-
   return (
     <div className="eventlist-bg">
       <div>
@@ -48,21 +42,48 @@ export default function EventList() {
         <h1 className="eventlist-title">EVENT LIST:</h1>
         <div
           style={{
+            height: "60vh", // Set a fixed height for the container
+            overflowY: "auto", // Enable vertical scrolling
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
           }}
         >
           {events.map((event) => (
-            <div key={event.id} className="event-card">
-              <h2> Event title: {event.title}</h2>
-              <p> Description: {event.description}</p>
-              <p>Location: {event.location}</p>
-              <p>Time: {event.time}</p>
-              <p>Date: {event.date}</p>
-              <button onClick={() => handleUpdate(event.id)}>Update</button>
-              <button onClick={() => handleDelete(event.id)}>Delete</button>
-            </div>
+            <Paper
+              elevation={3}
+              style={{
+                borderRadius: "10px",
+                margin: "15px",
+                display: "flex",
+                justifyContent: "space-between",
+                padding: "10px",
+              }}
+              className="event-list-paper"
+              key={event.eventId}
+            >
+              <div style={{ margin: "0", padding: "10px" }}>
+                <h2 style={{ margin: "0" }}>Event {event.eventId}</h2>
+                <p style={{ fontSize: "18px", margin: "0" }}>
+                  {event.eventTitle}
+                </p>
+              </div>
+
+              <Button
+                variant="contained"
+                style={{
+                  margin: "10px",
+                  color: "white",
+                  background: "#213555",
+                  borderRadius: "10px",
+                  width: "150px",
+                  fontWeight: "bold",
+                  justifyContent: "center",
+                }}
+              >
+                View Profile
+              </Button>
+            </Paper>
           ))}
         </div>
       </div>

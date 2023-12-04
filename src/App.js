@@ -47,7 +47,7 @@ function App() {
       <Route path="/profile/edit" element={<ProfileEdit />} />
       <Route path="/calendar" element={<CommunityCalendar />} />
       <Route path="/admincalendar" element={<AdminCalendar />} />
-      <Route path="/admincalendar/eventlist" element={<EventList />} />
+      <Route path="/admincalendar/eventList" element={<EventList />} />
       <Route path="/" element={<EmergencyAlertChoices />} />
       <Route path="/profileList" element={<AdminProfileList />} />
       <Route path="/profileList/:userId" element={<AdminProfileView />} />
