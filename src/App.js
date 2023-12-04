@@ -15,12 +15,22 @@ import EmergencyAlertList from "./Emergency/EmergencyAlertList";
 import Requests from "./Request/Requests";
 import ProfileView from "./Profile/ProfileView";
 import ProfileEdit from "./Profile/ProfileEdit";
+import BarangayDirectory from "./Directory/BarangayDirectory" 
+import AdminIncidentReport from "./AdminEmergency/AdminIncidentReport";
+import AdminEmergencyHotline from "./AdminEmergency/AdminEmergencyHotline";
+import AdminDirectoryList from "./AdminDirectory/AdminDirectoryList";
 import BarangayDirectory from "./Directory/BarangayDirectory";
 import AdminCalendar from "./Calendar/AdminCalendar";
 import EventList from "./Calendar/EventList";
 import AdminProfileList from "./Profile/AdminProfileList";
 import AdminProfileView from "./Profile/AdminProfileView";
 import AdminProfileEdit from "./Profile/AdminProfileEdit";
+
+import AdminAnnouncementChoices from "./Announcementss/AdminAnnouncementChoices";
+import AdminAnnouncementForm from "./Announcementss/AdminAnnouncementForm";
+import AdminAnnouncementView from "./Announcementss/AdminAnnouncementView";
+import AdminAnnouncementEdit from "./Announcementss/AdminAnnouncementEdit";
+import UserAnnouncementView from "./Announcementss/UserAnnouncementView"
 
 function App() {
   return (
@@ -49,9 +59,19 @@ function App() {
       <Route path="/admincalendar" element={<AdminCalendar />} />
       <Route path="/admincalendar/eventList" element={<EventList />} />
       <Route path="/" element={<EmergencyAlertChoices />} />
+      <Route path="/adminincidentreport" element={<AdminIncidentReport />} />
+      <Route path="/adminemergencyhotline" element={<AdminEmergencyHotline />} />
+      <Route path="/admindirectorylist" element={<AdminDirectoryList />} />
       <Route path="/profileList" element={<AdminProfileList />} />
       <Route path="/profileList/:userId" element={<AdminProfileView />} />
       <Route path="/profileList/:userId/editProfile" element={<AdminProfileEdit />} />
+
+      <Route path="/announcement" element={<AdminAnnouncementChoices />} />
+      <Route path="/submitannouncement" element={<AdminAnnouncementForm />} />
+      <Route path="/adminviewannouncement" element={<AdminAnnouncementView />} />
+      <Route path="/admin/announcements/updateAnnouncement/:id" element={<AdminAnnouncementEdit />} />
+      <Route path="/userviewannouncement" element={<UserAnnouncementView />} />
+      
     </Routes>
   );
 }

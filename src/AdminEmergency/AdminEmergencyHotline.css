@@ -1,0 +1,227 @@
+/* AdminEmergencyHotline.css */
+
+.emergency-container {
+    background-color: #213555;
+    height: 880px;
+    width: 40%;
+    position: fixed;
+    top: 106px;
+    left: 0;
+}
+
+.add-hotline-heading {
+    color: white;
+    margin: auto;
+    margin-top: 130px;
+    margin-bottom: 20px;
+    font-size: 40px;
+    text-align: center;
+}
+
+.hotline-textarea {
+    width: 80%;
+    height: 100px;
+    margin: auto;
+    margin-top: 20px;
+    font-size: 16px;
+    padding: 10px;
+    resize: none;
+    align-content: center;
+    justify-content: center;
+    display: flex;
+    border-radius: 20px;
+}
+
+.clear-button,
+.add-button {
+    font-weight: bold;
+    padding: 15px 30px;
+    font-size: 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    border: none;
+    margin: 10px;
+}
+
+.clear-button {
+    background-color: white;
+    color: #213555;
+    margin-left: 540px;
+}
+
+.add-button {
+    background-color: #829ca6;
+    color: white;
+}
+
+.hotlines-container {
+    color: #213555;
+    margin-top: 30px;
+    margin-left: 42%;
+}
+
+.hotline-list-heading {
+    font-size: 40px;
+    margin-bottom: 10px;
+    margin-top: -10px;
+}
+
+.search-hotline {
+    width: 97%;
+    height: 40px;
+    font-size: 16px;
+    padding: 5px;
+    border-radius: 10px;
+    margin-top: 10px;
+    margin-left: -25px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    margin: auto;
+}
+
+.hotline-number {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #a3a3a3;
+    padding-bottom: 10px;
+    box-shadow: 0 4px 8px #494444;
+    border-radius: 10px;
+    height: 70px;
+    width: 97%;
+    font-size: 20px;
+    background-color: rgb(251, 250, 250);
+    margin-left: 18px;
+    margin-bottom: 20px;
+}
+
+.hotline-name {
+    font-weight: bolder;
+    margin-left: 20px;
+    margin-top: 10px;
+}
+
+.hotline-info {
+    color: red;
+    margin-left: 20px;
+}
+
+/* Add this CSS in your AdminEmergencyHotline.css file or style component */
+
+.hotline-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.hotline-edit-button,
+.hotline-delete-button {
+    padding: 8px 12px;
+    margin-right: 8px;
+    cursor: pointer;
+    border: none;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    height: 30px;
+}
+
+.hotline-edit-button {
+    background-color: #213555;
+    color: #fff;
+}
+
+.hotline-delete-button {
+    background-color: #e74c3c;
+    color: #fff;
+}
+
+/* Edit modal styles */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(135, 132, 132, 0.5); /* Semi-transparent gray background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hotline-edit-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    height: 300px;
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.edit-container h2{
+    font-size: 60px;
+    margin-top: -50px;
+}
+
+.edit-title {
+    height: 50px;
+    width: 400px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 2px solid #c4c3c3; /* White border */
+}
+
+.edit-number {
+    height: 50px;
+    width: 400px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 2px solid #c4c3c3; /* White border */
+}
+
+
+
+.save-button,
+.cancel-button {
+    padding: 8px 12px;
+    margin-right: 8px;
+    cursor: pointer;
+    border: none;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    height: 30px;
+}
+
+.save-button {
+    background-color: #213555;
+    color: #fff;
+    width: 100px;
+    font-size: 18px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.cancel-button {
+    background-color: #e74c3c;
+    color: #fff;
+    margin-top: 10px;
+    width: 100px;
+    font-size: 18px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

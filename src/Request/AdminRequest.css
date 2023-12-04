@@ -1,0 +1,52 @@
+.request-img2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  width: 50vw;
+  height: 50vw;
+   }
+ 
+   .request-table {
+    font-size: 25px;
+    padding: 10px;
+    border: 1px solid black;
+    padding: 20px;
+   }
+
+   .request-table2 {
+    font-size: 20px;
+    padding: 10px;
+    border: 1px solid black;
+    padding-right: 20px;
+   }
+
+   .popup3 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    border: 2px solid #213555;
+    text-align: left;
+  }
+
+  .request-p {
+    font-size: 20px;
+    font-weight: 600;
+    font-style: italic;
+  }
+  
+  .popup4 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    border: 2px solid #213555;
+    text-align: center;
+  }
