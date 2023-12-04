@@ -184,7 +184,7 @@ export default function Header() {
           
         <Grid item sm={1} className="btn">
           <div className="noowrap">
-            <Link to="business" className="header-link">LOGOUT</Link>
+            <NavLink to="home" className="header-link">LOGOUT</NavLink>
           </div>
         </Grid>
         {/* Add other grids as needed */}

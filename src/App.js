@@ -15,6 +15,10 @@ import EmergencyAlertList from "./Emergency/EmergencyAlertList";
 import Requests from "./Request/Requests";
 import ProfileView from "./Profile/ProfileView";
 import ProfileEdit from "./Profile/ProfileEdit";
+import BarangayDirectory from "./Directory/BarangayDirectory" 
+import AdminIncidentReport from "./AdminEmergency/AdminIncidentReport";
+import AdminEmergencyHotline from "./AdminEmergency/AdminEmergencyHotline";
+import AdminDirectoryList from "./AdminDirectory/AdminDirectoryList";
 import BarangayDirectory from "./Directory/BarangayDirectory";
 import AdminCalendar from "./Calendar/AdminCalendar";
 import EventList from "./Calendar/EventList";
@@ -55,6 +59,9 @@ function App() {
       <Route path="/admincalendar" element={<AdminCalendar />} />
       <Route path="/admincalendar/eventlist" element={<EventList />} />
       <Route path="/" element={<EmergencyAlertChoices />} />
+      <Route path="/adminincidentreport" element={<AdminIncidentReport />} />
+      <Route path="/adminemergencyhotline" element={<AdminEmergencyHotline />} />
+      <Route path="/admindirectorylist" element={<AdminDirectoryList />} />
       <Route path="/profileList" element={<AdminProfileList />} />
       <Route path="/profileList/:userId" element={<AdminProfileView />} />
       <Route path="/profileList/:userId/editProfile" element={<AdminProfileEdit />} />

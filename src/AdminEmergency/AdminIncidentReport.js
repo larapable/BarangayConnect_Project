@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Button } from '@mui/material';
 import Header from '../Header';
-import "./IncidentReportForm.css";
+import "./AdminIncidentReport.css";
 
-const IncidentReportForm = () => {
+const AdminIncidentReport = () => {
     const [incidentType, setIncidentType] = useState('');
     const [date, setDate] = useState('');
     const [time, setTime] = useState('');
@@ -31,20 +31,20 @@ const IncidentReportForm = () => {
             <div>
                 <div style={{ display: 'flex' }}>
                     {/* Left side - Form */}
-                    <div style={{ marginTop: '20px' }}>
-                        <h1 style={{ color: "#213555", marginLeft: '5px', marginTop: '-5px' }}>REPORT AN ISSUE</h1>
+                    <div style={{ marginTop: '10px' }}>
+                        <h1 style={{ color: "#213555", marginLeft: '20px', marginTop: '-5px', fontSize: '40px' }}>REPORT AN ISSUE</h1>
                     </div>
-                    <div style={{ border: "2px solid #213555", padding: "3px", width: "520px", height: "540px", marginTop: '70px', marginLeft: '-270px' , marginRight: '5px' }}>
+                    <div style={{ border: "2px solid #213555", padding: "3px", width: "820px", height: "790px", marginTop: '70px', marginLeft: '-348px', marginRight: '5px' }}>
                         <form onSubmit={handleSubmit}>
                             {/* Type of Incident */}
                             <br />
-                            <input
+                            <textarea
                                 type="text"
                                 value={incidentType}
                                 onChange={(e) => setIncidentType(e.target.value)}
                                 placeholder='Type of Incident.....'
                                 required={submitted}
-                                className='incident-report-incident-input'
+                                className='admin-incident-input'
                             />
                             <br />
                             <br />
@@ -57,7 +57,7 @@ const IncidentReportForm = () => {
                                     value={date}
                                     onChange={(e) => setDate(e.target.value)}
                                     required={submitted}
-                                    className='incident-report-incident-date'
+                                    className='admin-date-input'
                                 />
                             </label>
 
@@ -68,7 +68,7 @@ const IncidentReportForm = () => {
                                     value={time}
                                     onChange={(e) => setTime(e.target.value)}
                                     required={submitted}
-                                    className='incident-report-incident-time'
+                                    className='admin-time-input'
                                 />
                             </label>
                             <br />
@@ -76,13 +76,13 @@ const IncidentReportForm = () => {
                             {/* Exact Location */}
                             <br />
                             <br />
-                            <input
+                            <textarea
                                 type="text"
                                 value={location}
                                 onChange={(e) => setLocation(e.target.value)}
                                 placeholder='Exact Location.....'
                                 required={submitted}
-                                className='incident-report-incident-location'
+                                className='admin-location-input'
                             />
                             <br />
                             <br />
@@ -95,13 +95,13 @@ const IncidentReportForm = () => {
                                 onChange={(e) => setIncidentDetails(e.target.value)}
                                 placeholder='Incident Details.....'
                                 required={submitted}
-                                className='incident-report-incident-incident-details'
+                                className='admin-details-input'
                             />
                             <br />
                             <div className='incident-button-submit'>
                                 <Button
                                     variant="contained"
-                                    style={{ color: '#FFFFFF', fontWeight: "bolder", backgroundColor: "#213555", width: '400px', height: '20px', padding: '15px 30px', borderRadius: '10px', textAlign: 'center' }}
+                                    style={{ color: '#FFFFFF', fontWeight: "bolder", backgroundColor: "#213555", width: '400px', height: '20px', padding: '15px 30px', borderRadius: '10px', textAlign: 'center', fontStyle: 'Arial' }}
                                     onClick={handleSubmit}
                                 >
                                     Submit
@@ -111,27 +111,32 @@ const IncidentReportForm = () => {
                     </div>
                     <div>
                         {/* Incident Alert Box */}
-                        <div style={{ backgroundColor: '#213555', padding: '10px', borderRadius: '5px', color: '#fff', height: '50px', width: '965px', marginLeft: '3px' , marginTop: '5px'}}>
-                            <h2 style={{ marginTop: '-3px' }}>A L E R T !</h2>
+                        <div class="alert-label-container">
+                            <h2>A L E R T !</h2>
                         </div>
-                        <div style={{ marginLeft: '5px', padding: '10px', border: '2px solid #ccc', borderRadius: '5px', width: '960px', height: '130px', marginTop: '0px', fontSize: '11px'}}>
-                            <p style={{ marginTop: '5px' }}><strong>Type of Incident:</strong> {incidentType}</p>
+
+                        <div class="alert-container">
+                            <p><strong>Type of Incident:</strong> {incidentType}</p>
                             <p><strong>Date:</strong> {date}</p>
                             <p><strong>Time:</strong> {time}</p>
                             <p><strong>Location:</strong> {location}</p>
                             <p><strong>Incident Details:</strong> {incidentDetails}</p>
                         </div>
 
+
                         {/* Report Forum Box */}
-                        <div style={{ backgroundColor: '#213555', padding: '10px', borderRadius: '5px', color: '#fff', height: '50px', width: '965px', marginLeft: '3px', marginTop: '70px' }}>
-                            <h2 style={{ marginTop: '-3px' }}>R E P O R T F O R U M</h2>
+                        <div class="report-label-container">
+                            <h2>R E P O R T - F O R U M</h2>
                         </div>
-                        <div style={{ marginLeft: '5px', padding: '10px', border: '2px solid #ccc', borderRadius: '5px', width: '960px', height: '130px', marginTop: '0px', fontSize: '11px'}}>
-                            <p style={{ marginTop: '5px' }}><strong>Type of Incident:</strong> {incidentType}</p>
+
+                        <div class="report-container">
+                            <p><strong>Type of Incident:</strong> {incidentType}</p>
                             <p><strong>Date:</strong> {date}</p>
                             <p><strong>Time:</strong> {time}</p>
                             <p><strong>Location:</strong> {location}</p>
                             <p><strong>Incident Details:</strong> {incidentDetails}</p>
+
+                            <button class="delete-button" onclick="deleteReport()">Delete</button>
                         </div>
                     </div>
                 </div>
@@ -140,4 +145,4 @@ const IncidentReportForm = () => {
     );
 };
 
-export default IncidentReportForm;
+export default AdminIncidentReport;
