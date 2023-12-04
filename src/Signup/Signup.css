@@ -21,11 +21,13 @@
   width: 345px;
   height: 40px;
   border-radius: 10px;
+  padding: 3px;
 }
 .short-input {
   width: 160px;
   height: 40px;
   border-radius: 10px;
+  padding: 3px;
 }
 .popup {
   position: absolute;

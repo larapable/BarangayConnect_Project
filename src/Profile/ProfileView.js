@@ -1,34 +1,63 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Button, Grid } from "@mui/material";
 import Header from "../Header";
 import "./Profile.css";
-import { Link, Outlet, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { IconButton } from "@mui/material";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 export default function ProfileView() {
   const uploadedImage = useRef(null);
-  const imageUploader = useRef(null);
-  const navigate = useNavigate();
+  const [userData, setUserData] = useState(null);
+  const [error, setError] = useState(null);
+  const [showPassword, setShowPassword] = useState(false);
 
-  const handleEditProfile = () => {
-    // Navigate to the /profile/edit route
-    navigate("/profile/edit");
-  };
+  // Fetch the username from the local storage
+  const userObj = JSON.parse(localStorage.getItem("user"));
+  const username = userObj.username;
 
-  const handleImageUpload = (e) => {
-    const [file] = e.target.files;
-    if (file) {
-      const reader = new FileReader();
-      const { current } = uploadedImage;
-      current.file = file;
-      reader.onload = (e) => {
-        current.src = e.target.result;
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-  const placeholderImage = "profile.png"; // Replace with your placeholder image URL or local path
+  useEffect(() => {
+    const fetchUserProfile = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:8080/login-signup/getInfoByUsername/${username}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error("User not found");
+        }
+
+        const data = await response.json();
+        setUserData(data);
+        setError(null);
+        console.log("Successfully fetched user information");
+        // Check if the photoPath is null or empty
+        if (data.photoPath) {
+          // Set the image path to the uploadedImage ref
+          uploadedImage.current.src = data.photoPath;
+        } else {
+          // Set the placeholder image to the uploadedImage ref
+          uploadedImage.current.src = placeholderImage;
+        }
+      } catch (error) {
+        setUserData(null);
+        setError(error.message || "An error occurred");
+        console.error("Error fetching user information:", error);
+      }
+    };
+    fetchUserProfile();
+  }, [username]);
+
+  const placeholderImage = "../profile.png"; // Replace with your placeholder image URL or local path
   const details = [
     "Username",
+    "Password",
     "Email",
     "First Name",
     "Last Name",
@@ -41,18 +70,19 @@ export default function ProfileView() {
     "Religion",
   ];
   // Sample values for each detail
-  const values = [
-    "larsss01 ",
-    "larajane@gmail.com",
-    "Lara",
-    "Jane",
-    "Jugan Tisa, Cebu, Philippines",
-    "Female",
-    "January 1, 1990",
-    "09999999999",
-    "Married",
-    "Filipino",
-    "Roman Catholic",
+  const data = [
+    userData?.username || "",
+    userData?.password || "",
+    userData?.email || "",
+    userData?.fname || "",
+    userData?.lname || "",
+    userData?.address || "",
+    userData?.gender || "",
+    userData?.dateOfBirth || "",
+    userData?.mobileNumber || "",
+    userData?.maritalStatus || "",
+    userData?.citizenship || "",
+    userData?.religion || "",
   ];
 
   return (
@@ -77,7 +107,7 @@ export default function ProfileView() {
                   fontSize: "50px",
                 }}
               >
-                Lara Jane
+                {userData?.fname || ""} {userData?.lname || ""}
               </p>
             </div>
           </div>
@@ -115,21 +145,43 @@ export default function ProfileView() {
                   </p>
                 </div>
                 <div style={{ textAlign: "center", marginRight: "250px" }}>
-                  <p
-                    style={{
-                      color: "#213555",
-                      fontWeight: "bold",
-                      fontSize: "18px",
-                      marginBottom: "10px",
-                    }}
-                  >
-                    {values[index]}
-                  </p>
+                  {label === "Password" ? (
+                    <>
+                      <p
+                        style={{
+                          color: "#213555",
+                          fontWeight: "bold",
+                          fontSize: "18px",
+                          marginBottom: "0px",
+                        }}
+                      >
+                        {showPassword
+                          ? data[index]
+                          : "*".repeat(data[index].length)}
+                        <IconButton
+                          onClick={() => setShowPassword(!showPassword)}
+                          onMouseDown={(event) => event.preventDefault()}
+                        >
+                          {showPassword ? <VisibilityOff /> : <Visibility />}
+                        </IconButton>
+                      </p>
+                    </>
+                  ) : (
+                    <p
+                      style={{
+                        color: "#213555",
+                        fontWeight: "bold",
+                        fontSize: "18px",
+                        marginBottom: "10px",
+                      }}
+                    >
+                      {data[index]}
+                    </p>
+                  )}
                 </div>
               </div>
             ))}
           </div>
-
           <div className="center-style">
             <Link to="/profile/edit">
               <Button

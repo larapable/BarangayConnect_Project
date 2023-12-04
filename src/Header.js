@@ -32,7 +32,7 @@ export default function Header() {
        
         <Grid item sm={5}>
           <div className="conlogo">
-            <img src={"headerlogo.png"} className="headlogo" alt="headerLogo" />
+            <img src={"/headerlogo.png"} className="headlogo" alt="headerLogo" />
           </div>
         </Grid>
 
@@ -117,7 +117,7 @@ export default function Header() {
               onClose={handleMenuClose}
             >
               <MenuItem onClick={handleMenuClose}>
-                <NavLink to="/announcements"
+                <NavLink to="/announcement"
                   style={{
                     color: "#213555",
                     fontWeight: "bold",
@@ -128,6 +128,20 @@ export default function Header() {
                   ANNOUNCEMENTS
                 </NavLink>
               </MenuItem>
+
+              <MenuItem onClick={handleMenuClose}>
+                <NavLink to="/userviewannouncement"
+                  style={{
+                    color: "#213555",
+                    fontWeight: "bold",
+                    textDecoration:"none",
+                  }}
+                  
+                >
+                  ANNOUNCEMENTS
+                </NavLink>
+              </MenuItem>
+
               <MenuItem onClick={handleMenuClose}>
                 <NavLink to="/forum"
                   style={{
