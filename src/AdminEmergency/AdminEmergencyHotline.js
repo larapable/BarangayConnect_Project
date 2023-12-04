@@ -11,6 +11,7 @@ const AdminEmergencyHotline = () => {
     });
 
     const [editingHotline, setEditingHotline] = useState(null);
+    const [nextId, setNextId] = useState(1); // Initial ID value
 
     useEffect(() => {
         localStorage.setItem('hotlines', JSON.stringify(hotlines));
@@ -38,20 +39,57 @@ const AdminEmergencyHotline = () => {
         }
     };
 
-    const handleAddHotline = () => {
-        if (newHotline.name && newHotline.number) {
+    const handleAddHotline = async () => {
+        try {
+            // Check if all required fields are filled
+            if (!newHotline.name || !newHotline.number) {
+                console.error('Please fill in all required fields.');
+                return;
+            }
+
+            // Make the HTTP request to your Spring Boot backend
+            const response = await fetch('http://localhost:8080/hotlines/insertHotlineNumbers', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    title: newHotline.name,         // Update to use 'title' instead of 'name'
+                    hotlinenumber: newHotline.number // Update to use 'hotlinenumber' instead of 'number'
+                }),
+            });
+
+            // Check if the response is successful
+            if (!response.ok) {
+                // Handle non-successful response
+                const errorMessage = await response.text(); // Get error message from the server
+                throw new Error(`Error adding hotline: ${response.status} - ${errorMessage}`);
+            }
+
+            // Update state to include the new hotline from the response
+            const addedHotline = await response.json();
             setHotlines((prevHotlines) => [
                 ...prevHotlines,
                 {
-                    id: prevHotlines.length + 1,
-                    name: newHotline.name,
-                    number: newHotline.number,
+                    id: nextId, // Assign the current nextId as the ID
+                    name: addedHotline.title,
+                    number: addedHotline.hotlinenumber,
                 },
             ]);
 
+            // Increment the nextId for the next added hotline
+            setNextId((prevId) => prevId + 1);
+
+            // Clear the form fields after the request completes
             setNewHotline({ name: '', number: '' });
+        } catch (error) {
+            // Handle any errors that occurred during the fetch
+            console.error('Error:', error.message);
+            // Display a user-friendly error message to the user
+            console.error('An error occurred while adding the hotline. Please try again.');
         }
     };
+
 
     const openEditModal = (id) => {
         const hotlineToEdit = hotlines.find((hotline) => hotline.id === id);
@@ -62,22 +100,75 @@ const AdminEmergencyHotline = () => {
         setEditingHotline(null);
     };
 
-    const handleEditHotline = () => {
-        if (editingHotline) {
-            const updatedHotlines = hotlines.map((hotline) =>
-                hotline.id === editingHotline.id
-                    ? { ...hotline, name: editingHotline.name, number: editingHotline.number }
-                    : hotline
-            );
-
-            setHotlines(updatedHotlines);
-            closeEditModal();
+    const handleEditHotline = async () => {
+        try {
+            if (editingHotline && editingHotline.id) {
+                // Make the HTTP request to update the hotline
+                const response = await fetch(
+                    `http://localhost:8080/hotlines/updateAdminHotlineNumbers/${editingHotline.id}`,
+                    {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            title: editingHotline.name,           // Update to use 'title' instead of 'name'
+                            hotlinenumber: editingHotline.number  // Update to use 'hotlinenumber' instead of 'number'
+                        }),
+                    }
+                );
+    
+                if (!response.ok) {
+                    const errorMessage = await response.text();
+                    throw new Error(`Error updating hotline: ${response.status} - ${errorMessage}`);
+                }
+    
+                // Update state with the edited hotline data
+                setHotlines((prevHotlines) =>
+                    prevHotlines.map((hotline) =>
+                        hotline.id === editingHotline.id
+                            ? { ...hotline, name: editingHotline.name, number: editingHotline.number }
+                            : hotline
+                    )
+                );
+    
+                closeEditModal();
+            }
+        } catch (error) {
+            console.error('Error updating hotline:', error.message);
+            // Handle any errors that occurred during the fetch
+            window.alert('An error occurred while updating the hotline. Please try again.');
         }
     };
+    
 
-    const handleDeleteHotline = (id) => {
-        const updatedHotlines = hotlines.filter((hotline) => hotline.id !== id);
-        setHotlines(updatedHotlines);
+    const handleDeleteHotline = async (id) => {
+        try {
+            const response = await fetch(
+                `http://localhost:8080/hotlines/deleteAdminHotlineNumbers/${id}?delete=true`,
+                {
+                    method: 'DELETE',
+                }
+            );
+
+            if (response.ok) {
+                setHotlines((prevHotlines) =>
+                    prevHotlines.filter((hotline) => hotline.id !== id)
+                );
+                console.log('Hotline deleted successfully.');
+
+                // Display a popup to the user
+                window.alert('Hotline deleted successfully.');
+            } else {
+                console.error('Error deleting hotline:', response.statusText);
+                // Display an error popup to the user
+                window.alert(`Error deleting hotline: ${response.statusText}`);
+            }
+        } catch (error) {
+            console.error('Error deleting hotline:', error.message);
+            // Display an error popup to the user
+            window.alert(`Error deleting hotline: ${error.message}`);
+        }
     };
 
     return (
@@ -126,7 +217,7 @@ const AdminEmergencyHotline = () => {
                 />
                 {hotlines
                     .filter((hotline) =>
-                        hotline.name.toLowerCase().includes(searchTerm.toLowerCase())
+                        hotline.name && hotline.name.toLowerCase().includes(searchTerm.toLowerCase())
                     )
                     .map((hotline) => (
                         <div key={hotline.id} className="hotline-number">
@@ -148,7 +239,7 @@ const AdminEmergencyHotline = () => {
 
             {editingHotline && (
                 <div className="overlay">
-                    <div className="edit-container">
+                    <div className="hotline-edit-container">
                         <h2>Edit Hotline</h2>
                         <input
                             type="text"
@@ -158,7 +249,7 @@ const AdminEmergencyHotline = () => {
                             onChange={(event) => handleInputChange(event, true)}
                             className='edit-title'
                         />
-                        <br/>
+                        <br />
                         <input
                             type="text"
                             name="number"
@@ -167,7 +258,7 @@ const AdminEmergencyHotline = () => {
                             onChange={(event) => handleInputChange(event, true)}
                             className='edit-number'
                         />
-                        <br/>
+                        <br />
 
                         <button className="save-button" onClick={handleEditHotline}>
                             Save

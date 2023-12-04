@@ -149,24 +149,32 @@ const AdminDirectoryList = () => {
     const handleDeleteWorker = async (id) => {
         try {
             const response = await fetch(
-                `http://localhost:8080/admindirectorylist/deleteAdminDirectoryList/${id}`,
+                `http://localhost:8080/admindirectorylist/deleteAdminDirectoryList/${id}?delete=true`,
                 {
                     method: 'DELETE',
                 }
             );
-
+    
             if (response.ok) {
                 setWorkers((prevWorkers) =>
                     prevWorkers.filter((worker) => worker.admindirectorylistId !== id)
                 );
                 console.log('Worker deleted successfully.');
+    
+                // Display a popup to the user
+                window.alert('Worker deleted successfully.');
             } else {
                 console.error('Error deleting worker:', response.statusText);
+                // Display an error popup to the user
+                window.alert(`Error deleting worker: ${response.statusText}`);
             }
         } catch (error) {
             console.error('Error deleting worker:', error.message);
+            // Display an error popup to the user
+            window.alert(`Error deleting worker: ${error.message}`);
         }
-    };
+    };    
+
     return (
         <div>
             <Header />
@@ -293,7 +301,7 @@ const AdminDirectoryList = () => {
 
             {editingWorkers && (
                 <div className="overlay">
-                    <div className="edit-container">
+                    <div className="directory-edit-container">
                         <h2>Edit Worker</h2>
                         <input
                             type="text"

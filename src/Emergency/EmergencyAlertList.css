@@ -17,31 +17,53 @@
     margin-bottom: 10px;
 }
 
-.incidentdetails {
+.alert-label {
+    font-size: 40px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 8px;
+    background-color: red;
+    box-shadow: 0 4px 10px rgba(168, 162, 162, 0.5);
+    width: 340%;
+    max-width: 1300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: -25px;
+    margin-top: 5px;
+}
+
+.alerts {
     border: 1px solid #ccc;
     border-radius: 4px;
     padding: 8px;
     margin: 4px;
+    margin-left: 0px;
+    margin-top:-15px;
+    margin-bottom: 30px;
     background-color: white;
     box-shadow: 0 4px 10px rgba(168, 162, 162, 0.5);
-    height: 175px;
-    width: 63%;
-    margin-left: -25px;
+    height: 135px;
+    width: 1280px; /* Adjust the width as needed */
+    max-width: 1275px;
+    font-size: 20px;
 }
 
 .hotlinelist {
-    margin-right: 30px;
+    margin-right: 10px;
     background-color: #213555;
     width: auto;
-    max-width: 700px; 
+    max-width: 700px;
     padding: 10px;
-    height: auto;
+    height: 860px; /* Set a fixed height or adjust as needed */
+    overflow-y: auto; /* Enable vertical scrolling */
     flex: 1;
-    overflow-y: auto; 
     padding-right: 10px;
     position: sticky;
-    top: 0; 
+    top: 0;
+    font-size: 18px;
 }
+
 
 .hotlinenumbers {
     border: 1px solid #ccc;
