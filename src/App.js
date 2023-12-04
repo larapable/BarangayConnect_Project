@@ -22,6 +22,12 @@ import AdminProfileList from "./Profile/AdminProfileList";
 import AdminProfileView from "./Profile/AdminProfileView";
 import AdminProfileEdit from "./Profile/AdminProfileEdit";
 
+import AdminAnnouncementChoices from "./Announcementss/AdminAnnouncementChoices";
+import AdminAnnouncementForm from "./Announcementss/AdminAnnouncementForm";
+import AdminAnnouncementView from "./Announcementss/AdminAnnouncementView";
+import AdminAnnouncementEdit from "./Announcementss/AdminAnnouncementEdit";
+import UserAnnouncementView from "./Announcementss/UserAnnouncementView"
+
 function App() {
   return (
     <Routes>
@@ -52,6 +58,13 @@ function App() {
       <Route path="/profileList" element={<AdminProfileList />} />
       <Route path="/profileList/:userId" element={<AdminProfileView />} />
       <Route path="/profileList/:userId/editProfile" element={<AdminProfileEdit />} />
+
+      <Route path="/announcement" element={<AdminAnnouncementChoices />} />
+      <Route path="/submitannouncement" element={<AdminAnnouncementForm />} />
+      <Route path="/adminviewannouncement" element={<AdminAnnouncementView />} />
+      <Route path="/admin/announcements/updateAnnouncement/:id" element={<AdminAnnouncementEdit />} />
+      <Route path="/userviewannouncement" element={<UserAnnouncementView />} />
+      
     </Routes>
   );
 }
