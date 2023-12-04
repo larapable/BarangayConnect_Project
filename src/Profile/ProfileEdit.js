@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { Button, Grid } from "@mui/material";
+import { Link, useNavigate } from "react-router-dom";
+import { Button, Grid, Modal } from "@mui/material";
 import Header from "../Header";
 import "./Profile.css";
 
@@ -15,9 +15,12 @@ export default function ProfileEdit() {
   const [religion, setReligion] = useState("");
   const [selectedImage, setSelectedImage] = useState();
   const [selectedFile, setSelectedFile] = useState(null);
+  const [showPopup, setShowPopup] = useState(false);
+
   const navigate = useNavigate();
 
-  const username = localStorage.getItem("username");
+  const userObj = JSON.parse(localStorage.getItem("user"));
+  const username = userObj.username;
   const placeholderImage = "../profile.png";
 
   useEffect(() => {
@@ -135,8 +138,14 @@ export default function ProfileEdit() {
     return passwordRegex.test(password);
   };
 
-  const handleFinishClick = async (event) => {
-    console.log("Finish button clicked");
+  const handleFinishClick = (event) => {
+    setShowPopup(true);
+  };
+
+  // Define modal actions
+  const handleConfirm = async (event) => {
+    event.preventDefault();
+    console.log("Confirm button clicked");
 
     // Check if all fields have values
     if (
@@ -147,7 +156,6 @@ export default function ProfileEdit() {
       !password
     ) {
       alert("All fields must have values");
-      event.preventDefault();
       return;
     }
     // Validate the password
@@ -211,7 +219,13 @@ export default function ProfileEdit() {
     }
 
     // Navigate to the profile view
+    setShowPopup(false);
     navigate("/profile");
+  };
+
+  const handleClose = () => {
+    // Handle closing the modal
+    setShowPopup(false);
   };
 
   return (
@@ -235,7 +249,7 @@ export default function ProfileEdit() {
                   fontSize: "50px",
                 }}
               >
-                {userData?.username || ""}
+                {userData?.fname || ""} {userData?.lname || ""}
               </p>
               <input
                 type="file"
@@ -417,6 +431,41 @@ export default function ProfileEdit() {
               Finish
             </Button>
           </div>
+          <Modal open={showPopup} onClose={handleClose}>
+            <div className="profile-popup">
+              <h2>Save Changes</h2>
+              <p>Do you want to save these changes?</p>
+              <Button
+                variant="contained"
+                onClick={handleConfirm}
+                style={{
+                  color: "#FFFFFF",
+                  background: "#213555",
+                  borderRadius: "10px",
+                  width: "150px",
+                  fontWeight: "bold",
+                  marginTop: "20px",
+                }}
+              >
+                Yes
+              </Button>
+              <Button
+                variant="contained"
+                onClick={handleClose}
+                style={{
+                  color: "#FFFFFF",
+                  background: "#F24E1E",
+                  borderRadius: "10px",
+                  width: "150px",
+                  fontWeight: "bold",
+                  marginLeft: "20px",
+                  marginTop: "20px",
+                }}
+              >
+                No
+              </Button>
+            </div>
+          </Modal>
         </div>
       </Grid>
     </div>

@@ -1,20 +1,53 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { Button, Grid, Modal } from "@mui/material";
 import Header from "../Header";
+import "./Profile.css";
+import { IconButton } from "@mui/material";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 export default function AdminProfileEdit() {
-  const uploadedImage = useRef(null);
   const imageUploader = useRef(null);
+  const [userData, setUserData] = useState(null);
+  const [error, setError] = useState(null);
+  const [mobileNumber, setMobileNumber] = useState("");
+  const [maritalStatus, setMaritalStatus] = useState("");
+  const [citizenship, setCitizenship] = useState("");
+  const [religion, setReligion] = useState("");
+  const [selectedImage, setSelectedImage] = useState();
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [showPassword, setShowPassword] = useState(false);
+  const [isVerified, setIsVerified] = useState("");
+  const [showConfirmModal, setShowConfirmModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const navigate = useNavigate();
+  const { userId } = useParams();
 
-  const placeholderImage = "profile.png";
-  const editableFields = [
-    "Mobile Number",
-    "Marital Status",
-    "Citizenship",
-    "Religion",
+  const userObj = JSON.parse(localStorage.getItem("user"));
+  const username = userObj.username;
+
+  const placeholderImage = "/profile.png";
+  // Sample values for each detail
+  const data = [
+    userData?.username || "",
+    userData?.password || "",
+    userData?.email || "",
+    userData?.fname || "",
+    userData?.lname || "",
+    userData?.address || "",
+    userData?.gender || "",
+    userData?.dateOfBirth || "",
+    userData?.mobileNumber || "",
+    userData?.maritalStatus || "",
+    userData?.citizenship || "",
+    userData?.religion || "",
+    userData?.isVerified || "",
   ];
+
   const details = [
     "Username",
+    "Password",
     "Email",
     "First Name",
     "Last Name",
@@ -25,58 +58,169 @@ export default function AdminProfileEdit() {
     "Marital Status",
     "Citizenship",
     "Religion",
+    "Verified",
   ];
-  // Sample values for each detail
-  const initialValues = [
-    "larsss01 ",
-    "larajane@gmail.com",
-    "Lara",
-    "Jane",
-    "Jugan Tisa, Cebu, Philippines",
-    "Female",
-    "January 1, 1990",
-    "09999999999",
-    "Married",
+  const verifiedOptions = ["", "Yes", "No"];
+  const maritalStatusOptions = ["", "Single", "Married", "Divorced", "Widowed"];
+  const citizenshipOptions = [
+    "",
     "Filipino",
+    "American",
+    "Chinese",
+    "Japanese",
+    "Korean",
+    "Indian",
+    "British",
+    "Canadian",
+    "Australian",
+    "Black American",
+    "Other",
+  ];
+  const religionOptions = [
+    "",
     "Roman Catholic",
+    "Islam",
+    "Protestant",
+    "Iglesia ni Cristo",
+    "Seventh Day Adventist",
+    "Jehovah's Witness",
+    "Bible Baptist Church",
+    "Born Again Christian",
+    "Philippine Independent Church",
+    "Other",
   ];
 
-  const [values, setValues] = useState(initialValues);
-  const [showDeletePopup, setShowDeletePopup] = useState(false);
-  const [showConfirmDeletePopup, setShowConfirmDeletePopup] = useState(false);
+  useEffect(() => {
+    const fetchUserProfile = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:8080/login-signup/getInfoById/${userId}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
 
-  const handleDeletePopup = () => {
-    setShowDeletePopup(true);
-  };
-  const handleCloseDeletePopup = () => {
-    setShowDeletePopup(false);
-  };
-  const handleDelete = () => {
-    setShowConfirmDeletePopup(true);
-  };
+        if (!response.ok) {
+          throw new Error("User not found");
+        }
 
-  const handleCloseConfirmDeletePopup = () => {
-    // Close both modals
-    setShowDeletePopup(false);
-    setShowConfirmDeletePopup(false);
-  };
+        const data = await response.json();
+        setUserData(data);
+        setError(null);
+        console.log("Successfully fetched user information");
+        console.log("Image URL:", data.photoPath);
+      } catch (error) {
+        setUserData(null);
+        setError(error.message || "An error occurred");
+        console.error("Error fetching user information:", error);
+      }
+    };
+    fetchUserProfile();
+  }, [userId]);
 
-  const handleInputChange = (index, newValue) => {
-    const newValues = [...values];
-    newValues[index] = newValue;
-    setValues(newValues);
-  };
-
-  const handleImageUpload = (e) => {
-    const [file] = e.target.files;
-    if (file) {
+  const handleImageUpload = (event) => {
+    if (event.target.files && event.target.files[0]) {
       const reader = new FileReader();
-      const { current } = uploadedImage;
-      current.file = file;
-      reader.onload = (e) => {
-        current.src = e.target.result;
+      reader.onloadend = () => {
+        setSelectedImage(reader.result);
       };
-      reader.readAsDataURL(file);
+      reader.readAsDataURL(event.target.files[0]);
+      setSelectedFile(event.target.files[0]);
+    }
+  };
+
+  const handleFinishClick = (event) => {
+    // Check if all fields have values
+
+    setShowConfirmModal(true);
+  };
+
+  // Define modal actions
+  const handleConfirm = async (event) => {
+    console.log("Confirm button clicked");
+
+    // Image upload
+    try {
+      const formData = new FormData();
+      formData.append("image", selectedFile); // selectedFile is the file selected by the user
+
+      const response = await fetch(
+        `http://localhost:8080/login-signup/uploadImage/${username}`,
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      localStorage.setItem("photoPath", response.photoPath);
+      const data = await response.json();
+      console.log("Success:", data);
+      // Update the user data in your application...
+      setSelectedImage(data.photoPath);
+    } catch (error) {
+      console.error("Error:", error);
+    }
+
+    const verifiedValue = isVerified === "Yes" ? 1 : 0;
+    // User info update
+    try {
+      const response = await fetch(
+        `http://localhost:8080/login-signup/updateInfo/${userId}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            isVerified: verifiedValue,
+          }),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to update user info");
+      }
+      console.log("User info updated successfully");
+    } catch (error) {
+      console.error("Error updating user info:", error);
+    }
+
+    // Navigate to the profile view
+    setShowConfirmModal(false);
+    navigate(`/profileList/${userId}`);
+  };
+
+  const handleClose = () => {
+    // Handle closing the modal
+    setShowConfirmModal(false);
+  };
+  const handleDelete = async () => {
+    try {
+      const response = await fetch(
+        `http://localhost:8080/login-signup/delete/${userId}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to delete user");
+      }
+
+      console.log("User deleted successfully");
+      setShowDeleteModal(false);
+      setShowSuccessModal(true);
+    } catch (error) {
+      console.error("Error deleting user:", error);
     }
   };
 
@@ -89,9 +233,8 @@ export default function AdminProfileEdit() {
         <div className="profilePicture-area">
           <div>
             <img
-              ref={uploadedImage}
               className="image-style"
-              src={uploadedImage.current?.src || placeholderImage}
+              src={selectedImage || placeholderImage}
               alt="Profile"
             />
             <div className="center-style">
@@ -102,7 +245,7 @@ export default function AdminProfileEdit() {
                   fontSize: "50px",
                 }}
               >
-                Lara Jane
+                {userData?.fname || ""} {userData?.lname || ""}
               </p>
               <input
                 type="file"
@@ -110,23 +253,25 @@ export default function AdminProfileEdit() {
                 onChange={handleImageUpload}
                 ref={imageUploader}
                 style={{
+                  textAlign: "center",
                   display: "none",
                 }}
               />
-
-              <Button
-                variant="contained"
-                style={{
-                  color: "#FFFFFF",
-                  background: "#213555",
-                  borderRadius: "10px",
-                  width: "200px",
-                  fontWeight: "bold",
-                }}
-                onClick={() => imageUploader.current.click()}
-              >
-                Upload a Photo
-              </Button>
+              <div style={{ marginTop: "20px" }}>
+                <Button
+                  variant="contained"
+                  style={{
+                    color: "#213555",
+                    background: "#FFFFFF",
+                    borderRadius: "10px",
+                    width: "200px",
+                    fontWeight: "bold",
+                  }}
+                  onClick={() => imageUploader.current.click()}
+                >
+                  Upload a Photo
+                </Button>
+              </div>
             </div>
           </div>
         </div>
@@ -138,7 +283,7 @@ export default function AdminProfileEdit() {
                 color: "#213555",
               }}
             >
-              Hi There, Tisaanon!
+              Hi There, Admin!
             </h1>
           </div>
           <div>
@@ -168,18 +313,43 @@ export default function AdminProfileEdit() {
                     marginRight: "250px",
                   }}
                 >
-                  {editableFields.includes(label) ? (
-                    <input
-                      type="text"
+                  {label === "Verified" ? (
+                    <select
+                      value={isVerified}
+                      onChange={(e) => setIsVerified(e.target.value)}
                       style={{
                         color: "#213555",
                         fontWeight: "bold",
                         fontSize: "18px",
-                        marginTop: "10px",
+                        marginTop: "15px",
+                        width: "245px",
                       }}
-                      value={values[index]}
-                      onChange={(e) => handleInputChange(index, e.target.value)}
-                    />
+                    >
+                      {verifiedOptions.map((option, optionIndex) => (
+                        <option key={optionIndex} value={option}>
+                          {option}
+                        </option>
+                      ))}
+                    </select>
+                  ) : label === "Password" ? (
+                    <p
+                      style={{
+                        color: "#213555",
+                        fontWeight: "bold",
+                        fontSize: "18px",
+                        marginBottom: "0px",
+                      }}
+                    >
+                      {showPassword
+                        ? data[index]
+                        : "*".repeat(data[index].length)}
+                      <IconButton
+                        onClick={() => setShowPassword(!showPassword)}
+                        onMouseDown={(event) => event.preventDefault()}
+                      >
+                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </p>
                   ) : (
                     <p
                       style={{
@@ -189,7 +359,7 @@ export default function AdminProfileEdit() {
                         marginBottom: "10px",
                       }}
                     >
-                      {values[index]}
+                      {data[index]}
                     </p>
                   )}
                 </div>
@@ -207,7 +377,9 @@ export default function AdminProfileEdit() {
                 width: "150px",
                 fontWeight: "bold",
                 marginTop: "20px",
+                marginBottom: "20px",
               }}
+              onClick={handleFinishClick}
             >
               Finish
             </Button>
@@ -222,19 +394,61 @@ export default function AdminProfileEdit() {
                 fontWeight: "bold",
                 marginTop: "20px",
                 marginLeft: "20px",
+                marginBottom: "20px",
               }}
-              onClick={handleDeletePopup}
+              onClick={() => setShowDeleteModal(true)} // Add this line
             >
               Delete Profile
             </Button>
-            <Modal open={showDeletePopup} onClose={handleCloseDeletePopup}>
+
+            {/* Confirmation Modal */}
+            <Modal open={showConfirmModal}>
+              <div className="profile-popup">
+                <h2>Save Changes</h2>
+                <p>Do you want to save these changes?</p>
+                <div>
+                  <Button
+                    variant="contained"
+                    style={{
+                      color: "#FFFFFF",
+                      background: "#213555",
+                      borderRadius: "10px",
+                      width: "100px",
+                      fontWeight: "bold",
+                      marginTop: "20px",
+                      marginRight: "10px",
+                    }}
+                    onClick={handleConfirm}
+                  >
+                    Yes
+                  </Button>
+                  <Button
+                    variant="contained"
+                    style={{
+                      color: "#FFFFFF",
+                      background: "#F24E1E",
+                      borderRadius: "10px",
+                      width: "100px",
+                      fontWeight: "bold",
+                      marginTop: "20px",
+                      marginLeft: "10px",
+                    }}
+                    onClick={() => setShowConfirmModal(false)}
+                  >
+                    No
+                  </Button>
+                </div>
+              </div>
+            </Modal>
+
+            {/* Delete Confirmation Modal */}
+            <Modal open={showDeleteModal}>
               <div className="delete-popup">
                 <h2>Delete User Profile</h2>
                 <p>Are you sure you want to delete this Profile?</p>
                 <div>
                   <Button
                     variant="contained"
-                    onClick={handleDelete}
                     style={{
                       color: "#FFFFFF",
                       background: "#F24E1E",
@@ -244,13 +458,13 @@ export default function AdminProfileEdit() {
                       marginTop: "20px",
                       marginRight: "10px",
                     }}
+                    onClick={handleDelete}
                   >
                     Delete
                   </Button>
 
                   <Button
                     variant="contained"
-                    onClick={handleCloseDeletePopup}
                     style={{
                       color: "#FFFFFF",
                       background: "#213555",
@@ -260,23 +474,22 @@ export default function AdminProfileEdit() {
                       marginTop: "20px",
                       marginLeft: "10px",
                     }}
+                    onClick={() => setShowDeleteModal(false)}
                   >
                     Cancel
                   </Button>
                 </div>
               </div>
             </Modal>
-            <Modal
-              open={showConfirmDeletePopup}
-              onClose={handleCloseConfirmDeletePopup}
-            >
+
+            {/* Delete Success Modal */}
+            <Modal open={showSuccessModal}>
               <div className="delete-popup">
                 <h2>Successfully Deleted</h2>
                 <p>The user profile has been successfully deleted.</p>
                 <div>
                   <Button
                     variant="contained"
-                    onClick={handleCloseConfirmDeletePopup}
                     style={{
                       color: "#FFFFFF",
                       background: "#213555",
@@ -285,6 +498,10 @@ export default function AdminProfileEdit() {
                       fontWeight: "bold",
                       marginTop: "20px",
                       marginRight: "10px",
+                    }}
+                    onClick={() => {
+                      setShowSuccessModal(false);
+                      navigate("/profileList");
                     }}
                   >
                     Done

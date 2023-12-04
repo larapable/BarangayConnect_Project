@@ -117,7 +117,7 @@ export default function Header() {
               onClose={handleMenuClose}
             >
               <MenuItem onClick={handleMenuClose}>
-                <NavLink to="/announcements"
+                <NavLink to="/announcement"
                   style={{
                     color: "#213555",
                     fontWeight: "bold",
@@ -128,6 +128,20 @@ export default function Header() {
                   ANNOUNCEMENTS
                 </NavLink>
               </MenuItem>
+
+              <MenuItem onClick={handleMenuClose}>
+                <NavLink to="/userviewannouncement"
+                  style={{
+                    color: "#213555",
+                    fontWeight: "bold",
+                    textDecoration:"none",
+                  }}
+                  
+                >
+                  ANNOUNCEMENTS
+                </NavLink>
+              </MenuItem>
+
               <MenuItem onClick={handleMenuClose}>
                 <NavLink to="/forum"
                   style={{
@@ -170,7 +184,7 @@ export default function Header() {
           
         <Grid item sm={1} className="btn">
           <div className="noowrap">
-            <Link to="business" className="header-link">LOGOUT</Link>
+            <NavLink to="home" className="header-link">LOGOUT</NavLink>
           </div>
         </Grid>
         {/* Add other grids as needed */}

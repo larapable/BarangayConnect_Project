@@ -1,65 +1,6 @@
-body {
+.emergency-choices-body {
     background-color: #213555;
 }
-
-.grid {
-    width: auto;
-    height: auto;
-    background-color: #829ca6;
-}
-
-.conlogo {
-    text-align: left;
-    padding: 1em;
-}
-
-.headlogo {
-    width: 15vw;
-}
-
-.btn {
-    text-align: right;
-    padding: 30px;
-}
-
-.noowrap {
-    white-space: nowrap;
-}
-
-.noowrap>.header-link {
-    text-decoration: none;
-    color: #fff;
-    font-weight: 600;
-    margin-right: 50px;
-    font-size: 16px;
-    display: flex;
-    align-items: center;
-    position: relative;
-    transition: color 0.3s, box-shadow 0.3s;
-}
-
-.noowrap>.header-link:hover {
-    color: #213555;
-    ;
-}
-
-.noowrap>.header-link::after {
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background-color: transparent;
-    transition: height 0.3s, background-color 0.3s;
-}
-
-.noowrap>.header-link:hover::after {
-    height: 2px;
-    background-color: #BDBDBD;
-}
-
-/* Pop - up css */
 
 .popup-container {
     position: fixed;
@@ -74,13 +15,13 @@ body {
     z-index: 1000;
 }
 
-.popup-box {
+.inside-popup-container {
     background-color: #E0E0E0;
     padding: 40px;
     border: 2px solid #E0E0E0;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-    width: 500px;
-    height: 400px;
+    width: 600px;
+    height: 500px;
     border-radius: 5%;
     display: flex;
     flex-direction: column;
@@ -90,16 +31,13 @@ body {
 }
 
 .popup-image {
-    max-width: 100%;
-    max-height: 100%;
+    max-width: 500%;
+    width: 250px;
+    max-height: 500%;
     position: relative;
-    top: 80px;
-    left: 85px;
+    top: 100px;
+    left: 130px;
     transform: translate(-50%, -50%);
-}
-
-.container {
-    align-items: center;
 }
 
 .button {
@@ -111,13 +49,15 @@ body {
 .button-submit {
     margin-bottom: 30px;
     margin-top: 55px;
+    font-size: large;
 }
 
 .button-emergency {
     margin-top: 20px;
+    font-size: large;
 }
 
-.text {
+.text-button {
     font-size: 1.5em;
     color: #213555;
     text-align: center;
