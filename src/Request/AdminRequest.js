@@ -2,6 +2,8 @@ import './AdminRequest.css';
 import React, { useState, useEffect } from 'react';
 import { Button, Modal, Link } from '@mui/material';
 import Header from '../Header';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEdit } from '@fortawesome/free-solid-svg-icons';
 
 function AdminRequest() {
   const [requests, setRequests] = useState([]);
@@ -10,6 +12,10 @@ function AdminRequest() {
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
   const [requestToDelete, setRequestToDelete] = useState(null);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [editedTrack, setEditedTrack] = useState('');
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [editingRequestId, setEditingRequestId] = useState(null);
+  const [showSaveConfirmationModal, setShowSaveConfirmationModal] = useState(false);
 
   const fetchRequests = async () => {
     try {
@@ -46,6 +52,19 @@ function AdminRequest() {
   const handleViewDetails = (request) => {
     setSelectedRequest(request);
     setShowPopup(true);
+  };
+
+  
+  const handleEditIconClick = (requestId, currentTrack) => {
+    setEditingRequestId(requestId);
+    setEditedTrack(currentTrack);
+    setIsEditModalOpen(true);
+  };
+
+  const handleEditModalClose = () => {
+    setIsEditModalOpen(false);
+    setEditingRequestId(null);
+    setEditedTrack('');
   };
 
   useEffect(() => {
@@ -89,6 +108,34 @@ function AdminRequest() {
     setShowSuccessModal(false);
   };
 
+  const handleSaveTrackChanges = async () => {
+    try {
+      const response = await fetch(`http://localhost:8080/requests/updateRequest/${editingRequestId}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ track: editedTrack }),
+      });
+      if (!response.ok) {
+        const errorResponse = await response.json();
+        throw new Error(`Failed to update track: ${errorResponse.message}`);
+      }
+
+      // After successful update, fetch the updated list of requests
+      fetchRequests();
+      setIsEditModalOpen(false);
+      setEditingRequestId(null);
+      setEditedTrack('');
+      setShowSaveConfirmationModal(true);
+    } catch (error) {
+      console.error('Error updating track:', error.message);
+    }
+  };
+
+  const handleCloseSaveConfirmationModal = () => {
+    setShowSaveConfirmationModal(false);
+  };
   return (
     <div>
        <div>
@@ -96,31 +143,33 @@ function AdminRequest() {
       </div>
       <div className="request-img2">
         <div
-          style={{
-            backgroundImage: 'url("/tisa_logo.png")',
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat',
-            backgroundColor: 'rgba(255, 255, 255, 0.2)',
-            position: 'relative',
-            width: '100%',
-            height: '100%',
-          }}
+          // style={{
+          //   backgroundImage: 'url("/tisa_logo.png")',
+          //   backgroundSize: 'cover',
+          //   backgroundPosition: 'center',
+          //   backgroundRepeat: 'no-repeat',
+          //   backgroundColor: 'rgba(255, 255, 255, 0.2)',
+          //   position: 'relative',
+          //   width: '100%',
+          //   height: '100%',
+          // }}
         >
           {/* Table Section */}
           <table
             style={{
-              width: '80%',
-              margin: 'auto',
+              width: '100%',
+              margin: 'auto 0',
               marginTop: '50px',
               border: '3px solid black',
+              position: 'relative',
+
             }}
           >
             <thead>
               <tr>
                 <th className="request-table">RequestID</th>
                 <th className="request-table">UserID</th>
-                <th className="request-table">Username</th>
+                <th className="request-table">Document_Type</th>
                 <th className="request-table">Document_Status</th>
                 <th className="request-table">Summary_Details</th>
                 <th className="request-table">Delete_Request</th>
@@ -131,8 +180,11 @@ function AdminRequest() {
                 <tr key={request?.docid}>
                   <td className="request-table2">{request?.docid}</td>
                   <td className="request-table2">{request?.user?.id}</td>
-                  <td className="request-table2">{request?.user?.username}</td>
-                  <td className="request-table2">{request?.track}</td>
+                  <td className="request-table2">{request?.doctype}</td>
+                  <td className="request-table2">{request?.track}
+                  <FontAwesomeIcon icon={faEdit} style={{ marginLeft: '5px', cursor: 'pointer' }} 
+                  onClick={() => handleEditIconClick(request.docid, request.track)}/>
+                  </td>
                   <td className="request-table2">
                     <Button variant="contained" onClick={() => handleViewDetails(request)}>
                       VIEW_DETAILS
@@ -244,7 +296,62 @@ function AdminRequest() {
               width: '150px',
               fontWeight: 'bold',
               marginTop: '20px',
-              marginLeft:'50px'
+              marginLeft:'75px'
+            }}
+          >
+            OK
+          </Button>
+        </div>
+      </Modal>
+      {/* Edit Modal */}
+      <Modal open={isEditModalOpen} onClose={handleEditModalClose}>
+        <div className="popup4">
+          <h1>Document Progress</h1>
+          <div>
+  <input
+    type="text"
+    value={editedTrack}
+    onChange={(e) => setEditedTrack(e.target.value)}
+    style={{
+      width: '200px',
+      height: '40px',
+    }}
+  />
+</div>
+<div>
+  <Button
+    variant="contained"
+    onClick={handleSaveTrackChanges}
+    style={{
+      color: '#FFFFFF',
+      background: '#213555',
+      borderRadius: '10px',
+      width: '150px',
+      fontWeight: 'bold',
+      marginTop: '20px',
+    }}
+  >
+    Save
+  </Button>
+</div>
+
+        </div>
+      </Modal>
+      {/* Save Confirmation Modal */}
+      <Modal open={showSaveConfirmationModal} onClose={handleCloseSaveConfirmationModal}>
+        <div className="popup4">
+          <h1>Save Confirmation</h1>
+          <p>The changes have been successfully saved.</p>
+          <Button
+            variant="contained"
+            onClick={handleCloseSaveConfirmationModal}
+            style={{
+              color: '#FFFFFF',
+              background: '#213555',
+              borderRadius: '10px',
+              width: '150px',
+              fontWeight: 'bold',
+              marginTop: '20px',
             }}
           >
             OK

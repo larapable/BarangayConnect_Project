@@ -31,6 +31,9 @@ function Requests () {
   const [type, setType] = useState("");
   const [contactnum, setContactNum] = useState("");
   const [email, setEmail] = useState("");
+  const [requests, setRequests] = useState([]);
+  const [showProgress, setShowProgress] = useState(false);
+
   
   const [showPopup, setShowPopup] = useState(false);
 
@@ -152,6 +155,8 @@ function Requests () {
         // Request successful
         console.log("Request successful");
         setShowPopup(true);
+        fetchRequests();
+        setShowProgress(true);
 
 
       } else {
@@ -171,7 +176,39 @@ function Requests () {
     handleClearRequest();
   };
 
-  
+  const fetchRequests = async () => {
+    try {
+      const response = await fetch(
+        `http://localhost:8080/requests/getAllRequest`,
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+      if (!response.ok) {
+        throw new Error('Request not found');
+      }
+
+      const allRequests = await response.json();
+
+      // Filter out requests that are marked as deleted
+      const activeRequests = allRequests.filter((request) => !request.isDeleted);
+      setRequests(activeRequests);
+      setShowProgress(true);
+
+      console.log('Successfully fetched user information');
+    } catch (error) {
+      console.error('Error fetching user information:', error);
+    }
+  };
+
+  useEffect(() => {
+    // Fetch requests when the component mounts
+    fetchRequests();
+  }, []); 
+
   return (
     <div>
     <div>
@@ -185,6 +222,20 @@ function Requests () {
             <p className='request-para'>The requesting of documents has a fee of P30.00 
                peso for each documents. And for others, additional 
                P5.00 will be charge.</p>
+        </div>
+        <div>
+        {showProgress && requests.length > 0 &&  (
+          <Grid item sm={3}>
+            <Paper elevation={3} style={{ padding: '20px', marginTop: '20px' }}>
+              {/* Add content for tracking request progress */}
+              <h2>Request Progress</h2>
+              {/* Assuming requests is an array, you need to map through it */}
+              {requests.map((request) => (
+                <h3 key={request.id}>Document Status: {request.track}</h3>
+              ))}
+            </Paper>
+          </Grid>
+        )}
         </div>
     </div>
    

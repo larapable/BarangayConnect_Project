@@ -39,3 +39,14 @@
     font-style: italic;
   }
   
+  .popup4 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    border: 2px solid #213555;
+    text-align: center;
+  }
