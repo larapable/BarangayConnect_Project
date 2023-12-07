@@ -12,6 +12,13 @@ const AdminAnnouncementView = ({ announcement, handleEdit }) => {
     const navigate = useNavigate();
 
     const [announcements, setAnnouncements] = useState([]);
+    const [searchTerm, setSearchTerm] = useState('');
+
+    const [currentPage, setCurrentPage] = useState(1);
+    const announcementsPerPage = 3;
+    // Calculate the index range for the announcements to display on the current page
+    const startIndex = (currentPage - 1) * announcementsPerPage;
+    const endIndex = startIndex + announcementsPerPage;
 
     useEffect(() => {
         fetchAnnouncements();
@@ -35,8 +42,27 @@ const AdminAnnouncementView = ({ announcement, handleEdit }) => {
         }
     };
 
-    const handleSearch = () => { //add search here
+    const handleSearch = (e) => { 
+        setSearchTerm(e.target.value);
+    };
 
+    const filteredAnnouncements = announcements.filter((announcement) =>
+      announcement.announcementTitle.toLowerCase().includes(searchTerm.toLowerCase())
+    )
+    .slice(startIndex, endIndex);
+
+    const totalPages = Math.ceil(announcements.length / announcementsPerPage);
+
+    const handleNextPage = () => {
+      if (currentPage < totalPages) {
+        setCurrentPage(currentPage + 1);
+      }
+    };
+
+    const handlePrevPage = () => {
+      if (currentPage > 1) {
+        setCurrentPage(currentPage - 1);
+      }
     };
 
 
@@ -80,19 +106,42 @@ const AdminAnnouncementView = ({ announcement, handleEdit }) => {
                 <InputBase
                 placeholder="Search..."
                 className="input-base4"
+                value={searchTerm}
+                onChange={handleSearch}
                 />
                 <Button variant="contained" color="primary" className="search-button4">
                 Search
                 </Button>
             </Paper>
 
-            {/* Display Announcements */}
-                {announcements.map((announcement) => (
+                    {/* Pagination Buttons */}
+                    <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px', marginBottom: '20px' }}>
+                    <Button
+                      onClick={handlePrevPage}
+                      style={{ color: '#213555', marginRight: '10px', borderRadius: '50px', backgroundColor: '#ffffff' }}
+                      variant="contained"
+                    >
+                      <span style={{ fontSize: '20px' }}>←</span>
+                    </Button>
+                    {/* <span style={{ color: '#ffffff', fontSize: '20px' }}>
+                      Page {currentPage} of {totalPages}
+                    </span> */}
+                    <Button
+                      onClick={handleNextPage}
+                      style={{ color: '#ffffff', marginLeft: '10px', borderRadius: '50px' }}
+                      variant="contained"
+                    >
+                      <span style={{ fontSize: '20px' }}>→</span>
+                    </Button>
+                  </div>
+
+                        {/* Display Announcements */}
+                        {filteredAnnouncements.map((announcement) => (
                         <Paper key={announcement.announcementId} elevation={3} className="announcement-paper4">
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                             <Paper
                                 style={{
-                                    backgroundColor: '#d34622',
+                                    backgroundColor: '#3BC2E0',
                                     color: 'black',
                                     borderRadius: '10px',
                                     padding: '5px',

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import Header from '../Header';
 import './AdminAnnouncementEdit.css';
-import { Grid, Link, Menu, MenuItem, Paper, Button, TextField, InputBase, Dialog, DialogTitle, DialogActions } from "@mui/material";
+import { Grid, Link, Menu, MenuItem, Paper, Button, TextField, InputBase, Dialog, DialogTitle, DialogActions, DialogContent} from "@mui/material";
 import axios from 'axios';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 
 const AdminAnnouncementEdit = () => {
@@ -16,7 +16,9 @@ const AdminAnnouncementEdit = () => {
       });
 
       const { id } = useParams();
+      const navigate = useNavigate();
       const [isDialogOpen, setDialogOpen] = useState(false);
+      const [isAnnouncementUpdatedDialogOpen, setAnnouncementUpdatedDialogOpen] = useState(false);
 
       useEffect(() => {
         console.log('Fetching announcement data for ID:', id);
@@ -25,7 +27,7 @@ const AdminAnnouncementEdit = () => {
 
       const fetchAnnouncementData = async (announcementId) => {
         try {
-          const response = await fetch(`http://localhost:8080/announcements/${announcementId}`);
+          const response = await fetch(`http://localhost:8080/announcements/getInfoById/${announcementId}`);
           console.log('Response:', response);
           
           if (response.ok) {
@@ -35,7 +37,6 @@ const AdminAnnouncementEdit = () => {
           } else {
             console.error('Error updating announcement:', response.statusText);
       
-            // Optionally, handle specific error cases
             if (response.status === 404) {
               console.error('Announcement not found');
             } else {
@@ -49,7 +50,6 @@ const AdminAnnouncementEdit = () => {
     
       const handleConfirmUpdate = async () => {
         try {
-          // Make the HTTP request to update the announcement using fetch
           const response = await fetch(`http://localhost:8080/announcements/updateAnnouncement/${id}`, {
             method: 'PUT',
             headers: {
@@ -60,14 +60,12 @@ const AdminAnnouncementEdit = () => {
       
           if (response.ok) {
             setDialogOpen(false);
-            // Optionally, redirect to the view page or perform other actions
+            setAnnouncementUpdatedDialogOpen(true); // Set it to true here
           } else {
             console.error('Error updating announcement:', response.statusText);
-            // Handle error
           }
         } catch (error) {
           console.error('Error updating announcement:', error);
-          // Handle error
         }
       };
       
@@ -77,6 +75,20 @@ const AdminAnnouncementEdit = () => {
 
       const handleCancelUpdate = () => {
         setDialogOpen(false);
+      };
+
+      const handleHomeButtonClick = () => {
+        // Redirect to the home page or the desired location
+        navigate('/');
+      };
+
+      const handleViewAnnouncementButtonClick = () => {
+        // Redirect to the view announcement page or the desired location
+        navigate('/adminviewannouncement');
+      };
+
+      const handleCloseAnnouncementUpdatedDialog = () => {
+        setAnnouncementUpdatedDialogOpen(false);
       };
 
       const handleInputChange = (e) => {
@@ -186,21 +198,55 @@ const AdminAnnouncementEdit = () => {
                 </div>
               {/* Confirmation Dialog */}
               <Dialog open={isDialogOpen} onClose={() => setDialogOpen(false)} PaperProps={{ style: { backgroundColor: '#ffffff' } }}>
-              <img src={"/questionmark.png"} alt="Check Button" className="submit-checkbutton2" style={{marginTop: "20px"}}/>
-                  <DialogTitle style={{ margin: 'auto', textAlign: 'center', color: '#213555', fontWeight: 'bold', fontSize: '30px' }}>
-                    Are you sure you want to update this announcement?
+                  <DialogTitle style={{ margin: 'auto', textAlign: 'center', color: '#16558f', fontWeight: 'bolder', fontSize: '40px' }}>
+                    Are you sure?
                   </DialogTitle>
+                  <p style={{fontSize: "23px", color: '#000000', textAlign: 'center', marginTop: "0px"}}>This page is asking you to confirm that you want to update this announcement.</p>
                   <DialogActions>
+                    <Button onClick={handleConfirmUpdate}
+                            style={{ backgroundColor: "#ffffff", marginBottom: "10px" , width: '280px', height: '50px', color: "#213555", border: '1px solid #213555' }}
+                            className="submit-button-home2">
+                      Yes
+                    </Button>
                     <Button onClick={handleCancelUpdate} 
-                            style={{ backgroundColor: "#FF0000", marginBottom: "10px" , width: '300px'}}
+                            style={{ backgroundColor: "#213555", marginBottom: "10px" , width: '280px', height: '50px', color: "#ffffff"}}
                             variant="contained"
                             className="submit-button-anotherann2">
                       No
                     </Button>
-                    <Button onClick={handleConfirmUpdate}
-                            style={{ backgroundColor: "#213555", marginBottom: "10px" , width: '300px', color: "white"}}
-                            className="submit-button-home2">
-                      Yes
+                    
+                  </DialogActions>
+                </Dialog>
+
+                <Dialog open={isAnnouncementUpdatedDialogOpen} onClose={handleCloseAnnouncementUpdatedDialog} PaperProps={{ style: { backgroundColor: '#ffffff' } }}>
+                  <DialogTitle style={{ margin: 'auto', textAlign: 'center', color: '#16558f', fontWeight: 'bolder', fontSize: '40px' }}>
+                    Updated
+                  </DialogTitle>
+                  <p style={{fontSize: "23px", color: '#000000', textAlign: 'center', marginTop: "0px"}}>Your annoucement is successfully updated!</p>
+                  
+                  <DialogActions>
+                    <Button onClick={handleHomeButtonClick} 
+                        style={{ color: "#213555", 
+                        backgroundColor: "#ffffff",
+                        marginBottom: "10px", 
+                        width: '280px', 
+                        height: '50px', 
+                        border: '1px solid #213555' }} 
+                        variant="contained">
+
+                      Home
+
+                    </Button>
+                    <Button onClick={handleViewAnnouncementButtonClick} 
+                        style={{ backgroundColor: "#213555", 
+                        color: "#ffffff",
+                        marginBottom: "10px", 
+                        width: '280px',
+                        height: '50px' }} 
+                        variant="contained">
+
+                      View Announcement
+
                     </Button>
                   </DialogActions>
                 </Dialog>

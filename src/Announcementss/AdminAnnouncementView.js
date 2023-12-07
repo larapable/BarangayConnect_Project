@@ -16,7 +16,14 @@ const AdminAnnouncementView = ({ announcement, handleEdit }) => {
     const [announcements, setAnnouncements] = useState([]);
     const [deleteConfirmationOpen, setDeleteConfirmationOpen] = useState(false);
     const [announcementToDelete, setAnnouncementToDelete] = useState(null);
+    const [searchTerm, setSearchTerm] = useState('');
 
+
+    const [currentPage, setCurrentPage] = useState(1);
+    const announcementsPerPage = 3;
+    // Calculate the index range for the announcements to display on the current page
+    const startIndex = (currentPage - 1) * announcementsPerPage;
+    const endIndex = startIndex + announcementsPerPage;
 
 
     const fetchAnnouncements = async () => {
@@ -41,36 +48,32 @@ const AdminAnnouncementView = ({ announcement, handleEdit }) => {
         fetchAnnouncements();
     }, []);
     
-    const handleSearch = () => { //add search here
+    const handleSearch = (e) => { 
+      setSearchTerm(e.target.value);
+    };
 
+    const filteredAnnouncements = announcements.filter((announcement) =>
+      announcement.announcementTitle.toLowerCase().includes(searchTerm.toLowerCase())
+    )
+    .slice(startIndex, endIndex);
+
+    const totalPages = Math.ceil(announcements.length / announcementsPerPage);
+
+    const handleNextPage = () => {
+      if (currentPage < totalPages) {
+        setCurrentPage(currentPage + 1);
+      }
+    };
+
+    const handlePrevPage = () => {
+      if (currentPage > 1) {
+        setCurrentPage(currentPage - 1);
+      }
     };
 
     const handleEditClick = (announcementId) => {
         navigate(`/admin/announcements/updateAnnouncement/${announcementId}`);
       };
-
-
-    //   const handleDelete = async (announcementId) => {
-    //     try {
-    //         const response = await fetch(`http://localhost:8080/announcements/deleteAnnouncement/${announcementId}`, {
-    //             method: 'DELETE',
-    //             headers: {
-    //                 'Content-Type': 'application/json',
-    //             },
-    //         });
-    
-    //         if (response.ok) {
-    //             // Remove the deleted announcement from the local state
-    //             setAnnouncements((prevAnnouncements) =>
-    //                 prevAnnouncements.filter((announcement) => announcement.announcementId !== announcementId)
-    //             );
-    //         } else {
-    //             console.error('Error deleting announcement:', response.statusText);
-    //         }
-    //     } catch (error) {
-    //         console.error('Error deleting announcement:', error);
-    //     }
-    // };
 
     const handleDelete = (announcementId) => {
         // Open the delete confirmation modal
@@ -112,31 +115,31 @@ const AdminAnnouncementView = ({ announcement, handleEdit }) => {
         <Grid container>
             {/* Left Container */}
             <Grid item xs={3} className="left-container3">
-            <h1 className="header-text3">ANNOUNCE WITH IMPACT!</h1>
+              <h1 className="header-text3">ANNOUNCE WITH IMPACT!</h1>
 
-            <img
-                src="/announcementpic.png"
-                alt="Support Local Business"
-                className="image-container3"
-            />
+              <img
+                  src="/announcementpic.png"
+                  alt="Support Local Business"
+                  className="image-container3"
+              />
 
-            <br />
-            <p className="description3">
-                As stewards of our community's well-being, your role is paramount.
-                Leverage the Announcements section to keep residents informed,
-                share emergency alerts, and showcase exciting community initiatives.
-                Informed administrators make for empowered communities.
-            </p>
-            <p className="description3">
-                Explore this feature to its fullest potential and witness the positive
-                impact it can have on community engagement and cohesion.
-            </p>
-            <p className="description3">
-                Your community, your tool - Barangay Connect!
-            </p>
-            <p className="description3">
-                Let's make our community stronger, together!
-            </p>
+              <br />
+              <p className="description3">
+                  As stewards of our community's well-being, your role is paramount.
+                  Leverage the Announcements section to keep residents informed,
+                  share emergency alerts, and showcase exciting community initiatives.
+                  Informed administrators make for empowered communities.
+              </p>
+              <p className="description3">
+                  Explore this feature to its fullest potential and witness the positive
+                  impact it can have on community engagement and cohesion.
+              </p>
+              <p className="description3">
+                  Your community, your tool - Barangay Connect!
+              </p>
+              <p className="description3">
+                  Let's make our community stronger, together!
+              </p>
             </Grid>
 
             {/* Right Content */}
@@ -146,25 +149,48 @@ const AdminAnnouncementView = ({ announcement, handleEdit }) => {
                 <InputBase
                 placeholder="Search..."
                 className="input-base3"
+                value={searchTerm}
+                onChange={handleSearch}
                 />
                 <Button variant="contained" color="primary" className="search-button3">
                 Search
                 </Button>
             </Paper>
 
-            {/* Display Announcements */}
-                {announcements.map((announcement) => (
+                  {/* Pagination Buttons */}
+                  <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px', marginBottom: '20px' }}>
+                    <Button
+                      onClick={handlePrevPage}
+                      style={{ color: '#213555', marginRight: '10px', borderRadius: '50px', backgroundColor: '#ffffff' }}
+                      variant="contained"
+                    >
+                      <span style={{ fontSize: '20px' }}>←</span>
+                    </Button>
+                    {/* <span style={{ color: '#ffffff', fontSize: '20px' }}>
+                      Page {currentPage} of {totalPages}
+                    </span> */}
+                    <Button
+                      onClick={handleNextPage}
+                      style={{ color: '#ffffff', marginLeft: '10px', borderRadius: '50px' }}
+                      variant="contained"
+                    >
+                      <span style={{ fontSize: '20px' }}>→</span>
+                    </Button>
+                  </div>
+
+                {/* Display Announcements */}
+                {filteredAnnouncements.map((announcement) => (
                         <Paper key={announcement.announcementId} elevation={3} className="announcement-paper3">
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                                 <h1 style={{ color: 'red', fontSize: '30px', fontWeight: 'bold', marginBottom: '10px'  }}>
                                     {announcement.announcementTitle}
                                 </h1>
                                 <div>
-                                    <Button onClick={() => { console.log(announcement.announcementId); handleEditClick(announcement.announcementId)}} style={{backgroundColor: '#FFFF66', marginRight: '5px'}}>
-                                        <EditIcon color="primary" />
+                                    <Button onClick={() => { console.log(announcement.announcementId); handleEditClick(announcement.announcementId)}} style={{backgroundColor: '#ffffff', marginRight: '5px', height: '50%', border: '1px solid #213555'}}>
+                                        <EditIcon style={{ color: '#213555' }} />
                                     </Button>
-                                    <Button onClick={() => handleDelete(announcement.announcementId)} style={{backgroundColor: '#FFFF66'}}>
-                                        <DeleteIcon color="error" />
+                                    <Button onClick={() => handleDelete(announcement.announcementId)} style={{backgroundColor: '#d8210b'}}>
+                                        <DeleteIcon style={{ color: '#ffffff' }} />
                                     </Button>
                                 </div>
                             </div>
@@ -189,32 +215,37 @@ const AdminAnnouncementView = ({ announcement, handleEdit }) => {
                         </Paper>
                     ))}
 
-                    {/* Delete Confirmation Dialog */}
-          <Dialog open={deleteConfirmationOpen} onClose={() => handleDeleteConfirmation(false)} PaperProps={{ style: { backgroundColor: '#ffffff' } }}>
-          <img src={"/deleteicon.png"} alt="Check Button" className="submit-checkbutton2" style={{marginTop: "20px"}}/>
-            <DialogTitle style={{ margin: 'auto', textAlign: 'center', color: '#213555', fontWeight: 'bold', fontSize: '30px' }}>
-                Are you sure you want to delete this announcement?
-            </DialogTitle>
-            <DialogActions>
-              <Button onClick={() => handleDeleteConfirmation(false)} 
-                      style={{ backgroundColor: "#FF0000", 
-                            marginBottom: "10px", 
-                            width: '300px' }} 
-                            variant="contained"
-                            className="submit-button-anotherann3">
-                No
-              </Button>
-              <Button onClick={() => handleDeleteConfirmation(true)} 
-                      style={{ backgroundColor: "#213555", 
-                            marginBottom: "10px", 
-                            width: '300px', 
-                            color: "white" }} 
-                            variant="contained"
-                            className="submit-button-home3">
-                Yes
-              </Button>
-            </DialogActions>
-          </Dialog>
+                  {/* Delete Confirmation Dialog */}
+                  <Dialog open={deleteConfirmationOpen} onClose={() => handleDeleteConfirmation(false)} PaperProps={{ style: { backgroundColor: '#ffffff' } }}>
+                  {/* <img src={"/deleteicon.png"} alt="Check Button" className="submit-checkbutton2" style={{marginTop: "20px"}}/> */}
+                    <DialogTitle style={{ margin: 'auto', textAlign: 'center', color: '#16558f', fontWeight: 'bolder', fontSize: '40px' }}>
+                        Are you sure?
+                    </DialogTitle>
+                    <p style={{fontSize: "23px", color: '#000000', textAlign: 'center', marginTop: "0px"}}>This page is asking you to confirm that you want to delete this announcement.</p>
+                    <DialogActions>
+                      <Button onClick={() => handleDeleteConfirmation(true)} 
+                              style={{ color: "#213555", 
+                                    backgroundColor: "#ffffff",
+                                    marginBottom: "10px", 
+                                    width: '280px', 
+                                    height: '50px', 
+                                    border: '1px solid #213555' }} 
+                                    variant="contained"
+                                    className="submit-button-home3">
+                        Yes
+                      </Button>
+                      <Button onClick={() => handleDeleteConfirmation(false)} 
+                              style={{ backgroundColor: "#213555", 
+                                    color: "#ffffff",
+                                    marginBottom: "10px", 
+                                    width: '280px',
+                                    height: '50px' }} 
+                                    variant="contained"
+                                    className="submit-button-anotherann3">
+                        No
+                      </Button>
+                    </DialogActions>
+                  </Dialog>
             </Grid>
         </Grid>
         </div>

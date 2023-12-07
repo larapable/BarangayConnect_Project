@@ -116,7 +116,7 @@ export default function Header() {
               open={Boolean(calendarAnchorEl)}
               onClose={handleMenuClose}
             >
-              <MenuItem onClick={handleMenuClose}>
+              {/* <MenuItem onClick={handleMenuClose}>
                 <NavLink to="/announcement"
                   style={{
                     color: "#213555",
@@ -127,7 +127,7 @@ export default function Header() {
                 >
                   ANNOUNCEMENTS
                 </NavLink>
-              </MenuItem>
+              </MenuItem> */}
 
               <MenuItem onClick={handleMenuClose}>
                 <NavLink to="/userviewannouncement"
