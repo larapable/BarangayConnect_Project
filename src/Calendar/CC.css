@@ -7,7 +7,7 @@
 .eventlist-title {
   font-size: 60px;
   color: white;
-  margin: 60px;
+  margin: 50px;
 }
 .admin-container {
   height: 100vh;
@@ -25,16 +25,8 @@
   font-size: 18px;
 }
 
-.event-card {
-  width: 80%;
-  height: 100px;
-  background: #ffffff;
-  border-radius: 10px;
-  margin: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 20px;
+.input-design::-webkit-calendar-picker-indicator {
+  display: none;
 }
 
 .event-list-paper {
@@ -45,5 +37,67 @@
   text-align: center;
   align-items: center;
   width: 80%;
-  height: 50px;
+  height: 60px;
 }
+
+.event-popup {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  border: 2px solid #213555;
+  text-align: center;
+  width: 320px;
+  height: auto;
+}
+
+.event-confirmation-popup {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  border: 2px solid #213555;
+  text-align: center;
+  width: auto;
+  height: auto;
+}
+
+.input-popup {
+  width: 280px;
+  height: 40px;
+  background-color: #ffffff;
+  border: #a8a2a2 2px solid;
+  box-shadow: 0px 8px 10px -5px rgba(0, 0, 0, 0.2);
+}
+
+.big-input-popup {
+  width: 280px;
+  height: 80px;
+  background-color: #ffffff;
+  border: #a8a2a2 2px solid;
+  box-shadow: 0px 8px 10px -5px rgba(0, 0, 0, 0.2);
+}
+
+.event-delete-popup {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  border: 2px solid #213555;
+  width: 300px;
+  text-align: center;
+}
+.event-delete-popup p {
+  font-size: 20px;
+}
+
+

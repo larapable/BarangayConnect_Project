@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Login.css";
 import { Button } from "@mui/material";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 
 const Login = () => {
@@ -46,9 +46,6 @@ const Login = () => {
       }
     } catch (error) {
       console.error("Error during login:", error);
-      alert(
-        "Your account does not exist or your account is not verified. Please check your email for verification instructions."
-      );
       alert(
         "Your account does not exist or your account is not verified. Please check your email for verification instructions."
       );

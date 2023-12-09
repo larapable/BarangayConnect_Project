@@ -16,7 +16,7 @@ const AdminAnnouncementChoices = () => {
             <div className="popup-container">
                 <div className="popup-box">
                     {/* Content inside the pop-up container */}
-                    <img src={"BClogo.png"} alt="Logo Pop-up" className="popup-image" />
+                    <img src={"BClogo.png"} alt="Logo Pop-up" className="annoucement-popup-image" />
                     <div style={{ alignItems: 'center', margin: 'auto', justifyContent: 'center', marginTop: '15px' }}>
                         <Link to="/submitannouncement">
                             <Button class="button button-submit" variant="contained" style={{ height: '70px', padding: '15px 150px', borderRadius: '10px', fontWeight: 'bold' }}>

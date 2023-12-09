@@ -257,7 +257,7 @@ export default function Signup() {
             </div>
             {/* Popup Modal for Verification */}
             <Modal open={showPopup} onClose={handleClosePopup}>
-              <div className="popup">
+              <div className="signup-popup">
                 {/* Display input values for verification */}
                 <h2>Please Wait for Verification</h2>
                 <p>
