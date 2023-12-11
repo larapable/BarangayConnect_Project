@@ -8,6 +8,7 @@ import dayjs from "dayjs";
 export default function CommunityCalendar() {
   const [value, setValue] = useState(null);
   const [events, setEvents] = useState([]);
+  const [hoveredEvent, setHoveredEvent] = useState(null);
 
   const convertTo12Hour = (time) => {
     let [hours, minutes] = time.split(":");
@@ -198,19 +199,23 @@ export default function CommunityCalendar() {
                   display: "flex",
                   justifyContent: "space-between",
                   padding: "20px",
+                  cursor: "pointer", // Add this line to make it clear that it's clickable
+                  backgroundColor: hoveredEvent === event.eventID ? "#F2F2F2" : "white", // Change background color on hover
                 }}
                 className="event-list-paper"
                 key={event.eventID}
+                onMouseEnter={() => setHoveredEvent(event.eventID)}
+                onMouseLeave={() => setHoveredEvent(null)}
               >
                 <div
                   style={{
                     textAlign: "left",
                   }}
                 >
-                  <h1 style={{ margin: "0" }}>Event {event.eventID}</h1>
-                  <p style={{ fontSize: "16px", margin: "3px", color: "red" }}>
+                  <h1 style={{ margin: "0", color: "red" }}>{event.eventTitle}</h1>
+                  {/* <p style={{ fontSize: "16px", margin: "3px", color: "red" }}>
                     <b>{event.eventTitle}</b>
-                  </p>
+                  </p> */}
                   <p
                     style={{
                       fontSize: "16px",
@@ -222,6 +227,14 @@ export default function CommunityCalendar() {
                     {event.eventDate} {convertTo12Hour(event.eventTime)}
                   </p>
                 </div>
+                {hoveredEvent === event.eventID && (
+                <div style={{ textAlign: "left", width: "50%" }}>
+                  <p style={{ fontSize: "14px", color: "#213555" }}>
+                    {/* Display your event description here */}
+                    {event.eventDescription}
+                  </p>
+                </div>
+              )}
               </Paper>
             ))}
           </div>
