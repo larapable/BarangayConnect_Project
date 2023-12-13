@@ -6,7 +6,6 @@ import Login from "./Login/Login";
 import Signup from "./Signup/Signup";
 import Home from "./Dashboard/Home";
 import CommunityCalendar from "./Calendar/CommunityCalendar";
-import BLUser from "./BusinessLocal/BLUser";
 import AnnUser from "./Announcement/AnnUser";
 import Forum from "./Forum/Forum";
 import EmergencyAlertChoices from "./Emergency/EmergencyAlertChoices";
@@ -30,6 +29,11 @@ import AdminAnnouncementForm from "./Announcementss/AdminAnnouncementForm";
 import AdminAnnouncementView from "./Announcementss/AdminAnnouncementView";
 import AdminAnnouncementEdit from "./Announcementss/AdminAnnouncementEdit";
 import UserAnnouncementView from "./Announcementss/UserAnnouncementView"
+import AdminBusinessChoices from "./Business/AdminBusinessChoices";
+import AdminBusinessForm from "./Business/AdminBusinessForm";
+import AdminBusinessEdit from "./Business/AdminBusinessForm";
+import AdminBusinessView from "./Business/AdminBusinessForm";
+
 
 function App() {
   return (
@@ -47,11 +51,9 @@ function App() {
       <Route path="/emergencyalertlist" element={<EmergencyAlertList />} />
       <Route path="/backhome" element={<Home />} />
       <Route path="/directory" element={<BarangayDirectory />} />
-      <Route path="/business" element={<BLUser />} />
       <Route path="/announcements" element={<AnnUser />} />
       <Route path="/forum" element={<Forum />} />
       <Route path="/requests" element={<Requests />} />
-      <Route path="/business" element={<BLUser />} />
       <Route path="/profile" element={<ProfileView />} />
       <Route path="/profile/edit" element={<ProfileEdit />} />
       <Route path="/calendar" element={<CommunityCalendar />} />
@@ -70,6 +72,11 @@ function App() {
       <Route path="/admin/announcements/updateAnnouncement/:id" element={<AdminAnnouncementEdit />} />
       <Route path="/userviewannouncement" element={<UserAnnouncementView />} />
       <Route path="/adminrequest" element={<AdminRequest/>}/>
+
+      <Route path="/business" element={<AdminBusinessChoices />} />
+      <Route path="/submitbusiness" element={<AdminBusinessForm />} />
+      <Route path="/adminviewbusiness" element={<AdminBusinessView />} />
+      <Route path="/admin/business/updateBusiness/:id" element={<AdminBusinessEdit />} />
     </Routes>
   );
 }
