@@ -16,7 +16,8 @@ export default function ProfileEdit() {
   const [selectedImage, setSelectedImage] = useState();
   const [selectedFile, setSelectedFile] = useState(null);
   const [showPopup, setShowPopup] = useState(false);
-
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
   const navigate = useNavigate();
 
   const userObj = JSON.parse(localStorage.getItem("user"));
@@ -54,7 +55,6 @@ export default function ProfileEdit() {
     fetchUserProfile();
   }, [username]);
 
-  // Sample values for each detail
   const data = [
     userData?.username || "",
     userData?.password || "",
@@ -121,6 +121,11 @@ export default function ProfileEdit() {
     "Other",
   ];
 
+  const showModal = (message) => {
+    setModalMessage(message);
+    setIsModalVisible(true);
+  };
+
   const handleImageUpload = (event) => {
     if (event.target.files && event.target.files[0]) {
       const reader = new FileReader();
@@ -138,33 +143,34 @@ export default function ProfileEdit() {
     return passwordRegex.test(password);
   };
 
-  const handleFinishClick = (event) => {
-    setShowPopup(true);
-  };
-
-  // Define modal actions
-  const handleConfirm = async (event) => {
-    event.preventDefault();
-    console.log("Confirm button clicked");
-
+  const handleFinishClick = () => {
     // Check if all fields have values
-    if (
-      !mobileNumber ||
-      !maritalStatus ||
-      !citizenship ||
-      !religion ||
-      !password
-    ) {
-      alert("All fields must have values");
+    if (!maritalStatus || !citizenship || !religion) {
+      showModal("All fields must have values");
       return;
     }
+
     // Validate the password
     if (!validatePassword(password)) {
-      alert(
+      showModal(
         "Password must be a minimum of 8 characters, with at least one uppercase letter, one lowercase letter, one number, and one special character (including period)."
       );
       return;
     }
+
+    // Check if the image size is greater than 20MB
+    if (selectedFile && selectedFile.size > 20 * 1024 * 1024) {
+      showModal("Image size must not exceed 20MB");
+      return;
+    }
+
+    // If all checks pass, show the popup
+    setShowPopup(true);
+  };
+
+  const handleConfirm = async (event) => {
+    event.preventDefault();
+    console.log("Confirm button clicked");
 
     // Image upload
     try {
@@ -375,6 +381,7 @@ export default function ProfileEdit() {
                     ) : label === "Password" ? (
                       <input
                         type="text"
+                        name="password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         style={{
@@ -387,6 +394,9 @@ export default function ProfileEdit() {
                     ) : (
                       <input
                         type="text"
+                        name="mobileNumber"
+                        value={mobileNumber}
+                        onChange={(e) => setMobileNumber(e.target.value)}
                         placeholder="0999-999-9999"
                         style={{
                           color: "#213555",
@@ -394,8 +404,6 @@ export default function ProfileEdit() {
                           fontSize: "18px",
                           marginTop: "15px",
                         }}
-                        value={mobileNumber}
-                        onChange={(e) => setMobileNumber(e.target.value)}
                       />
                     )
                   ) : (
@@ -468,6 +476,16 @@ export default function ProfileEdit() {
           </Modal>
         </div>
       </Grid>
+      {isModalVisible && (
+        <div className="profile-modal">
+          <div className="profile-modal-content">
+            <span className="close" onClick={() => setIsModalVisible(false)}>
+              &times;
+            </span>
+            <p style={{ textAlign: "center" }}>{modalMessage}</p>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

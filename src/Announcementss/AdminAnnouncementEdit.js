@@ -79,7 +79,7 @@ const AdminAnnouncementEdit = () => {
 
       const handleHomeButtonClick = () => {
         // Redirect to the home page or the desired location
-        navigate('/');
+        navigate('/home');
       };
 
       const handleViewAnnouncementButtonClick = () => {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import "./AdminBusinessForm.css";
 import { Button, Dialog, DialogTitle, DialogActions, Grid } from '@mui/material';
@@ -12,6 +12,11 @@ const AdminBusinessForm = () => {
     const [busContent, setBusContent] = useState(''); 
     const [busTitle, setBusTitle] = useState(''); 
     //image
+    const [selectedImage, setSelectedImage] = useState();
+    const [selectedFile, setSelectedFile] = useState(null);
+    // Add these lines
+    const imageUploader = useRef(null);
+    const placeholderImage = '/upload.png'; // Replace with your placeholder image path
 
     const [isDialogOpen, setDialogOpen] = useState(false);
     const [error, setError] = useState('');
@@ -21,12 +26,18 @@ const AdminBusinessForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if (!date || !busContent || !busTitle) { //image
+        if (!date || !busContent || !busTitle || !selectedFile) { //image
             setError('Please fill in all fields.');
             return;
         }
 
         try {
+            const formData = new FormData();
+            formData.append("image", selectedFile); // selectedFile is the file selected by the user
+            formData.append('date', date);
+            formData.append('busContent', busContent);
+            formData.append('busTitle', busTitle);
+
             const response = await fetch('http://localhost:8080/business/insertAdminBusiness', {
                 method: 'POST',
                 headers: {
@@ -36,7 +47,7 @@ const AdminBusinessForm = () => {
                     date,
                     busContent,
                     busTitle,
-                    //image
+                    selectedFile
                 }),
             });
     
@@ -51,7 +62,17 @@ const AdminBusinessForm = () => {
         }
     };
 
-    
+    //image
+    const handleImageUpload = (e) => {
+        if (e.target.files && e.target.files[0]) {
+          const reader = new FileReader();
+          reader.onloadend = () => {
+            setSelectedImage(reader.result);
+          };
+          reader.readAsDataURL(e.target.files[0]);
+          setSelectedFile(e.target.files[0]);
+        }
+      };
 
     const handleDialogClose = () => {
         setDialogOpen(false);
@@ -103,7 +124,7 @@ const AdminBusinessForm = () => {
                     <h1 style={{ color: "#fff", marginLeft: '10px' }}>MAKE YOUR BUSINESS KNOWN!</h1>
                 </div>
                 <div className='submit-announcementb1'>
-                    <div style={{ border: "2px solid #213555", padding: "3px", width: "1500px", height: "750px" }}>
+                    <div style={{ border: "2px solid #213555", padding: "3px", width: "1500px", height: "auto" }}>
                         <form onSubmit={handleSubmit}>
 
                             {/* Title */}
@@ -139,6 +160,8 @@ const AdminBusinessForm = () => {
 
                             {/* content */}
                             <br />
+                            <Grid container >
+                            <Grid item xs={8}>
                             <textarea
                                 type="text"
                                 value={busContent}
@@ -148,14 +171,54 @@ const AdminBusinessForm = () => {
                                 className='content-detailsb1'
                             />
                             <br />
-
+                            </Grid>
                             {/* insert image here */}
+                            <Grid item xs={3} >
+                            <input
+                                type="file"
+                                accept="image/*"
+                                onChange={handleImageUpload}
+                                ref={imageUploader}
+                                style={{
+                                    textAlign: "center",
+                                    display: "none",
+                                }}
+                                />
+                                <div style={{ marginTop: "20px" }}>
+
+                                <img
+                                className="img-container"
+                                src={selectedImage || placeholderImage}
+                                alt="Profile"
+                                style={{width: '100%', height: '100%', display: 'flex', marginLeft: '20%'}}
+                                />
+                                <Button
+                                    variant="contained"
+                                    style={{
+                                    color: "#213555",
+                                    background: "#FFFFFF",
+                                    borderRadius: "10px",
+                                    border: '1px solid #213555',
+                                    width: "200px",
+                                    fontWeight: "bold",
+                                    marginLeft: '45%',
+                                    marginTop: "5%"
+                                    }}
+                                    onClick={() => imageUploader.current.click()}
+                                >
+                                    Upload a Photo
+                                </Button>
+                                </div>
+                                
+                            </Grid>
+                            </Grid>
+
 
                             <div className='announcement-submitb1'>
                             {error && <p style={{ color: 'red' }}>{error}</p>}
                                 <Button
                                     variant="contained"
-                                    style={{ color: '#FFFFFF', fontWeight: "bolder", backgroundColor: "#213555", width: '400px', height: '50px', padding: '15px 30px', borderRadius: '10px', textAlign: 'center', fontSize: 'large' }}
+                                    style={{ color: '#FFFFFF', fontWeight: "bolder", backgroundColor: "#213555", width: '400px', height: '50px', padding: '15px 30px', borderRadius: '10px', textAlign: 'center', fontSize: 'large', marginTop: '30px' }}
                                     onClick={handleSubmit}
                                 >
                                     Submit
@@ -175,7 +238,7 @@ const AdminBusinessForm = () => {
                 <DialogTitle style={{ margin: 'auto', textAlign: 'center', color: '#16558f', fontWeight: 'bolder', fontSize: '40px' }}>
                     Successful!
                 </DialogTitle>
-                <p style={{fontSize: "23px", color: '#000000', textAlign: 'center', marginTop: "0px"}}>Your announcement is successfully submitted!</p>
+                <p style={{fontSize: "23px", color: '#000000', textAlign: 'center', marginTop: "0px"}}>Your local business is successfully submitted!</p>
                 <DialogActions>
                     <Button
                         style={{ backgroundColor: "#ffffff", marginBottom: "10px" , width: '280px', height: '50px', border: '1px solid #213555', color: "#213555",

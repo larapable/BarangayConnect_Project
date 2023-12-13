@@ -123,9 +123,7 @@ const AdminAnnouncementView = ({ announcement, handleEdit }) => {
                     >
                       <span style={{ fontSize: '20px' }}>←</span>
                     </Button>
-                    {/* <span style={{ color: '#ffffff', fontSize: '20px' }}>
-                      Page {currentPage} of {totalPages}
-                    </span> */}
+                    
                     <Button
                       onClick={handleNextPage}
                       style={{ color: '#ffffff', marginLeft: '10px', borderRadius: '50px' }}
