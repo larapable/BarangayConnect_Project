@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Header from '../Header';
 import './AdminBusinessView.css';
 import SearchIcon from "@mui/icons-material/Search";
@@ -16,34 +16,37 @@ const AdminBusinessView = ({ business, handleEdit }) => {
     const [deleteConfirmationOpen, setDeleteConfirmationOpen] = useState(false);
     const [businessToDelete, setBusinessToDelete] = useState(null);
     const [searchTerm, setSearchTerm] = useState('');
+    const uploadedImage = useRef(null);
 
 
     const [currentPage, setCurrentPage] = useState(1);
     const businessesPerPage = 3;
-    // Calculate the index range for the announcements to display on the current page
     const startIndex = (currentPage - 1) * businessesPerPage;
     const endIndex = startIndex + businessesPerPage;
 
 
-    const fetchBusinesses = async () => {
-        try {
-            const response = await fetch('http://localhost:8080/business/getAllBusiness');
-            if (response.ok) {
-                const data = await response.json();
-                const nonDeletedBusinesses = data.filter((business) => business.isdelete !== 1);
-
-                setBusinesses(nonDeletedBusinesses.reverse());
-            } else {
-                console.error('Error fetching businesses:', response.statusText);
-            }
-        } catch (error) {
-            console.error('Error fetching businesses:', error);
-        }
-    };
-
     useEffect(() => {
-        fetchBusinesses();
+      const fetchBusinesses = async () => {
+        try {
+          const response = await fetch("http://localhost:8080/business/getAllBusiness");
+          
+          if (!response.ok) {
+            throw new Error('Failed to fetch business details');
+          }
+  
+          const businessesData = await response.json();
+          setBusinesses(businessesData.reverse());
+        } catch (error) {
+          console.error(error);
+        }
+      };
+  
+      fetchBusinesses();
     }, []);
+  
+    if (!businesses) {
+      return <p>Loading...</p>;
+    }
     
     const handleSearch = (e) => { 
       setSearchTerm(e.target.value);
@@ -73,7 +76,6 @@ const AdminBusinessView = ({ business, handleEdit }) => {
       };
 
     const handleDelete = (busId) => {
-        // Open the delete confirmation modal
         setBusinessToDelete(busId);
         setDeleteConfirmationOpen(true);
       };
@@ -92,7 +94,6 @@ const AdminBusinessView = ({ business, handleEdit }) => {
             });
     
             if (response.ok) {
-              // Remove the deleted announcement from the local state
               setBusinesses((prevBusinesses) =>
               prevBusinesses.filter((business) => business.busId !== businessToDelete)
               );
@@ -110,7 +111,6 @@ const AdminBusinessView = ({ business, handleEdit }) => {
         <div>
         <Header />
         <Grid container>
-            {/* Left Container */}
             <Grid item xs={3} className="left-containerb3">
               <h1 className="header-textb3">SUPPORT LOCAL!</h1>
 
@@ -137,7 +137,6 @@ const AdminBusinessView = ({ business, handleEdit }) => {
               </p>
             </Grid>
 
-            {/* Right Content */}
             <Grid item xs={9} style={{ backgroundColor: "#213555" }}>
             <Paper elevation={3} className="search-bar-paperb3">
                 <SearchIcon className="search-iconb3" />
@@ -152,7 +151,6 @@ const AdminBusinessView = ({ business, handleEdit }) => {
                 </Button>
             </Paper>
 
-                  {/* Pagination Buttons */}
                   <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px', marginBottom: '20px' }}>
                     <Button
                       onClick={handlePrevPage}
@@ -161,9 +159,6 @@ const AdminBusinessView = ({ business, handleEdit }) => {
                     >
                       <span style={{ fontSize: '20px' }}>←</span>
                     </Button>
-                    {/* <span style={{ color: '#ffffff', fontSize: '20px' }}>
-                      Page {currentPage} of {totalPages}
-                    </span> */}
                     <Button
                       onClick={handleNextPage}
                       style={{ color: '#ffffff', marginLeft: '10px', borderRadius: '50px' }}
@@ -173,7 +168,6 @@ const AdminBusinessView = ({ business, handleEdit }) => {
                     </Button>
                   </div>
 
-                {/* Display Announcements */}
                 {filteredBusinesses.map((business) => (
                         <Paper key={business.busId} elevation={3} className="announcement-paperb3">
                             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -207,12 +201,15 @@ const AdminBusinessView = ({ business, handleEdit }) => {
                                 <AccessTimeIcon style={{ marginRight: '5px' }} />
                             {business.date}
                             </Paper>
+                            <img 
+                              src={business.photoPath}
+                              alt="Business Image" 
+                              onError={(e) => console.error("Error loading image", e)}
+                            />
                         </Paper>
                     ))}
 
-                  {/* Delete Confirmation Dialog */}
                   <Dialog open={deleteConfirmationOpen} onClose={() => handleDeleteConfirmation(false)} PaperProps={{ style: { backgroundColor: '#ffffff' } }}>
-                  {/* <img src={"/deleteicon.png"} alt="Check Button" className="submit-checkbutton2" style={{marginTop: "20px"}}/> */}
                     <DialogTitle style={{ margin: 'auto', textAlign: 'center', color: '#16558f', fontWeight: 'bolder', fontSize: '40px' }}>
                         Are you sure?
                     </DialogTitle>

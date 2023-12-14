@@ -9,7 +9,7 @@
   .request-con {
     width: 50vw;
     max-width: 450px; 
-    height:1000px;
+    height:1200px;
     padding: 20px;
     background-color: #213555;
   }
@@ -23,23 +23,24 @@
 
   .request-para{
     font-size: 1.2em;
-    font-weight: bold;
+    font-weight: 600;
     text-align: justify;
     padding: 10px;
   }
   
   .request-para2{
     font-size: 2em;
-    font-weight: bolder;
+    font-weight: bold;
     text-align: center;
     color: red;
+    text-align: center;
   }
   .request-img {
    margin-left: 0;
-   margin-right: auto;
-   display: flex;
+   /* margin-right: auto; */
+   /* display: flex; */
    width: 100%;
-   height: 50vw;
+   height:1200px;
    flex-direction: column;
 
   }
@@ -51,17 +52,14 @@
   .custom-input {
     height: 3vw; 
     width: 15vw; 
-    border: 2px solid #000; 
+    border: 1px solid #bebaba; 
     padding: 5px; 
     box-sizing: border-box; 
     border-radius: 10px;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); 
-    box-shadow: 
-     2px 2px 5px rgba(0, 0, 0, 0.1), 
-     2px 2px 5px #000; 
     margin-left: 50px;
     margin-bottom: 5px;
   }
+
 
     .name {
       display: flex;
@@ -77,8 +75,8 @@
       align-items: flex-start;
       margin-top: 0px;
       font-size: 20px;
-      font-weight: bold;
-      margin-left: 50px;
+      margin-left: 40px;
+      color: #dd0a0a;
     }
    
 
@@ -86,30 +84,25 @@
     .custom-input2 {
       height: 3vw; 
       width: 32.5vw; 
-      border: 2px solid #000; 
+      border: 1px solid #bebaba; 
       margin-bottom: 5px; 
       padding: 5px; 
       box-sizing: border-box; 
       border-radius: 10px;
-      box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); 
-      box-shadow: 
-       2px 2px 5px rgba(0, 0, 0, 0.1), 
-       2px 2px 5px #000; 
+      color: #8a8282;
       margin-left: 50px; 
     }
 
     .custom-checkbox input {
       appearance: none; 
-      width: 30px; 
-      height: 30px; 
-      border: 2px solid #000; 
-      border-radius: 4px; 
+      width: 20px; 
+      height: 20px; 
+      border: 2px solid #7c7979; 
+      border-radius: 100%; 
       cursor: pointer; 
       margin-left: 50px;
-      box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); 
-      box-shadow: 
-       2px 2px 5px rgba(0, 0, 0, 0.1), 
-       2px 2px 5px #000; 
+      margin-bottom: 0%;
+      
     }
 
     
@@ -123,6 +116,7 @@
   display: flex;
   align-items: left;
   justify-content: left;
+  margin-bottom: 3%;
 
 }
 

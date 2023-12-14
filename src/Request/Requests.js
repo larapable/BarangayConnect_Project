@@ -42,67 +42,64 @@ function Requests() {
    
      
     <div className='request-img'>
-    <div style={{backgroundImage: 'url("/tisa_logo.png")',
-                backgroundSize:'cover',
-                backgroundPosition:'center',
-                backgroundRepeat:'no-repeat',
-                backgroundColor: 'rgba(255, 255, 255, 0.2)',
-                position:'relative',
-               }}>
+    
       <div style={{marginBottom:'50px'}}>
       <Grid container>
         <Grid item className='text-fields-container'>
-          <h1 style={{textAlign: 'left', 
-                      display: 'flex', 
-                      alignItems: 'left', 
-                      justifyContent: 'left' ,
-                      marginLeft:'50px'}}>DOCUMENT REQUEST</h1>
-          <p className='name2'>Fill all the necessary informations and make sure to fill NA for none</p>
-        <p className='name'>Name</p>
-      <input type='text' placeholder='Lastname' className='custom-input'/>
-      <input type='text' placeholder='Firstname'  className='custom-input' />
-      <input type='text' placeholder='Middlename'  className='custom-input' />
-      <input type='text' placeholder='Suffix'  className='custom-input'/>
-        </Grid>
-      </Grid>
+          <p className='name2' style={{marginTop: '30px'}}>Fill all the necessary informations and make sure to fill NA for none</p>
+
+    <div class='card' style={{backgroundColor: '#f0f0f0', padding: '15px',borderRadius: '8px', marginLeft: '2%', width: '100%', marginBottom: '-2%'}}>
+      <p class='card-label' style={{marginBottom: '40px', fontWeight: 'bold', fontSize: '30px'}}>Personal Information</p>
+      <div class='card-content' style={{marginBottom: '50px'}}>
+        <input type='text' placeholder='Lastname' class='custom-input' />
+        <input type='text' placeholder='Firstname' class='custom-input' />
+        <input type='text' placeholder='Middlename' class='custom-input' />
+        <input type='text' placeholder='Suffix' class='custom-input' />
       </div>
-       
-    <div style={{marginBottom:'50px'}}>
+
+      <div style={{marginBottom:'50px'}}>
       <Grid container>
         <Grid item >
-          <p className='name'>Birthdate</p>
           <div>
-          <input type='text' placeholder='dd/mm/yyyy' className='custom-input'/> 
+          <input type='text' placeholder='Birthdate (dd/mm/yyyy)' className='custom-input'/> 
           </div>
         </Grid>
         <Grid item>
-          <p className='name'>Age</p>
           <div>
-          <input type='text' placeholder='' className='custom-input'/> 
+          <input type='text' placeholder='Age' className='custom-input'/> 
           </div>
         </Grid>
         <Grid item>
-          <p className='name'>Gender</p>
           <div>
-          <input type='text' placeholder='' className='custom-input'/> 
+          <input type='text' placeholder='Gender' className='custom-input'/> 
           </div>
         </Grid>
         <Grid item>
-          <p className='name'>Number of Copies</p>
           <div>
-          <input type='text' placeholder='' className='custom-input'/> 
+          <input type='text' placeholder='Contact Number' className='custom-input'/> 
           </div>
         </Grid>
       </Grid>
     </div>
 
+    </div>
+        
+
+        </Grid>
+      </Grid>
+      </div>
+
+
+      <div class='card' style={{backgroundColor: '#f0f0f0', padding: '15px',borderRadius: '8px', marginLeft: '2%', width: '95%'}}>
+      <p class='card-label' style={{marginBottom: '40px', fontWeight: 'bold', fontSize: '30px'}}>Additional Information</p>
+    {/* ===========ADDITIONAL============ */}
     <div style={{marginBottom:'50px'}}>
       <Grid container>
         <Grid item>
-        <p className='name'>Purok</p>
           <div>
           <div>
-            <select className='custom-input2'>
+            <select className='custom-input2' required>
+            <option value='' disabled selected hidden>Purok</option>
               <option value='option1'>Option 1</option>
               <option value='option2'>Option 2</option>
               <option value='option3'>Option 3</option>
@@ -112,18 +109,24 @@ function Requests() {
         </Grid>
 
         <Grid item >
-        <p className='name'>Purpose</p>
           <div>
-          <input type='text' placeholder='' className='custom-input2'/> 
+          <input type='text' placeholder='Purpose' className='custom-input2'/> 
           </div>
         </Grid>
       </Grid>
     </div>
+    </div>
+    {/* ======================= */}
 
     <div style={{marginBottom:'50px'}}>
+    
+    <div class='card' style={{backgroundColor: '#f0f0f0', padding: '15px',borderRadius: '8px', marginLeft: '2%', width: '95%', marginTop: '1.5%', height: '90%'}}>
     <Grid container>
     <Grid item>
-        <p className='name'>Document Type (Please check the appropriate box)</p>
+      
+      {/* ===========DOCUMENT============ */}
+      <p class='card-label' style={{marginBottom: '40px', fontWeight: 'bold', fontSize: '30px'}}>Document Information</p>
+        <p className='name2'>Please choose the type of document</p>
         <div>
           {checkboxes.map((isChecked, index) => (
             <label key={index} className='custom-checkbox input'>
@@ -132,27 +135,24 @@ function Requests() {
                 checked={isChecked}
                 onChange={() => handleCheckboxChange(index)}
               />
-              <span style={{ fontSize: '20px',marginRight:'40px', fontWeight:'bold'}}>{labels[index]}</span>
+              <span style={{ fontSize: '20px',marginRight:'40px', fontWeight: '600' , marginLeft: '10px'}}>{labels[index]}</span>
             </label>
           ))}
         </div>
         </Grid>
     </Grid>
-    </div>
-     
-        
-    <div style={{marginBottom:'50px'}}>
-      <Grid container>
+          <br/><br/>
+          
+    <Grid container>
         <Grid item>
-          <p className='name'>For Others</p>
           <div>
-          <input type='text' placeholder='Please specify' className='custom-input'/> 
+          <input type='text' placeholder='For others, please specify' className='custom-input'/> 
           </div>
         </Grid>
         <Grid item>
-          <p className='name'>Type</p>
           <div>
-            <select className='custom-input'>
+            <select className='custom-input' style={{color: '#8a8282'}} required>
+              <option value='' disabled selected hidden>Type</option>
               <option value='option1'>Option 1</option>
               <option value='option2'>Option 2</option>
               <option value='option3'>Option 3</option>
@@ -161,33 +161,35 @@ function Requests() {
         </Grid>
 
         <Grid item>
-        <p className='name'>Contact Number</p>
           <div>
-          <input type='text' placeholder='' className='custom-input'/> 
+          <input type='text' placeholder='No. of Copies' className='custom-input'/> 
           </div>
         </Grid>
 
         <Grid item>
-        <p className='name'>Email</p>
           <div>
-          <input type='text' placeholder='' className='custom-input'/> 
+          <input type='text' placeholder='Email' className='custom-input'/> 
           </div>
         </Grid>
       </Grid>
-    </div>
 
-       <div >
-       <Grid container className='request-btn'>
+    </div>
+    
+      
+    </div>
+    {/* ======================= */}
+       <div>
+       <Grid container className='request-btn' justifyContent='center'>
         <Grid item >
-        <button variant='contained' style={{backgroundColor:'#213555',
-                                            color:'white',
+        <button variant='contained' style={{backgroundColor:'#FFFFFF',
+                                            color:'#213555',
                                             height:'50px',
                                             width:'300px',
                                             marginLeft:'50px',
                                             fontSize:'18px',
                                             fontWeight:'bold',
                                             borderRadius:'10px',
-                                            border:'none',
+                                            border:'1 px solid #213555',
                                             }}>
           CLEAR REQUEST
         </button>
@@ -209,7 +211,7 @@ function Requests() {
        </div>
        
         </div>
-        </div>
+        {/* </div> */}
           </div>  
     </div>
   );
