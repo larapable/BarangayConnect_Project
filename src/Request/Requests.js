@@ -292,8 +292,8 @@ function Requests () {
             onChange={handleGenderChange}  
             className='custom-input'>
               <option value="" disabled style={{ display: 'none' }}>Select Gender</option>
-              <option value='option1' style={{fontSize:'20px'}}>Male</option>
-              <option value='option2' style={{fontSize:'20px'}}>Female</option>
+              <option value='Male' style={{fontSize:'20px'}}>Male</option>
+              <option value='Female' style={{fontSize:'20px'}}>Female</option>
             </select>
           </div> 
           </div>
@@ -319,10 +319,10 @@ function Requests () {
             onChange={handlePurokChange}  
             className='custom-input2'>
               <option value="" disabled style={{ display: 'none' }}>Select a Purok</option>
-              <option value='option1' style={{fontSize:'20px'}}>Mangga</option>
-              <option value='option2' style={{fontSize:'20px'}}>Upper</option>
-              <option value='option3' style={{fontSize:'20px'}}>Lower</option>
-              <option value='option4' style={{fontSize:'20px'}}>Crossing</option>
+              <option value='Mangga' style={{fontSize:'20px'}}>Mangga</option>
+              <option value='Upper' style={{fontSize:'20px'}}>Upper</option>
+              <option value='Lower' style={{fontSize:'20px'}}>Lower</option>
+              <option value='Crossing' style={{fontSize:'20px'}}>Crossing</option>
             </select>
           </div> 
           </div>
@@ -378,9 +378,9 @@ function Requests () {
             onChange={handleTypeChange}  
             className='custom-input'>
                <option value="" disabled style={{ display: 'none' }}>Select Type</option>
-              <option value='option1' style={{fontSize:'20px'}}>A4</option>
-              <option value='option2' style={{fontSize:'20px'}}>short</option>
-              <option value='option3' style={{fontSize:'20px'}}>long</option>
+              <option value='A4' style={{fontSize:'20px'}}>A4</option>
+              <option value='short' style={{fontSize:'20px'}}>short</option>
+              <option value='long' style={{fontSize:'20px'}}>long</option>
             </select>
           </div>
 	</div>
