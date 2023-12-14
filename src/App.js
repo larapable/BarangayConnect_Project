@@ -15,11 +15,10 @@ import EmergencyAlertList from "./Emergency/EmergencyAlertList";
 import Requests from "./Request/Requests";
 import ProfileView from "./Profile/ProfileView";
 import ProfileEdit from "./Profile/ProfileEdit";
-import BarangayDirectory from "./Directory/BarangayDirectory" 
+import BarangayDirectory from "./Directory/BarangayDirectory" ;
 import AdminIncidentReport from "./AdminEmergency/AdminIncidentReport";
 import AdminEmergencyHotline from "./AdminEmergency/AdminEmergencyHotline";
 import AdminDirectoryList from "./AdminDirectory/AdminDirectoryList";
-import BarangayDirectory from "./Directory/BarangayDirectory";
 import AdminCalendar from "./Calendar/AdminCalendar";
 import EventList from "./Calendar/EventList";
 import AdminProfileList from "./Profile/AdminProfileList";
@@ -30,7 +29,7 @@ import AdminAnnouncementChoices from "./Announcementss/AdminAnnouncementChoices"
 import AdminAnnouncementForm from "./Announcementss/AdminAnnouncementForm";
 import AdminAnnouncementView from "./Announcementss/AdminAnnouncementView";
 import AdminAnnouncementEdit from "./Announcementss/AdminAnnouncementEdit";
-import UserAnnouncementView from "./Announcementss/UserAnnouncementView"
+import UserAnnouncementView from "./Announcementss/UserAnnouncementView";
 
 function App() {
   return (

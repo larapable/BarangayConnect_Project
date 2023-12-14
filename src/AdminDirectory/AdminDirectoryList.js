@@ -4,6 +4,8 @@ import './AdminDirectoryList.css';
 
 const AdminDirectoryList = () => {
     const [searchTerm, setSearchTerm] = useState('');
+    const [image, setImage] = useState(null);
+    const [isSubmitClicked, setIsSubmitClicked] = useState(false);
     const [newBarangayWorker, setNewBarangayWorker] = useState({ name: '', email: '', age: '', status: '', birthdate: '', position: '', message: '' });
     const [validationMessage, setValidationMessage] = useState('');
     const [workers, setWorkers] = useState([]);
@@ -21,30 +23,137 @@ const AdminDirectoryList = () => {
         setSearchTerm(event.target.value);
     };
 
-    const handleInputChange = (event, isEditing) => {
-        const { name, value } = event.target;
+    const styles = {
+        circleImage: {
+            borderRadius: '50%',
+            width: '100px', // Adjust the size as needed
+            height: '100px', // Adjust the size as needed
+            objectFit: 'cover', // Maintain aspect ratio and cover the entire circle
+        },
+    };
 
-        if (isEditing) {
-            // Editing worker
-            setEditingWorkers((prevWorker) => ({
-                ...prevWorker,
-                [name]: value,
-            }));
+    const handleInputChange = (event, isEditing) => {
+        const { name, value, type } = event.target;
+
+        if (type === 'file') {
+            // File input, update the image state
+            setImage(event.target.files[0]);
         } else {
-            // New worker
-            setNewBarangayWorker((prevWorker) => ({
-                ...prevWorker,
-                [name]: value,
-            }));
+            // Other inputs
+            if (isEditing) {
+                // Editing worker
+                setEditingWorkers((prevWorker) => ({
+                    ...prevWorker,
+                    [name]: value,
+                }));
+            } else {
+                // New worker
+                setNewBarangayWorker((prevWorker) => ({
+                    ...prevWorker,
+                    [name]: value,
+                }));
+
+                // Update birthdate based on age for new worker
+                if (name === 'age') {
+                    const birthYear = new Date().getFullYear() - parseInt(value);
+                    setNewBarangayWorker((prevWorker) => ({
+                        ...prevWorker,
+                        birthdate: `${birthYear}-01-01`, // Assuming birthdate format is YYYY-01-01 for simplicity
+                    }));
+                }
+
+                // Only show validation message when the submit button is clicked
+                if (isSubmitClicked) {
+                    // Validate email format
+                    if (name === 'email' && !validateEmail(value)) {
+                        setValidationMessage('Valid email required.');
+                    } else {
+                        setValidationMessage(''); // Clear the validation message if email is valid
+                    }
+                }
+            }
         }
     };
 
+    const validateEmail = (email) => {
+        // Use a simple regex pattern for email validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    };
+
+    const validateAge = (birthdate, minAge) => {
+        const today = new Date();
+        const birthdateDate = new Date(birthdate);
+        const age = today.getFullYear() - birthdateDate.getFullYear();
+
+        // If the birthdate hasn't occurred yet this year, subtract 1 from age
+        if (
+            today.getMonth() < birthdateDate.getMonth() ||
+            (today.getMonth() === birthdateDate.getMonth() && today.getDate() < birthdateDate.getDate())
+        ) {
+            return age - 1 >= minAge;
+        }
+
+        return age >= minAge;
+    };
+
+
+    const validateBirthdate = (birthdate, minAge) => {
+        const today = new Date();
+        const birthdateDate = new Date(birthdate);
+        const age = today.getFullYear() - birthdateDate.getFullYear();
+
+        // If the birthdate hasn't occurred yet this year, subtract 1 from age
+        if (
+            today.getMonth() < birthdateDate.getMonth() ||
+            (today.getMonth() === birthdateDate.getMonth() && today.getDate() < birthdateDate.getDate())
+        ) {
+            if (age - 1 < minAge) {
+                return false;
+            }
+        } else {
+            if (age < minAge) {
+                return false;
+            }
+        }
+
+        return true;
+    };
+
     const handleSubmitWorker = async () => {
+        setIsSubmitClicked(true);
         try {
+            const formData = new FormData();
+            formData.append('image', image);
+
+            // Append other fields
+            Object.entries(newBarangayWorker).forEach(([key, value]) => {
+                formData.append(key, value);
+            });
+
             // Check if all required fields are filled
-            if (!newBarangayWorker.name || !newBarangayWorker.email || !newBarangayWorker.age || !newBarangayWorker.status
-                || !newBarangayWorker.birthdate || !newBarangayWorker.position || !newBarangayWorker.message) {
+            const requiredFields = ['name', 'email', 'age', 'status', 'birthdate', 'position', 'message'];
+            const hasEmptyField = requiredFields.some((field) => !newBarangayWorker[field]);
+            if (hasEmptyField) {
                 setValidationMessage('Please fill in all required fields.');
+                return;
+            }
+
+            // Validate age
+            if (!validateAge(newBarangayWorker.birthdate, 18)) {
+                setValidationMessage('Age should be 18 or above.');
+                return;
+            }
+
+            // Validate birthdate based on age
+            if (!validateBirthdate(newBarangayWorker.birthdate, 18)) {
+                setValidationMessage('Birthdate should be valid based on the age (18 or above).');
+                return;
+            }
+
+            // Validate email format
+            if (!validateEmail(newBarangayWorker.email)) {
+                setValidationMessage('Valid email required.');
                 return;
             }
 
@@ -60,10 +169,7 @@ const AdminDirectoryList = () => {
             // Make the HTTP request to your Spring Boot backend
             const response = await fetch('http://localhost:8080/admindirectorylist/insertAdminDirectoryList', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(newBarangayWorker),
+                body: formData,
             });
 
             // Check if the response is successful
@@ -94,6 +200,7 @@ const AdminDirectoryList = () => {
             setValidationMessage('An error occurred while adding the worker. Please try again.');
         }
     };
+
 
     const openEditModal = (id) => {
         const workerToEdit = workers.find((worker) => worker.admindirectorylistId === id);
@@ -134,7 +241,7 @@ const AdminDirectoryList = () => {
                 setWorkers((prevWorkers) =>
                     prevWorkers.map((worker) =>
                         worker.admindirectorylistId === editingWorkers.admindirectorylistId
-                            ? { ...worker, age: editingWorkers.age }
+                            ? editingWorkers // Update entire worker object
                             : worker
                     )
                 );
@@ -154,13 +261,13 @@ const AdminDirectoryList = () => {
                     method: 'DELETE',
                 }
             );
-    
+
             if (response.ok) {
                 setWorkers((prevWorkers) =>
                     prevWorkers.filter((worker) => worker.admindirectorylistId !== id)
                 );
                 console.log('Worker deleted successfully.');
-    
+
                 // Display a popup to the user
                 window.alert('Worker deleted successfully.');
             } else {
@@ -173,7 +280,8 @@ const AdminDirectoryList = () => {
             // Display an error popup to the user
             window.alert(`Error deleting worker: ${error.message}`);
         }
-    };    
+    };
+
 
     return (
         <div>
@@ -183,6 +291,16 @@ const AdminDirectoryList = () => {
                 <h1 className="add-barangay-heading">
                     Add Barangay Workers
                 </h1>
+
+                <h4 className='h4'> Upload Photo:</h4>
+                <input
+                    type="file"
+                    name="image"
+                    accept="image/*"
+                    onChange={(event) => handleInputChange(event, false)}
+                    className="upload-photo"
+                />
+
 
                 <h4 className='h4'> Full Name:</h4>
                 <textarea
@@ -222,6 +340,7 @@ const AdminDirectoryList = () => {
                     onChange={(event) => handleInputChange(event, false)}
                     required
                 >
+                    <option value="" disabled>Select Marital Status</option>
                     <option value="single">Single</option>
                     <option value="married">Married</option>
                     <option value="divorced">Divorced</option>
@@ -240,14 +359,25 @@ const AdminDirectoryList = () => {
                 />
 
                 <h4 className="h4">Position:</h4>
-                <textarea
-                    type="text"
+                <select
                     name="position"
-                    className="position-textarea"
+                    className="position-dropdown"
                     value={newBarangayWorker.position}
                     onChange={(event) => handleInputChange(event, false)}
                     required
-                />
+                >
+                    <option value="" disabled>Select Position</option>
+                    <option value="Barangay Captain">Barangay Captain</option>
+                    <option value="Barangay Kagawad">Barangay Kagawad</option>
+                    <option value="Barangay Secretary">Barangay Secretary</option>
+                    <option value="Barangay Treasurer">Barangay Treasurer</option>
+                    <option value="Barangay Tanod">Barangay Tanod</option>
+                    <option value="Barangay Health Worker">Barangay Health Worker</option>
+                    <option value="Barangay Day Care Worker">Barangay Day Care Worker</option>
+                    <option value="Barangay Environmental Officer">Barangay Environmental Officer</option>
+                    <option value="Barangay Youth Council Member">Barangay Youth Council Member</option>
+                    <option value="Barangay Livelihood Coordinator">Barangay Livelihood Coordinator</option>
+                </select>
 
                 <h4 className="h4">Message:</h4>
                 <textarea
@@ -275,27 +405,40 @@ const AdminDirectoryList = () => {
                     className="search-workers"
                 />
                 {workers
-                    .filter((worker) =>
-                        worker.name && worker.name.toLowerCase().includes(searchTerm.toLowerCase())
-                    )
-                    .map((worker) => (
-                        <div key={worker.admindirectorylistId} className="worker-details">
-                            <div>
-                                <div className="worker-name">{worker.name}</div>
-                                <div className="worker-info">
-                                    Position: {worker.position}<br />
+                    .filter((worker) => worker.name && worker.name.toLowerCase().includes(searchTerm.toLowerCase()))
+                    .map((worker) => {
+                        const imageUrl = worker.imageUrl ? `http://localhost:8080/${worker.imageUrl}` : ''; // Update the path accordingly
+                        return (
+                            <div key={worker.admindirectorylistId} className="worker-details">
+                                <div>
+                                    {/* Display worker image with circular styling */}
+                                    {imageUrl ? (
+                                        <img
+                                            src={imageUrl} // Use the imageUrl from worker data
+                                            alt={`Image of ${worker.name}`}
+                                            className="worker-image circle-image"
+                                            style={styles.circleImage}
+                                        />
+                                    ) : (
+                                        <div className="worker-no-image">No Image</div>
+                                    )}
+                                    <div className="worker-name">{worker.name}</div>
+                                    <div className="worker-info">
+                                        Position: {worker.position}<br />
+                                    </div>
+                                </div>
+                                <div className="worker-actions">
+                                    <button className="worker-edit-button" onClick={() => openEditModal(worker.admindirectorylistId)}>
+                                        Edit
+                                    </button>
+                                    <button className="worker-delete-button" onClick={() => handleDeleteWorker(worker.admindirectorylistId)}>
+                                        Delete
+                                    </button>
                                 </div>
                             </div>
-                            <div className="worker-actions">
-                                <button className="worker-edit-button" onClick={() => openEditModal(worker.admindirectorylistId)}>
-                                    Edit
-                                </button>
-                                <button className="worker-delete-button" onClick={() => handleDeleteWorker(worker.admindirectorylistId)}>
-                                    Delete
-                                </button>
-                            </div>
-                        </div>
-                    ))}
+                        );
+                    })}
+
 
             </div>
 
@@ -346,14 +489,25 @@ const AdminDirectoryList = () => {
                             onChange={(event) => handleInputChange(event, true)}
                             className='birthdate-textarea'
                         />
-                        <input
-                            type="text"
+                        <select
                             name="position"
-                            placeholder="Position"
-                            value={editingWorkers.position}
-                            onChange={(event) => handleInputChange(event, true)}
-                            className='position-textarea'
-                        />
+                            className="position-dropdown"
+                            value={newBarangayWorker.position}
+                            onChange={(event) => handleInputChange(event, false)}
+                            required
+                        >
+                            <option value="" disabled>Select Position</option>
+                            <option value="Barangay Captain">Barangay Captain</option>
+                            <option value="Barangay Kagawad">Barangay Kagawad</option>
+                            <option value="Barangay Secretary">Barangay Secretary</option>
+                            <option value="Barangay Treasurer">Barangay Treasurer</option>
+                            <option value="Barangay Tanod">Barangay Tanod</option>
+                            <option value="Barangay Health Worker">Barangay Health Worker</option>
+                            <option value="Barangay Day Care Worker">Barangay Day Care Worker</option>
+                            <option value="Barangay Environmental Officer">Barangay Environmental Officer</option>
+                            <option value="Barangay Youth Council Member">Barangay Youth Council Member</option>
+                            <option value="Barangay Livelihood Coordinator">Barangay Livelihood Coordinator</option>
+                        </select>
                         <textarea
                             type="text"
                             name="message"

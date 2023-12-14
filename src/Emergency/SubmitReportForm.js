@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import "./SubmitReportForm.css";
 import { Button, Dialog, DialogTitle, DialogActions } from '@mui/material';
 import Header from '../Header';
-import axios from 'axios';
 
 const SubmitReportForm = () => {
 
@@ -16,12 +15,25 @@ const SubmitReportForm = () => {
     const [error, setError] = useState('');
     const [submitted, setSubmitted] = useState(false);
 
+    useEffect(() => {
+        // Set the date to the present date when the component mounts
+        const currentDate = new Date().toISOString().split('T')[0];
+        setDate(currentDate);
+    }, []);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         // Check if all required fields are filled
         if (!date || !time || !exactLocation || !incidentDetails || !incidentType) {
             setError('Please fill in all fields.');
+            return;
+        }
+
+        // Check if the selected date is the present date
+        const currentDate = new Date().toISOString().split('T')[0];
+        if (date !== currentDate) {
+            setError('Please select the present date.');
             return;
         }
 
@@ -34,7 +46,7 @@ const SubmitReportForm = () => {
         try {
             // Make the HTTP request to your Spring Boot backend
             const response = await fetch('http://localhost:8080/emergency/insertEmergency', {
-                method: 'POST',  // Make sure it's a POST request
+                method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
@@ -48,10 +60,9 @@ const SubmitReportForm = () => {
                 }),
             });
 
-
             if (!response.ok) {
                 // Handle non-successful response
-                const errorMessage = await response.text(); // Get error message from the server
+                const errorMessage = await response.text();
                 throw new Error(`Error submitting incident: ${response.status} - ${errorMessage}`);
             }
 
@@ -62,7 +73,6 @@ const SubmitReportForm = () => {
             console.error(error.message);
         }
     };
-
 
     const handleDialogClose = () => {
         setDialogOpen(false);

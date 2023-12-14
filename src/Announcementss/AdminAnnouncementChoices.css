@@ -61,7 +61,7 @@ body {
 
 /* Pop - up css */
 
-.popup-container {
+.announcements-popup-container {
     position: fixed;
     top: 0;
     left: 0;
@@ -74,7 +74,7 @@ body {
     z-index: 1000;
 }
 
-.popup-box {
+.announcements-popup-box {
     background-color: #E0E0E0;
     padding: 40px;
     border: 2px solid #E0E0E0;
@@ -89,7 +89,7 @@ body {
     text-align: center;
 }
 
-.popup-image {
+.announcements-popup-image {
     max-width: 100%;
     max-height: 100%;
     position: relative;

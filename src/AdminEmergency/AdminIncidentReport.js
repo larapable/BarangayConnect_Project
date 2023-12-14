@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from '@mui/material';
 import Header from '../Header';
 import "./AdminIncidentReport.css";
@@ -10,6 +10,42 @@ const AdminIncidentReport = () => {
     const [location, setLocation] = useState('');
     const [incidentDetails, setIncidentDetails] = useState('');
     const [submitted, setSubmitted] = useState(false);
+    const [alerts, setAlerts] = useState([]);
+
+    useEffect(() => {
+        // Fetch alerts from the backend when the component mounts
+        fetchAlerts();
+    }, []);
+
+    const fetchAlerts = async () => {
+        try {
+            const response = await fetch('http://localhost:8080/emergency/getAllEmergency');
+            if (!response.ok) {
+                throw new Error(`Failed to fetch alert data: ${response.status}`);
+            }
+            const data = await response.json();
+            setAlerts(data);
+        } catch (error) {
+            console.error(error.message);
+        }
+    };
+
+    const handleDelete = async (emergencyId) => {
+        try {
+            const response = await fetch(`http://localhost:8080/deleteEmergency/${emergencyId}`, {
+                method: 'DELETE',
+            });
+
+            if (!response.ok) {
+                throw new Error(`Failed to delete alert: ${response.status}`);
+            }
+
+            // Add any additional logic after successfully deleting the alert
+            console.log(`Alert with ID ${emergencyId} deleted successfully`);
+        } catch (error) {
+            console.error(error.message);
+        }
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -34,7 +70,7 @@ const AdminIncidentReport = () => {
                     <div style={{ marginTop: '10px' }}>
                         <h1 style={{ color: "#213555", marginLeft: '20px', marginTop: '-5px', fontSize: '40px' }}>REPORT AN ISSUE</h1>
                     </div>
-                    <div style={{ border: "2px solid #213555", padding: "3px", width: "820px", height: "790px", marginTop: '70px', marginLeft: '-348px', marginRight: '5px' }}>
+                    <div style={{ border: "2px solid #213555", padding: "3px", width: "820px", height: "auto", marginTop: '70px', marginLeft: '-340px', marginRight: '5px' }}>
                         <form onSubmit={handleSubmit}>
                             {/* Type of Incident */}
                             <br />
@@ -111,32 +147,48 @@ const AdminIncidentReport = () => {
                     </div>
                     <div>
                         {/* Incident Alert Box */}
-                        <div class="alert-label-container">
+                        <div className="alert-label-container">
                             <h2>A L E R T !</h2>
                         </div>
 
-                        <div class="alert-container">
+                        <div className="alert-container">
                             <p><strong>Type of Incident:</strong> {incidentType}</p>
                             <p><strong>Date:</strong> {date}</p>
                             <p><strong>Time:</strong> {time}</p>
                             <p><strong>Location:</strong> {location}</p>
                             <p><strong>Incident Details:</strong> {incidentDetails}</p>
                         </div>
-
 
                         {/* Report Forum Box */}
-                        <div class="report-label-container">
+                        <div className="report-label-container">
                             <h2>R E P O R T - F O R U M</h2>
                         </div>
-
-                        <div class="report-container">
-                            <p><strong>Type of Incident:</strong> {incidentType}</p>
-                            <p><strong>Date:</strong> {date}</p>
-                            <p><strong>Time:</strong> {time}</p>
-                            <p><strong>Location:</strong> {location}</p>
-                            <p><strong>Incident Details:</strong> {incidentDetails}</p>
-
-                            <button class="delete-button" onclick="deleteReport()">Delete</button>
+                        <div className="report-container">
+                            {alerts.map((alert, index) => (
+                                <div key={index} className='alerts-report-forum'>
+                                    <div>
+                                        <strong>A L E R T !</strong>
+                                    </div>
+                                    <div>
+                                        Type of Incident: {alert.typeOfIncident}
+                                    </div>
+                                    <div>
+                                        Date: {alert.date}
+                                    </div>
+                                    <div>
+                                        Location: {alert.exactLocation}
+                                    </div>
+                                    <div>
+                                        Detailed Incident: {alert.incidentDetails}
+                                    </div>
+                                    <button
+                                        className="delete-button"
+                                        onClick={() => handleDelete(index)}
+                                    >
+                                        Delete
+                                    </button>
+                                </div>
+                            ))}
                         </div>
                     </div>
                 </div>

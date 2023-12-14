@@ -1,58 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import Header from '../Header';
 import "./BarangayDirectory.css";
 
-const BarangayDirectory = [
-  {
-    id: 1,
-    name: 'John Doe',
-    position: 'Barangay Captain',
-    image: '1-official.jpeg', // replace with the actual image file path
-    email: 'john.doe@example.com',
-    age: 35,
-    maritalStatus: 'Married',
-    birthdate: '1988-05-15',
-    message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-  },
-  {
-    id: 2,
-    name: 'James Reid',
-    position: 'Barangay Secretary',
-    image: '2-official.jpeg', // replace with the actual image file path
-    email: 'james.reid@example.com',
-    age: 28,
-    maritalStatus: 'Single',
-    birthdate: '1995-11-20',
-    message: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-  },
-  {
-    id: 3,
-    name: 'Jane Smith',
-    position: 'Barangay Secretary',
-    image: '3-official.jpeg', // replace with the actual image file path
-    email: 'jane.smith@example.com',
-    age: 27, // Corrected age
-    maritalStatus: 'Single',
-    birthdate: '1996-03-18', // Corrected birthdate
-    message: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-  },
-  {
-    id: 4,
-    name: 'Johnny Bravo',
-    position: 'Barangay Secretary',
-    image: '4-official.jpeg', // replace with the actual image file path
-    email: 'johnny.bravo@example.com',
-    age: 30, // Corrected age
-    maritalStatus: 'Single',
-    birthdate: '1993-04-10',
-    message: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-  },
-  // Add more officials as needed
-];
-
 const OfficialsList = () => {
+  const [officials, setOfficials] = useState([]);
   const [showDetailsModal, setShowDetailsModal] = useState(false);
   const [selectedOfficial, setSelectedOfficial] = useState(null);
+
+  useEffect(() => {
+    // Fetch data from the Spring Boot API
+    axios.get('http://localhost:8080/admindirectorylist/getAllAdminDirectoryList')
+      .then(response => {
+        setOfficials(response.data);
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+      });
+  }, []); // Empty dependency array means this effect runs once when the component mounts
 
   const handleViewDetails = (official) => {
     setSelectedOfficial(official);
@@ -62,7 +27,6 @@ const OfficialsList = () => {
   const handleCloseModal = () => {
     setShowDetailsModal(false);
   };
-
   return (
     <div>
       <Header />
@@ -74,7 +38,7 @@ const OfficialsList = () => {
       </div>
 
       <div className="officials-container">
-        {BarangayDirectory.map((official) => (
+        {officials.map((official) => (
           <div key={official.id} className="official-card">
             <img
               src={official.image}
@@ -120,5 +84,6 @@ const OfficialsList = () => {
     </div>
   );
 };
+
 
 export default OfficialsList;
