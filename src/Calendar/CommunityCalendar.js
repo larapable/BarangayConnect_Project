@@ -4,11 +4,27 @@ import { useEffect, useState } from "react";
 import { DateCalendar, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
+import { IoMdTime, IoMdPin } from "react-icons/io";
+import Button from "@mui/material/Button";
 
 export default function CommunityCalendar() {
   const [value, setValue] = useState(null);
   const [events, setEvents] = useState([]);
   const [hoveredEvent, setHoveredEvent] = useState(null);
+  //added
+  const [currentPage, setCurrentPage] = useState(1);
+  const eventsPerPage = 4;
+  const indexOfLastEvent = currentPage * eventsPerPage;
+  const indexOfFirstEvent = indexOfLastEvent - eventsPerPage;
+  const currentEvents = events.slice(indexOfFirstEvent, indexOfLastEvent);
+  const totalPages = Math.ceil(events.length / eventsPerPage);
+  const handlePrevPage = () => {
+    setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
+  };
+
+  const handleNextPage = () => {
+    setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages));
+  };
 
   const convertTo12Hour = (time) => {
     let [hours, minutes] = time.split(":");
@@ -32,7 +48,7 @@ export default function CommunityCalendar() {
 
       const allEvents = await response.json();
       const activeEvents = allEvents.filter((events) => !events.isDeleted);
-      setEvents(activeEvents);
+      setEvents(activeEvents.reverse());
       console.log("Successfully fetched event information");
       console.log(events); // Add this line
     } catch (error) {
@@ -165,6 +181,7 @@ export default function CommunityCalendar() {
             </LocalizationProvider>
           </div>
         </div>
+        {/* add prev and next page here */}
         <div
           style={{
             height: "100%",
@@ -182,61 +199,125 @@ export default function CommunityCalendar() {
           >
             EVENTS:
           </h1>
+          {/* ADDED */}
           <div
             style={{
-              height: "70vh", // Set a fixed height for the container
-              overflowY: "auto", // Enable vertical scrolling
+              display: "flex",
+              justifyContent: "center",
+              marginTop: "20px",
+              marginBottom: "20px",
+            }}
+          >
+            <Button
+              onClick={handlePrevPage}
+              disabled={currentPage === 1}
+              style={{
+                color: "#213555",
+                marginLeft: "10px",
+                borderRadius: "50px",
+                backgroundColor: "white",
+              }}
+              variant="contained"
+            >
+              <span style={{ fontSize: "20px" }}>←</span>
+            </Button>
+            {/* <span>{`Page ${currentPage} of ${totalPages}`}</span> */}
+            <Button
+              onClick={handleNextPage}
+              disabled={currentPage === totalPages}
+              style={{
+                color: "#ffffff",
+                marginLeft: "10px",
+                borderRadius: "50px",
+                backgroundColor: "#3e77d3",
+              }}
+              variant="contained"
+            >
+              <span style={{ fontSize: "20px" }}>→</span>
+            </Button>
+          </div>
+
+          <div
+            style={{
+              height: "70vh",
+              overflowY: "auto",
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
             }}
           >
-            {events.map((event) => (
-              <Paper
-                elevation={3}
-                style={{
-                  borderRadius: "10px",
-                  display: "flex",
-                  justifyContent: "space-between",
-                  padding: "20px",
-                  cursor: "pointer", // Add this line to make it clear that it's clickable
-                  backgroundColor: hoveredEvent === event.eventID ? "#F2F2F2" : "white", // Change background color on hover
-                }}
-                className="event-list-paper"
-                key={event.eventID}
-                onMouseEnter={() => setHoveredEvent(event.eventID)}
-                onMouseLeave={() => setHoveredEvent(null)}
-              >
-                <div
+            {currentEvents.map(
+              (
+                event //paper of title and date
+              ) => (
+                <Paper
+                  elevation={3}
                   style={{
-                    textAlign: "left",
+                    width: "80%",
+                    borderRadius: "10px",
+                    marginBottom: "10px",
+                    height: "auto",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    padding: "20px",
+                    cursor: "pointer",
+                    backgroundColor:
+                      hoveredEvent === event.eventID ? "#F2F2F2" : "white",
                   }}
+                  className="event-list-paper"
+                  key={event.eventID}
+                  onMouseEnter={() => setHoveredEvent(event.eventID)}
+                  onMouseLeave={() => setHoveredEvent(null)}
                 >
-                  <h1 style={{ margin: "0", color: "red" }}>{event.eventTitle}</h1>
-                  {/* <p style={{ fontSize: "16px", margin: "3px", color: "red" }}>
-                    <b>{event.eventTitle}</b>
-                  </p> */}
-                  <p
+                  <div
                     style={{
-                      fontSize: "16px",
-                      margin: "3px",
-                      color: "gray",
-                      fontStyle: "italic",
+                      textAlign: "left",
                     }}
                   >
-                    {event.eventDate} {convertTo12Hour(event.eventTime)}
-                  </p>
-                </div>
-                {hoveredEvent === event.eventID && (
-                <div style={{ textAlign: "left", width: "50%" }}>
-                  <p style={{ fontSize: "14px", color: "#213555" }}>
-                    {/* Display your event description here */}
-                    {event.eventDescription}
-                  </p>
-                </div>
-              )}
-              </Paper>
-            ))}
+                    <h1
+                      style={{
+                        margin: "0",
+                        color: "#213555",
+                        fontSize: "30px",
+                      }}
+                    >
+                      {event.eventTitle}
+                    </h1>
+                    <p
+                      style={{
+                        fontSize: "18px",
+                        margin: "3px",
+                        color: "gray",
+                        fontStyle: "italic",
+                      }}
+                    >
+                      <IoMdTime
+                        style={{ marginRight: "5px", fontSize: "18px" }}
+                      />
+                      {event.eventDate} {convertTo12Hour(event.eventTime)}
+                    </p>
+                    <p
+                      style={{
+                        fontSize: "18px",
+                        margin: "3px",
+                        color: "gray",
+                        fontStyle: "italic",
+                      }}
+                    >
+                      <IoMdPin
+                        style={{ marginRight: "5px", fontSize: "18px" }}
+                      />
+                      {event.eventLocation}
+                    </p>
+                  </div>
+
+                  <Grid
+                    className="descriptioncontainer"
+                    data-motto={event.eventDescription}
+                  ></Grid>
+                </Paper>
+              )
+            )}
           </div>
         </div>
       </Grid>
