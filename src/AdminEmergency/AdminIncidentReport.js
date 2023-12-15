@@ -11,10 +11,21 @@ const AdminIncidentReport = () => {
     const [incidentDetails, setIncidentDetails] = useState('');
     const [submitted, setSubmitted] = useState(false);
     const [alerts, setAlerts] = useState([]);
+    const [submittedIncidentType, setSubmittedIncidentType] = useState(''); // New state variable
 
     useEffect(() => {
         // Fetch alerts from the backend when the component mounts
         fetchAlerts();
+
+        // Retrieve alerts from local storage
+        const storedAlerts = JSON.parse(localStorage.getItem('alerts'));
+        if (storedAlerts) {
+            setAlerts(storedAlerts);
+        }
+
+        // Set the default value for the date to the current date
+        const currentDate = new Date().toISOString().split('T')[0];
+        setDate(currentDate);
     }, []);
 
     const fetchAlerts = async () => {
@@ -24,40 +35,51 @@ const AdminIncidentReport = () => {
                 throw new Error(`Failed to fetch alert data: ${response.status}`);
             }
             const data = await response.json();
-            setAlerts(data);
+
+            // Filter out soft-deleted alerts (where isdelete is 1)
+            const filteredAlerts = data.filter(alert => alert.isdelete !== 1);
+
+            setAlerts(filteredAlerts);
+            // Update local storage with fetched alerts
+            localStorage.setItem('alerts', JSON.stringify(filteredAlerts));
         } catch (error) {
             console.error(error.message);
         }
     };
 
-    const handleDelete = async (emergencyId) => {
+    const handleDelete = async (emergencyId, index) => {
         try {
-            const response = await fetch(`http://localhost:8080/deleteEmergency/${emergencyId}`, {
+            const response = await fetch(`http://localhost:8080/emergency/deleteEmergency/${emergencyId}`, {
                 method: 'DELETE',
             });
 
-            if (!response.ok) {
-                throw new Error(`Failed to delete alert: ${response.status}`);
-            }
+            if (response.ok) {
+                // Remove the deleted alert from the state
+                const updatedAlerts = [...alerts];
+                updatedAlerts.splice(index, 1);
+                setAlerts(updatedAlerts);
 
-            // Add any additional logic after successfully deleting the alert
-            console.log(`Alert with ID ${emergencyId} deleted successfully`);
+                console.log(`Alert with ID ${emergencyId} deleted successfully.`);
+                localStorage.setItem('alerts', JSON.stringify(updatedAlerts));
+
+                // Display a popup to the user
+                window.alert('Alert deleted successfully.');
+            } else {
+                console.error(`Error deleting alert: ${response.status}`);
+                // Display an error popup to the user
+                window.alert(`Error deleting alert: ${response.statusText}`);
+            }
         } catch (error) {
-            console.error(error.message);
+            console.error(`Error deleting alert: ${error.message}`);
+            // Display an error popup to the user
+            window.alert(`Error deleting alert: ${error.message}`);
         }
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Add your form submission logic here
-        // For example, you can console.log the inputs for now
-        console.log({
-            incidentType,
-            date,
-            time,
-            location,
-            incidentDetails,
-        });
+        // Store the submitted incidentType separately
+        setSubmittedIncidentType(incidentType);
         setSubmitted(true);
     };
 
@@ -152,7 +174,7 @@ const AdminIncidentReport = () => {
                         </div>
 
                         <div className="alert-container">
-                            <p><strong>Type of Incident:</strong> {incidentType}</p>
+                            <p><strong>Type of Incident:</strong> {submittedIncidentType}</p>
                             <p><strong>Date:</strong> {date}</p>
                             <p><strong>Time:</strong> {time}</p>
                             <p><strong>Location:</strong> {location}</p>
@@ -183,7 +205,7 @@ const AdminIncidentReport = () => {
                                     </div>
                                     <button
                                         className="delete-button"
-                                        onClick={() => handleDelete(index)}
+                                        onClick={() => handleDelete(alert.emergencyId, index)} // Pass emergencyId along with index
                                     >
                                         Delete
                                     </button>

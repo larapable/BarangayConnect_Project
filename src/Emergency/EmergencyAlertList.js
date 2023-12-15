@@ -36,7 +36,8 @@ const EmergencyAlertList = () => {
                 throw new Error(`Failed to fetch emergency data: ${response.status}`);
             }
             const data = await response.json();
-            setIncidentDetails(data);
+            // Filter out incidents with isdelete set to 1
+            setIncidentDetails(data.filter(incident => incident.isdelete !== 1));
         } catch (error) {
             console.error(error.message);
         }

@@ -15,11 +15,11 @@ const SubmitReportForm = () => {
     const [error, setError] = useState('');
     const [submitted, setSubmitted] = useState(false);
 
+    // Set the initial date to the present date when the component mounts
     useEffect(() => {
-        // Set the date to the present date when the component mounts
         const currentDate = new Date().toISOString().split('T')[0];
         setDate(currentDate);
-    }, []);
+    }, []);    
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -79,7 +79,7 @@ const SubmitReportForm = () => {
     };
 
     const handleSubmitAnotherReport = () => {
-        setDate('');
+        // Only reset form fields, not the date
         setTime('');
         setExactLocation('');
         setIncidentDetails('');
