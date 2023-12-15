@@ -31,8 +31,8 @@ import AdminAnnouncementEdit from "./Announcementss/AdminAnnouncementEdit";
 import UserAnnouncementView from "./Announcementss/UserAnnouncementView"
 import AdminBusinessChoices from "./Business/AdminBusinessChoices";
 import AdminBusinessForm from "./Business/AdminBusinessForm";
-import AdminBusinessEdit from "./Business/AdminBusinessForm";
-import AdminBusinessView from "./Business/AdminBusinessForm";
+import AdminBusinessEdit from "./Business/AdminBusinessEdit";
+import AdminBusinessView from "./Business/AdminBusinessView";
 
 
 function App() {
