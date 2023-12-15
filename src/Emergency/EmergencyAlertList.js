@@ -84,7 +84,7 @@ const EmergencyAlertList = () => {
                         />
                         {hotlines
                             .filter((hotline) =>
-                                hotline.title.toLowerCase().includes(searchTerm.toLowerCase())
+                                hotline.title.toLowerCase().includes(searchTerm.toLowerCase()) && hotline.isdelete == 0
                             )
                             .map((hotline) => (
                                 <div key={hotline.hotlineId} style={{ marginTop: '20px' }}>

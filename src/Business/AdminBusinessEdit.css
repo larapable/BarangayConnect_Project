@@ -2,28 +2,28 @@ body {
   background-color: #ffffff;
 }
 
-.left-container2 {
+.left-containerb2 {
   height: calc(100vh - 64px);
   background-color: #ffffff;
   margin-left: 0;
   margin-top: 40px;
 }
 
-.image-container2 {
+.image-containerb2 {
   width: 100%;
   max-width: 200px;
   margin-bottom: 20px;
-  margin-left: 100px;
+  margin-left: 150px;
 }
 
-.description2 {
+.descriptionb2 {
   font-size: 18px;
   color: #a8a2a2;
   margin-left: 15px;
   margin-right: 15px;
 }
 
-.header-text2 {
+.header-textb2 {
   font-weight: 800;
   font-size: 37;
   color: #213555;
@@ -33,12 +33,12 @@ body {
   margin-left: 15px;
 }
 
-.importantannouncement2 {
+.importantannouncementb2 {
   margin-top: -5px;
   height: fit-content;
 }
 
-.importantannouncement-box2 {
+.importantannouncement-boxb2 {
   border: 2px solid #333;
   padding: 0%;
   display: inline-block;
@@ -47,13 +47,13 @@ body {
   margin-top: 5px;
 }
 
-.submit-announcement2 {
+.submit-announcementb2 {
   height: 50vh;
   margin-right: 50%;
   margin-bottom: 100px;
 }
 
-.title-input2 {
+.title-inputb2 {
   border: 1px solid #ccc;
   border-radius: 8px;
   padding: 8px;
@@ -67,7 +67,7 @@ body {
   font-size: large;
 }
 
-.announcement-date2 {
+.announcement-dateb2 {
   border: 1px solid #ccc;
   border-radius: 8px;
   padding: 8px;
@@ -81,7 +81,7 @@ body {
   font-size: large;
 }
 
-.content-details2 {
+.content-detailsb2 {
   border: 1px solid #ccc;
   border-radius: 8px;
   padding: 8px;
@@ -95,7 +95,7 @@ body {
   font-size: large;
 }
 
-.submit-checkbutton2 {
+.submit-checkbuttonb2 {
   width: 200px;
   height: auto;
   display: flex;
@@ -104,8 +104,8 @@ body {
   margin: auto;
 }
 
-.submit-button-anotherann2,
-.submit-button-home2 {
+.submit-button-anotherannb2,
+.submit-button-homeb2 {
   height: 30px;
   width: 400px;
   padding: 15px 30px;
@@ -113,13 +113,13 @@ body {
   margin-bottom: 100px;
 }
 
-.announcement-submit2 {
+.announcement-submitb2 {
   margin-top: 10px;
   text-align: center;
 }
 
-.title-input2,
-.announcement-date2,
-.content-details2 {
+.title-inputb2,
+.announcement-dateb2,
+.content-detailsb2 {
   font-family: "Your Chosen Font", sans-serif;
 }

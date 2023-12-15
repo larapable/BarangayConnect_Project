@@ -2,9 +2,9 @@ import { Button } from "@mui/material";
 import React from "react";
 import { Link } from "react-router-dom";
 import Header from "../Header";
-import "./AdminAnnouncementChoices.css";
+import "./AdminBusinessChoices.css";
 
-const AdminAnnouncementChoices = () => {
+const AdminBusinessChoices = () => {
   return (
     <div style={{ backgroundColor: "#213555" }}>
       <div>
@@ -17,10 +17,10 @@ const AdminAnnouncementChoices = () => {
         />
       </div>
 
-      <div className="popup-container">
-        <div className="popup-box">
+      <div className="popup-containerb1">
+        <div className="popup-boxb1">
           {/* Content inside the pop-up container */}
-          <img src={"BClogo.png"} alt="Logo Pop-up" className="popup-image" />
+          <img src={"BClogo.png"} alt="Logo Pop-up" className="popup-imageb1" />
           <div
             style={{
               alignItems: "center",
@@ -29,7 +29,7 @@ const AdminAnnouncementChoices = () => {
               marginTop: "15px",
             }}
           >
-            <Link to="/submitannouncement">
+            <Link to="/submitbusiness">
               <Button
                 class="button button-submit"
                 variant="contained"
@@ -40,7 +40,7 @@ const AdminAnnouncementChoices = () => {
                   fontWeight: "bold",
                 }}
               >
-                Submit Announcement Form
+                Submit Business Form
               </Button>
             </Link>
             <br />
@@ -48,7 +48,7 @@ const AdminAnnouncementChoices = () => {
               OR
             </span>
             <br />
-            <Link to="/adminviewannouncement">
+            <Link to="/adminviewbusiness">
               <Button
                 class="button button-emergency"
                 variant="contained"
@@ -59,7 +59,7 @@ const AdminAnnouncementChoices = () => {
                   fontWeight: "bold",
                 }}
               >
-                View Announcements
+                View Businesses
               </Button>
             </Link>
           </div>
@@ -69,4 +69,4 @@ const AdminAnnouncementChoices = () => {
   );
 };
 
-export default AdminAnnouncementChoices;
+export default AdminBusinessChoices;

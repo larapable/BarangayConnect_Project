@@ -2,28 +2,28 @@ body {
   background-color: #ffffff;
 }
 
-.left-container2 {
+.left-containerb1 {
   height: calc(100vh - 64px);
   background-color: #ffffff;
   margin-left: 0;
   margin-top: 40px;
 }
 
-.image-container2 {
+.image-containerb1 {
   width: 100%;
   max-width: 200px;
   margin-bottom: 20px;
-  margin-left: 100px;
+  margin-left: 150px;
 }
 
-.description2 {
+.descriptionb1 {
   font-size: 18px;
   color: #a8a2a2;
   margin-left: 15px;
   margin-right: 15px;
 }
 
-.header-text2 {
+.header-textb1 {
   font-weight: 800;
   font-size: 37;
   color: #213555;
@@ -33,27 +33,27 @@ body {
   margin-left: 15px;
 }
 
-.importantannouncement2 {
+.importantannouncementb1 {
   margin-top: -5px;
   height: fit-content;
 }
 
-.importantannouncement-box2 {
+.importantannouncement-boxb1 {
   border: 2px solid #333;
   padding: 0%;
   display: inline-block;
-  width: 1505px;
+  width: 100%;
   background-color: #213555;
   margin-top: 5px;
 }
 
-.submit-announcement2 {
+.submit-announcementb1 {
   height: 50vh;
   margin-right: 50%;
   margin-bottom: 100px;
 }
 
-.title-input2 {
+.title-inputb1 {
   border: 1px solid #ccc;
   border-radius: 8px;
   padding: 8px;
@@ -67,7 +67,7 @@ body {
   font-size: large;
 }
 
-.announcement-date2 {
+.announcement-dateb1 {
   border: 1px solid #ccc;
   border-radius: 8px;
   padding: 8px;
@@ -81,21 +81,21 @@ body {
   font-size: large;
 }
 
-.content-details2 {
+.content-detailsb1 {
   border: 1px solid #ccc;
   border-radius: 8px;
   padding: 8px;
   box-shadow: 0 4px 5px #a8a2a2;
   box-sizing: border-box;
-  width: 98%;
+  width: 100%;
   margin-left: 8px;
-  height: 350px;
+  height: 100%;
   box-sizing: border-box;
-  margin-top: -20px;
+  margin-top: 10px;
   font-size: large;
 }
 
-.submit-checkbutton2 {
+.submit-checkbuttonb1 {
   width: 200px;
   height: auto;
   display: flex;
@@ -104,8 +104,8 @@ body {
   margin: auto;
 }
 
-.submit-button-anotherann2,
-.submit-button-home2 {
+.submit-button-anotherannb1,
+.submit-button-homeb1 {
   height: 30px;
   width: 400px;
   padding: 15px 30px;
@@ -113,13 +113,20 @@ body {
   margin-bottom: 100px;
 }
 
-.announcement-submit2 {
+.announcement-submitb1 {
   margin-top: 10px;
   text-align: center;
 }
 
-.title-input2,
-.announcement-date2,
-.content-details2 {
+.title-inputb1,
+.announcement-dateb1,
+.content-detailsb1 {
   font-family: "Your Chosen Font", sans-serif;
+}
+
+.img-container {
+  width: 200px; /* Adjust the width to your preference */
+  height: 200px; /* Adjust the height to your preference */
+  object-fit: cover;
+  border-radius: 10px; /* Add border-radius for rounded corners if desired */
 }

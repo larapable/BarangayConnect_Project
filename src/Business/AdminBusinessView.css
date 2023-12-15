@@ -1,11 +1,11 @@
-.left-container3 {
+.left-containerb3 {
   height: calc(100vh - 64px);
   background-color: #ffffff;
   margin-left: 0;
   margin-top: 40px;
 }
 
-.header-text3 {
+.header-textb3 {
   font-weight: 800;
   font-size: 37;
   color: #213555;
@@ -15,21 +15,21 @@
   margin-left: 15px;
 }
 
-.image-container3 {
+.image-containerb3 {
   width: 100%;
   max-width: 200px;
   margin-bottom: 20px;
-  margin-left: 100px;
+  margin-left: 150px;
 }
 
-.description3 {
+.descriptionb3 {
   font-size: 18px;
   color: #a8a2a2;
   margin-left: 15px;
   margin-right: 15px;
 }
 
-.search-bar-paper3 {
+.search-bar-paperb3 {
   width: 60%;
   margin: auto;
   margin-top: 20px;
@@ -40,25 +40,25 @@
   margin-bottom: 50px;
 }
 
-.search-icon3 {
+.search-iconb3 {
   margin-right: 10px;
 }
 
-.input-base3 {
+.input-baseb3 {
   flex: 1;
   margin-left: 10px;
 }
 
-.search-button3 {
+.search-buttonb3 {
   margin-left: 10px;
 }
 
-.search-button3:hover {
+.search-buttonb3:hover {
   background-color: #bdbdbd;
   color: #213555;
 }
 
-.announcement-paper3 {
+.announcement-paperb3 {
   height: auto;
   width: 70%;
   margin: 10px;
@@ -67,8 +67,8 @@
   margin-bottom: 20px;
 }
 
-.submit-button-anotherann3,
-.submit-button-home3 {
+.submit-button-anotherannb3,
+.submit-button-homeb3 {
   height: 30px;
   width: 400px;
   padding: 15px 30px;

@@ -129,7 +129,7 @@ export default function Header() {
                 </NavLink>
               </MenuItem>
 
-              <MenuItem onClick={handleMenuClose}>
+              {/* <MenuItem onClick={handleMenuClose}>
                 <NavLink to="/userviewannouncement"
                   style={{
                     color: "#213555",
@@ -140,7 +140,7 @@ export default function Header() {
                 >
                   ANNOUNCEMENTS
                 </NavLink>
-              </MenuItem>
+              </MenuItem> */}
 
               <MenuItem onClick={handleMenuClose}>
                 <NavLink to="/forum"

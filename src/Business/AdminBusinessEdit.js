@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Header from "../Header";
-import "./AdminAnnouncementEdit.css";
+import "./AdminBusinessEdit.css";
 import {
   Grid,
   Link,
@@ -18,75 +18,76 @@ import {
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 
-const AdminAnnouncementEdit = () => {
-  const [announcement, setAnnouncement] = useState({
-    announcementId: 0,
-    announcementTitle: "",
+const AdminBusinessEdit = () => {
+  const [business, setBusiness] = useState({
+    busId: 0,
+    busTitle: "",
     date: "",
-    announcementContent: "",
+    busContent: "",
+    //image
   });
 
   const { id } = useParams();
   const navigate = useNavigate();
   const [isDialogOpen, setDialogOpen] = useState(false);
-  const [isAnnouncementUpdatedDialogOpen, setAnnouncementUpdatedDialogOpen] =
+  const [isBusinessUpdatedDialogOpen, setBusinessUpdatedDialogOpen] =
     useState(false);
 
   useEffect(() => {
-    console.log("Fetching announcement data for ID:", id);
-    fetchAnnouncementData(id);
+    console.log("Fetching business data for ID:", id);
+    fetchBusinessData(id);
   }, [id]);
 
-  const fetchAnnouncementData = async (announcementId) => {
+  const fetchBusinessData = async (busId) => {
     try {
       const response = await fetch(
-        `http://localhost:8080/announcements/getInfoById/${announcementId}`
+        `http://localhost:8080/business/getInfoById/${busId}`
       );
       console.log("Response:", response);
 
       if (response.ok) {
         const data = await response.json();
         console.log("Fetched data:", data);
-        setAnnouncement(data);
+        setBusiness(data);
       } else {
-        console.error("Error updating announcement:", response.statusText);
+        console.error("Error updating business:", response.statusText);
 
         if (response.status === 404) {
-          console.error("Announcement not found");
+          console.error("Business not found");
         } else {
           console.error("Unhandled error");
         }
       }
     } catch (error) {
-      console.error("Error updating announcement:", error);
+      console.error("Error updating business:", error);
     }
   };
 
   const handleConfirmUpdate = async () => {
     try {
       const response = await fetch(
-        `http://localhost:8080/announcements/updateAnnouncement/${id}`,
+        `http://localhost:8080/business/updateBusiness/${id}`,
         {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(announcement),
+          body: JSON.stringify(business),
         }
       );
 
       if (response.ok) {
         setDialogOpen(false);
-        setAnnouncementUpdatedDialogOpen(true); // Set it to true here
+        setBusinessUpdatedDialogOpen(true); // Set it to true here
       } else {
-        console.error("Error updating announcement:", response.statusText);
+        console.error("Error updating business:", response.statusText);
       }
     } catch (error) {
-      console.error("Error updating announcement:", error);
+      console.error("Error updating business:", error);
     }
   };
 
-  const handleEditAnnouncement = async () => {
+  const handleEditBusiness = async () => {
     setDialogOpen(true);
   };
 
@@ -96,22 +97,22 @@ const AdminAnnouncementEdit = () => {
 
   const handleHomeButtonClick = () => {
     // Redirect to the home page or the desired location
-    navigate("/home");
+    navigate("/");
   };
 
-  const handleViewAnnouncementButtonClick = () => {
+  const handleViewBusinessButtonClick = () => {
     // Redirect to the view announcement page or the desired location
-    navigate("/adminviewannouncement");
+    navigate("/adminviewbusiness");
   };
 
-  const handleCloseAnnouncementUpdatedDialog = () => {
-    setAnnouncementUpdatedDialogOpen(false);
+  const handleCloseBusinessUpdatedDialog = () => {
+    setBusinessUpdatedDialogOpen(false);
   };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setAnnouncement((prevAnnouncement) => ({
-      ...prevAnnouncement,
+    setBusiness((prevBusiness) => ({
+      ...prevBusiness,
       [name]: value,
     }));
   };
@@ -121,43 +122,41 @@ const AdminAnnouncementEdit = () => {
       <Header />
       <Grid container>
         {/* Left Container */}
-        <Grid item xs={3} className="left-container2">
-          <h1 className="header-text2">ANNOUNCE WITH IMPACT!</h1>
+        <Grid item xs={3} className="left-containerb2">
+          <h1 className="header-textb2">SUPPORT LOCAL!</h1>
 
           <img
-            src="/announcementpic.png"
+            src="/support1.png"
             alt="Support Local Business"
-            className="image-container2"
+            className="image-containerb2"
           />
 
           <br />
-          <p className="description2">
-            As stewards of our community's well-being, your role is paramount.
-            Leverage the Announcements section to keep residents informed, share
-            emergency alerts, and showcase exciting community initiatives.
-            Informed administrators make for empowered communities.
+          <p className="descriptionb2">
+            Discover the charm in your town by supporting local businesses. From
+            unique finds to personalized service, your contributions nurture a
+            sense of community and boost the local economy. By shopping locally,
+            you help preserve cultural heritage, reduce environmental impact,
+            and contribute to vibrant town centers.
           </p>
-          <p className="description2">
-            Explore this feature to its fullest potential and witness the
-            positive impact it can have on community engagement and cohesion.
+          <p className="descriptionb2">
+            Make a difference today – explore and invest in the businesses that
+            make your community special.
           </p>
-          <p className="description2">
-            Your community, your tool - Barangay Connect!
-          </p>
-          <p className="description2">
-            Let's make our community stronger, together!
+          <p className="descriptionb2">
+            Your support ensures a thriving and lively town for all.
           </p>
         </Grid>
 
         {/* Right Content */}
         <Grid item xs={9} style={{ backgroundColor: "#ffffff" }}>
-          <div className="importantannouncement2">
-            <div className="importantannouncement-box2">
+          <div className="importantannouncementb2">
+            <div className="importantannouncement-boxb2">
               <h1 style={{ color: "#fff", marginLeft: "10px" }}>
-                EDIT ANNOUNCEMENT
+                EDIT BUSINESS
               </h1>
             </div>
-            <div className="submit-announcement2">
+            <div className="submit-announcementb2">
               <div
                 style={{
                   border: "2px solid #213555",
@@ -179,10 +178,10 @@ const AdminAnnouncementEdit = () => {
                   <input
                     variant="outlined"
                     fullWidth
-                    name="announcementTitle"
-                    value={announcement.announcementTitle}
+                    name="busTitle"
+                    value={business.busTitle}
                     onChange={handleInputChange}
-                    className="title-input2"
+                    className="title-inputb2"
                   />
                 </label>
 
@@ -202,9 +201,9 @@ const AdminAnnouncementEdit = () => {
                     fullWidth
                     type="date"
                     name="date"
-                    value={announcement.date}
+                    value={business.date}
                     onChange={handleInputChange}
-                    className="announcement-date2"
+                    className="announcement-dateb2"
                   />
                 </label>
 
@@ -217,14 +216,14 @@ const AdminAnnouncementEdit = () => {
                   fullWidth
                   multiline
                   rows={4}
-                  name="announcementContent"
-                  value={announcement.announcementContent}
+                  name="busContent"
+                  value={business.busContent}
                   onChange={handleInputChange}
-                  className="content-details2"
+                  className="content-detailsb2"
                 />
                 <br />
 
-                <div className="announcement-submit2">
+                <div className="announcement-submitb2">
                   <Button
                     variant="contained"
                     style={{
@@ -238,7 +237,7 @@ const AdminAnnouncementEdit = () => {
                       textAlign: "center",
                       fontSize: "large",
                     }}
-                    onClick={handleEditAnnouncement}
+                    onClick={handleEditBusiness}
                   >
                     Save Changes
                   </Button>
@@ -282,7 +281,7 @@ const AdminAnnouncementEdit = () => {
                         color: "#213555",
                         border: "1px solid #213555",
                       }}
-                      className="submit-button-home2"
+                      className="submit-button-homeb2"
                     >
                       Yes
                     </Button>
@@ -296,7 +295,7 @@ const AdminAnnouncementEdit = () => {
                         color: "#ffffff",
                       }}
                       variant="contained"
-                      className="submit-button-anotherann2"
+                      className="submit-button-anotherannb2"
                     >
                       No
                     </Button>
@@ -304,8 +303,8 @@ const AdminAnnouncementEdit = () => {
                 </Dialog>
 
                 <Dialog
-                  open={isAnnouncementUpdatedDialogOpen}
-                  onClose={handleCloseAnnouncementUpdatedDialog}
+                  open={isBusinessUpdatedDialogOpen}
+                  onClose={handleCloseBusinessUpdatedDialog}
                   PaperProps={{ style: { backgroundColor: "#ffffff" } }}
                 >
                   <DialogTitle
@@ -327,7 +326,7 @@ const AdminAnnouncementEdit = () => {
                       marginTop: "0px",
                     }}
                   >
-                    Your annoucement is successfully updated!
+                    Your business is successfully updated!
                   </p>
 
                   <DialogActions>
@@ -346,7 +345,7 @@ const AdminAnnouncementEdit = () => {
                       Home
                     </Button>
                     <Button
-                      onClick={handleViewAnnouncementButtonClick}
+                      onClick={handleViewBusinessButtonClick}
                       style={{
                         backgroundColor: "#213555",
                         color: "#ffffff",
@@ -356,7 +355,7 @@ const AdminAnnouncementEdit = () => {
                       }}
                       variant="contained"
                     >
-                      View Announcement
+                      View Businesses
                     </Button>
                   </DialogActions>
                 </Dialog>
@@ -369,4 +368,4 @@ const AdminAnnouncementEdit = () => {
   );
 };
 
-export default AdminAnnouncementEdit;
+export default AdminBusinessEdit;

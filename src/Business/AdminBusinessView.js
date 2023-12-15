@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Header from "../Header";
-import "./AdminAnnouncementView.css";
+import "./AdminBusinessView.css";
 import SearchIcon from "@mui/icons-material/Search";
 import {
   Grid,
@@ -23,59 +23,56 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { useNavigate } from "react-router-dom";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 
-const AdminAnnouncementView = ({ announcement, handleEdit }) => {
+const AdminBusinessView = ({ business, handleEdit }) => {
   const navigate = useNavigate();
 
-  const [announcements, setAnnouncements] = useState([]);
+  const [businesses, setBusinesses] = useState([]);
   const [deleteConfirmationOpen, setDeleteConfirmationOpen] = useState(false);
-  const [announcementToDelete, setAnnouncementToDelete] = useState(null);
+  const [businessToDelete, setBusinessToDelete] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
+  const uploadedImage = useRef(null);
 
   const [currentPage, setCurrentPage] = useState(1);
-  const announcementsPerPage = 3;
-  // Calculate the index range for the announcements to display on the current page
-  const startIndex = (currentPage - 1) * announcementsPerPage;
-  const endIndex = startIndex + announcementsPerPage;
-
-  const fetchAnnouncements = async () => {
-    try {
-      const response = await fetch(
-        "http://localhost:8080/announcements/getAllAnnouncement"
-      );
-      if (response.ok) {
-        const data = await response.json();
-        // Filter out announcements marked as deleted
-        const nonDeletedAnnouncements = data.filter(
-          (announcement) => announcement.isdelete !== 1
-        );
-
-        // Update the state with non-deleted announcements
-        setAnnouncements(nonDeletedAnnouncements.reverse());
-      } else {
-        console.error("Error fetching announcements:", response.statusText);
-      }
-    } catch (error) {
-      console.error("Error fetching announcements:", error);
-    }
-  };
+  const businessesPerPage = 3;
+  const startIndex = (currentPage - 1) * businessesPerPage;
+  const endIndex = startIndex + businessesPerPage;
 
   useEffect(() => {
-    fetchAnnouncements();
+    const fetchBusinesses = async () => {
+      try {
+        const response = await fetch(
+          "http://localhost:8080/business/getAllBusiness"
+        );
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch business details");
+        }
+
+        const businessesData = await response.json();
+        setBusinesses(businessesData.reverse());
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchBusinesses();
   }, []);
+
+  if (!businesses) {
+    return <p>Loading...</p>;
+  }
 
   const handleSearch = (e) => {
     setSearchTerm(e.target.value);
   };
 
-  const filteredAnnouncements = announcements
-    .filter((announcement) =>
-      announcement.announcementTitle
-        .toLowerCase()
-        .includes(searchTerm.toLowerCase())
+  const filteredBusinesses = businesses
+    .filter((business) =>
+      business.busTitle.toLowerCase().includes(searchTerm.toLowerCase())
     )
     .slice(startIndex, endIndex);
 
-  const totalPages = Math.ceil(announcements.length / announcementsPerPage);
+  const totalPages = Math.ceil(businesses.length / businessesPerPage);
 
   const handleNextPage = () => {
     if (currentPage < totalPages) {
@@ -89,13 +86,12 @@ const AdminAnnouncementView = ({ announcement, handleEdit }) => {
     }
   };
 
-  const handleEditClick = (announcementId) => {
-    navigate(`/admin/announcements/updateAnnouncement/${announcementId}`);
+  const handleEditClick = (busId) => {
+    navigate(`/admin/business/updateBusiness/${busId}`);
   };
 
-  const handleDelete = (announcementId) => {
-    // Open the delete confirmation modal
-    setAnnouncementToDelete(announcementId);
+  const handleDelete = (busId) => {
+    setBusinessToDelete(busId);
     setDeleteConfirmationOpen(true);
   };
 
@@ -105,7 +101,7 @@ const AdminAnnouncementView = ({ announcement, handleEdit }) => {
     if (confirmed) {
       try {
         const response = await fetch(
-          `http://localhost:8080/announcements/deleteAnnouncement/${announcementToDelete}`,
+          `http://localhost:8080/business/deleteBusiness/${businessToDelete}`,
           {
             method: "DELETE",
             headers: {
@@ -115,18 +111,16 @@ const AdminAnnouncementView = ({ announcement, handleEdit }) => {
         );
 
         if (response.ok) {
-          // Remove the deleted announcement from the local state
-          setAnnouncements((prevAnnouncements) =>
-            prevAnnouncements.filter(
-              (announcement) =>
-                announcement.announcementId !== announcementToDelete
+          setBusinesses((prevBusinesses) =>
+            prevBusinesses.filter(
+              (business) => business.busId !== businessToDelete
             )
           );
         } else {
-          console.error("Error deleting announcement:", response.statusText);
+          console.error("Error deleting business:", response.statusText);
         }
       } catch (error) {
-        console.error("Error deleting announcement:", error);
+        console.error("Error deleting business:", error);
       }
     }
   };
@@ -135,55 +129,50 @@ const AdminAnnouncementView = ({ announcement, handleEdit }) => {
     <div>
       <Header />
       <Grid container>
-        {/* Left Container */}
-        <Grid item xs={3} className="left-container3">
-          <h1 className="header-text3">ANNOUNCE WITH IMPACT!</h1>
+        <Grid item xs={3} className="left-containerb3">
+          <h1 className="header-textb3">SUPPORT LOCAL!</h1>
 
           <img
-            src="/announcementpic.png"
+            src="/support1.png"
             alt="Support Local Business"
-            className="image-container3"
+            className="image-containerb3"
           />
 
           <br />
-          <p className="description3">
-            As stewards of our community's well-being, your role is paramount.
-            Leverage the Announcements section to keep residents informed, share
-            emergency alerts, and showcase exciting community initiatives.
-            Informed administrators make for empowered communities.
+          <p className="descriptionb3">
+            Discover the charm in your town by supporting local businesses. From
+            unique finds to personalized service, your contributions nurture a
+            sense of community and boost the local economy. By shopping locally,
+            you help preserve cultural heritage, reduce environmental impact,
+            and contribute to vibrant town centers.
           </p>
-          <p className="description3">
-            Explore this feature to its fullest potential and witness the
-            positive impact it can have on community engagement and cohesion.
+          <p className="descriptionb3">
+            Make a difference today – explore and invest in the businesses that
+            make your community special.
           </p>
-          <p className="description3">
-            Your community, your tool - Barangay Connect!
-          </p>
-          <p className="description3">
-            Let's make our community stronger, together!
+          <p className="descriptionb3">
+            Your support ensures a thriving and lively town for all.
           </p>
         </Grid>
 
-        {/* Right Content */}
         <Grid item xs={9} style={{ backgroundColor: "#213555" }}>
-          <Paper elevation={3} className="search-bar-paper3">
-            <SearchIcon className="search-icon3" />
+          <Paper elevation={3} className="search-bar-paperb3">
+            <SearchIcon className="search-iconb3" />
             <InputBase
               placeholder="Search..."
-              className="input-base3"
+              className="input-baseb3"
               value={searchTerm}
               onChange={handleSearch}
             />
             <Button
               variant="contained"
               color="primary"
-              className="search-button3"
+              className="search-buttonb3"
             >
               Search
             </Button>
           </Paper>
 
-          {/* Pagination Buttons */}
           <div
             style={{
               display: "flex",
@@ -204,9 +193,6 @@ const AdminAnnouncementView = ({ announcement, handleEdit }) => {
             >
               <span style={{ fontSize: "20px" }}>←</span>
             </Button>
-            {/* <span style={{ color: '#ffffff', fontSize: '20px' }}>
-                      Page {currentPage} of {totalPages}
-                    </span> */}
             <Button
               onClick={handleNextPage}
               style={{
@@ -220,12 +206,11 @@ const AdminAnnouncementView = ({ announcement, handleEdit }) => {
             </Button>
           </div>
 
-          {/* Display Announcements */}
-          {filteredAnnouncements.map((announcement) => (
+          {filteredBusinesses.map((business) => (
             <Paper
-              key={announcement.announcementId}
+              key={business.busId}
               elevation={3}
-              className="announcement-paper3"
+              className="announcement-paperb3"
             >
               <div
                 style={{
@@ -242,13 +227,13 @@ const AdminAnnouncementView = ({ announcement, handleEdit }) => {
                     marginBottom: "10px",
                   }}
                 >
-                  {announcement.announcementTitle}
+                  {business.busTitle}
                 </h1>
                 <div>
                   <Button
                     onClick={() => {
-                      console.log(announcement.announcementId);
-                      handleEditClick(announcement.announcementId);
+                      console.log(business.busId);
+                      handleEditClick(business.busId);
                     }}
                     style={{
                       backgroundColor: "#ffffff",
@@ -260,7 +245,7 @@ const AdminAnnouncementView = ({ announcement, handleEdit }) => {
                     <EditIcon style={{ color: "#213555" }} />
                   </Button>
                   <Button
-                    onClick={() => handleDelete(announcement.announcementId)}
+                    onClick={() => handleDelete(business.busId)}
                     style={{ backgroundColor: "#d8210b" }}
                   >
                     <DeleteIcon style={{ color: "#ffffff" }} />
@@ -275,7 +260,7 @@ const AdminAnnouncementView = ({ announcement, handleEdit }) => {
                   marginBottom: "20px",
                 }}
               >
-                {announcement.announcementContent}
+                {business.busContent}
               </p>
               <Paper
                 style={{
@@ -292,18 +277,22 @@ const AdminAnnouncementView = ({ announcement, handleEdit }) => {
                 }}
               >
                 <AccessTimeIcon style={{ marginRight: "5px" }} />
-                {announcement.date}
+                {business.date}
               </Paper>
+              <img
+                src={business.photoPath}
+                alt="Business Image"
+                style={{ width: "100px", height: "auto" }}
+                onError={(e) => console.error("Error loading image", e)}
+              />
             </Paper>
           ))}
 
-          {/* Delete Confirmation Dialog */}
           <Dialog
             open={deleteConfirmationOpen}
             onClose={() => handleDeleteConfirmation(false)}
             PaperProps={{ style: { backgroundColor: "#ffffff" } }}
           >
-            {/* <img src={"/deleteicon.png"} alt="Check Button" className="submit-checkbutton2" style={{marginTop: "20px"}}/> */}
             <DialogTitle
               style={{
                 margin: "auto",
@@ -338,7 +327,7 @@ const AdminAnnouncementView = ({ announcement, handleEdit }) => {
                   border: "1px solid #213555",
                 }}
                 variant="contained"
-                className="submit-button-home3"
+                className="submit-button-homeb3"
               >
                 Yes
               </Button>
@@ -352,7 +341,7 @@ const AdminAnnouncementView = ({ announcement, handleEdit }) => {
                   height: "50px",
                 }}
                 variant="contained"
-                className="submit-button-anotherann3"
+                className="submit-button-anotherannb3"
               >
                 No
               </Button>
@@ -364,4 +353,4 @@ const AdminAnnouncementView = ({ announcement, handleEdit }) => {
   );
 };
 
-export default AdminAnnouncementView;
+export default AdminBusinessView;
