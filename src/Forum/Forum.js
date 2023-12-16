@@ -21,11 +21,8 @@ function Forum() {
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [requestToDelete, setRequestToDelete] = useState(null);
-  const [loading, setLoading] = useState(true);
   const user = JSON.parse(localStorage.getItem("user"));
-  
 
- 
   const handleClear = () => {
     setPost("");
   };
@@ -254,10 +251,7 @@ function Forum() {
     alert(`An error occurred during reply: ${error.message}`);
   }
 };
-   
      
-
-
   return (
     <div>
       <div >
@@ -362,11 +356,7 @@ function Forum() {
             {newPost.replies.map((reply,id)=>{
               console.log('Current reply:', reply); // Log the reply object
               return <Paper key={id} style={{margin:'5px', padding:'10px'}} elevation={1}>
-                {user!==null && user.id===newPost.userr?<>
-                {/* <Button onClick={()=>{deleteReply(content.reply_id)}} variant='contained' color="error" style={{fontSize:"7px"}}>X</Button> */}
-                </>:<></>}
                 <h3>{reply.reply}</h3>
-                {console.log('user:', reply.userId)}
                 <h6 style={{fontStyle:'italic'}}>{reply.user.username}</h6>
                 </Paper>
             })}
