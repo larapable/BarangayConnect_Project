@@ -4,6 +4,7 @@ import Header from "../Header";
 import { FaPhone, FaEnvelope, FaClock } from "react-icons/fa";
 
 export default function Home() {
+  console.log(JSON.parse(localStorage.getItem("user")));
   return (
     <div>
       <div>

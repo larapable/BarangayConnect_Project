@@ -1,10 +1,8 @@
-
-  .request-grid2 {
-    display: flex;
-    justify-content: center; 
-    align-items: center; 
-
-  }
+.request-grid2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
   .request-con {
     width: 50vw;
@@ -45,9 +43,9 @@
 
   }
 
-  .text-fields-container input {
-    flex-direction: column;
-  }
+.text-fields-container input {
+  flex-direction: column;
+}
 
   .custom-input {
     height: 3vw; 
@@ -110,7 +108,7 @@
   background-color: #213555;
 }
 
-.request-btn{
+.request-btn {
   margin-top: 10px;
   text-align: left;
   display: flex;
@@ -120,4 +118,14 @@
 
 }
 
-
+.popup2 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  border: 2px solid #213555;
+  text-align: center;
+}

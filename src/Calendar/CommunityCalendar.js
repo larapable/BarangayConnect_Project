@@ -4,9 +4,8 @@ import { useEffect, useState } from "react";
 import { DateCalendar, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
-import { IoMdTime, IoMdPin } from 'react-icons/io';
+import { IoMdTime, IoMdPin } from "react-icons/io";
 import Button from "@mui/material/Button";
-
 
 export default function CommunityCalendar() {
   const [value, setValue] = useState(null);
@@ -26,8 +25,6 @@ export default function CommunityCalendar() {
   const handleNextPage = () => {
     setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages));
   };
-
-
 
   const convertTo12Hour = (time) => {
     let [hours, minutes] = time.split(":");
@@ -51,7 +48,7 @@ export default function CommunityCalendar() {
 
       const allEvents = await response.json();
       const activeEvents = allEvents.filter((events) => !events.isDeleted);
-      setEvents(activeEvents);
+      setEvents(activeEvents.reverse());
       console.log("Successfully fetched event information");
       console.log(events); // Add this line
     } catch (error) {
@@ -168,6 +165,17 @@ export default function CommunityCalendar() {
                           Calendar
                         </h1>
                       </div>
+                      <div>
+                        <h1
+                          style={{
+                            color: "white",
+                            fontSize: "22px",
+                            marginTop: "0",
+                          }}
+                        >
+                          Calendar
+                        </h1>
+                      </div>
                     </h1>
                   </div>
                 </Card>
@@ -184,6 +192,7 @@ export default function CommunityCalendar() {
             </LocalizationProvider>
           </div>
         </div>
+        {/* add prev and next page here */}
         {/* add prev and next page here */}
         <div
           style={{
@@ -208,88 +217,119 @@ export default function CommunityCalendar() {
               display: "flex",
               justifyContent: "center",
               marginTop: "20px",
-              marginBottom: '20px'
+              marginBottom: "20px",
             }}
           >
-            <Button onClick={handlePrevPage} disabled={currentPage === 1}
-              style={{ color: '#213555', marginLeft: '10px', borderRadius: '50px', backgroundColor: 'white' }}
+            <Button
+              onClick={handlePrevPage}
+              disabled={currentPage === 1}
+              style={{
+                color: "#213555",
+                marginLeft: "10px",
+                borderRadius: "50px",
+                backgroundColor: "white",
+              }}
               variant="contained"
             >
-              <span style={{ fontSize: '20px' }}>←</span>
+              <span style={{ fontSize: "20px" }}>←</span>
             </Button>
             {/* <span>{`Page ${currentPage} of ${totalPages}`}</span> */}
-            <Button onClick={handleNextPage} disabled={currentPage === totalPages}
-              style={{ color: '#ffffff', marginLeft: '10px', borderRadius: '50px', backgroundColor: '#3e77d3' }}
+            <Button
+              onClick={handleNextPage}
+              disabled={currentPage === totalPages}
+              style={{
+                color: "#ffffff",
+                marginLeft: "10px",
+                borderRadius: "50px",
+                backgroundColor: "#3e77d3",
+              }}
               variant="contained"
             >
-              <span style={{ fontSize: '20px' }}>→</span>
+              <span style={{ fontSize: "20px" }}>→</span>
             </Button>
-
           </div>
 
           <div
             style={{
-              height: "70vh", 
+              height: "70vh",
               overflowY: "auto",
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
             }}
           >
-            {currentEvents.map((event) => ( //paper of title and date
-              <Paper
-                elevation={3}
-                style={{
-                  width: "80%" ,
-                  borderRadius: "10px",
-                  marginBottom: "10px",
-                  height: "100%", 
-                  display: "flex",
-                  justifyContent: "space-between",
-                  padding: "20px",
-                  cursor: "pointer", 
-                  backgroundColor: hoveredEvent === event.eventID ? "#F2F2F2" : "white",
-                }}
-                className="event-list-paper"
-                key={event.eventID}
-                onMouseEnter={() => setHoveredEvent(event.eventID)}
-                onMouseLeave={() => setHoveredEvent(null)}
-              >
-                <div
+            {currentEvents.map(
+              (
+                event //paper of title and date
+              ) => (
+                <Paper
+                  elevation={3}
                   style={{
-                    textAlign: "left",
+                    width: "80%",
+                    borderRadius: "10px",
+                    marginBottom: "10px",
+                    height: "auto",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    padding: "20px",
+                    cursor: "pointer",
+                    backgroundColor:
+                      hoveredEvent === event.eventID ? "#F2F2F2" : "white",
                   }}
+                  className="event-list-paper"
+                  key={event.eventID}
+                  onMouseEnter={() => setHoveredEvent(event.eventID)}
+                  onMouseLeave={() => setHoveredEvent(null)}
                 >
-                  <h1 style={{ margin: "0", color: "#213555", fontSize: "30px" }}>{event.eventTitle}</h1>
-                  <p
+                  <div
                     style={{
-                      fontSize: "18px",
-                      margin: "3px",
-                      color: "gray",
-                      fontStyle: "italic",
+                      textAlign: "left",
                     }}
                   >
-                    <IoMdTime style={{ marginRight: "5px", fontSize: "18px" }} />
-                    {event.eventDate} {convertTo12Hour(event.eventTime)}
-                  </p>
-                  <p
-                    style={{
-                      fontSize: "18px",
-                      margin: "3px",
-                      color: "gray",
-                      fontStyle: "italic",
-                    }}
-                  >
-                    <IoMdPin style={{ marginRight: "5px", fontSize: "18px" }} />
-                    {event.eventLocation}
-                  </p>
-                </div>
+                    <h1
+                      style={{
+                        margin: "0",
+                        color: "#213555",
+                        fontSize: "30px",
+                      }}
+                    >
+                      {event.eventTitle}
+                    </h1>
+                    <p
+                      style={{
+                        fontSize: "18px",
+                        margin: "3px",
+                        color: "gray",
+                        fontStyle: "italic",
+                      }}
+                    >
+                      <IoMdTime
+                        style={{ marginRight: "5px", fontSize: "18px" }}
+                      />
+                      {event.eventDate} {convertTo12Hour(event.eventTime)}
+                    </p>
+                    <p
+                      style={{
+                        fontSize: "18px",
+                        margin: "3px",
+                        color: "gray",
+                        fontStyle: "italic",
+                      }}
+                    >
+                      <IoMdPin
+                        style={{ marginRight: "5px", fontSize: "18px" }}
+                      />
+                      {event.eventLocation}
+                    </p>
+                  </div>
 
-                <Grid className="descriptioncontainer" 
-                  data-motto={event.eventDescription}>
-                </Grid>
-              </Paper>
-            ))}
+                  <Grid
+                    className="descriptioncontainer"
+                    data-motto={event.eventDescription}
+                  ></Grid>
+                </Paper>
+              )
+            )}
           </div>
         </div>
       </Grid>

@@ -14,24 +14,27 @@ import EmergencyAlertList from "./Emergency/EmergencyAlertList";
 import Requests from "./Request/Requests";
 import ProfileView from "./Profile/ProfileView";
 import ProfileEdit from "./Profile/ProfileEdit";
+import AdminIncidentReport from "./AdminEmergency/AdminIncidentReport";
+import AdminEmergencyHotline from "./AdminEmergency/AdminEmergencyHotline";
+import AdminDirectoryList from "./AdminDirectory/AdminDirectoryList";
 import BarangayDirectory from "./Directory/BarangayDirectory";
 import AdminCalendar from "./Calendar/AdminCalendar";
 import EventList from "./Calendar/EventList";
 import AdminProfileList from "./Profile/AdminProfileList";
 import AdminProfileView from "./Profile/AdminProfileView";
 import AdminProfileEdit from "./Profile/AdminProfileEdit";
-
+import AdminRequest from "./Request/AdminRequest"
 import AdminAnnouncementChoices from "./Announcementss/AdminAnnouncementChoices";
 import AdminAnnouncementForm from "./Announcementss/AdminAnnouncementForm";
 import AdminAnnouncementView from "./Announcementss/AdminAnnouncementView";
 import AdminAnnouncementEdit from "./Announcementss/AdminAnnouncementEdit";
 import UserAnnouncementView from "./Announcementss/UserAnnouncementView"
-
 import AdminBusinessChoices from "./Business/AdminBusinessChoices";
 import AdminBusinessForm from "./Business/AdminBusinessForm";
-import AdminBusinessView from "./Business/AdminBusinessView";
 import AdminBusinessEdit from "./Business/AdminBusinessEdit";
-// import UserBusinessView from "./Business/UserBusinessView"
+import AdminBusinessView from "./Business/AdminBusinessView";
+import UserBusinessView from "./Business/UserBusinessView";
+
 
 function App() {
   return (
@@ -56,26 +59,26 @@ function App() {
       <Route path="/profile/edit" element={<ProfileEdit />} />
       <Route path="/calendar" element={<CommunityCalendar />} />
       <Route path="/admincalendar" element={<AdminCalendar />} />
-      <Route path="/admincalendar/eventlist" element={<EventList />} />
+      <Route path="/admincalendar/eventList" element={<EventList />} />
       <Route path="/" element={<EmergencyAlertChoices />} />
+      <Route path="/adminincidentreport" element={<AdminIncidentReport />} />
+      <Route path="/adminemergencyhotline" element={<AdminEmergencyHotline />} />
+      <Route path="/admindirectorylist" element={<AdminDirectoryList />} />
       <Route path="/profileList" element={<AdminProfileList />} />
       <Route path="/profileList/:userId" element={<AdminProfileView />} />
       <Route path="/profileList/:userId/editProfile" element={<AdminProfileEdit />} />
-
       <Route path="/announcement" element={<AdminAnnouncementChoices />} />
       <Route path="/submitannouncement" element={<AdminAnnouncementForm />} />
       <Route path="/adminviewannouncement" element={<AdminAnnouncementView />} />
       <Route path="/admin/announcements/updateAnnouncement/:id" element={<AdminAnnouncementEdit />} />
       <Route path="/userviewannouncement" element={<UserAnnouncementView />} />
+      <Route path="/adminrequest" element={<AdminRequest/>}/>
 
       <Route path="/business" element={<AdminBusinessChoices />} />
       <Route path="/submitbusiness" element={<AdminBusinessForm />} />
       <Route path="/adminviewbusiness" element={<AdminBusinessView />} />
       <Route path="/admin/business/updateBusiness/:id" element={<AdminBusinessEdit />} />
-      {/* <Route path="/userviewannouncement" element={<UserBusinessView />} /> */}
-
-
-      
+      <Route path="/userviewbusiness" element={<UserBusinessView />} />
     </Routes>
   );
 }

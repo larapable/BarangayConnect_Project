@@ -212,9 +212,14 @@ const AdminBusinessForm = () => {
                             width: "100%",
                             height: "100%",
                             display: "flex",
-                            marginLeft: "20%",
+                            marginLeft: "15%",
                           }}
                         />
+                        <div style={{marginLeft: '100px'}}>
+                        <p style={{textAlign: 'center'}}>
+                          <strong>Important Note:</strong> Please choose only one image for your business. This will be your final image, and you won't be able to edit it later.
+                        </p>
+                        </div>
                         <Button
                           variant="contained"
                           style={{
@@ -224,8 +229,8 @@ const AdminBusinessForm = () => {
                             border: "1px solid #213555",
                             width: "200px",
                             fontWeight: "bold",
-                            marginLeft: "45%",
-                            marginTop: "5%",
+                            marginLeft: "40%",
+                            marginTop: "2%",
                           }}
                           onClick={() => imageUploader.current.click()}
                         >

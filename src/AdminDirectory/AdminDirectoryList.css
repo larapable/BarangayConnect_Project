@@ -1,0 +1,359 @@
+/* AdminDirectoryList.css */
+
+.directory-container {
+  background-color: #213555;
+  height: 880px;
+  width: 30%;
+  position: fixed;
+  top: 106px;
+  left: 0;
+}
+
+.add-barangay-heading {
+  color: white;
+  margin: auto;
+  margin-top: 30px;
+  margin-bottom: 20px;
+  font-size: 40px;
+  text-align: center;
+}
+
+.h4 {
+  margin-left: 50px;
+  margin-bottom: -20px;
+  margin-top: 16px;
+  color: white;
+}
+
+.worker-image {
+  /* Add any general styling for the worker's image here */
+  /* For example: */
+  display: block;
+  margin: 0 auto;
+  /* Center the image horizontally */
+}
+
+.circle-image {
+  /* Circular styling */
+  border-radius: 50%;
+  width: 100px;
+  /* Adjust the size as needed */
+  height: 100px;
+  /* Adjust the size as needed */
+  object-fit: cover;
+  /* Maintain aspect ratio and cover the entire circle */
+  border: 2px solid #213555;
+  /* Add a 2px solid border with color #213555 */
+}
+
+.upload-photo {
+  margin-top: 25px;
+  margin-left: 50px;
+  color: white;
+}
+
+.photo-upload-input {
+  margin-bottom: -10px;
+  margin-top: 20px;
+  margin-left: 50px;
+  color: white;
+}
+
+.worker-photo {
+  width: 50px;
+  /* Adjust the width as needed */
+  height: 50px;
+  /* Adjust the height as needed */
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.fullname-textarea,
+.email-textarea,
+.age-textarea {
+  width: 80%;
+  height: 20px;
+  margin: auto;
+  margin-top: 20px;
+  font-size: 16px;
+  padding: 10px;
+  resize: none;
+  align-content: center;
+  justify-content: center;
+  display: flex;
+}
+
+.birthdate-textarea {
+  width: 80%;
+  height: 25px;
+  margin: auto;
+  margin-top: 20px;
+  font-size: 16px;
+  padding: 10px;
+  resize: none;
+  align-content: center;
+  justify-content: center;
+  display: flex;
+}
+
+.marital-status-dropdown {
+  width: 85%;
+  height: 45px;
+  margin: auto;
+  margin-top: 20px;
+  font-size: 16px;
+  padding: 10px;
+  resize: none;
+  align-content: center;
+  justify-content: center;
+  display: flex;
+}
+
+.position-dropdown {
+  width: 85%;
+  height: 45px;
+  margin: auto;
+  margin-top: 20px;
+  font-size: 16px;
+  padding: 10px;
+  resize: none;
+  align-content: center;
+  justify-content: center;
+  display: flex;
+}
+
+.message-textarea {
+  height: 70px;
+  width: 80%;
+  margin: auto;
+  margin-top: 20px;
+  font-size: 16px;
+  padding: 10px;
+  resize: none;
+  align-content: center;
+  justify-content: center;
+  display: flex;
+}
+
+.submit-validation-message {
+  color: red;
+  font-size: 14px;
+  margin-top: 10px;
+  margin-bottom: 30px;
+  /* Adjust the value as needed */
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.submit-button {
+  font-weight: bold;
+  padding: 15px 30px;
+  font-size: 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  border: none;
+  position: absolute;
+  left: 50%;
+  width: 200px;
+  text-align: center;
+  height: 35px;
+  transform: translateX(-50%);
+  margin-top: 50px;
+  line-height: 8px;
+  /* Add this line */
+}
+
+.submit-button:hover {
+  background-color: rgb(153, 153, 153);
+  /* Change this to the desired color on hover */
+}
+
+.validation-message {
+  color: red;
+  font-size: 14px;
+  margin-top: 10px;
+  margin-bottom: 30px;
+  /* Adjust the value as needed */
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* Workers Container */
+.workers-container {
+  color: #213555;
+  margin-top: 30px;
+  margin-left: 32%;
+  width: 65%;
+  height: 900%;
+}
+
+.workers-list-heading {
+  font-size: 40px;
+  margin-bottom: 10px;
+  margin-top: -10px;
+}
+
+.search-workers {
+  width: 97%;
+  height: 40px;
+  font-size: 16px;
+  padding: 5px;
+  border-radius: 10px;
+  margin-top: 10px;
+  margin-left: 20px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.worker-details {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #a3a3a3;
+  padding-bottom: 10px;
+  box-shadow: 0 4px 8px #494444;
+  border-radius: 10px;
+  height: 120px;
+  width: 97%;
+  font-size: 20px;
+  background-color: rgb(251, 250, 250);
+  margin-left: 18px;
+  margin-bottom: 20px;
+}
+
+.worker-name {
+  font-weight: bolder;
+  margin-left: 20px;
+  margin-top: 10px;
+}
+
+.worker-info {
+  margin-left: 20px;
+}
+
+.worker-actions {
+  display: flex;
+  margin-top: 10px;
+}
+
+.worker-edit-button {
+  background-color: #213555;
+  color: #fff;
+  padding: 8px 12px;
+  margin-right: 8px;
+  cursor: pointer;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: bold;
+  height: 30px;
+}
+
+.worker-delete-button {
+  background-color: #e74c3c;
+  color: #fff;
+  padding: 8px 12px;
+  margin-right: 8px;
+  cursor: pointer;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: bold;
+  height: 30px;
+}
+
+/* Edit modal styles */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(135, 132, 132, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.directory-edit-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  height: 800px;
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.edit-container h2 {
+  font-size: 60px;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+.edit-title,
+.edit-number {
+  height: 50px;
+  width: 400px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: 2px solid #c4c3c3;
+}
+
+.save-button {
+  background-color: #213555;
+  color: #fff;
+  width: 100px;
+  font-size: 18px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 12px;
+  margin-right: 8px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: bold;
+  height: 30px;
+}
+
+.save-validation-message {
+  color: red;
+  /* Set the text color to red */
+  font-size: 14px;
+  /* Set the font size */
+  margin-top: 8px;
+  /* Add some top margin for spacing */
+}
+
+.cancel-button {
+  background-color: #e74c3c;
+  color: #fff;
+  margin-top: 5px;
+  width: 100px;
+  font-size: 18px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 12px;
+  margin-right: 8px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: bold;
+  height: 30px;
+}

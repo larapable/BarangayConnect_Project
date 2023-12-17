@@ -6,14 +6,14 @@ import "./EmergencyAlertChoices.css";
 
 const EmergencyAlertChoices = () => {
     return (
-        <div style={{ backgroundColor: '#213555' }}>
+        <div className='emergency-choices-body'>
             <div>
                 {/* Header */}
                 <Header />
                 <img src={"fullbg.png"} alt="Background Image" style={{ width: "100%", height: "88vh", objectFit: "cover" }} />
             </div>
             <div className="popup-container">
-                <div className="popup-box">
+                <div className="inside-popup-container">
                     {/* Content inside the pop-up container */}
                     <img src={"BClogo.png"} alt="Logo Pop-up" className="popup-image" />
                     <div style={{ alignItems: 'center', margin: 'auto', justifyContent: 'center', marginTop: '15px' }}>
@@ -23,7 +23,7 @@ const EmergencyAlertChoices = () => {
                             </Button>
                         </Link>
                         <br />
-                        <span class="text" style={{ fontWeight: "bolder" }}>OR</span>
+                        <span class="text-button" style={{ fontWeight: "bolder" }}>OR</span>
                         <br />
                         <Link to="/emergencyalertlist">
                             <Button class="button button-emergency" variant="contained" style={{ height: '70px', padding: '15px 150px', borderRadius: '10px', fontWeight: 'bold' }}>
