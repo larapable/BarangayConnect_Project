@@ -98,7 +98,7 @@ export default function AdminHeader() {
               </MenuItem>
               <MenuItem onClick={handleMenuClose}>
                 <NavLink
-                  to="/directory"
+                  to="/admindirectorylist"
                   style={{
                     color: "#213555",
                     fontWeight: "bold",
@@ -147,19 +147,6 @@ export default function AdminHeader() {
               </MenuItem>
 
               {/* <MenuItem onClick={handleMenuClose}>
-                <NavLink to="/userviewannouncement"
-                  style={{
-                    color: "#213555",
-                    fontWeight: "bold",
-                    textDecoration:"none",
-                  }}
-                  
-                >
-                  ANNOUNCEMENTS
-                </NavLink>
-              </MenuItem> */}
-
-              <MenuItem onClick={handleMenuClose}>
                 <NavLink
                   to="/forum"
                   style={{
@@ -170,11 +157,11 @@ export default function AdminHeader() {
                 >
                   FORUM
                 </NavLink>
-              </MenuItem>
+              </MenuItem> */}
 
               <MenuItem onClick={handleMenuClose}>
                 <NavLink
-                  to="/emergency"
+                  to="/adminemergency"
                   style={{
                     color: "#213555",
                     fontWeight: "bold",

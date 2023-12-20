@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Header from '../Header';
+import AdminHeader from '../AdminHeader';
 import './AdminEmergencyHotline.css';
 
 const AdminEmergencyHotline = () => {
@@ -173,7 +173,7 @@ const AdminEmergencyHotline = () => {
 
     return (
         <div>
-            <Header />
+            <AdminHeader />
 
             <div className="emergency-container">
                 <h1 className="add-hotline-heading">

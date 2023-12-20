@@ -23,7 +23,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { useNavigate } from "react-router-dom";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 
-const UserBusinessView = ({ business, handleEdit }) => {
+const AdminBusinessView = ({ business, handleEdit }) => {
   const navigate = useNavigate();
 
   const [businesses, setBusinesses] = useState([]);
@@ -36,6 +36,7 @@ const UserBusinessView = ({ business, handleEdit }) => {
   const businessesPerPage = 3;
   const startIndex = (currentPage - 1) * businessesPerPage;
   const endIndex = startIndex + businessesPerPage;
+  const [imageVisible, setImageVisible] = useState(false);
 
   useEffect(() => {
     const fetchBusinesses = async () => {
@@ -220,8 +221,16 @@ const UserBusinessView = ({ business, handleEdit }) => {
             >
               {/* when hovered, image will appear */}
               <Grid
-                className="imageContainer"
-                data-motto={business.photoPath}
+                className="imageContainer1"
+                onMouseOver={() => setImageVisible(true)}
+                onMouseOut={() => setImageVisible(false)}
+                style={{
+                  backgroundImage: `url(${business.photoPath})`,
+                  backgroundSize: "50%",
+                  backgroundRepeat: "no-repeat",
+                  opacity: imageVisible ? 1 : 0,
+                  transition: "opacity 0.5s ease-in-out",
+                }}
               ></Grid>
               <div
                 style={{
@@ -359,4 +368,4 @@ const UserBusinessView = ({ business, handleEdit }) => {
   );
 };
 
-export default UserBusinessView;
+export default AdminBusinessView;

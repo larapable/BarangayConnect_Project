@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import Header from "../Header";
+import AdminHeader from "../AdminHeader";
 import "./AdminBusinessView.css";
 import SearchIcon from "@mui/icons-material/Search";
 import {
@@ -36,6 +36,7 @@ const AdminBusinessView = ({ business, handleEdit }) => {
   const businessesPerPage = 3;
   const startIndex = (currentPage - 1) * businessesPerPage;
   const endIndex = startIndex + businessesPerPage;
+  const [imageVisible, setImageVisible] = useState(false);
 
   useEffect(() => {
     const fetchBusinesses = async () => {
@@ -127,7 +128,7 @@ const AdminBusinessView = ({ business, handleEdit }) => {
 
   return (
     <div>
-      <Header />
+      <AdminHeader />
       <Grid container>
         <Grid item xs={3} className="left-containerb3">
           <h1 className="header-textb3">SUPPORT LOCAL!</h1>
@@ -155,7 +156,11 @@ const AdminBusinessView = ({ business, handleEdit }) => {
           </p>
         </Grid>
 
-        <Grid item xs={9} style={{ backgroundColor: "#213555" }}>
+        <Grid
+          item
+          xs={9}
+          style={{ backgroundColor: "#213555", height: "1100px" }}
+        >
           <Paper elevation={3} className="search-bar-paperb3">
             <SearchIcon className="search-iconb3" />
             <InputBase
@@ -212,6 +217,19 @@ const AdminBusinessView = ({ business, handleEdit }) => {
               elevation={3}
               className="announcement-paperb3"
             >
+              {/* when hovered, image will appear */}
+              <Grid
+                className="imageContainer1"
+                onMouseOver={() => setImageVisible(true)}
+                onMouseOut={() => setImageVisible(false)}
+                style={{
+                  backgroundImage: `url(${business.photoPath})`,
+                  backgroundSize: "50%",
+                  backgroundRepeat: "no-repeat",
+                  opacity: imageVisible ? 1 : 0,
+                  transition: "opacity 0.5s ease-in-out",
+                }}
+              ></Grid>
               <div
                 style={{
                   display: "flex",
@@ -236,17 +254,17 @@ const AdminBusinessView = ({ business, handleEdit }) => {
                       handleEditClick(business.busId);
                     }}
                     style={{
-                      backgroundColor: "#ffffff",
+                      backgroundColor: "#213555",
                       marginRight: "5px",
                       height: "50%",
                       border: "1px solid #213555",
                     }}
                   >
-                    <EditIcon style={{ color: "#213555" }} />
+                    <EditIcon style={{ color: "#ffffff" }} />
                   </Button>
                   <Button
                     onClick={() => handleDelete(business.busId)}
-                    style={{ backgroundColor: "#d8210b" }}
+                    style={{ backgroundColor: "#F24E1E" }}
                   >
                     <DeleteIcon style={{ color: "#ffffff" }} />
                   </Button>
@@ -279,12 +297,14 @@ const AdminBusinessView = ({ business, handleEdit }) => {
                 <AccessTimeIcon style={{ marginRight: "5px" }} />
                 {business.date}
               </Paper>
-              <img
+
+              {/* image here */}
+              {/* <img
                 src={business.photoPath}
                 alt="Business Image"
                 style={{ width: "100px", height: "auto" }}
                 onError={(e) => console.error("Error loading image", e)}
-              />
+              /> */}
             </Paper>
           ))}
 
@@ -297,7 +317,7 @@ const AdminBusinessView = ({ business, handleEdit }) => {
               style={{
                 margin: "auto",
                 textAlign: "center",
-                color: "#16558f",
+                color: "#000000",
                 fontWeight: "bolder",
                 fontSize: "40px",
               }}
@@ -319,12 +339,11 @@ const AdminBusinessView = ({ business, handleEdit }) => {
               <Button
                 onClick={() => handleDeleteConfirmation(true)}
                 style={{
-                  color: "#213555",
-                  backgroundColor: "#ffffff",
+                  color: "#ffffff",
+                  backgroundColor: "#213555",
                   marginBottom: "10px",
                   width: "280px",
                   height: "50px",
-                  border: "1px solid #213555",
                 }}
                 variant="contained"
                 className="submit-button-homeb3"
@@ -334,7 +353,7 @@ const AdminBusinessView = ({ business, handleEdit }) => {
               <Button
                 onClick={() => handleDeleteConfirmation(false)}
                 style={{
-                  backgroundColor: "#213555",
+                  backgroundColor: "#F24E1E",
                   color: "#ffffff",
                   marginBottom: "10px",
                   width: "280px",
