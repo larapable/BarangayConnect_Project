@@ -1,4 +1,4 @@
-import Header from "../Header";
+import AdminHeader from "../AdminHeader";
 import React, { useState, useEffect } from "react";
 import "./CC.css";
 import { Button, Modal, Paper } from "@mui/material";
@@ -126,7 +126,7 @@ export default function EventList() {
   return (
     <div className="eventlist-bg">
       <div>
-        <Header />
+        <AdminHeader />
       </div>
       <div
         style={{

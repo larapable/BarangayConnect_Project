@@ -3,7 +3,7 @@ import "./Login.css";
 import { Button } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 
-const Login = () => {
+const AdminLogin = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -20,11 +20,8 @@ const Login = () => {
       return;
     }
 
-    let isAdmin = false; // Variable to track if the user is an admin
-
     try {
-      // Try to fetch from tblAdmin first
-      let response = await fetch(`http://localhost:8080/admin/login`, {
+      const response = await fetch("http://localhost:8080/admin/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -33,32 +30,13 @@ const Login = () => {
       });
 
       if (response.ok) {
-        isAdmin = true; // If the user is found in tblAdmin, set isAdmin to true
-      } else {
-        // If user not found in tblAdmin, try tblUser
-        response = await fetch(`http://localhost:8080/login-signup/login`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ username, password }),
-        });
-      }
-
-      if (response.ok) {
         // Login successful
         console.log("Login successful");
         // Store username in localStorage
-        const userObj = await response.json();
-        userObj.isAdmin = isAdmin; // Add isAdmin property to userObj
-        localStorage.setItem("user", JSON.stringify(userObj));
+        const adminObj = await response.json();
+        localStorage.setItem("admin", JSON.stringify(adminObj));
 
-        // Check user role and navigate to the appropriate page
-        if (isAdmin) {
-          navigate("/admindashboard");
-        } else {
-          navigate("/home");
-        }
+        navigate("/admindashboard");
       } else {
         // Handle login error
         const data = await response.json();
@@ -75,24 +53,33 @@ const Login = () => {
 
   return (
     <div>
-      <div style={{ display: "flex", justifyContent: "flex-start" }}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          textAlign: "center",
+        }}
+      >
         <div
           style={{
             background: "#829CA6",
-            width: "60%",
+            width: "100%",
             height: "100vh",
-            borderRight: "3px solid #213555",
           }}
         >
           <div>
             <img src={"headerlogo.png"} alt="Logo" className="top-left-icon" />
           </div>
-          <div style={{ marginTop: "18%" }}>
+          <div style={{ marginTop: "10%" }}>
             <div style={{ textAlign: "center", color: "#FFFFFF" }}>
-              <h1 className="header">Login to your account</h1>
+              <h1 className="header" style={{ fontSize: "80px" }}>
+                Login to your account
+              </h1>
             </div>
-            <div style={{ marginLeft: "25%", color: "#FFFFFF" }}>
-              <h2>Enter username:</h2>
+            <div style={{ color: "#FFFFFF" }}>
+              <h2 style={{ marginRight: "15%", fontSize: "36px" }}>
+                Enter username:
+              </h2>
               <input
                 type="text"
                 id="username"
@@ -105,7 +92,9 @@ const Login = () => {
                   borderRadius: "10px",
                 }}
               ></input>
-              <h2>Enter password:</h2>
+              <h2 style={{ marginRight: "15%", fontSize: "36px" }}>
+                Enter password:
+              </h2>
               <input
                 type="password"
                 id="password"
@@ -140,39 +129,9 @@ const Login = () => {
             </div>
           </div>
         </div>
-
-        <div
-          style={{
-            background: "#FFFFFF",
-            width: "40%",
-            textAlign: "center",
-          }}
-        >
-          <div style={{ marginTop: "38%", color: "#213555" }}>
-            <h1 className="header">New Here?</h1>
-            <p style={{ fontSize: "30px" }}>
-              Sign up to stay updated <br></br>
-              in the community
-            </p>
-            <Link to="/signup">
-              <Button
-                variant="contained"
-                style={{
-                  color: "#FFFFFF",
-                  background: "#213555",
-                  borderRadius: "10px",
-                  width: "200px",
-                  fontWeight: "bold",
-                }}
-              >
-                Sign Up
-              </Button>
-            </Link>
-          </div>
-        </div>
       </div>
     </div>
   );
 };
 
-export default Login;
+export default AdminLogin;

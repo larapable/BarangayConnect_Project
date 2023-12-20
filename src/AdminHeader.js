@@ -1,12 +1,10 @@
-import { Grid, Menu, MenuItem,Link} from "@mui/material";
+import { Grid, Menu, MenuItem, Link } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/KeyboardArrowDown";
 import { useState } from "react";
 import "./Header.css";
 import { NavLink } from "react-router-dom";
 
-
-export default function Header() {
-
+export default function AdminHeader() {
   const [aboutAnchorEl, setAboutAnchorEl] = useState(null);
   const [calendarAnchorEl, setCalendarAnchorEl] = useState(null);
 
@@ -28,70 +26,83 @@ export default function Header() {
   };
 
   return (
-   
     <div>
       {/* Header */}
       <Grid container className="grid">
-       
         <Grid item sm={5}>
           <div className="conlogo">
-            <img src={"/headerlogo.png"} className="headlogo" alt="headerLogo" />
+            <img
+              src={"/headerlogo.png"}
+              className="headlogo"
+              alt="headerLogo"
+            />
           </div>
         </Grid>
 
         <Grid item sm={1} className="btn">
           <div className="noowrap">
-            <NavLink to="/home" className="header-link">DASHBOARD</NavLink>
+            <NavLink to="/admindashboard" className="header-link">
+              DASHBOARD
+            </NavLink>
           </div>
         </Grid>
 
         <Grid item sm={1} className="btn">
           <div className="noowrap">
-            <NavLink to="/calendar" className="header-link">CALENDAR</NavLink>
+            <NavLink to="/admincalendar" className="header-link">
+              CALENDAR
+            </NavLink>
           </div>
         </Grid>
 
         <Grid item sm={1.5} className="btn">
           <div className="noowrap">
-            <NavLink to="/userviewbusiness" className="header-link">BUSINESS SUPPORT</NavLink>
+            <NavLink to="/business" className="header-link">
+              BUSINESS SUPPORT
+            </NavLink>
           </div>
         </Grid>
 
         <Grid item sm={1} className="btn">
           <div className="noowrap">
-            <Link to="about"
+            <Link
+              to="about"
               className="header-link"
               aria-controls="info-menu"
               aria-haspopup="true"
               onClick={handleAboutClick}
             >
               INFO HUB
-              <ExpandMoreIcon style={{ marginLeft: '5px', verticalAlign: 'middle' }} />
+              <ExpandMoreIcon
+                style={{ marginLeft: "5px", verticalAlign: "middle" }}
+              />
             </Link>
             <Menu
               id="info-menu"
-              anchorEl={aboutAnchorEl}         
+              anchorEl={aboutAnchorEl}
               keepMounted
               open={Boolean(aboutAnchorEl)}
               onClose={handleMenuClose}
             >
               <MenuItem onClick={handleMenuClose}>
-                <NavLink to="/profile"
+                <NavLink
+                  to="/profileList"
                   style={{
                     color: "#213555",
                     fontWeight: "bold",
-                    textDecoration:"none",
+                    textDecoration: "none",
                   }}
                 >
                   PROFILE
                 </NavLink>
               </MenuItem>
               <MenuItem onClick={handleMenuClose}>
-                <NavLink to="/directory"
+                <NavLink
+                  to="/directory"
                   style={{
                     color: "#213555",
                     fontWeight: "bold",
-                    textDecoration:"none",
+                    textDecoration: "none",
                   }}
                 >
                   BARANGAY DIRECTORY
@@ -103,14 +114,17 @@ export default function Header() {
 
         <Grid item sm={1} className="btn">
           <div className="noowrap">
-            <Link to="services"
+            <Link
+              to="services"
               className="header-link"
               aria-controls="services-menu"
               aria-haspopup="true"
               onClick={handleCalendarClick}
             >
               SERVICES
-              <ExpandMoreIcon style={{ marginLeft: '5px', verticalAlign: 'middle' }} />
+              <ExpandMoreIcon
+                style={{ marginLeft: "5px", verticalAlign: "middle" }}
+              />
             </Link>
             <Menu
               id="services-menu"
@@ -120,13 +134,13 @@ export default function Header() {
               onClose={handleMenuClose}
             >
               <MenuItem onClick={handleMenuClose}>
-                <NavLink to="/userviewannouncement"
+                <NavLink
+                  to="/announcement"
                   style={{
                     color: "#213555",
                     fontWeight: "bold",
-                    textDecoration:"none",
+                    textDecoration: "none",
                   }}
-                  
                 >
                   ANNOUNCEMENTS
                 </NavLink>
@@ -146,11 +160,12 @@ export default function Header() {
               </MenuItem> */}
 
               <MenuItem onClick={handleMenuClose}>
-                <NavLink to="/forum"
+                <NavLink
+                  to="/forum"
                   style={{
                     color: "#213555",
                     fontWeight: "bold",
-                    textDecoration:"none",
+                    textDecoration: "none",
                   }}
                 >
                   FORUM
@@ -158,23 +173,25 @@ export default function Header() {
               </MenuItem>
 
               <MenuItem onClick={handleMenuClose}>
-                <NavLink to="/emergency"
+                <NavLink
+                  to="/emergency"
                   style={{
                     color: "#213555",
                     fontWeight: "bold",
-                    textDecoration:"none",
+                    textDecoration: "none",
                   }}
                 >
                   EMERGENCY ALERT
                 </NavLink>
               </MenuItem>
-              
+
               <MenuItem onClick={handleMenuClose}>
-                <NavLink to="/requests"
+                <NavLink
+                  to="/adminrequest"
                   style={{
                     color: "#213555",
                     fontWeight: "bold",
-                    textDecoration:"none",
+                    textDecoration: "none",
                   }}
                 >
                   REQUESTS DOCUMENT
@@ -186,7 +203,9 @@ export default function Header() {
 
         <Grid item sm={1} className="btn">
           <div className="noowrap">
-            <NavLink to="/login" className="header-link" onClick={logout}>LOGOUT</NavLink>
+            <NavLink to="/login" className="header-link" onClick={logout}>
+              LOGOUT
+            </NavLink>
           </div>
         </Grid>
       </Grid>

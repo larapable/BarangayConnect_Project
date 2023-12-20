@@ -33,6 +33,9 @@ import AdminBusinessChoices from "./Business/AdminBusinessChoices";
 import AdminBusinessForm from "./Business/AdminBusinessForm";
 import AdminBusinessEdit from "./Business/AdminBusinessEdit";
 import AdminBusinessView from "./Business/AdminBusinessView";
+import UserBusinessView from "./Business/UserBusinessView";
+import AdminDashboard from "./Dashboard/AdminDashboard";
+import AdminLogin from "./Login/AdminLogin";
 
 
 function App() {
@@ -77,6 +80,9 @@ function App() {
       <Route path="/submitbusiness" element={<AdminBusinessForm />} />
       <Route path="/adminviewbusiness" element={<AdminBusinessView />} />
       <Route path="/admin/business/updateBusiness/:id" element={<AdminBusinessEdit />} />
+      <Route path="/userviewbusiness" element={<UserBusinessView />} />
+
+      <Route path="/admindashboard" element={<AdminDashboard/>} />
     </Routes>
   );
 }

@@ -1,7 +1,7 @@
 import { Button } from "@mui/material";
 import React from "react";
 import { Link } from "react-router-dom";
-import Header from "../Header";
+import AdminHeader from "../AdminHeader";
 import "./AdminAnnouncementChoices.css";
 
 const AdminAnnouncementChoices = () => {
@@ -9,7 +9,7 @@ const AdminAnnouncementChoices = () => {
     <div style={{ backgroundColor: "#213555" }}>
       <div>
         {/* Header */}
-        <Header />
+        <AdminHeader />
         <img
           src={"fullbg.png"}
           alt="Background Image"
