@@ -310,7 +310,7 @@ const AdminBusinessEdit = () => {
                     style={{
                       margin: "auto",
                       textAlign: "center",
-                      color: "#16558f",
+                      color: "#000000",
                       fontWeight: "bolder",
                       fontSize: "40px",
                     }}
@@ -332,12 +332,11 @@ const AdminBusinessEdit = () => {
                     <Button
                       onClick={handleHomeButtonClick}
                       style={{
-                        color: "#213555",
-                        backgroundColor: "#ffffff",
+                        color: "#ffffff",
+                        backgroundColor: "#213555",
                         marginBottom: "10px",
                         width: "280px",
                         height: "50px",
-                        border: "1px solid #213555",
                       }}
                       variant="contained"
                     >
@@ -346,7 +345,7 @@ const AdminBusinessEdit = () => {
                     <Button
                       onClick={handleViewBusinessButtonClick}
                       style={{
-                        backgroundColor: "#213555",
+                        backgroundColor: "#F24E1E",
                         color: "#ffffff",
                         marginBottom: "10px",
                         width: "280px",
