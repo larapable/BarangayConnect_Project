@@ -2,11 +2,11 @@ import { Button } from "@mui/material";
 import React from "react";
 import { Link } from "react-router-dom";
 import AdminHeader from "../AdminHeader";
-import "./AdminBusinessChoices.css";
+import "./AdminEmergencyAlertChoices.css";
 
-const AdminBusinessChoices = () => {
+const AdminEmergencyAlertChoices = () => {
   return (
-    <div style={{ backgroundColor: "#213555" }}>
+    <div className="emergency-choices-body">
       <div>
         {/* Header */}
         <AdminHeader />
@@ -16,11 +16,10 @@ const AdminBusinessChoices = () => {
           style={{ width: "100%", height: "88vh", objectFit: "cover" }}
         />
       </div>
-
-      <div className="popup-containerb1">
-        <div className="popup-boxb1">
+      <div className="popup-container">
+        <div className="inside-popup-container">
           {/* Content inside the pop-up container */}
-          <img src={"BClogo.png"} alt="Logo Pop-up" className="popup-imageb1" />
+          <img src={"BClogo.png"} alt="Logo Pop-up" className="popup-image" />
           <div
             style={{
               alignItems: "center",
@@ -29,7 +28,7 @@ const AdminBusinessChoices = () => {
               marginTop: "15px",
             }}
           >
-            <Link to="/submitbusiness">
+            <Link to="/adminincidentreport">
               <Button
                 class="button button-submit"
                 variant="contained"
@@ -40,15 +39,15 @@ const AdminBusinessChoices = () => {
                   fontWeight: "bold",
                 }}
               >
-                Submit Business Form
+                Submit a Report Form
               </Button>
             </Link>
             <br />
-            <span class="text" style={{ fontWeight: "bolder" }}>
+            <span class="text-button" style={{ fontWeight: "bolder" }}>
               OR
             </span>
             <br />
-            <Link to="/adminviewbusiness">
+            <Link to="/adminemergencyhotline">
               <Button
                 class="button button-emergency"
                 variant="contained"
@@ -59,7 +58,7 @@ const AdminBusinessChoices = () => {
                   fontWeight: "bold",
                 }}
               >
-                View Businesses
+                See Emergency Alert
               </Button>
             </Link>
           </div>
@@ -69,4 +68,4 @@ const AdminBusinessChoices = () => {
   );
 };
 
-export default AdminBusinessChoices;
+export default AdminEmergencyAlertChoices;

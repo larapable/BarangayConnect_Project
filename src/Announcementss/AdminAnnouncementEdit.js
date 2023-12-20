@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Header from "../Header";
+import AdminHeader from "../AdminHeader";
 import "./AdminAnnouncementEdit.css";
 import {
   Grid,
@@ -118,7 +118,7 @@ const AdminAnnouncementEdit = () => {
 
   return (
     <div>
-      <Header />
+      <AdminHeader />
       <Grid container>
         {/* Left Container */}
         <Grid item xs={3} className="left-container2">

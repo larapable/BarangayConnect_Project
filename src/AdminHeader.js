@@ -1,14 +1,12 @@
-import { Grid, Menu, MenuItem, Link, Modal, Box, Button } from "@mui/material";
+import { Grid, Menu, MenuItem, Link } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/KeyboardArrowDown";
 import { useState } from "react";
 import "./Header.css";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
-
-export default function Header() {
+export default function AdminHeader() {
   const [aboutAnchorEl, setAboutAnchorEl] = useState(null);
   const [calendarAnchorEl, setCalendarAnchorEl] = useState(null);
-  const navigate = useNavigate();
 
   const handleAboutClick = (event) => {
     setAboutAnchorEl(event.currentTarget);
@@ -23,20 +21,8 @@ export default function Header() {
     setCalendarAnchorEl(null);
   };
 
-  const [logoutOpen, setLogoutOpen] = useState(false);
-
-  const handleLogoutOpen = () => {
-    setLogoutOpen(true);
-  };
-
-  const handleLogoutClose = () => {
-    setLogoutOpen(false);
-  };
-
-  const handleLogoutConfirm = () => {
+  const logout = () => {
     localStorage.removeItem("user");
-    setLogoutOpen(false);
-    navigate("/login");
   };
 
   return (
@@ -55,7 +41,7 @@ export default function Header() {
 
         <Grid item sm={1} className="btn">
           <div className="noowrap">
-            <NavLink to="/home" className="header-link">
+            <NavLink to="/admindashboard" className="header-link">
               DASHBOARD
             </NavLink>
           </div>
@@ -63,7 +49,7 @@ export default function Header() {
 
         <Grid item sm={1} className="btn">
           <div className="noowrap">
-            <NavLink to="/calendar" className="header-link">
+            <NavLink to="/admincalendar" className="header-link">
               CALENDAR
             </NavLink>
           </div>
@@ -71,7 +57,7 @@ export default function Header() {
 
         <Grid item sm={1.5} className="btn">
           <div className="noowrap">
-            <NavLink to="/userviewbusiness" className="header-link">
+            <NavLink to="/business" className="header-link">
               BUSINESS SUPPORT
             </NavLink>
           </div>
@@ -100,7 +86,7 @@ export default function Header() {
             >
               <MenuItem onClick={handleMenuClose}>
                 <NavLink
-                  to="/profile"
+                  to="/profileList"
                   style={{
                     color: "#213555",
                     fontWeight: "bold",
@@ -112,7 +98,7 @@ export default function Header() {
               </MenuItem>
               <MenuItem onClick={handleMenuClose}>
                 <NavLink
-                  to="/directory"
+                  to="/admindirectorylist"
                   style={{
                     color: "#213555",
                     fontWeight: "bold",
@@ -149,7 +135,7 @@ export default function Header() {
             >
               <MenuItem onClick={handleMenuClose}>
                 <NavLink
-                  to="/userviewannouncement"
+                  to="/announcement"
                   style={{
                     color: "#213555",
                     fontWeight: "bold",
@@ -161,19 +147,6 @@ export default function Header() {
               </MenuItem>
 
               {/* <MenuItem onClick={handleMenuClose}>
-                <NavLink to="/userviewannouncement"
-                  style={{
-                    color: "#213555",
-                    fontWeight: "bold",
-                    textDecoration:"none",
-                  }}
-                  
-                >
-                  ANNOUNCEMENTS
-                </NavLink>
-              </MenuItem> */}
-
-              <MenuItem onClick={handleMenuClose}>
                 <NavLink
                   to="/forum"
                   style={{
@@ -184,11 +157,11 @@ export default function Header() {
                 >
                   FORUM
                 </NavLink>
-              </MenuItem>
+              </MenuItem> */}
 
               <MenuItem onClick={handleMenuClose}>
                 <NavLink
-                  to="/emergency"
+                  to="/adminemergency"
                   style={{
                     color: "#213555",
                     fontWeight: "bold",
@@ -201,7 +174,7 @@ export default function Header() {
 
               <MenuItem onClick={handleMenuClose}>
                 <NavLink
-                  to="/requests"
+                  to="/adminrequest"
                   style={{
                     color: "#213555",
                     fontWeight: "bold",
@@ -217,50 +190,10 @@ export default function Header() {
 
         <Grid item sm={1} className="btn">
           <div className="noowrap">
-            <NavLink
-              className="header-link"
-              onClick={handleLogoutOpen}
-            >
+            <NavLink to="/login" className="header-link" onClick={logout}>
               LOGOUT
             </NavLink>
           </div>
-          <Modal open={logoutOpen} onClose={handleLogoutClose}>
-            <div 
-              className="logout-popup"
-            >
-              <h2>Confirm Logout</h2>
-              <p>Do you really want to log out?</p>
-              <Button
-                variant="contained"
-                onClick={handleLogoutConfirm}
-                style={{
-                  color: "#FFFFFF",
-                  background: "#213555",
-                  borderRadius: "10px",
-                  width: "150px",
-                  fontWeight: "bold",
-                  marginTop: "20px",
-                }}
-              >
-                Yes
-              </Button>
-              <Button
-                variant="contained"
-                onClick={handleLogoutClose}
-                style={{
-                  color: "#FFFFFF",
-                  background: "#F24E1E",
-                  borderRadius: "10px",
-                  width: "150px",
-                  fontWeight: "bold",
-                  marginLeft: "20px",
-                  marginTop: "20px",
-                }}
-              >
-                No
-              </Button>
-            </div>
-          </Modal>
         </Grid>
       </Grid>
     </div>

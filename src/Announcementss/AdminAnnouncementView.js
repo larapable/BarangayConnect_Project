@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Header from "../Header";
+import AdminHeader from "../AdminHeader";
 import "./AdminAnnouncementView.css";
 import SearchIcon from "@mui/icons-material/Search";
 import {
@@ -133,7 +133,7 @@ const AdminAnnouncementView = ({ announcement, handleEdit }) => {
 
   return (
     <div>
-      <Header />
+      <AdminHeader />
       <Grid container>
         {/* Left Container */}
         <Grid item xs={3} className="left-container3">

@@ -8,7 +8,7 @@ import {
   DialogActions,
   Grid,
 } from "@mui/material";
-import Header from "../Header";
+import AdminHeader from "../AdminHeader";
 import axios from "axios";
 
 const AdminBusinessForm = () => {
@@ -87,7 +87,7 @@ const AdminBusinessForm = () => {
 
   return (
     <div>
-      <Header />
+      <AdminHeader />
       <Grid container>
         {/* Left Container */}
         <Grid item xs={3} className="left-containerb1">

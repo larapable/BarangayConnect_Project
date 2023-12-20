@@ -1,5 +1,5 @@
 import { Button, Card, Grid } from "@mui/material";
-import Header from "../Header";
+import AdminHeader from "../AdminHeader";
 import { DateCalendar, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { useState } from "react";
@@ -76,7 +76,7 @@ export default function AdminCalendar() {
   return (
     <div className="admin-container">
       <div>
-        <Header />
+        <AdminHeader />
       </div>
       <div
         style={{

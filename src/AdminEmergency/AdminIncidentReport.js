@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Button } from '@mui/material';
-import Header from '../Header';
+import AdminHeader from '../AdminHeader';
 import "./AdminIncidentReport.css";
 
 const AdminIncidentReport = () => {
@@ -27,7 +27,7 @@ const AdminIncidentReport = () => {
 
     return (
         <div>
-            <Header />
+            <AdminHeader />
             <div>
                 <div style={{ display: 'flex' }}>
                     {/* Left side - Form */}

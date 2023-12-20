@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Button, Grid, Modal } from "@mui/material";
-import Header from "../Header";
+import AdminHeader from "../AdminHeader";
 import "./Profile.css";
 import { IconButton } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
@@ -196,7 +196,7 @@ export default function AdminProfileEdit() {
   return (
     <div className="profile-screen">
       <div>
-        <Header />
+        <AdminHeader />
       </div>
       <Grid container style={{ flex: 1 }}>
         <div className="profilePicture-area">

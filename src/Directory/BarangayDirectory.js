@@ -50,8 +50,8 @@ const OfficialsList = () => {
         {officials.map((official) => (
           <div key={official.id} className="official-card">
             <img
-              src={official.image}
-              alt={official.name}
+              src={official.imageName}
+              alt={official.imageName}
               className="official-image"
             />
             <div>

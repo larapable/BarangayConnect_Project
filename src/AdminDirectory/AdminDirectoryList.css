@@ -224,14 +224,11 @@
   margin-bottom: 20px;
 }
 
-.worker-name {
-  font-weight: bolder;
+.worker-name,
+.worker-position {
+  text-align: left; /* or center, right, justify, etc. */
   margin-left: 20px;
   margin-top: 10px;
-}
-
-.worker-info {
-  margin-left: 20px;
 }
 
 .worker-actions {

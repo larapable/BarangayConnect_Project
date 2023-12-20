@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Header from "../Header";
+import AdminHeader from "../AdminHeader";
 import "./AdminDirectoryList.css";
 
 const AdminDirectoryList = () => {
@@ -331,7 +331,7 @@ const AdminDirectoryList = () => {
 
   return (
     <div>
-      <Header />
+      <AdminHeader />
 
       <div className="directory-container">
         <h1 className="add-barangay-heading">Add Barangay Workers</h1>
@@ -472,10 +472,11 @@ const AdminDirectoryList = () => {
                   src={worker.imageName}
                 ></img>
               </div>
-              <div className="worker-name">{worker.name}</div>
               <div className="worker-info">
-                Position: {worker.position}
-                <br />
+                <div className="worker-name">{worker.name}</div>
+                <div className="worker-position">
+                  Position: {worker.position}
+                </div>
               </div>
             </div>
             <div className="worker-actions">
@@ -495,7 +496,6 @@ const AdminDirectoryList = () => {
           </div>
         ))}
       </div>
-
       {editingWorkers && (
         <div className="overlay">
           <div className="directory-edit-container">

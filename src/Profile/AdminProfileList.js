@@ -1,5 +1,5 @@
 import { Button, Paper } from "@mui/material";
-import Header from "../Header";
+import AdminHeader from "../AdminHeader";
 import React, { useEffect, useState } from "react";
 import "./Profile.css";
 import { Link, useNavigate } from "react-router-dom";
@@ -36,7 +36,7 @@ export default function AdminProfileList() {
       }}
     >
       <div>
-        <Header />
+        <AdminHeader />
       </div>
       <div
         style={{
@@ -81,9 +81,21 @@ export default function AdminProfileList() {
                 key={user.id}
               >
                 <div style={{ margin: "0" }}>
-                  <h2 style={{ margin: "0" }}>Profile {user.id}</h2>
-                  <p style={{ fontSize: "16px", margin: "0", color: "red", fontWeight: "bold" }}>
+                  <h2 style={{ margin: "0" }}>
                     {user.fname} {user.lname}
+                  </h2>
+                  <p
+                    style={{
+                      fontSize: "16px",
+                      margin: "0",
+                      color: "black",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    <span>Verified:</span>
+                    <span style={{ color: "red" }}>
+                      {user.isVerified ? " Yes" : " No"}
+                    </span>
                   </p>
                 </div>
                 <Link to={`/profileList/${user.id}`} key={user.id}>

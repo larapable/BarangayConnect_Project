@@ -3,7 +3,6 @@ import "./Login.css";
 import { Button } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 
-
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -21,8 +20,11 @@ const Login = () => {
       return;
     }
 
+    let isAdmin = false; // Variable to track if the user is an admin
+
     try {
-      const response = await fetch("http://localhost:8080/login-signup/login", {
+      // Try to fetch from tblAdmin first
+      let response = await fetch(`http://localhost:8080/admin/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -31,13 +33,32 @@ const Login = () => {
       });
 
       if (response.ok) {
+        isAdmin = true; // If the user is found in tblAdmin, set isAdmin to true
+      } else {
+        // If user not found in tblAdmin, try tblUser
+        response = await fetch(`http://localhost:8080/login-signup/login`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ username, password }),
+        });
+      }
+
+      if (response.ok) {
         // Login successful
         console.log("Login successful");
         // Store username in localStorage
         const userObj = await response.json();
+        userObj.isAdmin = isAdmin; // Add isAdmin property to userObj
         localStorage.setItem("user", JSON.stringify(userObj));
-        
-        navigate("/home");
+
+        // Check user role and navigate to the appropriate page
+        if (isAdmin) {
+          navigate("/admindashboard");
+        } else {
+          navigate("/home");
+        }
       } else {
         // Handle login error
         const data = await response.json();
@@ -155,4 +176,3 @@ const Login = () => {
 };
 
 export default Login;
-

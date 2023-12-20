@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import AdminHeader from "../AdminHeader";
+import Header from "../Header";
 import "./AdminBusinessView.css";
 import SearchIcon from "@mui/icons-material/Search";
 import {
@@ -128,7 +128,7 @@ const AdminBusinessView = ({ business, handleEdit }) => {
 
   return (
     <div>
-      <AdminHeader />
+      <Header />
       <Grid container>
         <Grid item xs={3} className="left-containerb3">
           <h1 className="header-textb3">SUPPORT LOCAL!</h1>
@@ -159,7 +159,7 @@ const AdminBusinessView = ({ business, handleEdit }) => {
         <Grid
           item
           xs={9}
-          style={{ backgroundColor: "#213555", height: "1100px" }}
+          style={{ backgroundColor: "#213555", height: "1300px" }}
         >
           <Paper elevation={3} className="search-bar-paperb3">
             <SearchIcon className="search-iconb3" />
@@ -212,6 +212,8 @@ const AdminBusinessView = ({ business, handleEdit }) => {
           </div>
 
           {filteredBusinesses.map((business) => (
+            //add paper here when hovered
+
             <Paper
               key={business.busId}
               elevation={3}
@@ -237,38 +239,31 @@ const AdminBusinessView = ({ business, handleEdit }) => {
                   alignItems: "center",
                 }}
               >
-                <h1
+                <Paper
                   style={{
-                    color: "red",
-                    fontSize: "30px",
-                    fontWeight: "bold",
+                    backgroundColor: "#3BC2E0",
+                    color: "black",
+                    borderRadius: "10px",
+                    padding: "5px",
+                    marginTop: "5px",
                     marginBottom: "10px",
+                    width: "100%",
+                    marginTop: "5px",
+                    display: "flex",
+                    alignItems: "center",
                   }}
                 >
-                  {business.busTitle}
-                </h1>
-                <div>
-                  <Button
-                    onClick={() => {
-                      console.log(business.busId);
-                      handleEditClick(business.busId);
-                    }}
+                  <h1
                     style={{
-                      backgroundColor: "#213555",
-                      marginRight: "5px",
-                      height: "50%",
-                      border: "1px solid #213555",
+                      color: "white",
+                      fontSize: "40px",
+                      fontWeight: "bold",
+                      marginBottom: "10px",
                     }}
                   >
-                    <EditIcon style={{ color: "#ffffff" }} />
-                  </Button>
-                  <Button
-                    onClick={() => handleDelete(business.busId)}
-                    style={{ backgroundColor: "#F24E1E" }}
-                  >
-                    <DeleteIcon style={{ color: "#ffffff" }} />
-                  </Button>
-                </div>
+                    {business.busTitle}
+                  </h1>
+                </Paper>
               </div>
               <p
                 style={{
@@ -317,7 +312,7 @@ const AdminBusinessView = ({ business, handleEdit }) => {
               style={{
                 margin: "auto",
                 textAlign: "center",
-                color: "#000000",
+                color: "#16558f",
                 fontWeight: "bolder",
                 fontSize: "40px",
               }}
@@ -339,11 +334,12 @@ const AdminBusinessView = ({ business, handleEdit }) => {
               <Button
                 onClick={() => handleDeleteConfirmation(true)}
                 style={{
-                  color: "#ffffff",
-                  backgroundColor: "#213555",
+                  color: "#213555",
+                  backgroundColor: "#ffffff",
                   marginBottom: "10px",
                   width: "280px",
                   height: "50px",
+                  border: "1px solid #213555",
                 }}
                 variant="contained"
                 className="submit-button-homeb3"
@@ -353,7 +349,7 @@ const AdminBusinessView = ({ business, handleEdit }) => {
               <Button
                 onClick={() => handleDeleteConfirmation(false)}
                 style={{
-                  backgroundColor: "#F24E1E",
+                  backgroundColor: "#213555",
                   color: "#ffffff",
                   marginBottom: "10px",
                   width: "280px",
