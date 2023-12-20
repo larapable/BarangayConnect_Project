@@ -1,7 +1,7 @@
 import "./AdminRequest.css";
 import React, { useState, useEffect } from "react";
 import { Button, Modal, Link } from "@mui/material";
-import Header from "../Header";
+import AdminHeader from "../AdminHeader";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit } from "@fortawesome/free-solid-svg-icons";
 
@@ -147,7 +147,7 @@ function AdminRequest() {
   return (
     <div>
       <div>
-        <Header />
+        <AdminHeader />
       </div>
       <div className="request-img2">
         <div

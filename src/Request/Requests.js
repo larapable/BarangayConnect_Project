@@ -353,7 +353,7 @@ function Requests() {
                       <Grid item>
                         <div>
                           <input
-                            type="text"
+                            type="number"
                             placeholder="Age *"
                             id="age"
                             name="age"
