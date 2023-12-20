@@ -22,7 +22,8 @@ function Forum() {
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [requestToDelete, setRequestToDelete] = useState(null);
   const user = JSON.parse(localStorage.getItem("user"));
-
+  const [currentPage, setCurrentPage] = useState(1);
+  
   const handleClear = () => {
     setPost("");
   };
@@ -280,14 +281,15 @@ function Forum() {
             rows={15}
             fullWidth
             margin="normal"
-            InputProps={{ style: { border: "none" } }}
-            style={{ backgroundColor: "#fff" }}
+            InputProps={{ style: { border: "none", borderRadius: '20px' } }}
+            style={{ backgroundColor: "#fff", borderRadius: '20px' }}
             value={post}
             onChange={(e) => setPost(e.target.value)}
           />
         </div>
-
-        <Grid container spacing={2} style={{ maxWidth: "450px" }}>
+        
+        <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', }}>
+        <Grid container spacing={2} style={{ maxWidth: "450px",  marginLeft: "70px", marginTop: '10px'}}>
           <Grid item>
             <Button
               variant="contained"
@@ -322,13 +324,15 @@ function Forum() {
           </Grid>
         </Grid>
       </div>
+      </div>
+
 
       <div className='forum-posts'>
   {showProgress && newPosts.length > 0 && (
     <Grid container spacing={2}>
       {newPosts.map((newPost) => (
         <Grid item key={newPost.id} sm={12}>
-          <Paper elevation={3} style={{ textAlign: 'left', padding: '10px', width: '80%', margin: '10px auto' }} >
+          <Paper elevation={3} style={{ textAlign: 'left', padding: '10px', width: '80%', margin: '10px auto', background: 'rgba(255, 255, 255, 0.5)'}} >
           <h4 style={{fontStyle:'italic'}}> {newPost.user.username}
              {user.id !== null && user.id === newPost.userr? <>
               <Button onClick={()=>{handleEditIconClick(newPost.id, newPost.post)}} variant='contained' style={{fontSize:"16px",marginLeft: '78%'}}>EDIT
@@ -336,17 +340,25 @@ function Forum() {
               <Button onClick={()=>{handleDeleteRequest(newPost.id)}} variant='contained' color="error" style={{fontSize:"16px",marginLeft:'5px'}}>DELETE</Button>
                 </>:<></>}
                 </h4>
-            <h3>{newPost.post}</h3>
+                <h3 style={{fontWeight: '450', marginLeft: '10px', marginTop: '-20px',wordWrap: "break-word"}}>{newPost.post}</h3>
             <Accordion>
         <AccordionSummary
           aria-controls="panel1a-content"
-          id="panel1a-header">
+          id="panel1a-header"
+          style={{background: 'rgba(255, 255, 255, 255)'}}>
           <Typography>Replies</Typography>
             </AccordionSummary>
-        <AccordionDetails style={{background:'#eee'}}>
+
+        <AccordionDetails style={{background:'#e0e0e0'}}>
         {user.id!==null?<>
-          <textarea id={"replyni-"+newPost.id}/>
+          <div style={{  display: 'flex', position: 'relative', alignItems: 'center', justifyContent: 'space-between'  }}>
+          <textarea 
+                  id={"replyni-"+newPost.id} 
+                  style={{width: '92%', height: '50px', borderRadius: '10px', fontSize: '20px', marginTop: '5px', border: '1px solid gray'}}
+                  placeholder='Reply'>
+                </textarea>
             <Button variant='contained' onClick={()=>{handleReply(newPost.id)}}>Reply</Button>
+            </div>
             <br/>
             </>:<></>}
             {console.log('REPLY:',newPost.replies)}
@@ -355,9 +367,11 @@ function Forum() {
             {Array.isArray(newPost.replies) && newPost.replies.length > 0 ? <>
             {newPost.replies.map((reply,id)=>{
               console.log('Current reply:', reply); // Log the reply object
-              return <Paper key={id} style={{margin:'5px', padding:'10px'}} elevation={1}>
-                <h3>{reply.reply}</h3>
-                <h6 style={{fontStyle:'italic'}}>{reply.user.username}</h6>
+              return <Paper key={id} style={{backgroundColor: '#FAFAFA', padding: '5px', marginBottom: '15px', borderRadius: '10px'}} elevation={1}>
+                <div style={{ marginBottom: '10px' }}>
+                 <h3 style={{fontWeight: 'bolder', marginLeft: '10px', marginTop: '20px', fontSize: '16px'}}>{reply.reply}</h3>
+                 <h4 style={{fontWeight: '450', marginLeft: '10px', marginTop: '-10px', fontSize: '14px', color: '#555'}}>By: {reply.user.username}</h4>
+                 </div>
                 </Paper>
             })}
             </>:<>No Replies Yet</>}
@@ -377,11 +391,12 @@ function Forum() {
           <div>
   <input
     type="text"
+    multiline
     value={editedPost}
     onChange={(e) => setEditedPost(e.target.value)}
     style={{
-      width: '200px',
-      height: '40px',
+      width: '500px',
+      height: '100px',
     }}
   />
 </div>

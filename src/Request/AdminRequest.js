@@ -311,15 +311,21 @@ function AdminRequest() {
         <div className="popup4">
           <h1>Document Progress</h1>
           <div>
-  <input
-    type="text"
-    value={editedTrack}
-    onChange={(e) => setEditedTrack(e.target.value)}
-    style={{
-      width: '200px',
-      height: '40px',
-    }}
-  />
+          <select
+  value={editedTrack}
+  onChange={(e) => setEditedTrack(e.target.value)}
+  style={{
+    width: '200px',
+    height: '50px',
+  }}
+>
+  <option value="pending">Pending</option>
+  <option value="processing">Processing</option>
+  <option value="request_denied">Request Denied</option>
+  <option value="request_append">Request Append</option>
+  <option value="ready_for_release">Ready for Release</option>
+</select>
+
 </div>
 <div>
   <Button

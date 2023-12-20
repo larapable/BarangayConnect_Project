@@ -12,8 +12,8 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      {/* <App /> */}
-      <AdminDashboard/>
+      <App />
+      {/* <AdminDashboard/> */}
     </BrowserRouter>
   </React.StrictMode>
 );
