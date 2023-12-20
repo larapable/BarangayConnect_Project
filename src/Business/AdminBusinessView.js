@@ -155,7 +155,7 @@ const AdminBusinessView = ({ business, handleEdit }) => {
           </p>
         </Grid>
 
-        <Grid item xs={9} style={{ backgroundColor: "#213555", height: '1300px' }}>
+        <Grid item xs={9} style={{ backgroundColor: "#213555", height: '1100px' }}>
           <Paper elevation={3} className="search-bar-paperb3">
             <SearchIcon className="search-iconb3" />
             <InputBase
@@ -207,8 +207,6 @@ const AdminBusinessView = ({ business, handleEdit }) => {
           </div>
 
           {filteredBusinesses.map((business) => (
-            //add paper here when hovered
-            
             <Paper
               key={business.busId}
               elevation={3}
@@ -240,17 +238,17 @@ const AdminBusinessView = ({ business, handleEdit }) => {
                       handleEditClick(business.busId);
                     }}
                     style={{
-                      backgroundColor: "#ffffff",
+                      backgroundColor: "#213555",
                       marginRight: "5px",
                       height: "50%",
                       border: "1px solid #213555",
                     }}
                   >
-                    <EditIcon style={{ color: "#213555" }} />
+                    <EditIcon style={{ color: "#ffffff" }} />
                   </Button>
                   <Button
                     onClick={() => handleDelete(business.busId)}
-                    style={{ backgroundColor: "#d8210b" }}
+                    style={{ backgroundColor: "#F24E1E" }}
                   >
                     <DeleteIcon style={{ color: "#ffffff" }} />
                   </Button>
@@ -303,7 +301,7 @@ const AdminBusinessView = ({ business, handleEdit }) => {
               style={{
                 margin: "auto",
                 textAlign: "center",
-                color: "#16558f",
+                color: "#000000",
                 fontWeight: "bolder",
                 fontSize: "40px",
               }}
@@ -325,12 +323,11 @@ const AdminBusinessView = ({ business, handleEdit }) => {
               <Button
                 onClick={() => handleDeleteConfirmation(true)}
                 style={{
-                  color: "#213555",
-                  backgroundColor: "#ffffff",
+                  color: "#ffffff",
+                  backgroundColor: "#213555",
                   marginBottom: "10px",
                   width: "280px",
                   height: "50px",
-                  border: "1px solid #213555",
                 }}
                 variant="contained"
                 className="submit-button-homeb3"
@@ -340,7 +337,7 @@ const AdminBusinessView = ({ business, handleEdit }) => {
               <Button
                 onClick={() => handleDeleteConfirmation(false)}
                 style={{
-                  backgroundColor: "#213555",
+                  backgroundColor: "#F24E1E",
                   color: "#ffffff",
                   marginBottom: "10px",
                   width: "280px",

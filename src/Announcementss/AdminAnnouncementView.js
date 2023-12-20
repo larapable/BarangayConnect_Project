@@ -251,17 +251,16 @@ const AdminAnnouncementView = ({ announcement, handleEdit }) => {
                       handleEditClick(announcement.announcementId);
                     }}
                     style={{
-                      backgroundColor: "#ffffff",
+                      backgroundColor: "#213555",
                       marginRight: "5px",
                       height: "50%",
-                      border: "1px solid #213555",
                     }}
                   >
-                    <EditIcon style={{ color: "#213555" }} />
+                    <EditIcon style={{ color: "#ffffff" }} />
                   </Button>
                   <Button
                     onClick={() => handleDelete(announcement.announcementId)}
-                    style={{ backgroundColor: "#d8210b" }}
+                    style={{ backgroundColor: "#F24E1E" }}
                   >
                     <DeleteIcon style={{ color: "#ffffff" }} />
                   </Button>
@@ -303,12 +302,11 @@ const AdminAnnouncementView = ({ announcement, handleEdit }) => {
             onClose={() => handleDeleteConfirmation(false)}
             PaperProps={{ style: { backgroundColor: "#ffffff" } }}
           >
-            {/* <img src={"/deleteicon.png"} alt="Check Button" className="submit-checkbutton2" style={{marginTop: "20px"}}/> */}
             <DialogTitle
               style={{
                 margin: "auto",
                 textAlign: "center",
-                color: "#16558f",
+                color: "#000000",
                 fontWeight: "bolder",
                 fontSize: "40px",
               }}
@@ -330,12 +328,11 @@ const AdminAnnouncementView = ({ announcement, handleEdit }) => {
               <Button
                 onClick={() => handleDeleteConfirmation(true)}
                 style={{
-                  color: "#213555",
-                  backgroundColor: "#ffffff",
+                  color: "#ffffff",
+                  backgroundColor: "#213555",
                   marginBottom: "10px",
                   width: "280px",
                   height: "50px",
-                  border: "1px solid #213555",
                 }}
                 variant="contained"
                 className="submit-button-home3"
@@ -345,7 +342,7 @@ const AdminAnnouncementView = ({ announcement, handleEdit }) => {
               <Button
                 onClick={() => handleDeleteConfirmation(false)}
                 style={{
-                  backgroundColor: "#213555",
+                  backgroundColor: "#F24E1E",
                   color: "#ffffff",
                   marginBottom: "10px",
                   width: "280px",

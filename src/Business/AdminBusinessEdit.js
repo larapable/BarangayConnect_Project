@@ -252,7 +252,7 @@ const AdminBusinessEdit = () => {
                     style={{
                       margin: "auto",
                       textAlign: "center",
-                      color: "#16558f",
+                      color: "#000000",
                       fontWeight: "bolder",
                       fontSize: "40px",
                     }}
@@ -274,12 +274,11 @@ const AdminBusinessEdit = () => {
                     <Button
                       onClick={handleConfirmUpdate}
                       style={{
-                        backgroundColor: "#ffffff",
+                        backgroundColor: "#213555",
                         marginBottom: "10px",
                         width: "280px",
                         height: "50px",
-                        color: "#213555",
-                        border: "1px solid #213555",
+                        color: "#ffffff",
                       }}
                       className="submit-button-homeb2"
                     >
@@ -288,7 +287,7 @@ const AdminBusinessEdit = () => {
                     <Button
                       onClick={handleCancelUpdate}
                       style={{
-                        backgroundColor: "#213555",
+                        backgroundColor: "#F24E1E",
                         marginBottom: "10px",
                         width: "280px",
                         height: "50px",

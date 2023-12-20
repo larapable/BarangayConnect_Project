@@ -1,3 +1,8 @@
+.body-styles {
+  background-color: #e0e0e0; 
+  margin: 0;
+  font-family: Arial, sans-serif; 
+}
 
 .main-title {
     align-items: center;
@@ -14,63 +19,103 @@
   .paper-container {
     margin: 10px;
   }
-  
-  .card1 {
+  .card0 {
     border-radius: 10px;
     margin-top: 50px;
     padding: 20px;
-    border: 1px solid #ffffff;
+    border: 1px solid none;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     text-align: center;
-    width: 300px;
+    width: 1200px;
     height: 150px;
-    background-color: #829ca6; /* Light SkyBlue with 70% opacity */
+    background-color: #ffffff;
+  }
+  .card1 {
+    border-radius: 10px;
+    margin-top: -240px;
+    margin-left: 1280px;
+    padding: 20px;
+    border: 1px solid none;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 680px;
+    height: 150px;
+    background-color: #ffffff;
   }
 
   .card2 {
     border-radius: 10px;
     margin-top: 50px;
     padding: 20px;
-    border: 1px solid #829ca6;
+    border: 1px solid none;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     text-align: center;
     width: 300px;
     height: 150px;
+    background-color: #ffffff;
   }
 
   .card3 {
     border-radius: 10px;
-    margin-top: 50px;
     padding: 20px;
-    border: 1px solid #829ca6;
+    border: 1px solid none;
+    margin-right: 10px;
     text-align: center;
     width: 1200px;
     height: 500px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    background-color: #ffffff;
   }
 
   .card4 {
     border-radius: 10px;
-    margin-top: 50px;
     padding: 20px;
-    border: 1px solid #829ca6;
+    border: 1px solid none;
     text-align: center;
-    width: 600px;
+    width: 670px;
     height: 500px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    background-color: #ffffff;
   }
 
   .card5 {
     border-radius: 10px;
     margin-top: 50px;
     padding: 20px;
-    border: 1px solid #829ca6;
+    border: 1px solid none;
     text-align: center;
-    width: 1900px;
-    height: 500px;
+    width: 1200px;
+    height: 400px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     margin-bottom: 50px;
+    background-color: #ffffff;
   }
+
+  .card6 {
+    border-radius: 10px;
+    margin-top: 50px;
+    padding: 20px;
+    border: 1px solid none;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 300px;
+    height: 150px;
+    background-color: #ffffff;
+  }
+
+  .card7 {
+    border-radius: 10px;
+    margin-top: 50px;
+    padding: 20px;
+    border: 1px solid none;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 300px;
+    height: 150px;
+    background-color: #ffffff;
+  }
+
+  
   
   .line-chart {
     margin: 20px;
@@ -83,9 +128,7 @@
   .additional-papers {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
     align-items: flex-start;
-    margin-top: 20px;
     flex-direction: row; /* Align cards in one row */
     justify-content: space-around;
   }

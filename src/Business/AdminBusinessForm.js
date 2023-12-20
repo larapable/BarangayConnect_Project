@@ -278,7 +278,7 @@ const AdminBusinessForm = () => {
           style={{
             margin: "auto",
             textAlign: "center",
-            color: "#16558f",
+            color: "#000000",
             fontWeight: "bolder",
             fontSize: "40px",
           }}
@@ -298,15 +298,15 @@ const AdminBusinessForm = () => {
         <DialogActions>
           <Button
             style={{
-              backgroundColor: "#ffffff",
+              backgroundColor: "#213555",
               marginBottom: "10px",
               width: "280px",
               height: "50px",
               border: "1px solid #213555",
-              color: "#213555",
+              color: "#ffffff",
               "&:hover": {
-                backgroundColor: "#213555",
-                color: "#ffffff",
+                backgroundColor: "#ffffff",
+                color: "#213555",
               },
             }}
             className="submit-button-anotherannb1"
@@ -319,13 +319,13 @@ const AdminBusinessForm = () => {
           <Link to="/adminviewbusiness">
             <Button
               style={{
-                backgroundColor: "#213555",
+                backgroundColor: "#F24E1E",
                 marginBottom: "10px",
                 width: "280px",
                 height: "50px",
                 "&:hover": {
                   backgroundColor: "#ffffff",
-                  color: "#213555",
+                  color: "#F24E1E",
                 },
               }}
               className="submit-button-homeb1"

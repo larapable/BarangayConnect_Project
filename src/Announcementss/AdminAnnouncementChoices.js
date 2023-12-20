@@ -8,7 +8,6 @@ const AdminAnnouncementChoices = () => {
   return (
     <div style={{ backgroundColor: "#213555" }}>
       <div>
-        {/* Header */}
         <Header />
         <img
           src={"fullbg.png"}
@@ -17,10 +16,9 @@ const AdminAnnouncementChoices = () => {
         />
       </div>
 
-      <div className="popup-container">
-        <div className="popup-box">
-          {/* Content inside the pop-up container */}
-          <img src={"BClogo.png"} alt="Logo Pop-up" className="popup-image" />
+      <div className="popup-containera1">
+        <div className="popup-boxa1">
+          <img src={"BClogo.png"} alt="Logo Pop-up" className="popup-imagea1" />
           <div
             style={{
               alignItems: "center",
@@ -31,7 +29,7 @@ const AdminAnnouncementChoices = () => {
           >
             <Link to="/submitannouncement">
               <Button
-                class="button button-submit"
+                class="button button-submita1"
                 variant="contained"
                 style={{
                   height: "70px",
@@ -44,13 +42,13 @@ const AdminAnnouncementChoices = () => {
               </Button>
             </Link>
             <br />
-            <span class="text" style={{ fontWeight: "bolder" }}>
+            <span class="texta1" style={{ fontWeight: "bolder" }}>
               OR
             </span>
             <br />
             <Link to="/adminviewannouncement">
               <Button
-                class="button button-emergency"
+                class="button button-emergencya1"
                 variant="contained"
                 style={{
                   height: "70px",

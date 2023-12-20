@@ -35,7 +35,6 @@ export default function AdminDashboard() {
         return response.json();
       })
       .then((data) => {
-        // Update the state with the received data
         setUsers(data);
   
         let maleCount = 0;
@@ -47,10 +46,7 @@ export default function AdminDashboard() {
           } else if (user.gender === 'Female') {
             femaleCount += 1;
           }
-          // You can add more conditions for other genders if needed
         });
-  
-        // Now you have the counts in the maleCount and femaleCount variables
         console.log('Male Count:', maleCount);
         console.log('Female Count:', femaleCount);
   
@@ -169,75 +165,198 @@ export default function AdminDashboard() {
  
   
   return (
+    <div className="body-styles">
     <div>
+      
       <div>
         <Header />
       </div>
 
       <div className="main-container1">
-        {/* <div className="main-title">
-          <p style={{fontSize:"40px",fontWeight:'bold'}}>DASHBOARD</p>
-        </div> */}
-
-        <div className="card1">
+      <div className="card0">
           <div className="card-inner">
-          <img
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <h1 style={{ marginTop: '-5px', color: '#213555', textAlign: 'left' }}>Welcome, Admin</h1>
+            <span style={{ marginLeft: '10px', fontSize: '30px', marginTop: '-45px' }}>
+              🎉
+            </span>
+          </div>
+
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+          <div>
+            <img
+              src="adminpic.png" // Replace with the actual image URL
+              alt="Description of the image"
+              style={{ width: "30%", height: "30%", marginLeft: '880px', marginTop: '-68px' }}
+            />
+          </div>
+          </div>
+            <h4 style={{color: 'gray', textAlign: 'left', marginTop: '-140px' }}>Explore the dashboard for a quick overview of user data, requests, </h4>
+            <h4 style={{color: 'gray', textAlign: 'left', marginTop: '-15px'}}>events, and more. Manage with ease and stay informed!</h4>
+          </div>
+        </div>
+
+        <div className="card6">
+        <div className="card-inner">
+          <div style={{alignItems: 'center', marginLeft: '130px'}}>
+            <div
+              style={{
+                backgroundColor: 'rgba(255, 0, 0, 0.2)', // Red with 20% opacity
+                width: '60px',
+                height: '60px',
+                borderRadius: '5px',
+                marginRight: '10px',
+              }}
+            >
+              <img
+                src="diversity.png"
+                alt="diversity"
+                style={{ width: '100%', height: '100%' }}
+              />
+            </div>
+            <h4 style={{ color: '#213555', marginLeft: '-130px' }}>TOTAL RESIDENTS</h4>
+          </div>
+          <h1 style={{ marginTop: '-10px', color: '#213555' }}>{totalResidents}</h1>
+        </div>
+      </div>
+
+
+      <div className="card7">
+      <div className="card-inner">
+        <div style={{alignItems: 'center',marginLeft: '130px' }}>
+          <div
+            style={{
+              backgroundColor: 'rgba(0, 0, 255, 0.2)', // Red with 20% opacity
+              width: '60px',
+              height: '60px',
+              borderRadius: '5px',
+              marginRight: '10px',
+            }}
+          >
+            <img
               src="user.png"
               alt="user"
-              style={{ width: "50px"}}
+              style={{ width: '80%', height: '80%', marginTop: '5px' }}
             />
-            <h4 style={{color: '#ffffff'}}>TOTAL USERS </h4>
           </div>
-          <h1 style={{marginTop: '-10px', color: '#ffffff'}}>{totalUsers}</h1>
+          <h4 style={{ color: '#213555', marginLeft: '-130px'  }}>TOTAL USERS </h4>
         </div>
+        <h1 style={{ marginTop: '-10px', color: '#213555' }}>{totalUsers}</h1>
+      </div>
+    </div>
 
-        <div className="card2">
-          <div className="card-inner">
-          <img
+      </div>
+
+      <div className="main-container1">
+
+      <div className="additional-papers">
+    <div className="card5">
+        <div className="card-inner">
+      <div className="line-chart">
+      <ResponsiveContainer width="100%" height={400}>
+          <LineChart
+            data={data}
+            margin={{
+              top: 5,
+              right: 30,
+              left: 20,
+              bottom: 5,
+            }}
+          >
+            <CartesianGrid strokeDasharray="3 3" />
+            <text x="50%" y="20" textAnchor="middle" dominantBaseline="middle" fontSize="30" fontWeight="bold" fill="#213555">
+            Tisa Population (1990-2023)
+            </text>
+            <XAxis dataKey="name" />
+            <YAxis />
+            <Tooltip />
+            <Legend />
+            <Line type="monotone" dataKey="pv" stroke="#8884d8" activeDot={{ r: 8 }} />
+          </LineChart>
+        </ResponsiveContainer>
+        
+      </div>
+      </div>
+      </div>
+      </div>
+
+      <div className="card2">
+      <div className="card-inner">
+        <div style={{alignItems: 'center',marginLeft: '130px'  }}>
+          <div
+            style={{
+              backgroundColor: 'rgba(255, 255, 0, 0.5)', // Blue with 20% opacity
+              width: '60px',
+              height: '60px',
+              borderRadius: '5px',
+              marginRight: '10px',
+            }}
+          >
+            <img
               src="folder.png"
               alt="folder"
-              style={{ width: "50px"}}
+              style={{ width: '80%', height: '80%',  marginTop: '5px' }}
             />
-            <h4 style={{color: '#213555'}}>DOCUMENT REQUESTS</h4>
           </div>
-          <h1 style={{marginTop: '-10px', color: '#213555'}}>{totalRequests}</h1>
+          <h4 style={{ color: '#213555', marginLeft: '-130px'   }}>DOCUMENT REQUESTS</h4>
         </div>
+        <h1 style={{ marginTop: '-10px', color: '#213555' }}>{totalRequests}</h1>
+      </div>
+    </div>
 
-        <div className="card1">
-          <div className="card-inner">
-          <img
-              src="diversity.png"
-              alt="diversity"
-              style={{ width: "50px"}}
-            />
-            <h4 style={{color: '#ffffff'}}>TOTAL RESIDENTS</h4>
-          </div>
-          <h1 style={{marginTop: '-10px', color: '#ffffff'}}>{totalResidents}</h1>
-        </div>
+        
 
-        <div className="card2">
-          <div className="card-inner">
+    <div className="card2">
+    <div className="card-inner">
+      <div style={{alignItems: 'center',marginLeft: '130px'  }}>
+        <div
+          style={{
+            backgroundColor: 'rgba(255, 165, 0, 0.4)', // Yellow with 20% opacity
+            width: '60px',
+            height: '60px',
+            borderRadius: '5px',
+            marginRight: '10px',
+          }}
+        >
           <img
-              src="event.png"
-              alt="event"
-              style={{ width: "50px"}}
-            />
-            <h4 style={{color: '#213555'}}>TOTAL EVENTS</h4>
-          </div>
-          <h1 style={{marginTop: '-10px', color: '#213555'}}>{totalEvents}</h1>
+            src="event.png"
+            alt="event"
+            style={{ width: '80%', height: '80%', marginTop: '5px' }}
+          />
         </div>
+        <h4 style={{ color: '#213555',marginLeft: '-130px' }}>TOTAL EVENTS</h4>
+      </div>
+      <h1 style={{ marginTop: '-10px', color: '#213555' }}>{totalEvents}</h1>
+    </div>
+  </div>
 
-        <div className="card1">
-          <div className="card-inner">
-          <img
-              src="emergency.png"
-              alt="emergency"
-              style={{ width: "50px"}}
-            />
-            <h4 style={{color: '#ffffff'}}>RECENT REPORTS</h4>
-          </div>
-          <h1 style={{marginTop: '-10px', color: '#ffffff'}}>{totalReports}</h1>
-        </div>
+
+  <div className="card1">
+  <div className="card-inner">
+    <div style={{alignItems: 'center',marginLeft: '310px' }}>
+      <div
+        style={{
+          backgroundColor: 'rgba(255, 165, 0, 0.2)', // Orange with 20% opacity
+          width: '60px',
+          height: '60px',
+          borderRadius: '5px',
+          marginRight: '10px',
+        }}
+      >
+        <img
+          src="emergency.png"
+          alt="emergency"
+          style={{ width: '80%', height: '80%', marginTop: '5px'  }}
+        />
+      </div>
+      <h4 style={{ color: '#213555',marginLeft: '-300px' }}>RECENT REPORTS</h4>
+    </div>
+    <h1 style={{ marginTop: '-10px', color: '#213555' }}>{totalReports}</h1>
+  </div>
+</div>
+
+
+        
       </div>
 
         <div className="additional-papers">
@@ -250,7 +369,6 @@ export default function AdminDashboard() {
                     style={{ width: "900px", height: "440px"}}
                     />
                 </div>
-
             </div>
 
             <div className="card4">
@@ -280,37 +398,6 @@ export default function AdminDashboard() {
             </div>
         </div>
 
-    <div className="additional-papers">
-    <div className="card5">
-        <div className="card-inner">
-      <div className="line-chart">
-      <ResponsiveContainer width="100%" height={500}>
-          <LineChart
-            data={data}
-            margin={{
-              top: 5,
-              right: 30,
-              left: 20,
-              bottom: 5,
-            }}
-          >
-            <CartesianGrid strokeDasharray="3 3" />
-            <text x="50%" y="20" textAnchor="middle" dominantBaseline="middle" fontSize="30" fontWeight="bold" fill="#213555">
-            Tisa Population (1990-2023)
-            </text>
-            <XAxis dataKey="name" />
-            <YAxis />
-            <Tooltip />
-            <Legend />
-            <Line type="monotone" dataKey="pv" stroke="#8884d8" activeDot={{ r: 8 }} />
-          </LineChart>
-        </ResponsiveContainer>
-        
-      </div>
-
-      </div>
-
-            </div>
         </div>
     </div>
   );

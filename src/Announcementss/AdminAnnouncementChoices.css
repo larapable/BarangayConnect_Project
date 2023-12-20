@@ -60,7 +60,7 @@ body {
 
 /* Pop - up css */
 
-.popup-container {
+.popup-containera1 {
   position: fixed;
   top: 0;
   left: 0;
@@ -73,7 +73,7 @@ body {
   z-index: 1000;
 }
 
-.popup-box {
+.popup-boxa1 {
   background-color: #e0e0e0;
   padding: 40px;
   border: 2px solid #e0e0e0;
@@ -88,7 +88,7 @@ body {
   text-align: center;
 }
 
-.popup-image {
+.popup-imagea1 {
   max-width: 100%;
   max-height: 100%;
   position: relative;
@@ -97,26 +97,26 @@ body {
   transform: translate(-50%, -50%);
 }
 
-.container {
+.containera1 {
   align-items: center;
 }
 
-.button {
+.buttona1 {
   border: 1px solid #ccc;
   box-shadow: 0 4px 5px #a8a2a2;
   margin-bottom: 20px;
 }
 
-.button-submit {
+.button-submita1 {
   margin-bottom: 30px;
   margin-top: 55px;
 }
 
-.button-emergency {
+.button-emergencya1 {
   margin-top: 20px;
 }
 
-.text {
+.texta1 {
   font-size: 1.5em;
   color: #213555;
   text-align: center;
