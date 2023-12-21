@@ -30,14 +30,23 @@ const AdminIncidentReport = () => {
 
     const fetchAlerts = async () => {
         try {
-            const response = await fetch('http://localhost:8080/emergency/getAllEmergency');
-            if (!response.ok) {
-                throw new Error(`Failed to fetch alert data: ${response.status}`);
+            // Fetch alerts from the adminemergency endpoint
+            const adminEmergencyResponse = await fetch('http://localhost:8080/adminemergency/admingetAllEmergency');
+            if (!adminEmergencyResponse.ok) {
+                throw new Error(`Failed to fetch admin emergency alert data: ${adminEmergencyResponse.status}`);
             }
-            const data = await response.json();
+            const adminEmergencyData = await adminEmergencyResponse.json();
 
-            // Filter out soft-deleted alerts (where isdelete is 1)
-            const filteredAlerts = data.filter(alert => alert.isdelete !== 1);
+            // Fetch alerts from the emergency endpoint
+            const emergencyResponse = await fetch('http://localhost:8080/emergency/getAllEmergency');
+            if (!emergencyResponse.ok) {
+                throw new Error(`Failed to fetch emergency alert data: ${emergencyResponse.status}`);
+            }
+            const emergencyData = await emergencyResponse.json();
+
+            // Combine and filter out soft-deleted alerts from both endpoints
+            const combinedAlerts = [...adminEmergencyData, ...emergencyData];
+            const filteredAlerts = combinedAlerts.filter(alert => alert.isdelete !== 1);
 
             setAlerts(filteredAlerts);
             // Update local storage with fetched alerts
@@ -47,21 +56,26 @@ const AdminIncidentReport = () => {
         }
     };
 
-    const handleDelete = async (emergencyId, index) => {
+    const handleDelete = async (adminemergencyId, emergencyId, index, isAdminEmergency) => {
         try {
-            const response = await fetch(`http://localhost:8080/emergency/deleteEmergency/${emergencyId}`, {
+            const endpoint = isAdminEmergency
+                ? `http://localhost:8080/adminemergency/admindeleteEmergency/${adminemergencyId}`
+                : `http://localhost:8080/emergency/deleteEmergency/${emergencyId}`;
+    
+            const response = await fetch(endpoint, {
                 method: 'DELETE',
             });
-
+    
             if (response.ok) {
                 // Remove the deleted alert from the state
                 const updatedAlerts = [...alerts];
                 updatedAlerts.splice(index, 1);
                 setAlerts(updatedAlerts);
-
+    
                 console.log(`Alert with ID ${emergencyId} deleted successfully.`);
+                console.log(`Alert with ID ${adminemergencyId} deleted successfully.`);
                 localStorage.setItem('alerts', JSON.stringify(updatedAlerts));
-
+    
                 // Display a popup to the user
                 window.alert('Alert deleted successfully.');
             } else {
@@ -74,13 +88,55 @@ const AdminIncidentReport = () => {
             // Display an error popup to the user
             window.alert(`Error deleting alert: ${error.message}`);
         }
-    };
+    };    
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Store the submitted incidentType separately
-        setSubmittedIncidentType(incidentType);
-        setSubmitted(true);
+
+        try {
+            // Create an object with the incident data
+            const incidentData = {
+                typeOfIncident: incidentType,
+                date: date,
+                time: time,
+                exactLocation: location,
+                incidentDetails: incidentDetails,
+            };
+
+            // Make a POST request to your backend endpoint
+            const response = await fetch('http://localhost:8080/adminemergency/admininsertEmergency', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(incidentData),
+            });
+
+            if (response.ok) {
+                // Clear the form after successful submission
+                setIncidentType('');
+                setDate('');
+                setTime('');
+                setLocation('');
+                setIncidentDetails('');
+                setSubmitted(false);
+
+                // Fetch updated alerts after submission
+                fetchAlerts();
+
+                console.log('Incident report submitted successfully.');
+                // You can also display a success message to the user
+                window.alert('Incident report submitted successfully.');
+            } else {
+                console.error(`Error submitting incident report: ${response.status}`);
+                // Display an error popup to the user
+                window.alert(`Error submitting incident report: ${response.statusText}`);
+            }
+        } catch (error) {
+            console.error(`Error submitting incident report: ${error.message}`);
+            // Display an error popup to the user
+            window.alert(`Error submitting incident report: ${error.message}`);
+        }
     };
 
     return (
@@ -90,95 +146,113 @@ const AdminIncidentReport = () => {
                 <div style={{ display: 'flex' }}>
                     {/* Left side - Form */}
                     <div style={{ marginTop: '10px' }}>
-                        <h1 style={{ color: "#213555", marginLeft: '20px', marginTop: '-5px', fontSize: '40px' }}>REPORT AN ISSUE</h1>
+                        <h1 style={{ color: "#213555", marginLeft: '20px', marginTop: '-5px', fontSize: '38px' }}>REPORT AN ISSUE</h1>
                     </div>
-                    <div style={{ border: "2px solid #213555", padding: "3px", width: "820px", height: "auto", marginTop: '70px', marginLeft: '-340px', marginRight: '5px' }}>
-                        <form onSubmit={handleSubmit}>
-                            {/* Type of Incident */}
-                            <br />
-                            <textarea
-                                type="text"
-                                value={incidentType}
-                                onChange={(e) => setIncidentType(e.target.value)}
-                                placeholder='Type of Incident.....'
-                                required={submitted}
-                                className='admin-incident-input'
-                            />
-                            <br />
-                            <br />
-
-                            {/* Date and Time */}
-                            <label style={{ marginLeft: '10px' }}>
-                                Date:
-                                <input
-                                    type="date"
-                                    value={date}
-                                    onChange={(e) => setDate(e.target.value)}
+                    <div>
+                        <div style={{ border: "2px solid #213555", padding: "3px", width: "820px", height: "auto", marginTop: '70px', marginLeft: '-340px', marginRight: '5px' }}>
+                            <form onSubmit={handleSubmit}>
+                                {/* Type of Incident */}
+                                <br />
+                                <textarea
+                                    type="text"
+                                    value={incidentType}
+                                    onChange={(e) => setIncidentType(e.target.value)}
+                                    placeholder='Type of Incident.....'
                                     required={submitted}
-                                    className='admin-date-input'
+                                    className='admin-incident-input'
                                 />
-                            </label>
+                                <br />
+                                <br />
 
-                            <label style={{ marginLeft: '10px' }}>
-                                Time:
-                                <input
-                                    type="time"
-                                    value={time}
-                                    onChange={(e) => setTime(e.target.value)}
+                                {/* Date and Time */}
+                                <label style={{ marginLeft: '10px' }}>
+                                    Date:
+                                    <input
+                                        type="date"
+                                        value={date}
+                                        onChange={(e) => setDate(e.target.value)}
+                                        required={submitted}
+                                        className='admin-date-input'
+                                    />
+                                </label>
+
+                                <label style={{ marginLeft: '10px' }}>
+                                    Time:
+                                    <input
+                                        type="time"
+                                        value={time}
+                                        onChange={(e) => setTime(e.target.value)}
+                                        required={submitted}
+                                        className='admin-time-input'
+                                    />
+                                </label>
+                                <br />
+
+                                {/* Exact Location */}
+                                <br />
+                                <br />
+                                <textarea
+                                    type="text"
+                                    value={location}
+                                    onChange={(e) => setLocation(e.target.value)}
+                                    placeholder='Exact Location.....'
                                     required={submitted}
-                                    className='admin-time-input'
+                                    className='admin-location-input'
                                 />
-                            </label>
-                            <br />
+                                <br />
+                                <br />
 
-                            {/* Exact Location */}
-                            <br />
-                            <br />
-                            <textarea
-                                type="text"
-                                value={location}
-                                onChange={(e) => setLocation(e.target.value)}
-                                placeholder='Exact Location.....'
-                                required={submitted}
-                                className='admin-location-input'
-                            />
-                            <br />
-                            <br />
-
-                            {/* Incident Details */}
-                            <br />
-                            <textarea
-                                type="text"
-                                value={incidentDetails}
-                                onChange={(e) => setIncidentDetails(e.target.value)}
-                                placeholder='Incident Details.....'
-                                required={submitted}
-                                className='admin-details-input'
-                            />
-                            <br />
-                            <div className='incident-button-submit'>
-                                <Button
-                                    variant="contained"
-                                    style={{ color: '#FFFFFF', fontWeight: "bolder", backgroundColor: "#213555", width: '400px', height: '20px', padding: '15px 30px', borderRadius: '10px', textAlign: 'center', fontStyle: 'Arial' }}
-                                    onClick={handleSubmit}
-                                >
-                                    Submit
-                                </Button>
-                            </div>
-                        </form>
+                                {/* Incident Details */}
+                                <br />
+                                <textarea
+                                    type="text"
+                                    value={incidentDetails}
+                                    onChange={(e) => setIncidentDetails(e.target.value)}
+                                    placeholder='Incident Details.....'
+                                    required={submitted}
+                                    className='admin-details-input'
+                                />
+                                <br />
+                                <div className='incident-button-submit'>
+                                    <Button
+                                        variant="contained"
+                                        style={{ color: '#FFFFFF', fontWeight: "bolder", backgroundColor: "#213555", width: '400px', height: '20px', padding: '15px 30px', borderRadius: '10px', textAlign: 'center', fontStyle: 'Arial' }}
+                                        onClick={handleSubmit}
+                                    >
+                                        Submit
+                                    </Button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
+
                     <div>
                         {/* Incident Alert Box */}
                         <div className="alert-label-container">
-                            <h2>A L E R T !</h2>
+                            <h2>A L L - A L E R T S</h2>
                         </div>
+                        <div className="alertlist-container">
+                            <div className="alert-scroll-container">
+                                {alerts.map((alert, index) => (
+                                    <div key={index} className="alertslist-report-forum">
+                                        <p style={{ fontSize: '18px' }}><strong>Type of Incident:</strong> {alert.typeOfIncident}</p>
+                                        <p style={{ fontSize: '18px' }}><strong>Date:</strong> {alert.date}</p>
+                                        <p style={{ fontSize: '18px' }}><strong>Time:</strong> {alert.time}</p>
+                                        <p style={{ fontSize: '18px' }}><strong>Location:</strong> {alert.exactLocation}</p>
+                                        <p style={{ fontSize: '18px' }}><strong>Incident Details:</strong> {alert.incidentDetails}</p>
+                                    </div>
+                                ))}
 
-                        <div className="alert-container">
-                            <p><strong>Type of Incident:</strong> {submittedIncidentType}</p>
-                            <p><strong>Date:</strong> {date}</p>
-                            <p><strong>Time:</strong> {time}</p>
-                            <p><strong>Location:</strong> {location}</p>
-                            <p><strong>Incident Details:</strong> {incidentDetails}</p>
+                                {submitted && (
+                                    <div className="alertslist-report-forum">
+                                        <p style={{ fontSize: '18px' }}><strong>Type of Incident:</strong> {submittedIncidentType}</p>
+                                        <p style={{ fontSize: '18px' }}><strong>Date:</strong> {date}</p>
+                                        <p style={{ fontSize: '18px' }}><strong>Time:</strong> {time}</p>
+                                        <p style={{ fontSize: '18px' }}><strong>Location:</strong> {location}</p>
+                                        <p style={{ fontSize: '18px' }}><strong>Incident Details:</strong> {incidentDetails}</p>
+                                    </div>
+                                )}
+                            </div>
                         </div>
 
                         {/* Report Forum Box */}
@@ -204,8 +278,8 @@ const AdminIncidentReport = () => {
                                         Detailed Incident: {alert.incidentDetails}
                                     </div>
                                     <button
-                                        className="delete-button"
-                                        onClick={() => handleDelete(alert.emergencyId, index)} // Pass emergencyId along with index
+                                        className="report-delete-button"
+                                        onClick={() => handleDelete(alert.adminemergencyId, alert.emergencyId, index, alert.isAdminEmergency)}
                                     >
                                         Delete
                                     </button>
