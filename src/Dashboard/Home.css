@@ -65,17 +65,16 @@
   width: 15vw;
 }
 
-
 /* ========================================== */
 
 .container1 {
   width: 80vw;
   height: auto;
-  background-color:#ffffff;
-  opacity:0.8;
+  background-color: #ffffff;
+  opacity: 0.8;
   flex-direction: column;
-  justify-content: center; 
-  align-items: center; 
+  justify-content: center;
+  align-items: center;
   border-radius: 10px;
   margin-top: 30px;
 }
@@ -83,10 +82,10 @@
 .container2 {
   width: 80vw;
   height: auto;
-  background-color:#ffffff;
+  background-color: #ffffff;
   flex-direction: column;
-  justify-content: center; 
-  align-items: center; 
+  justify-content: center;
+  align-items: center;
   border-radius: 10px;
   margin-top: 30px;
 }
@@ -98,7 +97,7 @@
   justify-content: center;
   display: flex;
   font-size: 3rem;
-  color:#213555;
+  color: #213555;
 }
 
 .aboutus2 {
@@ -109,31 +108,30 @@
   text-align: center;
   font-size: 24px;
   font-weight: 500;
-  color:#213555;
+  color: #213555;
 }
 
 .member1 {
   width: 400px;
   height: 400px;
   margin-right: 10px;
-  background-color:#7FAAED;
-  opacity:0.8;
+  background-color: #7faaed;
+  opacity: 0.8;
   flex-direction: column;
-  justify-content: center; 
-  align-items: center; 
+  justify-content: center;
+  align-items: center;
   border-radius: 10px;
-  
 }
 
 .member2 {
   width: 400px;
   height: 400px;
   margin-right: 10px;
-  background-color:#213555;
-  opacity:0.8;
+  background-color: #213555;
+  opacity: 0.8;
   flex-direction: column;
-  justify-content: center; 
-  align-items: center; 
+  justify-content: center;
+  align-items: center;
   border-radius: 10px;
 }
 
@@ -141,25 +139,23 @@
   width: 400px;
   height: 400px;
   margin-right: 10px;
-  background-color:#7FAAED;
-  opacity:0.8;
+  background-color: #7faaed;
+  opacity: 0.8;
   flex-direction: column;
-  justify-content: center; 
-  align-items: center; 
+  justify-content: center;
+  align-items: center;
   border-radius: 10px;
-  
 }
 
 .member4 {
   width: 400px;
   height: 400px;
-  background-color:#213555;
-  opacity:0.8;
+  background-color: #213555;
+  opacity: 0.8;
   flex-direction: column;
-  justify-content: center; 
-  align-items: center; 
+  justify-content: center;
+  align-items: center;
   border-radius: 10px;
-  
 }
 
 .membernamesodd {
@@ -171,7 +167,7 @@
   text-align: center;
   font-size: 24px;
   font-weight: 500;
-  color:#000000;
+  color: #000000;
 }
 
 .membernameseven {
@@ -183,7 +179,7 @@
   text-align: center;
   font-size: 24px;
   font-weight: 500;
-  color:#ffffff;
+  color: #ffffff;
 }
 
 .memberdescriptionodd {
@@ -194,7 +190,7 @@
   text-align: center;
   font-size: 20px;
   font-weight: 500;
-  color:#213555;
+  color: #213555;
 }
 
 .memberdescriptioneven {
@@ -205,7 +201,7 @@
   text-align: center;
   font-size: 20px;
   font-weight: 500;
-  color:#ffffff;
+  color: #ffffff;
 }
 
 .servicesbox {
@@ -213,11 +209,11 @@
   height: 300px;
   margin-right: 20px;
   margin-top: 10px;
-  background-color:#ffffff;
+  background-color: #ffffff;
   border: 1px solid;
   flex-direction: column;
-  justify-content: center; 
-  align-items: center; 
+  justify-content: center;
+  align-items: center;
   border-radius: 10px;
 }
 
@@ -227,11 +223,11 @@
   margin-right: 20px;
   margin-top: 50px;
   margin-bottom: 50px;
-  background-color:#ffffff;
+  background-color: #ffffff;
   border: 1px solid;
   flex-direction: column;
-  justify-content: center; 
-  align-items: center; 
+  justify-content: center;
+  align-items: center;
   border-radius: 10px;
 }
 
@@ -244,17 +240,17 @@
   text-align: center;
   font-size: 24px;
   font-weight: 500;
-  color:#213555;
+  color: #213555;
 }
 
 .contact {
   width: 80vw;
   height: auto;
-  background-color:#213555;
-  opacity:0.8;
+  background-color: #213555;
+  opacity: 0.8;
   flex-direction: column;
-  justify-content: center; 
-  align-items: center; 
+  justify-content: center;
+  align-items: center;
   border-radius: 10px;
   margin-top: 30px;
 }
@@ -268,7 +264,7 @@
   text-align: center;
   font-size: 24px;
   font-weight: 500;
-  color:#ffffff;
+  color: #ffffff;
 }
 
 .contactdescription2 {
@@ -279,7 +275,7 @@
   text-align: center;
   font-size: 20px;
   font-weight: 300;
-  color:#ffffff;
+  color: #ffffff;
 }
 
 .contactbox {
@@ -287,10 +283,10 @@
   height: 150px;
   margin-right: 20px;
   margin-top: 20px;
-  background-color:#213555;
+  background-color: #213555;
   flex-direction: column;
-  justify-content: center; 
-  align-items: center; 
+  justify-content: center;
+  align-items: center;
   border-radius: 10px;
 }
 
@@ -298,23 +294,163 @@
   width: 400px;
   height: 400px;
   margin-right: 10px;
-  background-color:#7FAAED;
+  background-color: #7faaed;
   flex-direction: column;
-  justify-content: center; 
-  align-items: center; 
+  justify-content: center;
+  align-items: center;
   border-radius: 10px;
-  
+  position: relative;
+  overflow: hidden;
+}
+.profilecontainer1::after {
+  content: attr(data-motto);
+  position: absolute;
+  background-color: #333745;
+  border: 1px solid #ddd;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  font-size: 16px;
+  color: #ffffff;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bolder;
+  font-size: larger;
+  font-style: italic;
+}
+.profilecontainer1:hover::after {
+  opacity: 1;
 }
 
 .profilecontainer2 {
   width: 400px;
   height: 400px;
   margin-right: 10px;
-  background-color:#3F5476;
+  background-color: #3f5476;
   flex-direction: column;
-  justify-content: center; 
-  align-items: center; 
+  justify-content: center;
+  align-items: center;
   border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+}
+.profilecontainer2::after {
+  content: attr(data-motto);
+  position: absolute;
+  background-color: #333745;
+  border: 1px solid #ddd;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  font-size: 16px;
+  color: #ffffff;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bolder;
+  font-size: larger;
+  font-style: italic;
+}
+.profilecontainer2:hover::after {
+  opacity: 1;
 }
 
+.profilecontainer3 {
+  width: 400px;
+  height: 400px;
+  margin-right: 10px;
+  background-color: #7faaed;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+}
+.profilecontainer3::after {
+  content: attr(data-motto);
+  position: absolute;
+  background-color: #333745;
+  border: 1px solid #ddd;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  font-size: 16px;
+  color: #ffffff;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bolder;
+  font-size: larger;
+  font-style: italic;
+}
+.profilecontainer3:hover::after {
+  opacity: 1;
+}
 
+.profilecontainer4 {
+  width: 400px;
+  height: 400px;
+  margin-right: 10px;
+  background-color: #3f5476;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+}
+
+.profilecontainer4::after {
+  content: attr(data-motto);
+  position: absolute;
+  background-color: #333745;
+  border: 1px solid #ddd;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  font-size: 16px;
+  color: #ffffff;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bolder;
+  font-size: larger;
+  font-style: italic;
+}
+.profilecontainer4:hover::after {
+  opacity: 1;
+}

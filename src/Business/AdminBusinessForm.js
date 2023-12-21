@@ -129,7 +129,7 @@ const AdminBusinessForm = () => {
                 style={{
                   border: "2px solid #213555",
                   padding: "3px",
-                  width: "1500px",
+                  width: "1414px",
                   height: "auto",
                 }}
               >
@@ -215,6 +215,11 @@ const AdminBusinessForm = () => {
                             marginLeft: "20%",
                           }}
                         />
+                        <div style={{marginLeft: '100px'}}>
+                        <p style={{textAlign: 'center'}}>
+                          <strong>Important Note:</strong> Please choose only one image for your business. This will be your final image, and you won't be able to edit it later.
+                        </p>
+                        </div>
                         <Button
                           variant="contained"
                           style={{
@@ -224,8 +229,8 @@ const AdminBusinessForm = () => {
                             border: "1px solid #213555",
                             width: "200px",
                             fontWeight: "bold",
-                            marginLeft: "45%",
-                            marginTop: "5%",
+                            marginLeft: "40%",
+                            marginTop: "2%",
                           }}
                           onClick={() => imageUploader.current.click()}
                         >
@@ -273,7 +278,7 @@ const AdminBusinessForm = () => {
           style={{
             margin: "auto",
             textAlign: "center",
-            color: "#16558f",
+            color: "#000000",
             fontWeight: "bolder",
             fontSize: "40px",
           }}
@@ -293,15 +298,15 @@ const AdminBusinessForm = () => {
         <DialogActions>
           <Button
             style={{
-              backgroundColor: "#ffffff",
+              backgroundColor: "#213555",
               marginBottom: "10px",
               width: "280px",
               height: "50px",
               border: "1px solid #213555",
-              color: "#213555",
+              color: "#ffffff",
               "&:hover": {
-                backgroundColor: "#213555",
-                color: "#ffffff",
+                backgroundColor: "#ffffff",
+                color: "#213555",
               },
             }}
             className="submit-button-anotherannb1"
@@ -314,13 +319,13 @@ const AdminBusinessForm = () => {
           <Link to="/adminviewbusiness">
             <Button
               style={{
-                backgroundColor: "#213555",
+                backgroundColor: "#F24E1E",
                 marginBottom: "10px",
                 width: "280px",
                 height: "50px",
                 "&:hover": {
                   backgroundColor: "#ffffff",
-                  color: "#213555",
+                  color: "#F24E1E",
                 },
               }}
               className="submit-button-homeb1"

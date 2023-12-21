@@ -68,8 +68,10 @@ const AdminBusinessView = ({ business, handleEdit }) => {
   };
 
   const filteredBusinesses = businesses
-    .filter((business) =>
-      business.busTitle.toLowerCase().includes(searchTerm.toLowerCase())
+    .filter(
+      (business) =>
+        business.busTitle.toLowerCase().includes(searchTerm.toLowerCase()) &&
+        business.isdelete == 0
     )
     .slice(startIndex, endIndex);
 
@@ -297,14 +299,6 @@ const AdminBusinessView = ({ business, handleEdit }) => {
                 <AccessTimeIcon style={{ marginRight: "5px" }} />
                 {business.date}
               </Paper>
-
-              {/* image here */}
-              {/* <img
-                src={business.photoPath}
-                alt="Business Image"
-                style={{ width: "100px", height: "auto" }}
-                onError={(e) => console.error("Error loading image", e)}
-              /> */}
             </Paper>
           ))}
 
