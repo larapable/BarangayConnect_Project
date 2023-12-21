@@ -162,7 +162,7 @@ const AdminAnnouncementEdit = () => {
                 style={{
                   border: "2px solid #213555",
                   padding: "3px",
-                  width: "1500px",
+                  width: "1413px",
                   height: "735px",
                 }}
               >
@@ -253,7 +253,7 @@ const AdminAnnouncementEdit = () => {
                     style={{
                       margin: "auto",
                       textAlign: "center",
-                      color: "#16558f",
+                      color: "#000000",
                       fontWeight: "bolder",
                       fontSize: "40px",
                     }}
@@ -275,11 +275,11 @@ const AdminAnnouncementEdit = () => {
                     <Button
                       onClick={handleConfirmUpdate}
                       style={{
-                        backgroundColor: "#ffffff",
+                        backgroundColor: "#213555",
                         marginBottom: "10px",
                         width: "280px",
                         height: "50px",
-                        color: "#213555",
+                        color: "#ffffff",
                         border: "1px solid #213555",
                       }}
                       className="submit-button-home2"
@@ -289,7 +289,7 @@ const AdminAnnouncementEdit = () => {
                     <Button
                       onClick={handleCancelUpdate}
                       style={{
-                        backgroundColor: "#213555",
+                        backgroundColor: "#F24E1E",
                         marginBottom: "10px",
                         width: "280px",
                         height: "50px",
@@ -312,7 +312,7 @@ const AdminAnnouncementEdit = () => {
                     style={{
                       margin: "auto",
                       textAlign: "center",
-                      color: "#16558f",
+                      color: "#000000",
                       fontWeight: "bolder",
                       fontSize: "40px",
                     }}
@@ -334,8 +334,8 @@ const AdminAnnouncementEdit = () => {
                     <Button
                       onClick={handleHomeButtonClick}
                       style={{
-                        color: "#213555",
-                        backgroundColor: "#ffffff",
+                        color: "#ffffff",
+                        backgroundColor: "#213555",
                         marginBottom: "10px",
                         width: "280px",
                         height: "50px",
@@ -348,7 +348,7 @@ const AdminAnnouncementEdit = () => {
                     <Button
                       onClick={handleViewAnnouncementButtonClick}
                       style={{
-                        backgroundColor: "#213555",
+                        backgroundColor: "#F24E1E",
                         color: "#ffffff",
                         marginBottom: "10px",
                         width: "280px",

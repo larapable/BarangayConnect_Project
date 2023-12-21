@@ -13,6 +13,9 @@ import {
   BarChart,
   Bar,
   Rectangle,
+  PieChart, 
+  Pie,
+  Cell
 } from "recharts";
 
 export default function AdminDashboard() {
@@ -164,6 +167,13 @@ export default function AdminDashboard() {
       name: "2023",
       pv: 49336,
     },
+  ];
+
+  const COLORS = ['#0088FE', '#FFBB28']; // Colors for Male and Female, you can customize as needed
+
+  const genderData = [
+    { name: 'Male', value: maleCount },
+    { name: 'Female', value: femaleCount },
   ];
 
   return (
@@ -430,26 +440,51 @@ export default function AdminDashboard() {
                 Stat Value 2
               </h1>
             </div>
-            <div className="table">
-              <table>
-                <thead>
-                  <tr>
-                    <th>Gender</th>
-                    <th>Count</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Male</td>
-                    <td>{maleCount}</td>
-                  </tr>
-                  <tr>
-                    <td>Female</td>
-                    <td>{femaleCount}</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+
+            <div className="pie-chart">
+        <ResponsiveContainer width="100%" height={300}>
+          <PieChart>
+            <Pie
+              data={genderData}
+              cx="50%"
+              cy="50%"
+              outerRadius={120}
+              fill="#8884d8"
+              label
+            >
+              {genderData.map((entry, index) => (
+                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+              ))}
+            </Pie>
+            <Tooltip />
+            <Legend />
+          </PieChart>
+        </ResponsiveContainer>
+      </div>
+
+      <div className="table">
+  <table style={{border: "1px solid #e0e0e0", borderCollapse: "collapse", width:'100%'}}>
+    <thead>
+      <tr>
+        <th style={{border: "1px solid #e0e0e0", color:'#213555'}}>Gender</th>
+        <th style={{border: "1px solid #e0e0e0", color:'#213555'}}>Count</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style={{border: "1px solid #e0e0e0", color:'#213555'}}>Male</td>
+        <td style={{border: "1px solid #e0e0e0"}}>{maleCount}</td>
+      </tr>
+      <tr>
+        <td style={{border: "1px solid #e0e0e0",color:'#213555'}}>Female</td>
+        <td style={{border: "1px solid #e0e0e0"}}>{femaleCount}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+
           </div>
         </div>
       </div>

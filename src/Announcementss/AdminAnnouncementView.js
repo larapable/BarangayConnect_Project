@@ -33,7 +33,6 @@ const AdminAnnouncementView = ({ announcement, handleEdit }) => {
 
   const [currentPage, setCurrentPage] = useState(1);
   const announcementsPerPage = 3;
-  // Calculate the index range for the announcements to display on the current page
   const startIndex = (currentPage - 1) * announcementsPerPage;
   const endIndex = startIndex + announcementsPerPage;
 
@@ -44,12 +43,10 @@ const AdminAnnouncementView = ({ announcement, handleEdit }) => {
       );
       if (response.ok) {
         const data = await response.json();
-        // Filter out announcements marked as deleted
         const nonDeletedAnnouncements = data.filter(
           (announcement) => announcement.isdelete !== 1
         );
 
-        // Update the state with non-deleted announcements
         setAnnouncements(nonDeletedAnnouncements.reverse());
       } else {
         console.error("Error fetching announcements:", response.statusText);
@@ -94,7 +91,6 @@ const AdminAnnouncementView = ({ announcement, handleEdit }) => {
   };
 
   const handleDelete = (announcementId) => {
-    // Open the delete confirmation modal
     setAnnouncementToDelete(announcementId);
     setDeleteConfirmationOpen(true);
   };
@@ -115,7 +111,6 @@ const AdminAnnouncementView = ({ announcement, handleEdit }) => {
         );
 
         if (response.ok) {
-          // Remove the deleted announcement from the local state
           setAnnouncements((prevAnnouncements) =>
             prevAnnouncements.filter(
               (announcement) =>
@@ -204,9 +199,6 @@ const AdminAnnouncementView = ({ announcement, handleEdit }) => {
             >
               <span style={{ fontSize: "20px" }}>←</span>
             </Button>
-            {/* <span style={{ color: '#ffffff', fontSize: '20px' }}>
-                      Page {currentPage} of {totalPages}
-                    </span> */}
             <Button
               onClick={handleNextPage}
               style={{
@@ -251,17 +243,17 @@ const AdminAnnouncementView = ({ announcement, handleEdit }) => {
                       handleEditClick(announcement.announcementId);
                     }}
                     style={{
-                      backgroundColor: "#ffffff",
+                      backgroundColor: "#213555",
                       marginRight: "5px",
                       height: "50%",
                       border: "1px solid #213555",
                     }}
                   >
-                    <EditIcon style={{ color: "#213555" }} />
+                    <EditIcon style={{ color: "#ffffff" }} />
                   </Button>
                   <Button
                     onClick={() => handleDelete(announcement.announcementId)}
-                    style={{ backgroundColor: "#d8210b" }}
+                    style={{ backgroundColor: "#F24E1E" }}
                   >
                     <DeleteIcon style={{ color: "#ffffff" }} />
                   </Button>
@@ -303,7 +295,6 @@ const AdminAnnouncementView = ({ announcement, handleEdit }) => {
             onClose={() => handleDeleteConfirmation(false)}
             PaperProps={{ style: { backgroundColor: "#ffffff" } }}
           >
-            {/* <img src={"/deleteicon.png"} alt="Check Button" className="submit-checkbutton2" style={{marginTop: "20px"}}/> */}
             <DialogTitle
               style={{
                 margin: "auto",
@@ -330,8 +321,8 @@ const AdminAnnouncementView = ({ announcement, handleEdit }) => {
               <Button
                 onClick={() => handleDeleteConfirmation(true)}
                 style={{
-                  color: "#213555",
-                  backgroundColor: "#ffffff",
+                  color: "#ffffff",
+                  backgroundColor: "#213555",
                   marginBottom: "10px",
                   width: "280px",
                   height: "50px",
@@ -345,7 +336,7 @@ const AdminAnnouncementView = ({ announcement, handleEdit }) => {
               <Button
                 onClick={() => handleDeleteConfirmation(false)}
                 style={{
-                  backgroundColor: "#213555",
+                  backgroundColor: "#F24E1E",
                   color: "#ffffff",
                   marginBottom: "10px",
                   width: "280px",
