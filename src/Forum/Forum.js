@@ -22,7 +22,22 @@ function Forum() {
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [requestToDelete, setRequestToDelete] = useState(null);
   const user = JSON.parse(localStorage.getItem("user"));
+  
   const [currentPage, setCurrentPage] = useState(1);
+  const postsPerPage = 3; // You can adjust this value based on your preference
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = newPosts.slice(indexOfFirstPost, indexOfLastPost);
+  const totalPages = Math.ceil(newPosts.length / postsPerPage);
+
+  const handlePrevPage = () => {
+    setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
+  };
+
+  const handleNextPage = () => {
+    setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages));
+  };
+ 
   
   const handleClear = () => {
     setPost("");
@@ -328,19 +343,38 @@ function Forum() {
 
 
       <div className='forum-posts'>
-  {showProgress && newPosts.length > 0 && (
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '20px' }}>
+          <Button
+            onClick={handlePrevPage}
+            disabled={currentPage === 1}
+            style={{ color: '#213555', marginRight: '10px' }}
+            variant="contained"
+          >
+            <span style={{ fontSize: "20px" }}>←</span>
+          </Button>
+          <Button
+            onClick={handleNextPage}
+            disabled={currentPage === totalPages}
+            style={{ color: '#213555', marginLeft: '10px' }}
+            variant="contained"
+          >
+            <span style={{ fontSize: "20px" }}>→</span>
+          </Button>
+        </div>
+
+  {showProgress && currentPosts.length > 0 && (
     <Grid container spacing={2}>
-      {newPosts.map((newPost) => (
-        <Grid item key={newPost.id} sm={12}>
-          <Paper elevation={3} style={{ textAlign: 'left', padding: '10px', width: '80%', margin: '10px auto', background: 'rgba(255, 255, 255, 0.5)'}} >
-          <h4 style={{fontStyle:'italic'}}> {newPost.user.username}
-             {user.id !== null && user.id === newPost.userr? <>
-              <Button onClick={()=>{handleEditIconClick(newPost.id, newPost.post)}} variant='contained' style={{fontSize:"16px",marginLeft: '78%'}}>EDIT
+      {currentPosts.map((currentPost) => (
+        <Grid item key={currentPost.id} sm={12}>
+          <Paper elevation={3} style={{ textAlign: 'left', padding: '10px', width: '80%', margin: '10px auto', background: 'rgba(255, 255, 255, 0.7)'}} >
+          <h4 style={{fontStyle:'italic'}}> {currentPost.user.username}
+             {user.id !== null && user.id === currentPost.userr? <>
+              <Button onClick={()=>{handleEditIconClick(currentPost.id, currentPost.post)}} variant='contained' style={{fontSize:"16px",marginLeft: '78%'}}>EDIT
               <FontAwesomeIcon icon={faEdit} style={{marginLeft:'3px', cursor: 'pointer'}}/></Button>
-              <Button onClick={()=>{handleDeleteRequest(newPost.id)}} variant='contained' color="error" style={{fontSize:"16px",marginLeft:'5px'}}>DELETE</Button>
+              <Button onClick={()=>{handleDeleteRequest(currentPost.id)}} variant='contained' color="error" style={{fontSize:"16px",marginLeft:'5px'}}>DELETE</Button>
                 </>:<></>}
                 </h4>
-                <h3 style={{fontWeight: '450', marginLeft: '10px', marginTop: '-20px',wordWrap: "break-word"}}>{newPost.post}</h3>
+                <h3 style={{fontWeight: '450', marginLeft: '10px', marginTop: '-20px',wordWrap: "break-word"}}>{currentPost.post}</h3>
             <Accordion>
         <AccordionSummary
           aria-controls="panel1a-content"
@@ -353,19 +387,19 @@ function Forum() {
         {user.id!==null?<>
           <div style={{  display: 'flex', position: 'relative', alignItems: 'center', justifyContent: 'space-between'  }}>
           <textarea 
-                  id={"replyni-"+newPost.id} 
+                  id={"replyni-"+currentPost.id} 
                   style={{width: '92%', height: '50px', borderRadius: '10px', fontSize: '20px', marginTop: '5px', border: '1px solid gray'}}
                   placeholder='Reply'>
                 </textarea>
-            <Button variant='contained' onClick={()=>{handleReply(newPost.id)}}>Reply</Button>
+            <Button variant='contained' onClick={()=>{handleReply(currentPost.id)}}>Reply</Button>
             </div>
             <br/>
             </>:<></>}
-            {console.log('REPLY:',newPost.replies)}
-            {console.log('newPosts:', newPosts)}
+            {console.log('REPLY:',currentPost.replies)}
+            {console.log('currentPost:', currentPost)}
             
-            {Array.isArray(newPost.replies) && newPost.replies.length > 0 ? <>
-            {newPost.replies.map((reply,id)=>{
+            {Array.isArray(currentPost.replies) && currentPost.replies.length > 0 ? <>
+            {currentPost.replies.map((reply,id)=>{
               console.log('Current reply:', reply); // Log the reply object
               return <Paper key={id} style={{backgroundColor: '#FAFAFA', padding: '5px', marginBottom: '15px', borderRadius: '10px'}} elevation={1}>
                 <div style={{ marginBottom: '10px' }}>
