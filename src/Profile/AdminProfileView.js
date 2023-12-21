@@ -1,10 +1,11 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Button, Grid } from "@mui/material";
-import Header from "../Header";
+import AdminHeader from "../AdminHeader";
 import "./Profile.css";
 import { Link, useParams } from "react-router-dom";
 import { IconButton } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
+
 
 export default function AdminProfileView() {
   const uploadedImage = useRef(null);
@@ -89,7 +90,7 @@ export default function AdminProfileView() {
   return (
     <div className="profile-screen">
       <div>
-        <Header />
+        <AdminHeader />
       </div>
       <Grid container style={{ flex: 1 }}>
         <div className="profilePicture-area">

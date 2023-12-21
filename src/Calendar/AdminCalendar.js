@@ -1,13 +1,12 @@
 import { Button, Card, Grid } from "@mui/material";
-import Header from "../Header";
+import AdminHeader from "../AdminHeader";
 import { DateCalendar, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { useState } from "react";
 import "./CC.css";
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function AdminCalendar() {
-  const [value, setValue] = useState(null);
   const [eventTitle, setEventTitle] = useState("");
   const [eventDescription, setEventDescription] = useState("");
   const [eventLocation, setEventLocation] = useState("");
@@ -77,7 +76,7 @@ export default function AdminCalendar() {
   return (
     <div className="admin-container">
       <div>
-        <Header />
+        <AdminHeader />
       </div>
       <div
         style={{
@@ -145,7 +144,7 @@ export default function AdminCalendar() {
               ></input>
               <h1 style={{ color: "white" }}>Event time:</h1>
               <input
-                type="text"
+                type="time"
                 id="time"
                 name="time"
                 className="input-design"
@@ -186,12 +185,13 @@ export default function AdminCalendar() {
             <div>
               <h1
                 style={{
-                  color: "#213555",
-                  textAlign: "left",
-                  fontSize: "30px",
+                  color: "#BDBDBD",
+                  textAlign: "center",
+                  fontSize: "50px",
+                  margin: "0",
                 }}
               >
-                Select a date:
+                Select a Date:
               </h1>
               <Card
                 style={{

@@ -1,5 +1,5 @@
 import { Button, Paper } from "@mui/material";
-import Header from "../Header";
+import AdminHeader from "../AdminHeader";
 import React, { useEffect, useState } from "react";
 import "./Profile.css";
 import { Link, useNavigate } from "react-router-dom";
@@ -24,7 +24,6 @@ export default function AdminProfileList() {
       .catch((error) => {
         console.error("Error:", error);
       });
-     
   }, []);
 
   return (
@@ -37,7 +36,7 @@ export default function AdminProfileList() {
       }}
     >
       <div>
-        <Header />
+        <AdminHeader />
       </div>
       <div
         style={{
@@ -47,7 +46,13 @@ export default function AdminProfileList() {
           height: "100%",
         }}
       >
-        <h1 style={{ fontSize: "60px", color: "white", margin: "60px" }}>
+        <h1
+          style={{
+            fontSize: "60px",
+            color: "white",
+            margin: "60px",
+          }}
+        >
           PROFILE LIST:
         </h1>
         <div
@@ -59,43 +64,58 @@ export default function AdminProfileList() {
             alignItems: "center",
           }}
         >
-          {users.filter(user => user.isDeleted == 0).map((user) => (
-            <Paper
-              elevation={3}
-              style={{
-                borderRadius: "10px",
-                margin: "15px",
-                display: "flex",
-                justifyContent: "space-between",
-                padding: "10px",
-              }}
-              className="profile-list-paper"
-              key={user.id}
-            >
-              <div style={{ margin: "0" }}>
-                <h2 style={{ margin: "0" }}>Profile {user.id}</h2>
-                <p style={{ fontSize: "18px", margin: "0" }}>
-                  {user.fname}
-                </p>
-              </div>
-              <Link to={`/profileList/${user.id}`} key={user.id}>
-                <Button
-                  variant="contained"
-                  style={{
-                    margin: "10px",
-                    color: "white",
-                    background: "#213555",
-                    borderRadius: "10px",
-                    width: "150px",
-                    fontWeight: "bold",
-                    justifyContent: "center",
-                  }}
-                >
-                  View Profile
-                </Button>
-              </Link>
-            </Paper>
-          ))}
+          {users
+            .filter((user) => user.isDeleted == 0)
+            .map((user) => (
+              <Paper
+                elevation={3}
+                style={{
+                  borderRadius: "10px",
+                  margin: "15px",
+                  display: "flex",
+                  justifyContent: "space-between",
+                  padding: "15px",
+                  textAlign: "left",
+                }}
+                className="profile-list-paper"
+                key={user.id}
+              >
+                <div style={{ margin: "0" }}>
+                  <h2 style={{ margin: "0" }}>
+                    {user.fname} {user.lname}
+                  </h2>
+                  <p
+                    style={{
+                      fontSize: "16px",
+                      margin: "0",
+                      color: "black",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    <span>Verified:</span>
+                    <span style={{ color: "red" }}>
+                      {user.isVerified ? " Yes" : " No"}
+                    </span>
+                  </p>
+                </div>
+                <Link to={`/profileList/${user.id}`} key={user.id}>
+                  <Button
+                    variant="contained"
+                    style={{
+                      margin: "10px",
+                      color: "white",
+                      background: "#213555",
+                      borderRadius: "10px",
+                      width: "150px",
+                      fontWeight: "bold",
+                      justifyContent: "center",
+                    }}
+                  >
+                    View Profile
+                  </Button>
+                </Link>
+              </Paper>
+            ))}
         </div>
       </div>
     </div>

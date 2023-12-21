@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from '@mui/material';
-import Header from '../Header';
+import AdminHeader from '../AdminHeader';
 import "./AdminIncidentReport.css";
 
 const AdminIncidentReport = () => {
@@ -11,90 +11,75 @@ const AdminIncidentReport = () => {
     const [incidentDetails, setIncidentDetails] = useState('');
     const [submitted, setSubmitted] = useState(false);
     const [alerts, setAlerts] = useState([]);
-    const [submittedIncidentType, setSubmittedIncidentType] = useState(''); // New state variable
+    const [submittedIncidentType, setSubmittedIncidentType] = useState('');
 
     useEffect(() => {
-        // Fetch alerts from the backend when the component mounts
         fetchAlerts();
-
-        // Retrieve alerts from local storage
-        const storedAlerts = JSON.parse(localStorage.getItem('alerts'));
-        if (storedAlerts) {
-            setAlerts(storedAlerts);
-        }
-
-        // Set the default value for the date to the current date
+        const storedAlerts = JSON.parse(localStorage.getItem('alerts')) || [];
+        setAlerts(storedAlerts);
         const currentDate = new Date().toISOString().split('T')[0];
         setDate(currentDate);
     }, []);
 
     const fetchAlerts = async () => {
         try {
-            // Fetch alerts from the adminemergency endpoint
             const adminEmergencyResponse = await fetch('http://localhost:8080/adminemergency/admingetAllEmergency');
-            if (!adminEmergencyResponse.ok) {
-                throw new Error(`Failed to fetch admin emergency alert data: ${adminEmergencyResponse.status}`);
-            }
-            const adminEmergencyData = await adminEmergencyResponse.json();
-
-            // Fetch alerts from the emergency endpoint
             const emergencyResponse = await fetch('http://localhost:8080/emergency/getAllEmergency');
-            if (!emergencyResponse.ok) {
-                throw new Error(`Failed to fetch emergency alert data: ${emergencyResponse.status}`);
+    
+            if (!adminEmergencyResponse.ok || !emergencyResponse.ok) {
+                throw new Error('Failed to fetch alert data.');
             }
+    
+            const adminEmergencyData = await adminEmergencyResponse.json();
             const emergencyData = await emergencyResponse.json();
-
-            // Combine and filter out soft-deleted alerts from both endpoints
-            const combinedAlerts = [...adminEmergencyData, ...emergencyData];
+    
+            // Set the isAdminEmergency property for each alert in the combined list
+            const combinedAlerts = [...adminEmergencyData.map(alert => ({ ...alert, isAdminEmergency: true })), ...emergencyData.map(alert => ({ ...alert, isAdminEmergency: false }))];
+    
             const filteredAlerts = combinedAlerts.filter(alert => alert.isdelete !== 1);
-
+    
             setAlerts(filteredAlerts);
-            // Update local storage with fetched alerts
             localStorage.setItem('alerts', JSON.stringify(filteredAlerts));
         } catch (error) {
             console.error(error.message);
         }
     };
+    
 
     const handleDelete = async (adminemergencyId, emergencyId, index, isAdminEmergency) => {
         try {
-            const endpoint = isAdminEmergency
-                ? `http://localhost:8080/adminemergency/admindeleteEmergency/${adminemergencyId}`
-                : `http://localhost:8080/emergency/deleteEmergency/${emergencyId}`;
+            const adminEndpoint = `http://localhost:8080/adminemergency/admindeleteEmergency/${adminemergencyId}`;
+            const emergencyEndpoint = `http://localhost:8080/emergency/deleteEmergency/${emergencyId}`;
+    
+            const endpoint = isAdminEmergency ? adminEndpoint : emergencyEndpoint;
     
             const response = await fetch(endpoint, {
                 method: 'DELETE',
             });
     
             if (response.ok) {
-                // Remove the deleted alert from the state
                 const updatedAlerts = [...alerts];
                 updatedAlerts.splice(index, 1);
                 setAlerts(updatedAlerts);
-    
-                console.log(`Alert with ID ${emergencyId} deleted successfully.`);
-                console.log(`Alert with ID ${adminemergencyId} deleted successfully.`);
                 localStorage.setItem('alerts', JSON.stringify(updatedAlerts));
     
-                // Display a popup to the user
+                console.log(`Alert with ID ${isAdminEmergency ? adminemergencyId : emergencyId} deleted successfully.`);
                 window.alert('Alert deleted successfully.');
             } else {
                 console.error(`Error deleting alert: ${response.status}`);
-                // Display an error popup to the user
                 window.alert(`Error deleting alert: ${response.statusText}`);
             }
         } catch (error) {
             console.error(`Error deleting alert: ${error.message}`);
-            // Display an error popup to the user
             window.alert(`Error deleting alert: ${error.message}`);
         }
-    };    
+    };
+    
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         try {
-            // Create an object with the incident data
             const incidentData = {
                 typeOfIncident: incidentType,
                 date: date,
@@ -103,7 +88,6 @@ const AdminIncidentReport = () => {
                 incidentDetails: incidentDetails,
             };
 
-            // Make a POST request to your backend endpoint
             const response = await fetch('http://localhost:8080/adminemergency/admininsertEmergency', {
                 method: 'POST',
                 headers: {
@@ -113,7 +97,6 @@ const AdminIncidentReport = () => {
             });
 
             if (response.ok) {
-                // Clear the form after successful submission
                 setIncidentType('');
                 setDate('');
                 setTime('');
@@ -121,35 +104,31 @@ const AdminIncidentReport = () => {
                 setIncidentDetails('');
                 setSubmitted(false);
 
-                // Fetch updated alerts after submission
                 fetchAlerts();
 
                 console.log('Incident report submitted successfully.');
-                // You can also display a success message to the user
                 window.alert('Incident report submitted successfully.');
             } else {
                 console.error(`Error submitting incident report: ${response.status}`);
-                // Display an error popup to the user
                 window.alert(`Error submitting incident report: ${response.statusText}`);
             }
         } catch (error) {
             console.error(`Error submitting incident report: ${error.message}`);
-            // Display an error popup to the user
             window.alert(`Error submitting incident report: ${error.message}`);
         }
     };
 
     return (
         <div>
-            <Header />
+            <AdminHeader />
             <div>
                 <div style={{ display: 'flex' }}>
                     {/* Left side - Form */}
                     <div style={{ marginTop: '10px' }}>
-                        <h1 style={{ color: "#213555", marginLeft: '20px', marginTop: '-5px', fontSize: '38px' }}>REPORT AN ISSUE</h1>
+                        <h1 style={{ color: "#213555", marginLeft: '20px', marginTop: '-5px', fontSize: '50px' }}>REPORT!</h1>
                     </div>
                     <div>
-                        <div style={{ border: "2px solid #213555", padding: "3px", width: "820px", height: "auto", marginTop: '70px', marginLeft: '-340px', marginRight: '5px' }}>
+                        <div style={{ border: "2px solid #213555", padding: "3px", width: "820px", height: "auto", marginTop: '70px', marginLeft: '-210px', marginRight: '5px' }}>
                             <form onSubmit={handleSubmit}>
                                 {/* Type of Incident */}
                                 <br />
@@ -279,7 +258,10 @@ const AdminIncidentReport = () => {
                                     </div>
                                     <button
                                         className="report-delete-button"
-                                        onClick={() => handleDelete(alert.adminemergencyId, alert.emergencyId, index, alert.isAdminEmergency)}
+                                        onClick={(e) => {
+                                            e.preventDefault(); // Prevents form submission
+                                            handleDelete(alert.adminemergencyId, alert.emergencyId, index, alert.isAdminEmergency);
+                                        }}
                                     >
                                         Delete
                                     </button>

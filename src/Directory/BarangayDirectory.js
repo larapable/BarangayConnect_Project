@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import Header from '../Header';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import Header from "../Header";
 import "./BarangayDirectory.css";
 
 const OfficialsList = () => {
@@ -10,12 +10,13 @@ const OfficialsList = () => {
 
   useEffect(() => {
     // Fetch data from the Spring Boot API
-    axios.get('http://localhost:8080/admindirectorylist/getAllAdminDirectoryList')
-      .then(response => {
+    axios
+      .get("http://localhost:8080/admindirectorylist/getAllAdminDirectoryList")
+      .then((response) => {
         setOfficials(response.data);
       })
-      .catch(error => {
-        console.error('Error fetching data:', error);
+      .catch((error) => {
+        console.error("Error fetching data:", error);
       });
   }, []); // Empty dependency array means this effect runs once when the component mounts
 
@@ -33,7 +34,15 @@ const OfficialsList = () => {
       <div className="intro-section">
         <h1>ILA - ILA KITA!</h1>
         <p>
-          "We extend a warm welcome to our esteemed Barangay Officials! This directory has been created to enhance our community's connectivity and efficiency. It's designed with features tailored to facilitate your responsibilities and communication. From providing easy access to your contact information to streamlining residents' inquiries and feedback, this platform is here to support and empower you in serving our community. We value your dedication, and we're committed to making your tasks more manageable and transparent. Welcome, and thank you for your continuous dedication to our barangay!"
+          "We extend a warm welcome to our esteemed Barangay Officials! This
+          directory has been created to enhance our community's connectivity and
+          efficiency. It's designed with features tailored to facilitate your
+          responsibilities and communication. From providing easy access to your
+          contact information to streamlining residents' inquiries and feedback,
+          this platform is here to support and empower you in serving our
+          community. We value your dedication, and we're committed to making
+          your tasks more manageable and transparent. Welcome, and thank you for
+          your continuous dedication to our barangay!"
         </p>
       </div>
 
@@ -62,19 +71,24 @@ const OfficialsList = () => {
       {showDetailsModal && (
         <div className="modal-overlay">
           <div className="modal-content">
-            <h1 style={{ justifyContent: 'center', display: 'flex', alignContent: 'center' }}>D E T A I L S</h1>
+            <h1
+              style={{
+                justifyContent: "center",
+                display: "flex",
+                alignContent: "center",
+              }}
+            >
+              D E T A I L S
+            </h1>
             <div className="details-container">
               <p>Full Name: {selectedOfficial.name}</p>
               <p>Email Address: {selectedOfficial.email}</p>
               <p>Age: {selectedOfficial.age}</p>
-              <p>Marital Status: {selectedOfficial.maritalStatus}</p>
+              <p>Marital Status: {selectedOfficial.status}</p>
               <p>Birthdate: {selectedOfficial.birthdate}</p>
               <p>Postion: {selectedOfficial.position}</p>
               <p>Message: {selectedOfficial.message}</p>
-              <button
-                className="close-button"
-                onClick={handleCloseModal}
-              >
+              <button className="close-button" onClick={handleCloseModal}>
                 Close
               </button>
             </div>

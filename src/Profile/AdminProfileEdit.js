@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Button, Grid, Modal } from "@mui/material";
-import Header from "../Header";
+import AdminHeader from "../AdminHeader";
 import "./Profile.css";
 import { IconButton } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
@@ -10,10 +10,6 @@ export default function AdminProfileEdit() {
   const imageUploader = useRef(null);
   const [userData, setUserData] = useState(null);
   const [error, setError] = useState(null);
-  const [mobileNumber, setMobileNumber] = useState("");
-  const [maritalStatus, setMaritalStatus] = useState("");
-  const [citizenship, setCitizenship] = useState("");
-  const [religion, setReligion] = useState("");
   const [selectedImage, setSelectedImage] = useState();
   const [selectedFile, setSelectedFile] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
@@ -61,34 +57,6 @@ export default function AdminProfileEdit() {
     "Verified",
   ];
   const verifiedOptions = ["", "Yes", "No"];
-  const maritalStatusOptions = ["", "Single", "Married", "Divorced", "Widowed"];
-  const citizenshipOptions = [
-    "",
-    "Filipino",
-    "American",
-    "Chinese",
-    "Japanese",
-    "Korean",
-    "Indian",
-    "British",
-    "Canadian",
-    "Australian",
-    "Black American",
-    "Other",
-  ];
-  const religionOptions = [
-    "",
-    "Roman Catholic",
-    "Islam",
-    "Protestant",
-    "Iglesia ni Cristo",
-    "Seventh Day Adventist",
-    "Jehovah's Witness",
-    "Bible Baptist Church",
-    "Born Again Christian",
-    "Philippine Independent Church",
-    "Other",
-  ];
 
   useEffect(() => {
     const fetchUserProfile = async () => {
@@ -200,6 +168,7 @@ export default function AdminProfileEdit() {
     // Handle closing the modal
     setShowConfirmModal(false);
   };
+  
   const handleDelete = async () => {
     try {
       const response = await fetch(
@@ -227,7 +196,7 @@ export default function AdminProfileEdit() {
   return (
     <div className="profile-screen">
       <div>
-        <Header />
+        <AdminHeader />
       </div>
       <Grid container style={{ flex: 1 }}>
         <div className="profilePicture-area">

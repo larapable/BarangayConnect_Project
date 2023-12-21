@@ -1,0 +1,134 @@
+.body-styles {
+  background-color: #e0e0e0;
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.main-title {
+  align-items: center;
+  text-align: center;
+}
+
+.main-container1 {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: flex-start;
+}
+
+.paper-container {
+  margin: 10px;
+}
+.card0 {
+  border-radius: 10px;
+  margin-top: 50px;
+  padding: 20px;
+  border: 1px solid none;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  width: 1200px;
+  height: 150px;
+  background-color: #ffffff;
+}
+.card1 {
+  border-radius: 10px;
+  margin-top: -240px;
+  margin-left: 1280px;
+  padding: 20px;
+  border: 1px solid none;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  width: 550px;
+  height: 150px;
+  background-color: #ffffff;
+}
+
+.card2 {
+  border-radius: 10px;
+  margin-top: 50px;
+  padding: 20px;
+  border: 1px solid none;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  width: 240px;
+  height: 150px;
+  background-color: #ffffff;
+}
+
+.card3 {
+  border-radius: 10px;
+  padding: 20px;
+  border: 1px solid none;
+  margin-right: 10px;
+  text-align: center;
+  width: 1200px;
+  height: 500px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  background-color: #ffffff;
+}
+
+.card4 {
+  border-radius: 10px;
+  padding: 20px;
+  border: 1px solid none;
+  text-align: center;
+  width: 550px;
+  height: 500px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  background-color: #ffffff;
+}
+
+.card5 {
+  border-radius: 10px;
+  margin-top: 50px;
+  padding: 20px;
+  border: 1px solid none;
+  text-align: center;
+  width: 1200px;
+  height: 400px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  margin-bottom: 50px;
+  background-color: #ffffff;
+}
+
+.card6 {
+  border-radius: 10px;
+  margin-top: 50px;
+  padding: 20px;
+  border: 1px solid none;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  width: 240px;
+  height: 150px;
+  background-color: #ffffff;
+  text-align: center;
+  align-items: center;
+}
+
+.card7 {
+  border-radius: 10px;
+  margin-top: 50px;
+  padding: 20px;
+  border: 1px solid none;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  width: 240px;
+  height: 150px;
+  background-color: #ffffff;
+}
+
+.line-chart {
+  margin: 20px;
+}
+
+.table {
+  margin: 20px;
+}
+
+.additional-papers {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  flex-direction: row; /* Align cards in one row */
+  justify-content: space-around;
+}

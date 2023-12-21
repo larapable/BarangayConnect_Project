@@ -1,110 +1,110 @@
 .submit-report-body {
-    background-color: #ffffff;
+  background-color: #ffffff;
 }
 
 .text-voice-be-heard {
-    margin-left: 90px;
-    color: #213555;
-    font-size: 25px;
-    width: 700px;
+  margin-left: 90px;
+  color: #213555;
+  font-size: 25px;
+  width: 700px;
 }
 
 .submit-report-image {
-    margin-left: 220px;
-    margin-top: 30px;
+  margin-left: 220px;
+  margin-top: 30px;
 }
 
 .description-voice-be-heard {
-    margin-left: 100px;
-    font-size: 21px;
-    color: #A8A2A2;
-    font-family: 'Your Chosen Font', sans-serif;
+  margin-left: 100px;
+  font-size: 21px;
+  color: #a8a2a2;
+  font-family: "Your Chosen Font", sans-serif;
 }
 
 .report-an-issue-text {
-    margin-left: 640px;
-    margin-top: -780px;
+  margin-left: 640px;
+  margin-top: -780px;
 }
 
 .report-an-issue-text-box {
-    border: 2px solid #333;
-    padding: 0%;
-    display: inline-block;
-    width: 1163px;
-    background-color: #213555;
-    margin-top: -500%;
-    margin-left: 190px;
+  border: 2px solid #333;
+  padding: 0%;
+  display: inline-block;
+  width: 1164px;
+  background-color: #213555;
+  margin-top: -30px;
+  margin-left: 190px;
 }
 
 .submit-report-issue {
-    height: 50vh;
-    margin-right: 50%;
-    margin-bottom: 330px;
-    margin-left: 190px;
+  height: 50vh;
+  margin-right: 50%;
+  margin-bottom: 330px;
+  margin-left: 190px;
 }
 
 .incident-type-input {
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    padding: 8px;
-    box-shadow: 0 4px 5px #A8A2A2;
-    box-sizing: border-box;
-    width: 98%;
-    height: 90px;
-    margin-left: 8px;
-    font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 8px;
+  box-shadow: 0 4px 5px #a8a2a2;
+  box-sizing: border-box;
+  width: 98%;
+  height: 90px;
+  margin-left: 8px;
+  font-size: 16px;
 }
 
 .incident-date-input {
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    padding: 8px;
-    box-shadow: 0 4px 5px #A8A2A2;
-    box-sizing: border-box;
-    width: 130px;
-    height: 80px;
-    margin-top: 10px;
-    margin-left: 10px;
-    font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 8px;
+  box-shadow: 0 4px 5px #a8a2a2;
+  box-sizing: border-box;
+  width: 130px;
+  height: 80px;
+  margin-top: 10px;
+  margin-left: 10px;
+  font-size: 16px;
 }
 
 .incident-time-input {
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    padding: 8px;
-    box-shadow: 0 4px 5px #A8A2A2;
-    box-sizing: border-box;
-    width: 130px;
-    height: 80px;
-    margin-left: 10px;
-    font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 8px;
+  box-shadow: 0 4px 5px #a8a2a2;
+  box-sizing: border-box;
+  width: 130px;
+  height: 80px;
+  margin-left: 10px;
+  font-size: 16px;
 }
 
 .incident-location-input {
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    padding: 8px;
-    box-shadow: 0 4px 5px #A8A2A2;
-    box-sizing: border-box;
-    width: 98%;
-    margin-left: 8px;
-    margin-top: -20px;
-    height: 90px;
-    font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 8px;
+  box-shadow: 0 4px 5px #a8a2a2;
+  box-sizing: border-box;
+  width: 98%;
+  margin-left: 8px;
+  margin-top: -20px;
+  height: 90px;
+  font-size: 16px;
 }
 
 .incident-details-input {
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    padding: 8px;
-    box-shadow: 0 4px 5px #A8A2A2;
-    box-sizing: border-box;
-    width: 98%;
-    margin-left: 8px;
-    height: 330px;
-    box-sizing: border-box;
-    margin-top: -20px;
-    font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 8px;
+  box-shadow: 0 4px 5px #a8a2a2;
+  box-sizing: border-box;
+  width: 98%;
+  margin-left: 8px;
+  height: 330px;
+  box-sizing: border-box;
+  margin-top: -20px;
+  font-size: 16px;
 }
 
 .incident-type-input,
@@ -112,29 +112,29 @@
 .incident-time-input,
 .incident-location-input,
 .incident-details-input {
-    font-family: 'Your Chosen Font', sans-serif;
+  font-family: "Your Chosen Font", sans-serif;
 }
 
 .report-issue-button {
-    margin-top: 10px;
-    text-align: center;
-    margin-bottom: 10px;
+  margin-top: 10px;
+  text-align: center;
+  margin-bottom: 10px;
 }
 
 .success-pop-up {
-    width: 200px;
-    height: auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: auto;
+  width: 200px;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
 }
 
 .button-another-report,
 .button-back-home {
-    height: 30px;
-    width: 400px;
-    padding: 15px 30px;
-    border-radius: 10px;
-    margin-bottom: 100px;
+  height: 30px;
+  width: 400px;
+  padding: 15px 30px;
+  border-radius: 10px;
+  margin-bottom: 100px;
 }

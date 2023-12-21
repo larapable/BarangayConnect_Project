@@ -4,6 +4,7 @@ import Header from "../Header";
 import { FaPhone, FaEnvelope, FaClock } from "react-icons/fa";
 
 export default function Home() {
+  console.log(JSON.parse(localStorage.getItem("user")));
   return (
     <div>
       <div>
@@ -75,7 +76,10 @@ export default function Home() {
               </p>
 
               <div style={{ display: "flex", flexDirection: "row" }}>
-                <Grid className="profilecontainer1">
+                <Grid
+                  className="profilecontainer1"
+                  data-motto="An apple a day makes my heart kilig everyday"
+                >
                   <img
                     src="lara.jpg"
                     alt="Lara C. Pable"
@@ -92,7 +96,10 @@ export default function Home() {
                   <p className="memberdescriptionodd">Full-stack developer</p>
                 </Grid>
 
-                <Grid className="profilecontainer2">
+                <Grid
+                  className="profilecontainer2"
+                  data-motto="I call him sugarplum"
+                >
                   <img
                     src="arziel.png"
                     alt="Lara C. Pable"
@@ -109,7 +116,10 @@ export default function Home() {
                   <p className="memberdescriptioneven">Full-stack developer</p>
                 </Grid>
 
-                <Grid className="profilecontainer1">
+                <Grid
+                  className="profilecontainer3"
+                  data-motto="Cry and cry until you succeed"
+                >
                   <img
                     src="ebeb.jpg"
                     alt="Lara C. Pable"
@@ -126,7 +136,10 @@ export default function Home() {
                   <p className="memberdescriptionodd">Full-stack developer</p>
                 </Grid>
 
-                <Grid className="profilecontainer2">
+                <Grid
+                  className="profilecontainer4"
+                  data-motto="Bawal umihi dito"
+                >
                   <img
                     src="arvin.png"
                     alt="Lara C. Pable"
@@ -146,8 +159,7 @@ export default function Home() {
 
               <h1 className="aboutus1">OUR SERVICES</h1>
               <p className="aboutus2">
-                Explore a spectrum of cutting-edge services with Barangay
-                Connect
+                Explore a spectrum of cutting-edge services with Team Palm
               </p>
 
               <div style={{ display: "flex", flexDirection: "row" }}>
