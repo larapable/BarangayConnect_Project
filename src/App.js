@@ -37,7 +37,6 @@ import AdminDashboard from "./Dashboard/AdminDashboard";
 import AdminEmergencyAlertChoices from "./AdminEmergency/AdminEmergencyAlertChoices";
 
 
-
 function App() {
   return (
     <Routes>

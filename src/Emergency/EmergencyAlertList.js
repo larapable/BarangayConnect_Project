@@ -33,6 +33,7 @@ const EmergencyAlertList = () => {
 
   const fetchEmergencyData = async () => {
     try {
+      // Fetch regular emergency data
       const response = await fetch(
         "http://localhost:8080/emergency/getAllEmergency"
       );
@@ -40,8 +41,21 @@ const EmergencyAlertList = () => {
         throw new Error(`Failed to fetch emergency data: ${response.status}`);
       }
       const data = await response.json();
-      // Filter out incidents with isdelete set to 1
-      setIncidentDetails(data.filter((incident) => incident.isdelete !== 1));
+
+      // Fetch admin emergency data
+      const adminResponse = await fetch(
+        "http://localhost:8080/adminemergency/admingetAllEmergency"
+      );
+      if (!adminResponse.ok) {
+        throw new Error(
+          `Failed to fetch admin emergency data: ${adminResponse.status}`
+        );
+      }
+      const adminData = await adminResponse.json();
+
+      // Combine and filter out incidents with isdelete set to 1
+      const allData = [...data, ...adminData];
+      setIncidentDetails(allData.filter((incident) => incident.isdelete !== 1).reverse());
     } catch (error) {
       console.error(error.message);
     }

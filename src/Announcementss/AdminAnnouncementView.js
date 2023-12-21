@@ -299,7 +299,7 @@ const AdminAnnouncementView = ({ announcement, handleEdit }) => {
               style={{
                 margin: "auto",
                 textAlign: "center",
-                color: "#16558f",
+                color: "#000000",
                 fontWeight: "bolder",
                 fontSize: "40px",
               }}
