@@ -58,7 +58,7 @@ const AdminEmergencyAlertChoices = () => {
                   fontWeight: "bold",
                 }}
               >
-                See Emergency Alert
+                See Emergency Hotlines
               </Button>
             </Link>
           </div>
