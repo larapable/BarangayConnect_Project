@@ -44,8 +44,11 @@ cd barangay-connect
 npm install
 npm start
 ```
-
-3. Database Setup (MySQL)
+3. Clone the backend Repository:
+```bash
+https://github.com/Chae-vin/SpringBoot.git
+```
+4. Database Setup (MySQL)
   - Install MySQL locally and configure it.
   - Create a new database in MySQL for the project:
 ```bash
@@ -61,6 +64,6 @@ spring.jpa.hibernate.ddl-auto=update
 spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL5InnoDBDialect
 server.error.include-stacktrace=never
 ```
-4. Access the application
+5. Access the application
 * Frontend: http://localhost:3000
 * Backend: http://localhost:8080 (or the configured port)
